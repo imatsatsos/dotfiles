@@ -103,10 +103,10 @@ linkConfig() {
     # Copying files to destination and overwriting
     cp -fv ${GITPATH}/.bashrc 								${HOME}/.bashrc
     cp -fv ${GITPATH}/.config/starship.toml 				${HOME}/.config/starship.toml
-    mkdir -p ${GITPATH}/.config/fastfetch/
-    cp -fv ${GITPATH}/.config/fastfetch/config.conf 	    ${HOME}/.config/fastfetch/.config.conf
-    mkdir -p ${GITPATH}/.config/btop/
-    cp -fv ${GITPATH}/.config/btop/btop.conf 				${HOME}/.config/btop/btop.conf
+    mkdir -p ${HOME}/.config/fastfetch/
+    cp -fv ${GITPATH}/.config/fastfetch/config.conf 	    ${HOME}/.config/fastfetch/config.conf
+    mkdir -p ${HOME}/.config/btop/
+    cp -fv ${GITPATH}/.config/btop/btop.conf                ${HOME}/.config/btop/btop.conf
 
 }
 
