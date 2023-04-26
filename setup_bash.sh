@@ -70,7 +70,7 @@ installDepend() {
         else
             echo "Command paru already installed"
         fi
-    	paru --noconfirm -S ${DEPENDENCIES}
+    	paru --noconfirm -S --needed ${DEPENDENCIES}
     else 
     	sudo ${PACKAGER} install -yq ${DEPENDENCIES}
     fi
@@ -101,9 +101,11 @@ linkConfig() {
 
     echo -e "${YELLOW}Linking new bash config file...${RC}"
     # Copying files to destination and overwriting
-    cp -fv ${GITPATH}/.bashrc 										${HOME}/.bashrc
-    cp -fv ${GITPATH}/.config/starship.toml 					${HOME}/.config/starship.toml
-    cp -fv ${GITPATH}/.config/fastfetch/config.conf 	${HOME}/.config/fastfetch/.config.conf
+    cp -fv ${GITPATH}/.bashrc 								${HOME}/.bashrc
+    cp -fv ${GITPATH}/.config/starship.toml 				${HOME}/.config/starship.toml
+    mkdir -p ${GITPATH}/.config/fastfetch/
+    cp -fv ${GITPATH}/.config/fastfetch/config.conf 	    ${HOME}/.config/fastfetch/.config.conf
+    mkdir -p ${GITPATH}/.config/btop/
     cp -fv ${GITPATH}/.config/btop/btop.conf 				${HOME}/.config/btop/btop.conf
 
 }
