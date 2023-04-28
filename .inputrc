@@ -2,7 +2,7 @@ $include /etc/inputrc
 
 # add color
 set colored-stats on
-set color-completion-prefix on
+set colored-completion-prefix on
 
 # Completion settings
 set show-all-if-ambiguous on
