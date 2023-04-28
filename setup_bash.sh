@@ -18,7 +18,7 @@ checkEnv() {
     fi
 
     ## Check Package Handeler
-    PACKAGEMANAGER='apt dnf pacman'
+    PACKAGEMANAGER='apt dnf pacman xbps-install'
     for pgm in ${PACKAGEMANAGER}; do
         if command_exists ${pgm}; then
             PACKAGER=${pgm}
