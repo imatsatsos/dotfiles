@@ -1,0 +1,13 @@
+$include /etc/inputrc
+
+# add color
+set colored-stats on
+set color-completion-prefix on
+
+# Completion settings
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
+# history search used typed characters
+"\e[A": history-search-backward
+"\e[B": history-search-forward
