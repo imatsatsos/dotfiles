@@ -65,7 +65,7 @@ alias \
 		rm='rm -vI' \
 		df='df -h' \
 		bc='bc -ql' \
-		mkd='mkdir -pV' \
+		mkd='mkdir -pv' \
 		mcd='mkd $1; cd $1' \
 		treestat='rpm-ostree status' \
 		please='sudo !!' \
