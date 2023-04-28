@@ -62,7 +62,8 @@ alias \
 		ip='ip --color=auto' \
 		cp='cp -iv' \
 		mv='mv -iv' \
-		rm='rm -vI' \
+		rm='rm -Iv' \
+		ln='ln -i' \
 		df='df -h' \
 		bc='bc -ql' \
 		mkd='mkdir -pv' \
