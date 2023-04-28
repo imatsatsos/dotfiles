@@ -42,7 +42,7 @@ shopt -s checkwinsize
 # Enable automatic cd to paths
 shopt -s autocd
 # Disable history for consecutive identical commands and commands that start with space
-export HISTCONTROL=erasedups:ignorespace
+export HISTCONTROL=ignoredups:erasedups:ignorespace
 
 # Aliases
 alias \
