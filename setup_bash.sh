@@ -71,6 +71,8 @@ installDepend() {
             echo "Command paru already installed"
         fi
     	paru --noconfirm -S --needed ${DEPENDENCIES}
+    elif [[ $PACKAGER == "xbps-install" ]]; then
+        sudo ${PACKAGER} -y ${DEPENDENCIES}
     else 
     	sudo ${PACKAGER} install -yq ${DEPENDENCIES}
     fi
@@ -99,7 +101,7 @@ linkConfig() {
         fi
     fi
 
-    echo -e "${YELLOW}Linking new bash config file...${RC}"
+    echo -e "${YELLOW}Copying new config file...${RC}"
     # Copying files to destination and overwriting
     cp -fv ${GITPATH}/.bashrc 								${HOME}/.bashrc
     cp -fv ${GITPATH}/.config/starship.toml 				${HOME}/.config/starship.toml
