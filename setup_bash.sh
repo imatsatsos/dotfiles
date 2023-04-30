@@ -101,7 +101,7 @@ linkConfig() {
         fi
     fi
 
-    echo -e "${YELLOW}Copying new config file...${RC}"
+    echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
     cp -fv ${GITPATH}/.bashrc 								${HOME}/.bashrc
     cp -fv ${GITPATH}/.config/starship.toml 				${HOME}/.config/starship.toml
