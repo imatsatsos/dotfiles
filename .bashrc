@@ -71,7 +71,9 @@ alias \
 		treestat='rpm-ostree status' \
 		please='sudo !!' \
 		zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"'
-
+		itop='sudo intel_gpu_top'
+		vim='nvim'
+		
 if type "exa" >/dev/null 2>&1; then
 	alias \
 			ls='exa --icons --group-directories-first' \
