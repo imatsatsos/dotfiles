@@ -90,7 +90,7 @@ installStarship(){
     fi
 }
 
-linkConfig() {
+copyConfig() {
     ## Check if a bashrc file is already there.
     OLD_BASHRC="${HOME}/.bashrc"
     if [[ -e ${OLD_BASHRC} ]]; then
@@ -106,18 +106,17 @@ linkConfig() {
     cp -fv ${GITPATH}/.bashrc 								${HOME}/.bashrc
     cp -fv ${GITPATH}/.inputrc 								${HOME}/.inputrc
     cp -fv ${GITPATH}/.config/starship.toml 				${HOME}/.config/starship.toml
-    mkdir -p ${HOME}/.config/fastfetch/
-    cp -fv ${GITPATH}/.config/fastfetch/config.conf 	    ${HOME}/.config/fastfetch/config.conf
-    mkdir -p ${HOME}/.config/btop/
-    cp -fv ${GITPATH}/.config/btop/btop.conf                ${HOME}/.config/btop/btop.conf
-
+    cp -fv ${GITPATH}/.config/fastfetch/				 	    ${HOME}/.config/
+    cp -fv ${GITPATH}/.config/btop/              		    ${HOME}/.config/
+    cp -fv ${GITPATH}/.config/alacritty/						${HOME}/.config/
+    cp -fv ${GITPATH}/.config/htop/							${HOME}/.config/
 }
 
 checkEnv
 installDepend
 installStarship
-if linkConfig; then
-    echo -e "${GREEN}Done!\nrestart your shell to see the changes.${RC}"
+if copyConfig; then
+    echo -e "${GREEN}Done!\nRestart your shell to see the changes.${RC}"
 else
-    echo -e "${RED}Something went wrong!${RC}"
+    echo -e "${RED}OH! Something went wrong!${RC}"
 fi

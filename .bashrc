@@ -52,6 +52,8 @@ shopt -s expand_aliases
 
 # Disable history for consecutive identical commands and commands that start with space
 export HISTCONTROL=ignoredups:erasedups:ignorespace
+export HISTSIZE=1000
+export HISTFILESIZE=1000
 
 # Aliases
 alias \
@@ -70,10 +72,11 @@ alias \
 		mcd='mkd $1; cd $1' \
 		treestat='rpm-ostree status' \
 		please='sudo !!' \
-		zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"'
-		itop='sudo intel_gpu_top'
-		vim='nvim'
-		
+		zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"' \
+		itop='sudo intel_gpu_top' \
+                imeas='sudo intel-undervolt measure' \
+                vim='nvim'
+
 if type "exa" >/dev/null 2>&1; then
 	alias \
 			ls='exa --icons --group-directories-first' \
@@ -129,5 +132,7 @@ alias \
 [ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
 
 # Nice
-type "fastfetch" >/dev/null 2>&1 && fastfetch
+if [ $XDG_SESSION_TYPE = wayland ]; then
+	type "fastfetch" >/dev/null 2>&1 && fastfetch
+fi
 type "ufetch" >/dev/null 2>&1 && ufetch
