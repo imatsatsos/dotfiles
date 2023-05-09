@@ -74,9 +74,9 @@ alias \
 	please='sudo !!' \
 	zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"' \
 	itop='sudo intel_gpu_top' \
-        imeas='sudo intel-undervolt measure' \
-        vim='nvim' \
-        weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -ov && sudo xbps-remove -Ov'
+    imeas='sudo intel-undervolt measure' \
+    vim='nvim' \
+    weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -ov && sudo xbps-remove -Ov'
 
 if type "exa" >/dev/null 2>&1; then
 	alias \
@@ -115,12 +115,12 @@ ex ()
 # Aliases for package managers
 if type "xbps-install" >/dev/null 2>&1; then
 	alias \
-		install='sudo xbps-install -S' \
-		remove='sudo xbps-remove -R' \
-		update='sudo xbps-install -Su' \
-		query='xbps-query -Rs' \
-		orphan='sudo xbps-remove -ov' \
-		clean='sudo xbps-remove -Ov'
+		xinstall='sudo xbps-install -S' \
+		xremove='sudo xbps-remove -R' \
+		xupdate='sudo xbps-install -Su' \
+		xquery='xbps-query -Rs' \
+		xorphan='sudo xbps-remove -ov' \
+		xclean='sudo xbps-remove -Ov'
 fi
 
 # Directory aliases
