@@ -27,7 +27,7 @@ checkEnv() {
     done
 
     if [ -z "${PACKAGER}" ]; then
-        echo -e "${RED}Can't find a supported package manager"
+        echo -e "${RED}Can't find a supported package manager${RC}"
         exit 1
     fi
 
@@ -50,7 +50,7 @@ checkEnv() {
 
     ## Check if member of the sudo group.
     if ! groups | grep ${SUGROUP} >/dev/null; then
-        echo -e "${RED}You need to be a member of the sudo group to run me!"
+        echo -e "${RED}You need to be a member of the sudo group to run me!${RC}"
         exit 1
     fi
     
@@ -72,7 +72,7 @@ installDepend() {
         fi
     	paru --noconfirm -S --needed ${DEPENDENCIES}
     elif [[ $PACKAGER == "xbps-install" ]]; then
-        sudo ${PACKAGER} -y ${DEPENDENCIES}
+        sudo ${PACKAGER} -Sy ${DEPENDENCIES}
     else 
     	sudo ${PACKAGER} install -yq ${DEPENDENCIES}
     fi
