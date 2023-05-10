@@ -69,14 +69,15 @@ alias \
 	df='df -h' \
 	bc='bc -ql' \
 	mkd='mkdir -pv' \
-	mcd='mkd $1; cd $1' \
+	mcd='mkdir -p $1; cd $1' \
 	treestat='rpm-ostree status' \
 	please='sudo !!' \
 	zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"' \
 	itop='sudo intel_gpu_top' \
     imeas='sudo intel-undervolt measure' \
     vim='nvim' \
-    weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -ov && sudo xbps-remove -Ov'
+    weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
+	xerrors='sudo dmesg --level=emerg,alert,crit,err,warn'
 
 if type "exa" >/dev/null 2>&1; then
 	alias \
