@@ -33,7 +33,8 @@ checkEnv() {
 
 
     ## Check if the current directory is writable.
-    GITPATH="$(dirname "$(realpath "$0")")"
+    #GITPATH="$(dirname "$(realpath "$0")")"
+    GITPATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
     if [[ ! -w ${GITPATH} ]]; then
         echo -e "${RED}Can't write to ${GITPATH}${RC}"
         exit 1
@@ -106,10 +107,10 @@ copyConfig() {
     cp -fv ${GITPATH}/.bashrc 								${HOME}/.bashrc
     cp -fv ${GITPATH}/.inputrc 								${HOME}/.inputrc
     cp -fv ${GITPATH}/.config/starship.toml 				${HOME}/.config/starship.toml
-    cp -fv ${GITPATH}/.config/fastfetch/				 	    ${HOME}/.config/
-    cp -fv ${GITPATH}/.config/btop/              		    ${HOME}/.config/
-    cp -fv ${GITPATH}/.config/alacritty/						${HOME}/.config/
-    cp -fv ${GITPATH}/.config/htop/							${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/fastfetch/				 	    ${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/btop/              		    ${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/alacritty/						${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/htop/							${HOME}/.config/
 }
 
 checkEnv
