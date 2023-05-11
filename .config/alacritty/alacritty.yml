@@ -7,7 +7,7 @@ env:
 
 window:
   dimensions:
-    columns: 100
+    columns: 98
     lines: 32
 
   #position:
@@ -15,12 +15,12 @@ window:
   #  y: 0
 
   padding:
-    x: 4
-    y: 4
+    x: 3
+    y: 3
 
   #decorations: full
 
-  opacity: 0.96
+  opacity: 1.00
 
   #startup_mode: Windowed
 
@@ -102,7 +102,7 @@ cursor:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    blinking: On
+    blinking: Always
 
   # Vi mode cursor style
   #

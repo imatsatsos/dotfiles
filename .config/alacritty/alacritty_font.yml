@@ -3,17 +3,17 @@ font:
     family: Hack Nerd Font Mono
     #style: Regular
 
-  #bold:
-    #family: monospace
-    #style: Bold
+  bold:
+    family: Hack Nerd Font Mono
+    style: Bold
 
-  #italic:
-    #family: monospace
-    #style: Italic
+  italic:
+    family: Hack Nerd Font Mono
+    style: Italic
 
-  #bold_italic:
-    #family: monospace
-    #style: Bold Italic
+  bold_italic:
+    family: Hack Nerd Font Mono
+    style: Bold Italic
 
   size: 11.0
 
