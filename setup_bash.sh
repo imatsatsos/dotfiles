@@ -104,13 +104,14 @@ copyConfig() {
 
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
-    cp -fv ${GITPATH}/.bashrc 								${HOME}/.bashrc
-    cp -fv ${GITPATH}/.inputrc 								${HOME}/.inputrc
-    cp -fv ${GITPATH}/.config/starship.toml 				${HOME}/.config/starship.toml
-    cp -rfv ${GITPATH}/.config/fastfetch/				 	    ${HOME}/.config/
-    cp -rfv ${GITPATH}/.config/btop/              		    ${HOME}/.config/
-    cp -rfv ${GITPATH}/.config/alacritty/						${HOME}/.config/
-    cp -rfv ${GITPATH}/.config/htop/							${HOME}/.config/
+    cp -fv ${GITPATH}/.bashrc						${HOME}/.bashrc
+    cp -fv ${GITPATH}/.inputrc						${HOME}/.inputrc
+    cp -fv ${GITPATH}/.config/starship.toml				${HOME}/.config/starship.toml
+    cp -rfv ${GITPATH}/.config/fastfetch/				${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/btop/					${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/alacritty/				${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/htop/					${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/neofetch/				${HOME}/.config/
 }
 
 checkEnv
