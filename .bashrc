@@ -58,7 +58,7 @@ export HISTFILESIZE=1000
 # Aliases
 alias \
 	ls='ls --color=auto --group-directories-first' \
-	la='ls -alh --color=auto --group-directories-first' \
+	la='ls -lhA --color=auto --group-directories-first' \
 	ll='ls -lh --color=auto --group-directories-first' \
 	grep='grep --color=auto' \
 	ip='ip --color=auto' \
