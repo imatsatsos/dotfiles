@@ -57,78 +57,78 @@ export HISTFILESIZE=1000
 
 # Aliases
 alias \
-	ls='ls --color=auto --group-directories-first' \
-	la='ls -lhA --color=auto --group-directories-first' \
-	ll='ls -lh --color=auto --group-directories-first' \
-	grep='grep --color=auto' \
-	ip='ip --color=auto' \
-	cp='cp -iv' \
-	mv='mv -iv' \
-	rm='rm -Iv' \
-	ln='ln -i' \
-	df='df -h' \
-	bc='bc -ql' \
-	mkd='mkdir -pv' \
-	mcd='mkdir -p $1; cd $1' \
-	treestat='rpm-ostree status' \
-	please='sudo !!' \
-	zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"' \
-	itop='sudo intel_gpu_top' \
-    imeas='sudo intel-undervolt measure' \
-    vim='nvim' \
-    weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
-	xerrors='sudo dmesg --level=emerg,alert,crit,err,warn'
+		ls='ls --color=auto --group-directories-first' \
+		la='ls -lhA --color=auto --group-directories-first' \
+		ll='ls -lh --color=auto --group-directories-first' \
+		grep='grep --color=auto' \
+		ip='ip --color=auto' \
+		cp='cp -iv' \
+		mv='mv -iv' \
+		rm='rm -Iv' \
+		ln='ln -i' \
+		df='df -h' \
+		bc='bc -ql' \
+		mkd='mkdir -pv' \
+		mcd='mkdir -p $1; cd $1' \
+		treestat='rpm-ostree status' \
+		please='sudo !!' \
+		zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"' \
+		itop='sudo intel_gpu_top' \
+		imeas='sudo intel-undervolt measure' \
+		vim='nvim' \
+		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
+		xerrors='sudo dmesg --level=emerg,alert,crit,err,warn'
 
 if type "exa" >/dev/null 2>&1; then
 	alias \
-		ls='exa --icons --group-directories-first' \
-		la='exa -al --icons --group-directories-first' \
-		ll='exa -l --icons --group-directories-first'
+			ls='exa --icons --group-directories-first' \
+			la='exa -al --icons --group-directories-first' \
+			ll='exa -l --icons --group-directories-first'
 fi
 
 # --- ARCHIVE EXTRACT ---
 
 ex ()
 {
-    if [ -f $1 ] ; then
-      case $1 in
-        *.tar.bz2)   tar xjf $1   ;;
-        *.tar.gz)    tar xzf $1   ;;
-        *.bz2)       bunzip2 $1   ;;
-        *.rar)       unrar x $1   ;;
-        *.gz)        gunzip $1    ;;
-        *.tar)       tar xf $1    ;;
-        *.tbz2)      tar xjf $1   ;;
-        *.tgz)       tar xzf $1   ;;
-        *.zip)       unzip $1     ;;
-        *.Z)         uncompress $1;;
-        *.7z)        7za e x $1   ;;
-        *.deb)       ar x $1      ;;
-        *.tar.xz)    tar xf $1    ;;
-        *.tar.zst)   unzstd $1    ;;
-        *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2)   tar xjf $1   ;;
+			*.tar.gz)    tar xzf $1   ;;
+			*.bz2)       bunzip2 $1   ;;
+			*.rar)       unrar x $1   ;;
+			*.gz)        gunzip $1    ;;
+			*.tar)       tar xf $1    ;;
+			*.tbz2)      tar xjf $1   ;;
+			*.tgz)       tar xzf $1   ;;
+			*.zip)       unzip $1     ;;
+			*.Z)         uncompress $1;;
+			*.7z)        7za e x $1   ;;
+			*.deb)       ar x $1      ;;
+			*.tar.xz)    tar xf $1    ;;
+			*.tar.zst)   unzstd $1    ;;
+			*)           echo "'$1' cannot be extracted via ex()" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
 }
 
 # Aliases for package managers
 if type "xbps-install" >/dev/null 2>&1; then
 	alias \
-		xinstall='sudo xbps-install -S' \
-		xremove='sudo xbps-remove -R' \
-		xupdate='sudo xbps-install -Su' \
-		xquery='xbps-query -Rs' \
-		xorphan='sudo xbps-remove -ov' \
-		xclean='sudo xbps-remove -Ov'
+			xinstall='sudo xbps-install -S' \
+			xremove='sudo xbps-remove -R' \
+			xupdate='sudo xbps-install -Su' \
+			xquery='xbps-query -Rs' \
+			xorphan='sudo xbps-remove -ov' \
+			xclean='sudo xbps-remove -Ov'
 fi
 
 # Directory aliases
 alias \
-			home='~' \
-			dl='~/Downloads' \
-			doc='~/Documents'
+		home='~' \
+		dl='~/Downloads' \
+		doc='~/Documents'
 
 # Prompt
 [ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
@@ -136,5 +136,7 @@ alias \
 # Nice
 if [ $XDG_SESSION_TYPE = wayland ]; then
 	type "fastfetch" >/dev/null 2>&1 && fastfetch
+else
+	type "neofetch" >/dev/null 2>&1 && neofetch	
 fi
 type "ufetch" >/dev/null 2>&1 && ufetch
