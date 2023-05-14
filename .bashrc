@@ -8,17 +8,31 @@ fi
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# "bat" as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
-    if  [ -d "$HOME/bin" ];
-        then PATH="$HOME/bin:$PATH"
-    fi
-    if [ -d "$HOME/.local/bin" ];
-        then PATH="$HOME/.local/bin:$PATH"
-    fi
+# User scripts/bin to PATH
+if  [ -d "$HOME/bin" ]; then
+    PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+# Flatpaks to PATH
+if [ -d "/var/lib/flatpak/exports/bin/" ]; then
+    PATH="/var/lib/flatpak/exports/bin/:$PATH"
+fi
+# AppImages to PATH
+if [ -d "$HOME/Applications" ]; then
+    PATH="$HOME/Applications:$PATH"
 fi
 export PATH
+
+# ENVIRONMENT VARIABLES
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
@@ -125,7 +139,7 @@ if type "xbps-install" >/dev/null 2>&1; then
 fi
 
 # Aliases for flatpak
-if type "flatpak" >/dev/null 2>&; then
+if type "flatpak" >/dev/null 2>&1; then
 	alias \
 			finstall='flatpak install' \
 			fremove='flatpak uninstall --delete-data' \
