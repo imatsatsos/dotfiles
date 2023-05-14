@@ -69,10 +69,10 @@ alias \
 		df='df -h' \
 		bc='bc -ql' \
 		mkd='mkdir -pv' \
-		mcd='mkdir -p $1; cd $1' \
+		mkcd='mkdir -p && cd' \
 		treestat='rpm-ostree status' \
 		please='sudo !!' \
-		zipit='tar cf - "$1" | xz -T 0 -zevc > "${1%/}.tar.xz"' \
+		zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
 		itop='sudo intel_gpu_top' \
 		imeas='sudo intel-undervolt measure' \
 		vim='nvim' \
@@ -124,6 +124,16 @@ if type "xbps-install" >/dev/null 2>&1; then
 			xclean='sudo xbps-remove -Ov'
 fi
 
+# Aliases for flatpak
+if type "flatpak" >/dev/null 2>&; then
+	alias \
+			finstall='flatpak install' \
+			fremove='flatpak uninstall --delete-data' \
+			fupdate='flatpak update' \
+			fquery='flatpak search' \
+			forphan='flatpak uninstall --unused --delete-data'
+fi
+
 # Directory aliases
 alias \
 		home='~' \
@@ -139,4 +149,3 @@ if [ $XDG_SESSION_TYPE = wayland ]; then
 else
 	type "neofetch" >/dev/null 2>&1 && neofetch	
 fi
-type "ufetch" >/dev/null 2>&1 && ufetch
