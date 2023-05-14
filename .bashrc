@@ -34,9 +34,12 @@ fi
 export PATH
 
 # ENVIRONMENT VARIABLES
+export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export HISTFILE="${XDG_STATE_HOME}"/bash_history
+export EDITOR="nvim";
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
@@ -65,50 +68,38 @@ shopt -s checkwinsize
 shopt -s autocd
 # Autocorrects cd misspellings
 shopt -s cdspell
- # Expand aliases
+# Expand aliases
 shopt -s expand_aliases
+# Expand dot filenames
+shopt -s dotglob
 
 # Disable history for consecutive identical commands and commands that start with space
 export HISTCONTROL=ignoredups:erasedups:ignorespace
-export HISTSIZE=1000
-export HISTFILESIZE=1000
+export HISTSIZE=3000
+export HISTFILESIZE=3000
 
-# Aliases
-alias \
-		ls='ls --color=auto --group-directories-first' \
-		la='ls -lhA --color=auto --group-directories-first' \
-		ll='ls -lh --color=auto --group-directories-first' \
-		grep='grep --color=auto' \
-		ip='ip --color=auto' \
-		cp='cp -iv' \
-		mv='mv -iv' \
-		rm='rm -Iv' \
-		ln='ln -i' \
-		df='df -h' \
-		bc='bc -ql' \
-		mkd='mkdir -pv' \
-		mkcd='mkdir -p && cd' \
-		treestat='rpm-ostree status' \
-		please='sudo !!' \
-		zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
-		itop='sudo intel_gpu_top' \
-		imeas='sudo intel-undervolt measure' \
-		vim='nvim' \
-		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
-		errors='sudo dmesg --level=emerg,alert,crit,err,warn'
+## Colored manpages
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;91m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;93m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;92m'
 
-if type "exa" >/dev/null 2>&1; then
-	alias \
-			ls='exa --icons --group-directories-first' \
-			la='exa -al --icons --group-directories-first' \
-			ll='exa -l --icons --group-directories-first' \
-			lg='exa -al --git --icons'
-fi
 
-if type "bat" >/dev/null 2>&1; then
-	alias cat="bat"
-fi
-
+## Utilities
+# --- go back n directories ---
+function b {
+    str=""
+    count=0
+    while [ "$count" -lt "$1" ];
+    do
+        str=$str"../"
+        let count=count+1
+    done
+    cd $str
+}
 
 # --- ARCHIVE EXTRACT ---
 
@@ -136,6 +127,47 @@ ex ()
 		echo "'$1' is not a valid file"
 	fi
 }
+
+# --- mkdir && cd ---
+function mkcd ()
+{
+	mkdir -p "$1" && cd "$1";
+}
+
+## Aliases
+alias \
+		ls='ls --color=auto --group-directories-first' \
+		la='ls -lhA --color=auto --group-directories-first' \
+		ll='ls -lh --color=auto --group-directories-first' \
+		grep='grep --color=auto' \
+		ip='ip --color=auto' \
+		cp='cp -iv' \
+		mv='mv -iv' \
+		rm='rm -Iv' \
+		ln='ln -i' \
+		df='df -h' \
+		bc='bc -ql' \
+		mkd='mkdir -pv' \
+		treestat='rpm-ostree status' \
+		please='sudo !!' \
+		zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
+		itop='sudo intel_gpu_top' \
+		imeas='sudo intel-undervolt measure' \
+		vim='nvim' \
+		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
+		errors='sudo dmesg --level=emerg,alert,crit,err,warn'
+
+if type "exa" >/dev/null 2>&1; then
+	alias \
+			ls='exa --icons --group-directories-first' \
+			la='exa -al --icons --group-directories-first' \
+			ll='exa -l --icons --group-directories-first' \
+			lg='exa -al --git --icons'
+fi
+
+if type "bat" >/dev/null 2>&1; then
+	alias cat="bat"
+fi
 
 # Aliases for package managers
 if type "xbps-install" >/dev/null 2>&1; then

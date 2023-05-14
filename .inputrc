@@ -1,7 +1,7 @@
 $include /etc/inputrc
 
 # add color
-set colored-stats on
+#set colored-stats on
 set colored-completion-prefix on
 
 # Completion settings
