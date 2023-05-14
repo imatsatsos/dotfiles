@@ -9,7 +9,11 @@ fi
 [[ $- != *i* ]] && return
 
 # "bat" as manpager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#if type "bat" >/dev/null 2>&1; then
+#    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#    export MANROFFOPT="-c"
+#fi
+#alias man="man $1 | bat"
 
 # User specific environment
 # User scripts/bin to PATH
@@ -91,14 +95,20 @@ alias \
 		imeas='sudo intel-undervolt measure' \
 		vim='nvim' \
 		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
-		xerrors='sudo dmesg --level=emerg,alert,crit,err,warn'
+		errors='sudo dmesg --level=emerg,alert,crit,err,warn'
 
 if type "exa" >/dev/null 2>&1; then
 	alias \
 			ls='exa --icons --group-directories-first' \
 			la='exa -al --icons --group-directories-first' \
-			ll='exa -l --icons --group-directories-first'
+			ll='exa -l --icons --group-directories-first' \
+			lg='exa -al --git --icons'
 fi
+
+if type "bat" >/dev/null 2>&1; then
+	alias cat="bat"
+fi
+
 
 # --- ARCHIVE EXTRACT ---
 
