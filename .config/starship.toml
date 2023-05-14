@@ -76,7 +76,7 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [git_branch]
-symbol = ""
+symbol = " "
 style = "bg:#4C566A"
 format = '[ $symbol $branch ]($style)'
 
@@ -105,7 +105,7 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [nodejs]
-symbol = ""
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
@@ -115,7 +115,7 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
-symbol = ""
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
@@ -123,12 +123,12 @@ format = '[ $symbol ($version) ]($style)'
 disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#33658A"
-format = '[ $time ]($style)'
+format = '[ $time]($style)'
 
 [custom.toolbox]
 description = "active toolbox"
 command = """grep -Po 'name="\\K[^"]+' /run/.containerenv"""
 when = "test -f /run/.containerenv"
-symbol = ""
+symbol = " "
 format = '[$output$symbol ]($style)'
 style = "fg:purple bold bg:#3B4252"
