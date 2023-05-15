@@ -104,17 +104,17 @@ copyConfig() {
 
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
-    cp -fv ${GITPATH}/.bashrc						${HOME}/.bashrc
-    cp -fv ${GITPATH}/.inputrc						${HOME}/.inputrc
-    cp -rfv ${GITPATH}/bin/						${HOME}/.local/bin/
-    cp -fv ${GITPATH}/.config/starship.toml				${HOME}/.config/
-    cp -rfv ${GITPATH}/.config/alacritty/				${HOME}/.config/alacritty/
-    cp -rfv ${GITPATH}/.config/btop/					${HOME}/.config/btop/
-    cp -rfv ${GITPATH}/.config/fastfetch/				${HOME}/.config/fastfetch/
-    cp -rfv ${GITPATH}/.config/git/					${HOME}/.config/git/
-    cp -rfv ${GITPATH}/.config/htop/					${HOME}/.config/htop/
-    cp -rfv ${GITPATH}/.config/neofetch/				${HOME}/.config/neofetch/
-
+    cp -fv ${GITPATH}/.bashrc				${HOME}/.bashrc
+    cp -fv ${GITPATH}/.inputrc				${HOME}/.inputrc
+    cp -fv ${GITPATH}/.Xresources                       ${HOME}/.Xresources
+    cp -rfv ${GITPATH}/bin/				${HOME}/.local/bin/
+    cp -fv ${GITPATH}/.config/starship.toml		${HOME}/.config/
+    cp -rfv ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
+    cp -rfv ${GITPATH}/.config/btop/			${HOME}/.config/btop/
+    cp -rfv ${GITPATH}/.config/fastfetch/		${HOME}/.config/fastfetch/
+    cp -rfv ${GITPATH}/.config/git/			${HOME}/.config/git/
+    cp -rfv ${GITPATH}/.config/htop/			${HOME}/.config/htop/
+    cp -rfv ${GITPATH}/.config/neofetch/		${HOME}/.config/neofetch/
 }
 
 checkEnv
