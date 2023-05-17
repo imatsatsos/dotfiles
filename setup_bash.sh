@@ -105,6 +105,7 @@ copyConfig() {
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
     cp -fv ${GITPATH}/.bashrc				${HOME}/.bashrc
+    cp -fv ${HOME}/.bash_history			${HOME}/.local/state/bash_history
     cp -fv ${GITPATH}/.inputrc				${HOME}/.inputrc
     cp -fv ${GITPATH}/.Xresources                       ${HOME}/.Xresources
     [ ! -d ${HOME}/.local/ ] && mkdir -p ${HOME}/.local/
