@@ -16,9 +16,7 @@ set_touchpad_scrollspeed( ){
 	xinput set-prop $id "libinput Scrolling Pixel Distance" 50
 }
 
-sleep 3
-
 set_touchpad_scrollspeed
 xrdb -merge ~/.Xresources
-notify-send "onlogin.sh run successfully!"
+#notify-send "onlogin.sh run successfully!"
 
