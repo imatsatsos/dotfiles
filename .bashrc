@@ -15,11 +15,8 @@ fi
 #fi
 #alias man="man $1 | bat"
 
-# User specific environment
+## User specific environment
 # User scripts/bin to PATH
-if  [ -d "$HOME/bin" ]; then
-    PATH="$HOME/bin:$PATH"
-fi
 if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
