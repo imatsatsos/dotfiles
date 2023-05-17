@@ -108,7 +108,8 @@ copyConfig() {
     cp -fv ${GITPATH}/.inputrc				${HOME}/.inputrc
     cp -fv ${GITPATH}/.Xresources                       ${HOME}/.Xresources
     [ ! -d ${HOME}/.local/ ] && mkdir -p ${HOME}/.local/
-    cp -rfv ${GITPATH}/bin/				${HOME}/.local/bin/
+    cp -rfv ${GITPATH}/bin/				${HOME}/.local/
+    [ ! -d ${HOME}/.config/ ] && mkdir -p ${HOME}/.config/
     cp -fv ${GITPATH}/.config/starship.toml		${HOME}/.config/
     cp -rfv ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
     cp -rfv ${GITPATH}/.config/btop/			${HOME}/.config/btop/
