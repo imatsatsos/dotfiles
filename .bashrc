@@ -39,7 +39,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export HISTFILE="${XDG_STATE_HOME}"/bash_history
-export EDITOR="nvim";
+export EDITOR=nvim
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
@@ -78,7 +78,7 @@ export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTSIZE=3000
 export HISTFILESIZE=3000
 
-## Colored manpages
+# Colored manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;91m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -157,6 +157,7 @@ alias \
 		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
 		errors='sudo dmesg --level=emerg,alert,crit,err,warn'
 
+# exa for ls
 if type "exa" >/dev/null 2>&1; then
 	alias \
 			ls='exa --icons --group-directories-first' \
@@ -165,6 +166,7 @@ if type "exa" >/dev/null 2>&1; then
 			lg='exa -al --git --icons'
 fi
 
+# bat for cat
 if type "bat" >/dev/null 2>&1; then
 	alias cat="bat"
 fi
@@ -201,7 +203,7 @@ alias \
 
 # Nice
 if [ $XDG_SESSION_TYPE = wayland ]; then
-	type "fastfetch" >/dev/null 2>&1 && fastfetch
+	type "fastfetch" >/dev/null 2>&1 && fastfetch || type "neofetch" >/dev/null 2>&1 && neofetch
 else
 	type "neofetch" >/dev/null 2>&1 && neofetch	
 fi
