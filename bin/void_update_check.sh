@@ -7,7 +7,7 @@ broken="$(grep broken /tmp/error | wc -l)"
 pkg="$(awk '{print $1" ---> "$2}' /tmp/updates)"
 pkgs="$(awk '{print $1}' /tmp/updates)"
 unresolved="$(grep broken /tmp/error | awk '{ print $1" "$5 }')"
-xx=$(printf "=================================================")
+xx=$(printf "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
 
 if [ "$broken" = 0 ] && [ "$updates" -ge 1 ]; then
 	#~/Datos/Git/scripts/varios/dunst_sound.sh
