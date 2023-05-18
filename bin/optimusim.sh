@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Script to enable or disable the NVIDIA card on user input.
 
 move_rules_file() {

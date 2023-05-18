@@ -1,6 +1,8 @@
 #!/bin/sh
+
 # Script accepts three arguments: input file, width in pixels of output video, and output folder
 # Check that all arguments are passed
+
 if [ $# -ne 3 ]; then
     echo "Example usage: optvideo input.mp4 1920 output_folder"
     exit 1

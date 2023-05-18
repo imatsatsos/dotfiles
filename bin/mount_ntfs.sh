@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Script opens a fzf selection of disk devices to mount as ntfs3
 
 # fzf menu

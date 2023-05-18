@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Script checks for number of available updates, and sends a notification for how many
+#  there are and which of them. Also check for update errors and notifys appropriately
+
 /bin/xbps-install --dry-run --update --memory-sync 1>/tmp/updates 2>/tmp/error
 
 updates="$(wc -l < /tmp/updates)"
