@@ -199,8 +199,5 @@ alias \
 [ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
 
 # Nice
-if [ $XDG_SESSION_TYPE = wayland ]; then
-	type "fastfetch" >/dev/null 2>&1 && fastfetch || type "neofetch" >/dev/null 2>&1 && neofetch
-else
-	type "neofetch" >/dev/null 2>&1 && neofetch	
-fi
+type "neofetch" >/dev/null 2>&1 && neofetch
+
