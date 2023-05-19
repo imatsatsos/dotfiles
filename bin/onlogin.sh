@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Here live some on-login things I want to be run
 # These are: setting touchpad scroll speed, merging .Xresources
@@ -13,7 +13,7 @@ set_touchpad_scrollspeed( ){
 	#echo $line
 	#echo $id
 	
-	# finally set touchpad scroll speed
+	# finally set touchpad scroll speed with id
 	xinput set-prop $id "libinput Scrolling Pixel Distance" 50
 }
 
