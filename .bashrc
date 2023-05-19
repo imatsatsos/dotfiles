@@ -152,7 +152,8 @@ alias \
 		imeas='sudo intel-undervolt measure' \
 		vim='nvim' \
 		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
-		errors='sudo dmesg --level=emerg,alert,crit,err,warn'
+		errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
+		envy='python /home/$(whoami)/Documents/gitrepos/envycontrol/envycontrol.py'
 
 # exa for ls
 if type "exa" >/dev/null 2>&1; then
