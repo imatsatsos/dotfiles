@@ -4,6 +4,7 @@
 # These are: 
 # setting touchpad scroll speed, 
 # merging .Xresources,
+# disabling laptop monitor if an external is connected
 # setting BENQ monitor refresh to 100 Hz
 
 set_touchpad_scrollspeed( ){
@@ -16,17 +17,39 @@ set_touchpad_scrollspeed( ){
 	xinput set-prop $id "libinput Scrolling Pixel Distance" 50
 }
 
-set_benq_refresh() {
-    # find port benq is connected
-    benq_port=$( xrandr -q | grep 'HDMI' | grep -Ev 'disconnected' | awk '{print $1}' )
-    # set refresh rate
-    xrandr --output $benq_port --mode 1920x1080 --rate 100
+find_laptop_monitor_port() {
+    laptop_port=$( xrandr -q | grep 'eDP' | grep -w 'connected' | awk '{print $1}' )
 }
+
+find_benq_monitor_port() {
+    benq_port=$( xrandr -q | grep 'HDMI' | grep -w 'connected' | awk '{print $1}' )
+}
+
+set_benq_refresh() {
+    if [[ -z $benq_port ]]; then
+        exit 1
+    else
+        xrandr --output $benq_port --mode 1920x1080 --rate 100
+    fi
+}
+
+disable_laptop_monitor() {
+    if [[ -z $benq_port ]]; then
+        exit 1
+    else
+        xrandr --output $laptop_port --off
+    fi
+}
+
+# main
+find_laptop_monitor_port
+find_benq_monitor_port
 
 sleep 1
 set_touchpad_scrollspeed
 xrdb -merge ~/.Xresources
-sleep 2
+disable_laptop_monitor
+wait
+sleep 1
 set_benq_refresh
-source ./disable_laptop_monitor.sh
 notify-send "onlogin.sh run successfully!"
