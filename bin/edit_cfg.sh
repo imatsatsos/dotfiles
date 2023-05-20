@@ -18,7 +18,7 @@ confedit_list[xinitrc]="$HOME/.xinitrc"
 confedit_list[xresources]="$HOME/.Xresources"
 
 FMENU="fzf --border=rounded --margin=5% --color=dark --height 100% --reverse --header=$(basename "$0") --info=hidden --header-first --prompt"
-FTEM="alacritty -e"
+FTEM="xst -g=89x32"
 FEDITOR="$FTERM vim"
 
  # Piping the above array (cleaned) into fzf.

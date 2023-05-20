@@ -12,23 +12,21 @@ set_touchpad_scrollspeed( ){
 	# save touchpad id to var 'id'
 	id=$( echo "$line" | grep -oP 'id=\K\d+' )
 
-	## debug
-	#echo $line
-	#echo $id
-	
-	# finally set touchpad scroll speed with id
+	# touchpad scroll speed with id
 	xinput set-prop $id "libinput Scrolling Pixel Distance" 50
 }
 
 set_benq_refresh() {
     # find port benq is connected
-    port=$( xrandr -q | grep 'HDMI' | grep -Ev 'disconnected' | awk '{print $1}' )
+    benq_port=$( xrandr -q | grep 'HDMI' | grep -Ev 'disconnected' | awk '{print $1}' )
     # set refresh rate
-    xrandr --output $port --mode 1920x1080 --rate 100
+    xrandr --output $benq_port --mode 1920x1080 --rate 100
 }
 
 sleep 1
 set_touchpad_scrollspeed
 xrdb -merge ~/.Xresources
+sleep 2
 set_benq_refresh
+source ./disable_laptop_monitor.sh
 notify-send "onlogin.sh run successfully!"
