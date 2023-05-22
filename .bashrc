@@ -36,6 +36,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export HISTFILE="${XDG_STATE_HOME}"/bash_history
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export EDITOR=nvim
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
@@ -153,7 +154,7 @@ alias \
 		vim='nvim' \
 		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
 		errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
-		envy='python /home/$(whoami)/Documents/gitrepos/envycontrol/envycontrol.py'
+		envy='sudo python /home/john/Documents/gitrepos/envycontrol/envycontrol.py'
 
 # exa for ls
 if type "exa" >/dev/null 2>&1; then
@@ -168,6 +169,8 @@ fi
 if type "bat" >/dev/null 2>&1; then
 	alias cat="bat"
 fi
+# bat theme
+export BAT_THEME="Dracula"
 
 # Aliases for package managers
 if type "xbps-install" >/dev/null 2>&1; then
@@ -193,8 +196,8 @@ fi
 # Directory aliases
 alias \
 		home='~' \
-		dl='~/Downloads' \
-		doc='~/Documents'
+		dl='$HOME/Downloads' \
+		doc='$HOME/Documents'
 
 # Prompt
 [ -f /usr/local/bin/starship ] && eval "$(starship init bash)"

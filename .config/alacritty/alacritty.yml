@@ -7,7 +7,7 @@ env:
 
 window:
   dimensions:
-    columns: 92 
+    columns: 96 
     lines: 32
 
   #position:
