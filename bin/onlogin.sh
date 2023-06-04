@@ -6,6 +6,7 @@
 # merging .Xresources,
 # disabling laptop monitor if an external is connected
 # setting BENQ monitor refresh to 100 Hz
+# setting gnome text scaling factor to 1 when using an external monitor
 
 set_touchpad_scrollspeed( ){
 	# find touchpad device from xinput
@@ -41,6 +42,14 @@ disable_laptop_monitor() {
     fi
 }
 
+toggle_scaling_factor() {
+    if [[ -z $benq_port ]]; then
+       gsettings set.org.gnome.desktop.interface text-scaling-factor 1.15 
+    else
+       gsettings set org.gnome.desktop.interface text-scaling-factor 1
+    fi
+}
+
 # main
 find_laptop_monitor_port
 find_benq_monitor_port
@@ -48,8 +57,9 @@ find_benq_monitor_port
 sleep 1
 set_touchpad_scrollspeed
 xrdb -merge ~/.Xresources
+toggle_scaling_factor
+notify-send "onlogin.sh run successfully!"
 disable_laptop_monitor
 wait
-sleep 1
+sleep 3
 set_benq_refresh
-notify-send "onlogin.sh run successfully!"
