@@ -104,20 +104,21 @@ copyConfig() {
 
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
-    cp -fv ${GITPATH}/.bashrc				${HOME}/.bashrc
-    cp -fv ${HOME}/.bash_history			${HOME}/.local/state/bash_history
-    cp -fv ${GITPATH}/.inputrc				${HOME}/.inputrc
-    cp -fv ${GITPATH}/.Xresources                       ${HOME}/.Xresources
-    [ ! -d ${HOME}/.local/ ] && mkdir -p ${HOME}/.local/
-    cp -rfv ${GITPATH}/bin/				${HOME}/.local/
-    [ ! -d ${HOME}/.config/ ] && mkdir -p ${HOME}/.config/
+    cp -fv ${GITPATH}/.bashrc				    ${HOME}/.bashrc
+    cp -fv ${HOME}/.bash_history			    ${HOME}/.local/state/bash_history
+    cp -fv ${GITPATH}/.inputrc				    ${HOME}/.inputrc
+    cp -fv ${GITPATH}/.Xresources               ${HOME}/.Xresources
+    [ ! -d ${HOME}/.local/ ] && mkdir -p        ${HOME}/.local/
+    cp -rfv ${GITPATH}/bin/				        ${HOME}/.local/
+    [ ! -d ${HOME}/.config/ ] && mkdir -p       ${HOME}/.config/
     cp -fv ${GITPATH}/.config/starship.toml		${HOME}/.config/
     cp -rfv ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
     cp -rfv ${GITPATH}/.config/btop/			${HOME}/.config/btop/
     cp -rfv ${GITPATH}/.config/fastfetch/		${HOME}/.config/fastfetch/
-    cp -rfv ${GITPATH}/.config/git/			${HOME}/.config/git/
+    cp -rfv ${GITPATH}/.config/git/             ${HOME}/.config/git/
     cp -rfv ${GITPATH}/.config/htop/			${HOME}/.config/htop/
     cp -rfv ${GITPATH}/.config/neofetch/		${HOME}/.config/neofetch/
+    cp -rfv ${GITPATH}/.config/MangoHud/		${HOME}/.config/MangoHud/
 }
 
 checkEnv
