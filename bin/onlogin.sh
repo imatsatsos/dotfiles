@@ -18,6 +18,17 @@ set_touchpad_scrollspeed( ){
 	xinput set-prop $id "libinput Scrolling Pixel Distance" 50
 }
 
+set_mouse_accel( ){
+	# find mouse device from xinput
+	line="$( xinput | grep -iP '(?=.*G305)(?=.*pointer)' )"
+
+	# save touchpad id to var 'id'
+	id=$( echo "$line" | grep -oP 'id=\K\d+' )
+
+	# touchpad scroll speed with id
+	xinput set-prop $id "libinput Accel Profile Enabled" 0, 1
+}
+
 find_laptop_monitor_port() {
     laptop_port=$( xrandr -q | grep 'eDP' | grep -w 'connected' | awk '{print $1}' )
 }
@@ -56,6 +67,7 @@ find_benq_monitor_port
 
 sleep 1
 set_touchpad_scrollspeed
+set_mouse_accel
 xrdb -merge ~/.Xresources
 toggle_scaling_factor
 notify-send "onlogin.sh run successfully!"
