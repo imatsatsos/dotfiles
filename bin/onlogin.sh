@@ -44,7 +44,7 @@ disable_laptop_monitor() {
 
 toggle_scaling_factor() {
     if [[ -z $benq_port ]]; then
-       gsettings set.org.gnome.desktop.interface text-scaling-factor 1.15 
+       gsettings set org.gnome.desktop.interface text-scaling-factor 1.10 
     else
        gsettings set org.gnome.desktop.interface text-scaling-factor 1
     fi
