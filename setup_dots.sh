@@ -59,7 +59,7 @@ checkEnv() {
 
 installDepend() {
     ## Check for dependencies.
-    DEPENDENCIES='autojump bash bash-completion tar exa bat xinput'
+    DEPENDENCIES='autojump bash bash-completion tar exa bat xinput fzf'
     echo -e "${YELLOW}Installing dependencies...${RC}"
     if [[ $PACKAGER == "pacman" ]]; then
         if ! command_exists paru; then
@@ -119,7 +119,7 @@ copyConfig() {
     cp -rfv ${GITPATH}/.config/htop/			${HOME}/.config/htop/
     cp -rfv ${GITPATH}/.config/neofetch/		${HOME}/.config/neofetch/
     cp -rfv ${GITPATH}/.config/MangoHud/		${HOME}/.config/MangoHud/
-    cp -rfv ${GITPATH}/.config/i3/              ${HOME}/.config/i3/
+    cp -rfv ${GITPATH}/.config/i3/              ${HOME}/.config/
     cp -rfv ${GITPATH}/.config/gtk-3.0/         ${HOME}/.config/gtk-3.0/
 }
 

@@ -259,7 +259,7 @@ client.focused          $blue    $black   $grey    $blue     $purple
 client.focused_inactive $grey    $black   $grey    $grey     $grey
 client.unfocused        $white   #222236  #29293f  $white    $grey
 client.urgent           #d95177  #d54c73  $grey    #EF4A73   #d54c73
-client.placeholder      $black   $black   $grey    $black   #222236
+client.placeholder      $black   $black   $grey    $black    #222236
 
 #######
 # BAR #
@@ -305,7 +305,7 @@ exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=ssh,secr
 exec --no-startup-id /usr/bin/pipewire
 exec --no-startup-id /usr/bin/pipewire-pulse
 exec --no-startup-id /usr/bin/xwallpaper --maximize /home/$USER/.config/background
-exec --no-startup-id /home/john/.local/bin/onlogin.sh
+exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 # Change language
 exec_always "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
 
