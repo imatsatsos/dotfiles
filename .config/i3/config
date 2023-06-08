@@ -75,8 +75,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-bindsym $mod+Ctrl+l exec "i3lock --nofork -c 121314 -f"
-bindsym $mod+Ctrl+s exec "i3lock --nofork -c 121314 -f; loginctl suspend"
+bindsym $mod+Ctrl+l exec "i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png"
+bindsym $mod+Ctrl+s exec "i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png; loginctl suspend"
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -308,4 +308,3 @@ exec --no-startup-id /usr/bin/xwallpaper --maximize /home/$USER/.config/backgrou
 exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 # Change language
 exec_always "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
-
