@@ -119,6 +119,8 @@ copyConfig() {
     cp -rfv ${GITPATH}/.config/htop/			${HOME}/.config/htop/
     cp -rfv ${GITPATH}/.config/neofetch/		${HOME}/.config/neofetch/
     cp -rfv ${GITPATH}/.config/MangoHud/		${HOME}/.config/MangoHud/
+    cp -rfv ${GITPATH}/.config/i3/              ${HOME}/.config/i3/
+    cp -rfv ${GITPATH}/.config/gtk-3.0/         ${HOME}/.config/gtk-3.0/
 }
 
 checkEnv
