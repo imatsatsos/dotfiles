@@ -5,7 +5,11 @@ Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: true
 Xft.hintstyle: hintslight
-Xft.lcdfilter: lcdfilter
+Xft.lcdfilter: lcddefault
+
+! Xcursor
+Xcursor.theme: BreezeX-Black
+Xcursor.size: 32
 
 !! xst conf
 ! These are all possible options, presented with default values.
