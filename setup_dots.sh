@@ -112,6 +112,7 @@ copyConfig() {
     cp -rfv ${GITPATH}/bin/				        ${HOME}/.local/
     [ ! -d ${HOME}/.config/ ] && mkdir -p       ${HOME}/.config/
     cp -fv ${GITPATH}/.config/starship.toml		${HOME}/.config/
+    cp -fv ${GITPATH}/.config/lockscreen.png	${HOME}/.config/
     cp -rfv ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
     cp -rfv ${GITPATH}/.config/btop/			${HOME}/.config/btop/
     cp -rfv ${GITPATH}/.config/fastfetch/		${HOME}/.config/fastfetch/
