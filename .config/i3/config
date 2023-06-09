@@ -239,7 +239,11 @@ for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
 for_window [class="Steam"]              floating enable
 for_window [class="Project Zomboid"]    floating enable
-for_window [class="lutris"]             floating enable
+for_window [class="Lutris"]             floating enable
+
+# scratchpads
+bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create.sh 'scratch-term' 'xst -g=89x32'
+
 
 ##########
 # COLORS #
