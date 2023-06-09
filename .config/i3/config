@@ -34,10 +34,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute    exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle   && $refresh_i3blocks
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3blocks
 
-bindsym XF86AudioPlay  exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext  exec playerctl next
-bindsym XF86AudioPrev  exec playerctl previous
+bindsym XF86AudioPlay  exec --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext  exec --no-startup-id playerctl next
+bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 
 ############
 # KEYBINDS #
@@ -54,20 +54,20 @@ tiling_drag modifier titlebar
 
 ### START APPS
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec "xst -g=89x32"
-bindsym $mod+e exec "nautilus --new-window"
+bindsym $mod+Return exec --no-startup-id "xst -g=89x32"
+bindsym $mod+e exec --no-startup-id "nautilus --new-window"
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+shift+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+shift+d exec --no-startup-id dmenu_run
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -107,10 +107,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Ctrl+h split h
+bindsym $mod+z split h
 
 # split in vertical orientation
-bindsym $mod+Ctrl+v split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -145,7 +145,7 @@ set $ws5 5:SCHOOL
 set $ws6 6:CHAT
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
+set $ws9 9:VM
 set $ws10 10:MPV
 
 # switch to workspace
@@ -207,7 +207,7 @@ mode $modeSession {
         # These bindings trigger as soon as you enter the resize mode
         bindsym p exec "loginctl poweroff"; mode "default"
         bindsym r exec "loginctl reboot"; mode "default"
-        bindsym s exec "i3lock --nofork -c 121314 -f; loginctl suspend"; mode "default"
+        bindsym s exec "i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png; loginctl suspend"; mode "default"
         
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -220,16 +220,18 @@ bindsym $mod+Shift+q mode $modeSession
 #########
 # RULES #
 #########
-# assign to ws
+# assign to workspace
 assign [class="Brave"]              $ws1
 #assign [class="xst"]               $ws2
 assign [class="mpv"]                $ws10
 assign [class="Signal"]             $ws6
+assign [class="virt-manager"]       $ws9
 
 # atomatic focus for windows opening on different worskpace
 for_window [class="Brave"]          focus
 for_window [class="mpv"]            focus
 for_window [class="Signal"]         focus
+for_window [class="virt-manager"]   focus
 
 # assign floating
 for_window [class="Signal"]             floating enable
@@ -237,6 +239,7 @@ for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
 for_window [class="Steam"]              floating enable
 for_window [class="Project Zomboid"]    floating enable
+for_window [class="lutris"]             floating enable
 
 ##########
 # COLORS #
@@ -307,4 +310,5 @@ exec --no-startup-id /usr/bin/pipewire-pulse
 exec --no-startup-id /usr/bin/xwallpaper --maximize /home/$USER/.config/background
 exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 # Change language
-exec_always "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
+exec_always --no-startup-id "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
+
