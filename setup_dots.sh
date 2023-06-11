@@ -113,7 +113,7 @@ installNerdFonts() {
     if fc-list | grep 'Liga SFMono Nerd' >/dev/null; then
         echo -e "${YELLOW}! Liga SFMono Nerd font already installed \n${RC}"
     else
-        git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git && cd SFMono-Nerd-Font-Ligaturized
+        git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
         if [ ! -d SFMono-Nerd-Font-Ligaturized ]; then
             echo -e "${RED}! ERROR: git clone failed..${RC}"
         else
