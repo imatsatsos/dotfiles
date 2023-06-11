@@ -59,7 +59,7 @@ checkEnv() {
 
 installDepend() {
     ## Check for dependencies.
-    DEPENDENCIES='curl git autojump bash bash-completion tar exa bat xinput fzf'
+    DEPENDENCIES='curl git autojump bash bash-completion tar exa bat xinput xrdb fzf'
     echo -e "${YELLOW}Installing dependencies...${RC}"
     if [[ $PACKAGER == "pacman" ]]; then
         if ! command_exists paru; then
@@ -84,7 +84,7 @@ installCursor() {
     sleep 1
     mkdir -p ${HOME}/.local/share/icons/
     # install the icons in .local and symlink to ~/.icons, or xcursor wont work
-    cp -rfv ${GITPATH}/.local/share/icons/ ${HOME}/.local/share/icons/	
+    cp -rf ${GITPATH}/.local/share/icons/ ${HOME}/.local/share/icons/	
     ln -s ${HOME}/local/share/icons ${HOME}/.icons
 }
 
@@ -120,6 +120,7 @@ installNerdFonts() {
             mkdir -p ~/.local/share/fonts/SFMonoNerd/
             cp SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts/SFMonoNerd/
         fi
+    fi
 }
 
 installStarship(){
@@ -155,6 +156,7 @@ copyConfig() {
     cp -rfv ${GITPATH}/bin/				        ${HOME}/.local/
     [ ! -d ${HOME}/.config/ ] && mkdir -p       ${HOME}/.config/
     cp -fv ${GITPATH}/.config/starship.toml		${HOME}/.config/
+    cp -fv ${GITPATH}/.config/background	${HOME}/.config/
     cp -fv ${GITPATH}/.config/lockscreen.png	${HOME}/.config/
     cp -rfv ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
     cp -rfv ${GITPATH}/.config/btop/			${HOME}/.config/btop/
