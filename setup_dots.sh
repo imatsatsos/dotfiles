@@ -59,7 +59,7 @@ checkEnv() {
 
 installDepend() {
     ## Check for dependencies.
-    DEPENDENCIES='curl autojump bash bash-completion tar exa bat xinput fzf'
+    DEPENDENCIES='curl git autojump bash bash-completion tar exa bat xinput fzf'
     echo -e "${YELLOW}Installing dependencies...${RC}"
     if [[ $PACKAGER == "pacman" ]]; then
         if ! command_exists paru; then
@@ -101,6 +101,16 @@ installNerdFonts() {
 			exit 1
 		fi
 	fi
+    if fc-list | grep 'Liga SFMono Nerd' >/dev/null; then
+        box "! Liga SFMono Nerd font already installed \n"
+    else
+        git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git && cd SFMono-Nerd-Font-Ligaturized
+        if [ ! -d SFMono-Nerd-Font-Ligaturized ]; then
+            box "\e[1;31m! ERROR: git clone failed.."
+        else
+            mkdir -p ~/.local/share/fonts/SFMonoNerd/
+            cp SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts/SFMonoNerd/
+        fi
 }
 
 installStarship(){

@@ -2,7 +2,8 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 11
+#font pango:monospace 11
+font pango:Liga SFMono Nerd Font Bold 11
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -145,6 +146,18 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 9:VM
 set $ws10 10:MPV
+
+# 1: 
+# 2: 
+# 3: 
+# 4: 
+# 5: 
+# 6: 
+# 7: 
+# 8: 
+# 9: 
+# 10: 
+
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -307,12 +320,14 @@ default_border pixel 3
 default_floating_border normal 3
 hide_edge_borders smart_no_gaps
 
+
 ########
 # GAPS #
 ########
 gaps inner 6
 gaps outer 0
 smart_gaps on
+
 
 #############
 # AUTOSTART #
@@ -325,4 +340,3 @@ exec --no-startup-id /usr/bin/xwallpaper --maximize /home/$USER/.config/backgrou
 exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 # Change language
 exec_always --no-startup-id "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
-
