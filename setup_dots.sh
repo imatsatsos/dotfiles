@@ -11,7 +11,7 @@ command_exists () {
 
 checkEnv() {
     ## Check for requirements.
-    REQUIREMENTS='curl groups sudo'
+    REQUIREMENTS='groups sudo'
     if ! command_exists ${REQUIREMENTS}; then
         echo -e "${RED}To run me, you need: ${REQUIREMENTS}${RC}"
         exit 1
@@ -59,7 +59,7 @@ checkEnv() {
 
 installDepend() {
     ## Check for dependencies.
-    DEPENDENCIES='autojump bash bash-completion tar exa bat xinput fzf'
+    DEPENDENCIES='curl autojump bash bash-completion tar exa bat xinput fzf'
     echo -e "${YELLOW}Installing dependencies...${RC}"
     if [[ $PACKAGER == "pacman" ]]; then
         if ! command_exists paru; then
@@ -77,6 +77,30 @@ installDepend() {
     else 
     	sudo ${PACKAGER} install -yq ${DEPENDENCIES}
     fi
+}
+
+installNerdFonts() {
+    echo -e "${YELLOW}Installing some fonts...${RC}"
+    sleep 1
+    if fc-list | grep HackNerd >/dev/null; then 
+		box "! HackNerd font already installed \n"
+	else
+		if command_exists curl; then
+			curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Hack.zip -o HackNerd.zip
+			if [ ! -f HackNerd.zip ]; then
+				box "\e[1;31m! ERROR: Font download failed.."
+			else
+				unzip HackNerd.zip -d ./HackNerd
+				[ ! -d ~/.local/share/fonts/ ] && mkdir -p ~/.local/share/fonts/
+				mv ./HackNerd ~/.local/share/fonts/
+				rm HackNerd.zip
+				fc-cache -f
+			fi
+		else
+			echo -e "${RED}ERROR: curl not found!${RC}"
+			exit 1
+		fi
+	fi
 }
 
 installStarship(){
@@ -126,6 +150,7 @@ copyConfig() {
 
 checkEnv
 installDepend
+installNerdFonts
 installStarship
 if copyConfig; then
     echo -e "${GREEN}Done!\nRestart your shell to see the changes.${RC}"
