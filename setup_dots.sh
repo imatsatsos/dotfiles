@@ -79,6 +79,15 @@ installDepend() {
     fi
 }
 
+installCursor() {
+    echo -e "${YELLOW}Installing Breeze-Black cursror theme...${RC}"
+    sleep 1
+    mkdir -p ${HOME}/.local/share/icons/
+    # install the icons in .local and symlink to ~/.icons, or xcursor wont work
+    cp -rfv ${GITPATH}/.local/share/icons/ ${HOME}/.local/share/icons/	
+    ln -s ${HOME}/local/share/icons ${HOME}/.icons
+}
+
 installNerdFonts() {
     echo -e "${YELLOW}Installing some fonts...${RC}"
     sleep 1
@@ -161,6 +170,7 @@ copyConfig() {
 checkEnv
 installDepend
 installNerdFonts
+installCursor
 installStarship
 if copyConfig; then
     echo -e "${GREEN}Done!\nRestart your shell to see the changes.${RC}"
