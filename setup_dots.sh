@@ -84,7 +84,7 @@ installCursor() {
     sleep 1
     mkdir -p ${HOME}/.local/share/icons/
     # install the icons in .local and symlink to ~/.icons, or xcursor wont work
-    cp -rf ${GITPATH}/.local/share/icons/ ${HOME}/.local/share/icons/	
+    cp -rf ${GITPATH}/.local/share/icons/ ${HOME}/.local/share/
     ln -s ${HOME}/local/share/icons/ ${HOME}/.icons
 }
 
@@ -166,7 +166,7 @@ copyConfig() {
     cp -rfv ${GITPATH}/.config/neofetch/		${HOME}/.config/neofetch/
     cp -rfv ${GITPATH}/.config/MangoHud/		${HOME}/.config/MangoHud/
     cp -rfv ${GITPATH}/.config/i3/              ${HOME}/.config/
-    cp -rfv ${GITPATH}/.config/gtk-3.0/         ${HOME}/.config/gtk-3.0/
+    cp -rfv ${GITPATH}/.config/gtk-3.0/         ${HOME}/.config/
 }
 
 checkEnv
