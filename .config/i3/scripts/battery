@@ -76,15 +76,15 @@ if ($status eq 'discharging') {
 $short_text = $full_text;
 
 if ($percent < 20) {
-  $label = '';
+  $label = ' ';
 } elsif ($percent < 35) {
-  $label = '';
+  $label = ' ';
 } elsif ($percent < 60) {
-  $label = '';
+  $label = ' ';
 } elsif ($percent < 90) {
-  $label = '';
+  $label = ' ';
 } else {
-  $label = '';
+  $label = ' ';
 }
 
 if ($status eq 'discharging') {
