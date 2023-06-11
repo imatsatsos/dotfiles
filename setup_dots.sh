@@ -85,19 +85,19 @@ installCursor() {
     mkdir -p ${HOME}/.local/share/icons/
     # install the icons in .local and symlink to ~/.icons, or xcursor wont work
     cp -rf ${GITPATH}/.local/share/icons/ ${HOME}/.local/share/icons/	
-    ln -s ${HOME}/local/share/icons ${HOME}/.icons
+    ln -s ${HOME}/local/share/icons/ ${HOME}/.icons
 }
 
 installNerdFonts() {
     echo -e "${YELLOW}Installing some fonts...${RC}"
     sleep 1
     if fc-list | grep HackNerd >/dev/null; then 
-		box "! HackNerd font already installed \n"
+		echo -e "${YELLOW}! HackNerd font already installed \n${RC}"
 	else
 		if command_exists curl; then
 			curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Hack.zip -o HackNerd.zip
 			if [ ! -f HackNerd.zip ]; then
-				box "\e[1;31m! ERROR: Font download failed.."
+				echo -e "\${RED}! ERROR: Font download failed..${RC}"
 			else
 				unzip HackNerd.zip -d ./HackNerd
 				[ ! -d ~/.local/share/fonts/ ] && mkdir -p ~/.local/share/fonts/
@@ -111,11 +111,11 @@ installNerdFonts() {
 		fi
 	fi
     if fc-list | grep 'Liga SFMono Nerd' >/dev/null; then
-        box "! Liga SFMono Nerd font already installed \n"
+        echo -e "${YELLOW}! Liga SFMono Nerd font already installed \n${RC}"
     else
         git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git && cd SFMono-Nerd-Font-Ligaturized
         if [ ! -d SFMono-Nerd-Font-Ligaturized ]; then
-            box "\e[1;31m! ERROR: git clone failed.."
+            echo -e "${RED}! ERROR: git clone failed..${RC}"
         else
             mkdir -p ~/.local/share/fonts/SFMonoNerd/
             cp SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts/SFMonoNerd/
