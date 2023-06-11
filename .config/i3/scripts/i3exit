@@ -1,0 +1,33 @@
+#!/bin/sh
+
+lock() {
+    i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png
+}
+
+ctl="loginctl"
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        lock && $ctl suspend
+        ;;
+    hibernate)
+        lock && $ctl hibernate
+        ;;
+    reboot)
+        $ctl reboot
+        ;;
+    shutdown)
+        $ctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

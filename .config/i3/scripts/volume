@@ -124,7 +124,7 @@ $sinks"
 case "$BLOCK_BUTTON" in
     1) set_default_playback_device_next ;;
     2) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY toggle ;;
-    3) set_default_playback_device_next ;;
+    3) i3-sensible-terminal -e alsamixer ;;
     4) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY $AUDIO_DELTA%+ ;;
     5) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY $AUDIO_DELTA%- ;;
 esac

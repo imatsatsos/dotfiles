@@ -75,8 +75,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-bindsym $mod+Ctrl+l exec "i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png"
-bindsym $mod+Ctrl+s exec "i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png; loginctl suspend"
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -106,11 +104,10 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+z split h
-
-# split in vertical orientation
-bindsym $mod+v split v
+# split orientation
+bindsym $mod+z split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+n split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -202,14 +199,16 @@ mode $modeResize {
 
 bindsym $mod+r mode $modeResize
 
-set $modeSession "System: (r)eboot, (p)oweroff, (s)uspend"
+# control system session
+set $modeSession "System: (l)ock, (s)uspend, (r)eboot, (p)oweroff"
+set $i3exit ~/.config/i3/scripts/i3exit
 mode $modeSession {
-        # These bindings trigger as soon as you enter the resize mode
-        bindsym p exec "loginctl poweroff"; mode "default"
-        bindsym r exec "loginctl reboot"; mode "default"
-        bindsym s exec "i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png; loginctl suspend"; mode "default"
+        bindsym l exec --no-startup-id $i3exit lock, mode "default"
+        bindsym s exec --no-startup-id $i3exit suspend, mode "default"
+        bindsym r exec --no-startup-id $i3exit reboot, mode "default"
+        bindsym p exec --no-startup-id $i3exit poweroff, mode "default"
         
-        # back to normal: Enter or Escape or $mod+r
+        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -241,8 +240,15 @@ for_window [class="Steam"]              floating enable
 for_window [class="Project Zomboid"]    floating enable
 for_window [class="Lutris"]             floating enable
 
-# scratchpads
+### Scratchpads
 bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create.sh 'scratch-term' 'xst -g=89x32'
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 
 
 ##########

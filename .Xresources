@@ -1,9 +1,9 @@
 ! xfont
-!Xft.dpi: 96 
+Xft.dpi:       96 
 Xft.antialias: true
-Xft.hinting: true
-Xft.rgba: rgb
-Xft.autohint: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
@@ -23,10 +23,10 @@ st.termname:     xst-256color
 st.borderless:        0
 
 ! --- The following options options can be reloaded via USR1 signal. ---
-st.font:              Hack Nerd Font Mono:style=Regular:size=10:antialias=true:autohint=true;
+st.font:              Hack Nerd Font Mono:style=Regular:size=11:antialias=true:autohint=true;
 
 ! Font2 fallback, each font can be separated by comma ","
-st.font_fallback:     Fira Code Nerd Font Mono:style=Regular:size=10:antialias=true,Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font:size=11,JoyPixels:pixelsize=11
+st.font_fallback:     Fira Code Nerd Font Mono:style=Regular:size=11:antialias=true,Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font:size=11,JoyPixels:pixelsize=11
 
 ! window padding
 st.borderpx:          4
