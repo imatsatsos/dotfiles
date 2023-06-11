@@ -1,10 +1,12 @@
 #!/bin/sh
 
+# set screen-locker command
 lock() {
     i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png
 }
 
-ctl="loginctl"
+# systemd distros use systemctl, else use loginctl
+[ "$(cat /proc/1/comm)" = "systemd" ] && ctl=systemctl || ctl=loginctl
 
 case "$1" in
     lock)
