@@ -1,5 +1,6 @@
 ! xfont
-Xft.dpi:       96 
+! 96 dpi is default, 120 dpi is 125%
+Xft.dpi:       120 
 Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
@@ -17,16 +18,17 @@ Xcursor.size: 32
 ! see src/config.h for more information about option meanings.
 
 ! --- These options only take effect on startup. ---
-st.termname:     xst-256color
+st.termname: xst-256color
 
 ! Set to a non-zero value to disable window decorations (titlebar, etc) and go borderless.
-st.borderless:        0
+st.borderless: 0
 
 ! --- The following options options can be reloaded via USR1 signal. ---
-st.font:              Hack Nerd Font Mono:style=Regular:size=11:antialias=true:autohint=true;
+st.font: Hack Nerd Font Mono:style=Regular:size=11:antialias=true:autohint=true;
+!st.font: Liga SFMono Nerd Font:style=Regular:size=11:antialias=true:autohint=true;
 
 ! Font2 fallback, each font can be separated by comma ","
-st.font_fallback:     Fira Code Nerd Font Mono:style=Regular:size=11:antialias=true,Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font:size=11,JoyPixels:pixelsize=11
+st.font_fallback: Fira Code Nerd Font Mono:style=Regular:size=11:antialias=true,Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font:size=11,JoyPixels:pixelsize=11
 
 ! window padding
 st.borderpx:          4
@@ -43,12 +45,12 @@ st.cursorblinkstyle:  0
 ! 0: cursor blinks with a constant interval; 1: blinking cycle resets on key input
 st.cursorblinkontype: 1
 
-st.disablebold:         0
-st.disableitalics:         0
-st.disableroman:         0
+st.disablebold:       0
+st.disableitalics:    0
+st.disableroman:      0
 
 ! Amount of lines scrolled
-st.scrollrate:  5
+st.scrollrate:        5
 
 ! Kerning / character bounding-box height multiplier
 st.chscale:           1.0
@@ -66,20 +68,20 @@ st.bellvolume:        20
 ! perfect alignment between cells (U2500 - U259F except dashes/diagonals).
 ! Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
 ! 0: disable (render all U25XX glyphs normally from the font).
-st.boxdraw: 0
+st.boxdraw:           0
 
 ! (0|1) boxdraw(bold) enable toggle
-st.boxdraw_bold: 0
+st.boxdraw_bold:      0
 
 ! braille (U28XX):  1: render as adjacent "pixels",  0: use font
-st.boxdraw_braille: 0
+st.boxdraw_braille:   0
 
 ! set this to a non-zero value to force window depth
-st.depth: 0
+st.depth:             0
 
 ! opacity==255 means what terminal will be not transparent, 0 - fully transparent
 ! (float values in range 0 to 1.0 may also be used)
-st.opacity:      255
+st.opacity:           255
 
 ! (0|1) dont pre-multiply color values of the pixels when using transparency
 ! (useful for the systems where composite manager not running all the time,

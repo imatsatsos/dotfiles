@@ -1,7 +1,7 @@
 userresources=$HOME/.Xresources
 sysresources=/etc/X11/xinit/.Xresources
 
-# merge in defaults and keymaps
+# merge in defaults
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
@@ -20,5 +20,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-exec dbus-launch --exit-with-session /usr/bin/i3
-
+#exec dbus-launch --exit-with-session /usr/bin/i3
+#exec dbus-run-session /usr/bin/i3
+exec /usr/bin/i3

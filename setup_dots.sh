@@ -43,7 +43,7 @@ checkEnv() {
     ## Check SuperUser Group
     SUPERUSERGROUP='wheel sudo'
     for sug in ${SUPERUSERGROUP}; do
-        if groups | grep ${sug}; then
+        if groups | grep ${sug} >/dev/null; then
             SUGROUP=${sug}
             echo -e "Super user group ${SUGROUP}"
         fi
@@ -149,6 +149,7 @@ copyConfig() {
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
     cp -fv ${GITPATH}/.bashrc				    ${HOME}/.bashrc
+    cp -fv ${GITPATH}/.gtkrc-2.0				${HOME}/.gtkrc-2.0
     cp -fv ${HOME}/.bash_history			    ${HOME}/.local/state/bash_history
     cp -fv ${GITPATH}/.inputrc				    ${HOME}/.inputrc
     cp -fv ${GITPATH}/.Xresources               ${HOME}/.Xresources
