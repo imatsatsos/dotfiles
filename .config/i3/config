@@ -134,8 +134,8 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 1:WWW
-set $ws2 2:DEV
-set $ws3 3:GEN
+set $ws2 2:GEN
+set $ws3 3:DEV
 set $ws4 4:GAMES
 set $ws5 5:SCHOOL
 set $ws6 6:CHAT
@@ -236,12 +236,14 @@ assign [class="Brave"]              $ws1
 assign [class="mpv"]                $ws10
 assign [class="Signal"]             $ws6
 assign [class="virt-manager"]       $ws9
+assign [class="MATLAB"]             $ws5
 
 # atomatic focus for windows opening on different worskpace
 for_window [class="Brave"]          focus
 for_window [class="mpv"]            focus
 for_window [class="Signal"]         focus
 for_window [class="virt-manager"]   focus
+for_window [class="MATLAB"]         focus
 
 # assign floating
 for_window [class="Signal"]             floating enable
@@ -252,7 +254,7 @@ for_window [class="Project Zomboid"]    floating enable
 for_window [class="Lutris"]             floating enable
 for_window [class="Lxappearance"]       floating enable
 for_window [title="alsamixer"]			floating enable border pixel 1
-
+for_window [class="MATLAB"]             floating enable
 ### Scratchpads
 bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create.sh 'scratch-term' 'xst -g=89x32'
 
