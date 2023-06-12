@@ -24,11 +24,11 @@ case "$1" in
     reboot)
         $ctl reboot
         ;;
-    shutdown)
+    poweroff)
         $ctl poweroff
         ;;
     *)
-        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|poweroff}"
         exit 2
 esac
 

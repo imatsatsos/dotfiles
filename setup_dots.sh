@@ -59,7 +59,7 @@ checkEnv() {
 
 installDepend() {
     ## Check for dependencies.
-    DEPENDENCIES='curl git autojump bash bash-completion tar exa bat xinput xrdb fzf'
+    DEPENDENCIES='curl git unzip autojump bash bash-completion tar exa bat fzf'
     echo -e "${YELLOW}Installing dependencies...${RC}"
     if [[ $PACKAGER == "pacman" ]]; then
         if ! command_exists paru; then
@@ -80,7 +80,7 @@ installDepend() {
 }
 
 installCursor() {
-    echo -e "${YELLOW}Installing Breeze-Black cursror theme...${RC}"
+    echo -e "${YELLOW}Installing Breeze-Black cursor theme...${RC}"
     sleep 1
     mkdir -p ${HOME}/.local/share/icons/
     # install the icons in .local and symlink to ~/.icons, or xcursor wont work
@@ -131,7 +131,7 @@ installStarship(){
 
     if ! curl -sS https://starship.rs/install.sh | sh; then
         echo -e "${RED}Something went wrong during starship install!${RC}"
-        exit 1
+        #exit 1
     fi
 }
 
@@ -148,26 +148,26 @@ copyConfig() {
 
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
-    cp -fv ${GITPATH}/.bashrc				    ${HOME}/.bashrc
-    cp -fv ${GITPATH}/.gtkrc-2.0				${HOME}/.gtkrc-2.0
-    cp -fv ${HOME}/.bash_history			    ${HOME}/.local/state/bash_history
-    cp -fv ${GITPATH}/.inputrc				    ${HOME}/.inputrc
-    cp -fv ${GITPATH}/.Xresources               ${HOME}/.Xresources
+    cp -f ${GITPATH}/.bashrc				    ${HOME}/.bashrc
+    cp -f ${GITPATH}/.gtkrc-2.0				${HOME}/.gtkrc-2.0
+    cp -f ${HOME}/.bash_history			    ${HOME}/.local/state/bash_history
+    cp -f ${GITPATH}/.inputrc				    ${HOME}/.inputrc
+    cp -f ${GITPATH}/.Xresources               ${HOME}/.Xresources
     [ ! -d ${HOME}/.local/ ] && mkdir -p        ${HOME}/.local/
-    cp -rfv ${GITPATH}/bin/				        ${HOME}/.local/
+    cp -rf ${GITPATH}/bin/				        ${HOME}/.local/
     [ ! -d ${HOME}/.config/ ] && mkdir -p       ${HOME}/.config/
-    cp -fv ${GITPATH}/.config/starship.toml		${HOME}/.config/
-    cp -fv ${GITPATH}/.config/background	${HOME}/.config/
-    cp -fv ${GITPATH}/.config/lockscreen.png	${HOME}/.config/
-    cp -rfv ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
-    cp -rfv ${GITPATH}/.config/btop/			${HOME}/.config/btop/
-    cp -rfv ${GITPATH}/.config/fastfetch/		${HOME}/.config/fastfetch/
-    cp -rfv ${GITPATH}/.config/git/             ${HOME}/.config/git/
-    cp -rfv ${GITPATH}/.config/htop/			${HOME}/.config/htop/
-    cp -rfv ${GITPATH}/.config/neofetch/		${HOME}/.config/neofetch/
-    cp -rfv ${GITPATH}/.config/MangoHud/		${HOME}/.config/MangoHud/
-    cp -rfv ${GITPATH}/.config/i3/              ${HOME}/.config/
-    cp -rfv ${GITPATH}/.config/gtk-3.0/         ${HOME}/.config/
+    cp -f ${GITPATH}/.config/starship.toml		${HOME}/.config/
+    cp -f ${GITPATH}/.config/background	${HOME}/.config/
+    cp -f ${GITPATH}/.config/lockscreen.png	${HOME}/.config/
+    cp -rf ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
+    cp -rf ${GITPATH}/.config/btop/			${HOME}/.config/btop/
+    cp -rf ${GITPATH}/.config/fastfetch/		${HOME}/.config/fastfetch/
+    cp -rf ${GITPATH}/.config/git/             ${HOME}/.config/git/
+    cp -rf ${GITPATH}/.config/htop/			${HOME}/.config/htop/
+    cp -rf ${GITPATH}/.config/neofetch/		${HOME}/.config/neofetch/
+    cp -rf ${GITPATH}/.config/MangoHud/		${HOME}/.config/MangoHud/
+    cp -rf ${GITPATH}/.config/i3/              ${HOME}/.config/
+    cp -rf ${GITPATH}/.config/gtk-3.0/         ${HOME}/.config/
 }
 
 checkEnv
