@@ -2,7 +2,11 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#font pango:monospace 11
+
+# preferred default
+#font pango:Dejavu Sans Mono 11
+
+# other fonts
 font pango:Liga SFMono Nerd Font Bold 11
 #font pango:Source Code Pro Bold 11
 
@@ -140,7 +144,7 @@ set $ws4 4:GAMES
 set $ws5 5:SCHOOL
 set $ws6 6:CHAT
 set $ws7 "7"
-set $ws8 "8"
+set $ws8 8:TORR
 set $ws9 9:VM
 set $ws10 10:MPV
 
@@ -155,6 +159,15 @@ set $ws10 10:MPV
 # 9: 
 # 10: 
 
+# switch to workspace next/previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+h workspace prev
+
+# move focused container to workspace next/previous
+#bindsym $mod+Shift+h move container to workspace prev
+#bindsym $mod+Shift+l move container to workspace next
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -254,6 +267,7 @@ for_window [class="Project Zomboid"]    floating enable
 for_window [class="Lutris"]             floating enable
 for_window [class="Lxappearance"]       floating enable
 for_window [title="alsamixer"]			floating enable border pixel 1
+for_window [title="nmtui"]              floating enable border pixel 1
 for_window [class="MATLAB"]             floating enable
 ### Scratchpads
 bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create.sh 'scratch-term' 'xst -g=89x32'

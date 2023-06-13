@@ -66,6 +66,10 @@ toggle_scaling_factor() {
     fi
 }
 
+#fix_intel_power_mangohud(){
+#    sudo chmod o+r /sys/class/powercap/intel-rapl\:0/energy_uj
+#}
+
 # main
 find_laptop_monitor_port
 find_benq_monitor_port

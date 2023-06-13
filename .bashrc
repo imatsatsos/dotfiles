@@ -155,7 +155,7 @@ alias \
 		vim='nvim' \
 		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
 		errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
-		envy='sudo python /home/john/Documents/gitrepos/envycontrol/envycontrol.py'
+        envy='sudo python /home/$USER/.local/bin/envycontrol.py'
 
 # exa for ls
 if type "exa" >/dev/null 2>&1; then

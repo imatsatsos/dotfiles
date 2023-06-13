@@ -153,6 +153,13 @@ sed 's/.*= "\(.*\)".*/\1/')
         NAME=${ALSA_NAME:-$NAME}
     elif [[ $USE_DESCRIPTION == 1 ]] ; then
         DESCRIPTION=$(pactl list sinks  | grep "State\: RUNNING" -B4 -A55 | grep 'Description: ' | sed 's/^.*: //')
+        
+        if [[ $DESCRIPTION == *"Built-in"* ]]; then
+            DESCRIPTION="󰓃"
+        else
+            DESCRIPTION="󰋋"
+        fi
+
         NAME=${DESCRIPTION:-$NAME}
     fi
 

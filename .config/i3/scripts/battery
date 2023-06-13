@@ -53,26 +53,6 @@ if ($bat_state !~ /:               (\w+)/) {
 }
 $status = $1;
 
-if ($status eq 'discharging') {
-	$full_text .= ' ';
-} elsif ($status eq 'charging') {
-	$full_text .= ' ';
-} elsif ($status eq 'Unknown') {
-	open (AC_ADAPTER, "acpi -a |") or die;
-	$ac_adapt = <AC_ADAPTER>;
-	close(AC_ADAPTER);
-
-	if ($ac_adapt =~ /: ([\w-]+)/) {
-		$ac_adapt = $1;
-
-		if ($ac_adapt eq 'on-line') {
-			$full_text .= ' ';
-		} elsif ($ac_adapt eq 'off-line') {
-			$full_text .= ' ';
-		}
-	}
-}
-
 $short_text = $full_text;
 
 if ($percent < 20) {
