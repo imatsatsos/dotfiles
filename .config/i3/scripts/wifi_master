@@ -64,6 +64,9 @@ action_middle_click() {
 	fi
 	}
 
+#TERM=${TERM:-xst}
+#echo $TERM
+
 case "$BLOCK_BUTTON" in
     1) toggle_state ;;
     2) action_middle_click ;;

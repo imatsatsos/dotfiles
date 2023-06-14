@@ -16,6 +16,8 @@ confedit_list[neovim]="$HOME/.config/nvim/init.vim"
 #confedit_list[ssh]="$HOME/.ssh/config"
 confedit_list[xinitrc]="$HOME/.xinitrc"
 confedit_list[xresources]="$HOME/.Xresources"
+confedit_list[i3-config]="$HOME/.config/i3/config"
+confedit_list[i3-blocks]="$HOME/.config/i3/i3blocks.conf"
 
 FMENU="fzf --border=rounded --margin=5% --color=dark --height 100% --reverse --header=$(basename "$0") --info=hidden --header-first --prompt"
 FTEM="xst -g=89x32"

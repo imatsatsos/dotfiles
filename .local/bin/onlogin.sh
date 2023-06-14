@@ -78,6 +78,7 @@ sleep 1
 set_touchpad_scrollspeed
 set_mouse_accel
 xrdb -merge ~/.Xresources
+setxkbmap -option caps:escape
 toggle_scaling_factor
 disable_laptop_monitor
 wait

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-COLOR="#e4e7ff"
-MUTED_COLOR="#a0a0a0"
+MUTE_COLOR="#a0a0a0"
+BOOST_COLOR="#d95177"
 
 get_default_sink() {
     DEFAULT_SINK=$(pactl info | grep "Default Sink" | cut -d ' ' -f3)
@@ -56,10 +56,13 @@ fi
 if [[ $MUTED == *"yes"* ]]; then
     echo "󰝟 MUTE"
     echo "󰝟"
-    echo $MUTED_COLOR
+    echo $MUTE_COLOR
+elif (( ${VOLUME%%%} > 100 )); then
+    echo "$SINK_ICON $VOLUME"
+    echo "$VOLUME"
+    echo $BOOST_COLOR
 else
     echo "$SINK_ICON $VOLUME"
     echo "$VOLUME"
-    echo $COLOR
 fi
 

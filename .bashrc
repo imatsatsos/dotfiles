@@ -154,7 +154,7 @@ alias \
 		itop='sudo intel_gpu_top' \
 		imeas='sudo intel-undervolt measure' \
 		vim='nvim' \
-		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv' \
+		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv && sudo vkpurge rm all' \
 		errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
         envy='sudo python /home/$USER/.local/bin/envycontrol.py'
 

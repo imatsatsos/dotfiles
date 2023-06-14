@@ -11,18 +11,19 @@ current_profile=$(/usr/bin/powerprofilesctl get)
 
 case $current_profile in
 	power-save)
-	echo ""
-	echo ""
-	echo "#78DCA7"
+	    echo ""
+	    echo ""
+	    echo "#78DCA7"
 	;;
 	balanced)
-	echo "󰚀"
-	echo "  󰗑"
-	echo "#759EEA"
+	#   󰗑
+	    echo "󰚀"
+	    echo "󰚀"
+	    #echo "#759EEA"
 	;;
 	performance)
-	echo ""
-	echo ""
-	echo "#D95177"
+	    echo ""
+	    echo ""
+	    echo "#D95177"
 	;;
 esac
