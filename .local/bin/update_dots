@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copies files and folders specified to a GITREPO folder
+# Copies selected files and folders to a GITREPO folder
 
 #HOME="/home/$USER/"
 #GITREPO="$HOME/TESTREPO"
@@ -18,32 +18,43 @@ fi
 
 do_copy_home () {
     for file in $1; do
-        cp -rf $HOME/$file $GITREPO
+        cp -rf "$HOME/$file" $GITREPO
     done
 }
 
 do_copy_dotconfig () {
     [ ! -d $GITREPO/.config ] && mkdir -p $GITREPO/.config
     for folder in $1; do
-        cp -rf $HOME/.config/$folder $GITREPO/.config/
+        cp -rf "$HOME/.config/$folder" $GITREPO/.config/
     done
 }
 
 do_copy_localbin () {
     [ ! -d $GITREPO/.local ] && mkdir -p $GITREPO/.local
-    cp -rf $HOME/.local/bin $GITREPO/.local/
+    cp -rf "$HOME/.local/bin" $GITREPO/.local/
 }
 
-do_copy_localshare () {
-    [ ! -d $GITREPO/.local/share ] $$ mkdir -p $GITREPO/.local/share
-    cp -rf $HOME/.local/share/icons $GITREPO/.local/share/
-    cp -rf $HOME/.local/share/themes $GITREPO/.local/share/
+do_copy_icons () {
+    [ ! -d "$GITREPO/.local/share/icons" ] && mkdir -p "$GITREPO/.local/share/icons"
+    [ ! -d "$GITREPO/.local/share/themes" ] && mkdir -p "$GITREPO/.local/share/themes"
+    for folder in $1; do
+        cp -rf "$HOME/.local/share/icons/$folder" $GITREPO/.local/share/icons/
+    done
+}
+
+do_copy_themes () {
+    [ ! -d $GITREPO/.local/share/themes ] && mkdir -p $GITREPO/.local/share/themes
+    for folder in $1; do
+        cp -rf "$HOME/.local/share/themes/$folder" $GITREPO/.local/share/themes/
+    done
 }
 
 echo "Copying dots to folder: $GITREPO"
 sleep 1
 do_copy_home ".bashrc .gtkrc-2.0 .Xresources .inputrc .xinitrc"
 do_copy_localbin
+do_copy_icons "BreezeX-Black default"
+#do_copy_themes
 do_copy_dotconfig "background lockscreen.png starship.toml window_titles.yml alacritty/ btop/ dunst/ fastfetch/ git/ gtk-3.0/ htop/ i3/ MangoHud/ neofetch/ nvim/ mpv/"
 echo "Done"
 
@@ -59,10 +70,3 @@ if [[ "$dm" == [Y/y] ]]; then
     git push
 fi
 
-#echo " -- test -- "
-#TESTHOME=$HOME/testhome/
-#mkdir -p $TESTHOME
-#cp -rf $GITREPO/. $TESTHOME
-##cp -rf `ls $GITREPO -A | grep -v .bashrc` $TESTHOME
-#rm $TESTHOME/.bashrc $TESTHOME/.xinitrc
-#echo "check $TESTHOME"

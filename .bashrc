@@ -146,7 +146,8 @@ alias \
 		ln='ln -i' \
 		df='df -h' \
 		bc='bc -ql' \
-		mkd='mkdir -pv' \
+		du='du -h' \
+        mkd='mkdir -pv' \
 		treestat='rpm-ostree status' \
 		please='sudo !!' \
 		zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
