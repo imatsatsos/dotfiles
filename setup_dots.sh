@@ -9,6 +9,10 @@ command_exists () {
     command -v $1 >/dev/null 2>&1;
 }
 
+font_exists () {
+    fc-list | grep "$1" >/dev/null 2>&1 
+}
+
 checkEnv() {
     ## Check for requirements.
     REQUIREMENTS='groups sudo'
@@ -80,58 +84,66 @@ installDepend() {
 }
 
 installCursor() {
-    echo -e "${YELLOW}Installing Breeze-Black cursor theme...${RC}"
+    echo -e "${YELLOW}Installing Breeze-Black cursor theme..${RC}"
     sleep 1
     mkdir -p ${HOME}/.local/share/icons/
     # install the icons in .local and symlink to ~/.icons, or xcursor wont work
     cp -rf ${GITPATH}/.local/share/icons/ ${HOME}/.local/share/
-    ln -s ${HOME}/local/share/icons/ ${HOME}/.icons
+    ln -s ${HOME}/.local/share/icons/ ${HOME}/.icons
 }
 
-installNerdFonts() {
-    echo -e "${YELLOW}Installing some fonts...${RC}"
-    sleep 1
-    if fc-list | grep HackNerd >/dev/null; then 
-		echo -e "${YELLOW}! HackNerd font already installed \n${RC}"
-	else
-		if command_exists curl; then
-			curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Hack.zip -o HackNerd.zip
-			if [ ! -f HackNerd.zip ]; then
-				echo -e "\${RED}! ERROR: Font download failed..${RC}"
-			else
-				unzip HackNerd.zip -d ./HackNerd
-				[ ! -d ~/.local/share/fonts/ ] && mkdir -p ~/.local/share/fonts/
-				mv ./HackNerd ~/.local/share/fonts/
-				rm HackNerd.zip
-				fc-cache -f
-			fi
-		else
-			echo -e "${RED}ERROR: curl not found!${RC}"
-			exit 1
-		fi
-	fi
-    if fc-list | grep 'Liga SFMono Nerd' >/dev/null; then
-        echo -e "${YELLOW}! Liga SFMono Nerd font already installed \n${RC}"
-    else
-        git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
-        if [ ! -d SFMono-Nerd-Font-Ligaturized ]; then
-            echo -e "${RED}! ERROR: git clone failed..${RC}"
+installFonts() {
+    echo -e "${GREEN}Do you want to install some fonts?    [Y/N]${RC}"
+    read -r dm
+    if [[ "$dm" == [Y/y] ]]; then
+        FONTFOLDER="$HOME/.local/share/fonts"
+        echo -e "${YELLOW}Installing some fonts..${RC}"
+        sleep 1
+        [ ! -d "$FONTFOLDER" ] && mkdir -p "$FONTFOLDER"
+        
+        # Font: Hack Nerd
+        if font_exists HackNerd; then 
+            echo -e "${YELLOW}! Hack Nerd already installed \n${RC}"
         else
-            mkdir -p ~/.local/share/fonts/SFMonoNerd/
-            cp SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts/SFMonoNerd/
+            curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Hack.zip -o HackNerd.zip
+            if [ ! -f HackNerd.zip ]; then
+                echo -e "${RED}! ERROR: curl font download failed..${RC}"
+            else
+                unzip HackNerd.zip -d ./HackNerd
+                mv ./HackNerd/ "$FONTFOLDER"
+                rm HackNerd.zip
+                echo -e "${YELLOW}Hack Nerd font installed!${RC}"
+            fi
         fi
+        
+        # Font: San Francisco Mono Nerd
+        if font_exists 'Liga SFMono Nerd'; then 
+            echo -e "${YELLOW}! San Francisco Mono Nerd already installed \n${RC}"
+        else
+            git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git
+            if [ ! -d SFMono-Nerd-Font-Ligaturized ]; then
+                echo -e "${RED}! ERROR: git clone failed${RC}"
+            else
+                mkdir -p "$FONTFOLDER/SFMonoNerd/"
+                cp -rf "./SFMono-Nerd-Font-Ligaturized/*.otf" "$FONTFOLDER/SFMonoNerd/"
+                rm -rf "./SFMono-Nerd-Font-Ligaturized/"
+                echo -e "${YELLOW}San Fransisco Mono Nerd font installed!${RC}"
+            fi
+        fi
+        # update font cache
+        fc-cache -f
     fi
 }
 
 installStarship(){
     if command_exists starship; then
-        echo "Starship already installed"
+        echo -e "${YELLOW}Starship already installed!${RC}"
         return
     fi
 
     if ! curl -sS https://starship.rs/install.sh | sh; then
-        echo -e "${RED}Something went wrong during starship install!${RC}"
-        #exit 1
+        echo -e "${RED}! ERROR: Something went wrong during starship install${RC}"
+        sleep 1
     fi
 }
 
@@ -140,8 +152,8 @@ copyConfig() {
     OLD_BASHRC="${HOME}/.bashrc"
     if [[ -e ${OLD_BASHRC} ]]; then
         echo -e "${YELLOW}Moving old bash config file to ${HOME}/.bashrc.bak${RC}"
-        if ! mv ${OLD_BASHRC} ${HOME}/.bashrc.bak; then
-            echo -e "${RED}Can't move the old bash config file!${RC}"
+        if ! mv -f ${OLD_BASHRC} ${HOME}/.bashrc.bak; then
+            echo -e "${RED}! ERROR: Can't move the old bash config file${RC}"
             exit 1
         fi
     fi
@@ -157,11 +169,11 @@ copyConfig() {
 
 checkEnv
 installDepend
-installNerdFonts
 installCursor
 installStarship
+installFonts
 if copyConfig; then
     echo -e "${GREEN}Done!\nRestart your shell to see the changes.${RC}"
 else
-    echo -e "${RED}OH! Something went wrong!${RC}"
+    echo -e "${RED}OH! Something went wrong during .dots copy${RC}"
 fi
