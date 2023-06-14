@@ -1,0 +1,68 @@
+#!/bin/bash
+# Copies files and folders specified to a GITREPO folder
+
+#HOME="/home/$USER/"
+#GITREPO="$HOME/TESTREPO"
+GITREPO="$HOME/Documents/gitrepos/dotfiles"
+
+if [ ! -d $GITREPO ]; then
+    echo "$GITREPO does not exist. Do you wish to create it? [Y/N]"
+    read -r ans1
+    if [[ "$ans1" == [Y/y] ]]; then
+        mkdir -p $GITREPO
+    else
+        echo "Can't proceed. Please create a git repo in: $GITREPO"
+
+    fi
+fi
+
+do_copy_home () {
+    for file in $1; do
+        cp -rf $HOME/$file $GITREPO
+    done
+}
+
+do_copy_dotconfig () {
+    [ ! -d $GITREPO/.config ] && mkdir -p $GITREPO/.config
+    for folder in $1; do
+        cp -rf $HOME/.config/$folder $GITREPO/.config/
+    done
+}
+
+do_copy_localbin () {
+    [ ! -d $GITREPO/.local ] && mkdir -p $GITREPO/.local
+    cp -rf $HOME/.local/bin $GITREPO/.local/
+}
+
+do_copy_localshare () {
+    [ ! -d $GITREPO/.local/share ] $$ mkdir -p $GITREPO/.local/share
+    cp -rf $HOME/.local/share/icons $GITREPO/.local/share/
+    cp -rf $HOME/.local/share/themes $GITREPO/.local/share/
+}
+
+echo "Copying dots to folder: $GITREPO"
+sleep 1
+do_copy_home ".bashrc .gtkrc-2.0 .Xresources .inputrc .xinitrc"
+do_copy_localbin
+do_copy_dotconfig "background lockscreen.png starship.toml window_titles.yml alacritty/ btop/ dunst/ fastfetch/ git/ gtk-3.0/ htop/ i3/ MangoHud/ neofetch/ nvim/ mpv/"
+echo "Done"
+
+echo "Do you want to update dotfiles.git? [Y/N]"
+read -r dm
+if [[ "$dm" == [Y/y] ]]; then
+
+    echo "Enter commit message:"
+    read -r commit_msg
+    cd $GITREPO
+    git add .
+    git commit -m "$commit_msg"
+    git push
+fi
+
+#echo " -- test -- "
+#TESTHOME=$HOME/testhome/
+#mkdir -p $TESTHOME
+#cp -rf $GITREPO/. $TESTHOME
+##cp -rf `ls $GITREPO -A | grep -v .bashrc` $TESTHOME
+#rm $TESTHOME/.bashrc $TESTHOME/.xinitrc
+#echo "check $TESTHOME"

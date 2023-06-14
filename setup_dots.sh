@@ -148,27 +148,11 @@ copyConfig() {
 
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
-    cp -f ${GITPATH}/.bashrc				    ${HOME}/.bashrc
-    cp -f ${GITPATH}/.gtkrc-2.0				    ${HOME}/.gtkrc-2.0
-    cp -f ${HOME}/.bash_history			        ${HOME}/.local/state/bash_history
-    cp -f ${GITPATH}/.inputrc				    ${HOME}/.inputrc
-    cp -f ${GITPATH}/.Xresources                ${HOME}/.Xresources
-    [ ! -d ${HOME}/.local/ ] && mkdir -p        ${HOME}/.local/
-    cp -rf ${GITPATH}/bin/				        ${HOME}/.local/
-    [ ! -d ${HOME}/.config/ ] && mkdir -p       ${HOME}/.config/
-    cp -f ${GITPATH}/.config/starship.toml		${HOME}/.config/
-    cp -f ${GITPATH}/.config/background	        ${HOME}/.config/
-    cp -f ${GITPATH}/.config/lockscreen.png	    ${HOME}/.config/
-    cp -rf ${GITPATH}/.config/dunst/	        ${HOME}/.config/dunst/
-    cp -rf ${GITPATH}/.config/alacritty/		${HOME}/.config/alacritty/
-    cp -rf ${GITPATH}/.config/btop/			    ${HOME}/.config/btop/
-    cp -rf ${GITPATH}/.config/fastfetch/		${HOME}/.config/fastfetch/
-    cp -rf ${GITPATH}/.config/git/              ${HOME}/.config/git/
-    cp -rf ${GITPATH}/.config/htop/			    ${HOME}/.config/htop/
-    cp -rf ${GITPATH}/.config/neofetch/		    ${HOME}/.config/neofetch/
-    cp -rf ${GITPATH}/.config/MangoHud/		    ${HOME}/.config/MangoHud/
-    cp -rf ${GITPATH}/.config/i3/               ${HOME}/.config/
-    cp -rf ${GITPATH}/.config/gtk-3.0/          ${HOME}/.config/
+    cp -rf ${GITPATH}/.         ${HOME}
+    # Moving existing files to clean up home directory
+    cp -f ${HOME}/.bash_history ${HOME}/.local/state/bash_history
+    # clean up
+    rm ${HOME}/setup_dots.sh ${HOME}/LICENSE ${HOME}/.git
 }
 
 checkEnv

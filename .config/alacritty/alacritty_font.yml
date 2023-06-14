@@ -1,7 +1,7 @@
 font:
   normal:
     family: Hack Nerd Font
-    #style: Regular
+    style: Regular
 
   bold:
     family: Hack Nerd Font

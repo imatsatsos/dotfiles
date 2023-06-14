@@ -1,0 +1,60 @@
+# the icon to fall back to, if there is no mapping
+default_icon: ﬓ
+# spaces to insert between the icon & window title
+padding: 1
+# auto-capitalize window titles, when they are not manually set.
+capitalize: true
+
+# show workspace info, when no window is focused.
+workspace:
+  # turning this off will always show the last window title
+  enabled: true 
+  # icon and title mapping for the workspace placeholder
+  icon: ﬓ
+  title: Desktop
+
+# mappings for each application
+mappings:
+# class is the WM_CLASS, which you can get via xprop.
+# NB: you can ignore casing, it doesn't matter if lower/uppercase
+- class: firefox
+  title: Firefox
+  icon: 
+
+- class: brave-browser
+  title: Brave
+  icon: &browser 
+
+- class: Pcmanfm
+  title: Files 
+  icon: &files 󰉋
+
+- class: org.gnome.Nautilus
+  title: Files 
+  icon: *files
+  show_native_title: true
+
+- class: org.wezfurlong.wezterm
+  title: WezTerm
+  # you can use YAML anchors, to use icons again...
+  icon: &term 
+
+- class: kitty
+  # ...like this:
+  icon: *term
+  title: Kitty
+
+- class: xst-256color
+  icon: *term
+  title:
+  # if this is enabled, the native title is shown,
+  # as well as the mapped title.
+  # e.g. Kitty [~/]
+  #show_native_title: true
+
+# you can customize the separators for the
+# 'show_native_title' titles. the conf below would show:
+# 'Kitty (~/)' instead of 'Kitty [~/]'
+native_title_separators:
+  start: "("
+  end: ")"
