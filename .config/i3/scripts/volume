@@ -1,4 +1,11 @@
 #!/bin/bash
+# script outputs current default output sink, it's volume, mute state
+# used in i3blocks
+# left-click: change to next output sink
+# right-click: open alsamixer
+# middle-click: mute sound
+# mousewheel: change volume
+# REQUIRES: pactl, alsamixer
 
 MUTE_COLOR="#a0a0a0"
 BOOST_COLOR="#d95177"
@@ -65,4 +72,4 @@ else
     echo "$SINK_ICON $VOLUME"
     echo "$VOLUME"
 fi
-
+paplay /usr/share/sounds/freedesktop/stereo/bell.oga

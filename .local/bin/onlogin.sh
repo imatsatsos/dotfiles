@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Here live some on-login things I want to be run
-# These are: 
+# Here are some things I run on login
+
 # setting touchpad scroll speed, 
 # merging .Xresources,
 # disabling laptop monitor if an external is connected
-# setting BENQ monitor refresh to 100 Hz
+# setting BENQ monitor refresh to 100 Hz if it is connected
 # setting gnome text scaling factor to 1 when using an external monitor
 # setting touchpad scroll speed
 # disabling accel on mouse only
@@ -40,7 +40,7 @@ find_benq_monitor_port() {
 }
 
 set_benq_refresh() {
-    if [[ -z $benq_port ]]; then
+    if [ -z "$benq_port" ]; then
         return
     else
         xrandr --output $benq_port --mode 1920x1080 --rate 100
@@ -48,21 +48,37 @@ set_benq_refresh() {
 }
 
 disable_laptop_monitor() {
-    if [[ -z $benq_port ]]; then
+    if [ -z "$benq_port" ]; then
         return
     else
         xrandr --output $laptop_port --off
     fi
 }
 
-toggle_scaling_factor() {
+gnome_scaling_factor() {
 	if [[ $XDG_CURRENT_DESKTOP != "GNOME"  ]]; then
 		return
 	fi
-    if [[ -z $benq_port ]]; then
-       gsettings set org.gnome.desktop.interface text-scaling-factor 1.10 
+    if [ -z $benq_port ]; then
+       gsettings set org.gnome.desktop.interface text-scaling-factor 1.25 
     else
        gsettings set org.gnome.desktop.interface text-scaling-factor 1
+    fi
+}
+
+# functions that only have a reason to run on X11 session
+on_xorg(){
+    if [[ $XDG_SESSION_TYPE != "x11" ]]; then
+        return
+    else
+        xrdb -merge /home/$USER/.Xresources
+        find_laptop_monitor_port
+        find_benq_monitor_port
+        disable_laptop_monitor
+        sleep 3
+        set_benq_refresh
+        set_touchpad_scrollspeed
+        set_mouse_accel
     fi
 }
 
@@ -71,17 +87,8 @@ toggle_scaling_factor() {
 #}
 
 # main
-find_laptop_monitor_port
-find_benq_monitor_port
-sleep 1
-
-set_touchpad_scrollspeed
-set_mouse_accel
-xrdb -merge ~/.Xresources
+xrdb -merge /home/$USER/.Xresources
+on_xorg
 setxkbmap -option caps:escape
-toggle_scaling_factor
-disable_laptop_monitor
-wait
-sleep 3
-set_benq_refresh
-notify-send "onlogin.sh run successfully!"
+gnome_scaling_factor
+notify-send "onlogin.sh success!"

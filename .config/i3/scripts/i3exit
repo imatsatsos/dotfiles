@@ -1,4 +1,6 @@
 #!/bin/sh
+# a system power menu
+# REQUIRES: i3lock
 
 # set screen-locker command
 lock() {
@@ -10,13 +12,19 @@ lock() {
 
 case "$1" in
     lock)
-        lock
+        lock &
         ;;
     logout)
         i3-msg exit
         ;;
     suspend)
-        lock && $ctl suspend
+        #lock
+        #sleep 1
+        #$ctl suspend
+        # The VoidLinux way ;)
+        lock &
+        sleep 1
+        zzz
         ;;
     hibernate)
         lock && $ctl hibernate

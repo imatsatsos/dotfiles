@@ -1,4 +1,5 @@
 #!/bin/sh
+# Creates or shows-if-it-exists a scratchpad of the input arg
 
 if [ $# -ne 2 ]; then
     echo "Usage: "${0}" <i3_mark> <launch_cmd>"

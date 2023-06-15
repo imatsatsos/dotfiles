@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# outputs current connected wifi SSID and signal %
+# output is color graded
+# left-click: toggle SSID output
+# right-click: opens nmcli to manage connections
+# middle-click: toggles wifi state
+# REQUIRES: NetworkManager, iw
 
 if [[ -z "$INTERFACE" ]] ; then
     INTERFACE="${BLOCK_INSTANCE:-wlp0s20f3}"
@@ -76,7 +82,8 @@ esac
 if [[ "$state" == "1" ]]; then
 	echo "$QUALITY% $SSID"
 else
-	echo "$QUALITY% $SHORT_SSID"
+	#echo "$QUALITY% $SHORT_SSID"
+	echo "$QUALITY%"
 fi
 echo "$QUALITY% $SHORT_SSID"
 echo $COLOR

@@ -1,15 +1,29 @@
-# i3 config file (v4)
+########################
+## i3 config file (v4) #
+########################
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+#Liga SFMono Nerd Font Bold 11
+#Source Code Pro Bold 11
+set $font Dejavu Sans Mono 11
+set $font_bar Dejavu Sans 11
 
-# preferred default
-#font pango:Dejavu Sans Mono 11
+set $border_style pixel 3
+set $border_style_float normal 1
 
-# other fonts
-font pango:Liga SFMono Nerd Font Bold 11
-#font pango:Source Code Pro Bold 11
+set $gaps_in_size 6
+set $gaps_out_size -2
 
+set $term xst -g=89x32
+set $files nautilus --new-window
+
+set $launcher rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi
+set $window_tabber rofi -show window -no-default-config -config /home/$USER/.config/rofi/main.rasi
+set $power_menu exec /home/$USER/.local/bin/rofi-powermenu
+
+
+
+##############################################################################
+font pango:$font
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 #exec --no-startup-id dex --autostart --environment i3
@@ -41,6 +55,13 @@ bindsym XF86AudioPause exec --no-startup-id playerctl pause
 bindsym XF86AudioNext  exec --no-startup-id playerctl next
 bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 
+
+###################
+# BRIGHTNESS KEYS #
+###################
+bindsym XF86MonBrightnessUp exec /home/$USER/.config/i3/scripts/backlight_notif &
+bindsym XF86MonBrightnessDown exec /home/$USER/.config/i3/scripts/backlight_notif &
+
 ############
 # KEYBINDS #
 ############
@@ -50,22 +71,28 @@ set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Mouse keybinds
+bindsym --release button2 kill
+bindsym --whole-window $mod+button2 kill
+
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
+# default workspace layout (default|stacking|tabbed)
+workspace_layout default
+
 ### Launch apps
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec --no-startup-id "xst -g=89x32"
-bindsym $mod+e exec --no-startup-id "nautilus --new-window"
+bindsym $mod+Return exec --no-startup-id $term
+bindsym $mod+e exec --no-startup-id $files
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id $launcher
 
-#include $HOME/.config/i3/test.theme
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -74,6 +101,7 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 set_from_resource $selbg st.color5
 set_from_resource $bg st.background
 bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=14" -nb "$bg" -sb "$selbg"
+bindsym $mod+Tab exec --no-startup-id $window_tabber
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -85,7 +113,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 
-### WINDOWS & MODES
+### WINDOWS & CONTAINERS
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -127,16 +155,17 @@ bindsym $mod+w layout tabbed
 bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+
 
 ##############
 # WORKSPACES #
@@ -199,30 +228,23 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+
 #########
 # MODES #
 #########
 # resize window (you can also use the mouse for that)
 set $modeResize "Resize: ( < > h l | ⌄ ^ j k )  ESC/Enter to exit"
 mode $modeResize {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 3 px or 3 ppt
         bindsym j resize grow height 3 px or 3 ppt
         bindsym k resize shrink height 3 px or 3 ppt
         bindsym l resize grow width 3 px or 3 ppt
 
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 5 px or 5 ppt
         bindsym Down resize grow height 5 px or 5 ppt
         bindsym Up resize shrink height 5 px or 5 ppt
         bindsym Right resize grow width 5 px or 5 ppt
 
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -238,7 +260,6 @@ mode $modeSession {
         bindsym r exec --no-startup-id $i3exit reboot, mode "default"
         bindsym p exec --no-startup-id $i3exit poweroff, mode "default"
         
-        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -251,13 +272,12 @@ bindsym $mod+Shift+q mode $modeSession
 #########
 # assign to workspace
 assign [class="Brave"]              $ws1
-#assign [class="xst"]               $ws2
 assign [class="mpv"]                $ws10
 assign [class="Signal"]             $ws6
 assign [class="virt-manager"]       $ws9
 assign [class="MATLAB"]             $ws5
 
-# atomatic focus for windows opening on different worskpace
+# automatic focus for windows opening on different worskpace
 for_window [class="Brave"]          focus
 for_window [class="mpv"]            focus
 for_window [class="Signal"]         focus
@@ -275,8 +295,10 @@ for_window [class="Lxappearance"]       floating enable
 for_window [title="alsamixer"]			floating enable, border pixel 0, resize set 800 600
 for_window [title="nmtui"]              floating enable, border pixel 0, resize set 900 700
 for_window [class="MATLAB"]             floating enable
+for_window [class="kooha"]              floating enable
+
 ### Scratchpads
-bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create.sh 'scratch-term' 'xst -g=89x32'
+bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create.sh 'scratch-term' $term
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -289,7 +311,6 @@ bindsym $mod+minus scratchpad show
 ##########
 # COLORS #
 ##########
-# define color variables
 set_from_resource $black   st.color0
 set_from_resource $red     st.color1
 set_from_resource $green   st.color2
@@ -311,23 +332,22 @@ set_from_resource $txt     st.foreground
 
 client.background       $bg
 # class                 border   bground  text    indicator child_border
-client.focused          $purle   $bg      $txt    $cyan     $purple
+client.focused          $purple  $bg      $txt    $cyan     $purple
 client.focused_inactive $black2  $bg      $txt    $black2   $black
 client.unfocused        $black2  $bg      $txt    $black2   $black
 client.urgent           $red     $red     $txt    $red      $black2
 client.placeholder      $bg      $bg      $txt    $bg       $bg
 
+
 #######
 # BAR #
 #######
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
         #status_command i3status -c /home/$USER/.config/i3/i3status.conf
         status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
         position top
         tray_padding 6
-        strip_workspace_numbers yes
+        strip_workspace_numbers no
         colors {
 	            separator       $red
 		        background      $bg
@@ -340,19 +360,21 @@ bar {
         }
 }
 
+
 ###########
 # BORDERS #
 ###########
-default_border pixel 4
-default_floating_border normal 1
+# normal, pixel <size>, none
+default_border $border_style
+default_floating_border $border_style_float
 hide_edge_borders smart_no_gaps
 
 
 ########
 # GAPS #
 ########
-gaps inner 6
-gaps outer 0
+gaps inner $gaps_in_size
+gaps outer $gaps_out_size
 smart_gaps on
 
 
@@ -365,5 +387,6 @@ exec --no-startup-id /usr/bin/pipewire
 exec --no-startup-id /usr/bin/pipewire-pulse
 exec --no-startup-id /usr/bin/xwallpaper --maximize /home/$USER/.config/background
 exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
+exec --no-startup-id /home/$USER/.local/bin/low_battery &
 # Change language
 exec_always --no-startup-id "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"

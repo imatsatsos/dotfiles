@@ -1,0 +1,29 @@
+#!/bin/sh
+# send a notification with the current screen brightness %
+# REQUIRES: dunst
+
+dir_icons="/usr/local/bin/icons"
+max_bri=$(cat /sys/class/backlight/*/max_brightness)
+cur_bri=$(cat /sys/class/backlight/*/brightness)
+
+# calculating current percentage
+cur_per=$((cur_bri * 100 / max_bri))
+
+# creating a string bar
+bar=""
+i=0
+while [ "$i" -lt "$cur_per" ]; do
+    bar="${bar}█"
+    i=$((i + 10))
+done
+#notif_body="󰃠 $cur_per"
+#notif_body="${notif_body}\n${bar}"
+
+notif_body="Brightness:"
+
+dunstify -a "Screen" \
+    "$notif_body" \
+    -h int:value:$cur_per \
+    -t 500 \
+    -r 100 \
+    -i "$dir_icons"/sun.svg

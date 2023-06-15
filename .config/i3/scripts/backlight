@@ -1,15 +1,8 @@
 #!/bin/sh
+# script that outputs current screen brightness %
 
-# $1 should be + or - to step up or down the brightness.
-step_backlight() {
-    for backlight in /sys/class/backlight/*/; do
-        [ -d "$backlight" ] || continue
-        step=$(( $(cat "$backlight/max_brightness") / 20 ))
-        [ "$step" -gt "1" ] || step=1 #fallback if gradation is too low
-        printf '%s' "$(( $(cat "$backlight/brightness") $1 step ))" >"$backlight/brightness"
-    done
-}
+brightness=$(cat "/sys/class/backlight/intel_backlight/brightness")
+max_brightness=$(cat "/sys/class/backlight/intel_backlight/max_brightness")
 
-step_backlight $1
-percent=$(( $(cat "$backlight/max_brightness") ))
-notify-send backlight $percent
+percent=$(( brightness * 100 / max_brightness ))
+echo "󰃠 $percent%"

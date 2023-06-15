@@ -1,5 +1,6 @@
 #!/bin/bash
 # Copies selected files and folders to a GITREPO folder
+# and provides the option to update a git repo
 
 #HOME="/home/$USER/"
 #GITREPO="$HOME/TESTREPO"
@@ -58,7 +59,7 @@ do_copy_icons "BreezeX-Black default"
 do_copy_dotconfig "background lockscreen.png starship.toml window_titles.yml alacritty/ btop/ dunst/ fastfetch/ git/ gtk-3.0/ htop/ i3/ MangoHud/ neofetch/ nvim/ mpv/"
 echo "Done"
 
-echo "Do you want to update dotfiles.git? [Y/N]"
+echo "Do you want to update git repo? [y/N]"
 read -r dm
 if [[ "$dm" == [Y/y] ]]; then
 
