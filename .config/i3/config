@@ -5,7 +5,7 @@
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
 set $font Dejavu Sans Mono 11
-set $font_bar Dejavu Sans 11
+set $font_bar $font
 
 set $border_style pixel 3
 set $border_style_float normal 1
