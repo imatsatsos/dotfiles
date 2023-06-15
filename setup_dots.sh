@@ -105,6 +105,7 @@ installStarship(){
         return
     fi
 
+    echo -e "${YELLOW}Installing Starship.."
     if ! curl -sS https://starship.rs/install.sh | sh; then
         echo -e "${RED}! ERROR: Something went wrong during starship install${RC}"
         sleep 1
@@ -126,9 +127,13 @@ copyConfig() {
     # Copying files to destination and overwriting
     cp -rf ${GITPATH}/.         ${HOME}
     # Moving existing files to clean up home directory
-    cp -f ${HOME}/.bash_history ${HOME}/.local/state/bash_history
+    if [ -f ${HOME/.bash_history} ]; then
+        cp -f ${HOME}/.bash_history ${HOME}/.local/state/bash_history
+    else
+        touch ${HOME}/.local/state/bash_history
+    fi
     # clean up
-    rm ${HOME}/setup_dots.sh ${HOME}/LICENSE ${HOME}/.git
+    rm -rf ${HOME}/setup_dots.sh ${HOME}/LICENSE ${HOME}/.git
 }
 
 checkEnv
