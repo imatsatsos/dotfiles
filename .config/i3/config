@@ -288,7 +288,7 @@ for_window [class="MATLAB"]         focus
 for_window [class="Signal"]             floating enable
 for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
-for_window [class="Steam"]              floating enable
+for_window [class="steam"]              floating enable
 for_window [class="Project Zomboid"]    floating enable
 for_window [class="Lutris"]             floating enable
 for_window [class="Lxappearance"]       floating enable
@@ -298,14 +298,14 @@ for_window [class="MATLAB"]             floating enable
 for_window [class="kooha"]              floating enable
 
 ### Scratchpads
-bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create.sh 'scratch-term' $term
+bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create 'scratch-term' $term
 
 # move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+bindsym $mod+equal scratchpad show
 
 
 ##########
@@ -346,7 +346,6 @@ bar {
         #status_command i3status -c /home/$USER/.config/i3/i3status.conf
         status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
         position top
-        tray_padding 6
         strip_workspace_numbers no
         colors {
 	            separator       $red
