@@ -93,9 +93,9 @@ installCursor() {
 }
 
 installFonts() {
-    echo -e "${YELLOW}Installing fonts.."
-    [ ! -d $HOME/.local/share/fonts ] && mkdir -p $HOME/.local/share/fonts
-    cp -rf ${GIPATH}/.local/share/fonts/ $HOME/.local/share/fonts/
+    echo -e "${YELLOW}Installing fonts..${RC}"
+    [ ! -d ${HOME}/.local/share/fonts ] && mkdir -p ${HOME}/.local/share/fonts
+    cp -rf ${GIPATH}/.local/share/fonts/ ${HOME}/.local/share/fonts/
     fc-cache -f
 }
 
