@@ -24,11 +24,16 @@ st.termname: xst-256color
 st.borderless: 0
 
 ! --- The following options options can be reloaded via USR1 signal. ---
-st.font: Hack Nerd Font Mono:style=Regular:size=11:antialias=true:autohint=true;
-!st.font: Liga SFMono Nerd Font:style=Regular:size=11:antialias=true:autohint=true;
+st.font: FiraCode Nerd Font:size=11
+!Hack Nerd Font
+!FiraCode Nerd Font
+!Liga SFMono Nerd Font
+!JetBrainsMono Nerd Font
+!ShureTechMono Nerd Font
+!Ubuntu Nerd Font
 
 ! Font2 fallback, each font can be separated by comma ","
-st.font_fallback: Fira Code Nerd Font Mono:style=Regular:size=11:antialias=true,Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font:size=11,JoyPixels:pixelsize=11
+st.font_fallback: FiraCode Nerd Font:size=11,Material\\-Design\\-Iconic\\-Font:style=Design-Iconic-Font:size=11,JoyPixels:pixelsize=11
 
 ! window padding
 st.borderpx:          4

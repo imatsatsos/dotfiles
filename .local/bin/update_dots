@@ -30,6 +30,11 @@ do_copy_dotconfig () {
     done
 }
 
+do_copy_fonts () {
+    [ ! -d "$GITREPO/.local/share/fonts" ] && mkdir -p "$GITREPO/.local/share/fonts"
+    cp -rf "$HOME/.local/share/fonts" $GITREPO/.local/share/
+}
+
 do_copy_localbin () {
     [ ! -d $GITREPO/.local ] && mkdir -p $GITREPO/.local
     cp -rf "$HOME/.local/bin" $GITREPO/.local/
@@ -56,6 +61,7 @@ do_copy_home ".bashrc .gtkrc-2.0 .Xresources .inputrc .xinitrc"
 do_copy_localbin
 do_copy_icons "BreezeX-Black default"
 #do_copy_themes
+do_copy_fonts
 do_copy_dotconfig "background lockscreen.png starship.toml window_titles.yml alacritty/ btop/ dunst/ fastfetch/ git/ gtk-3.0/ htop/ i3/ MangoHud/ neofetch/ nvim/ mpv/ rofi/"
 echo "Done"
 

@@ -4,7 +4,7 @@
 
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
-set $font Dejavu Sans Mono 11
+set $font Hack Nerd Font 11
 set $font_bar $font
 
 set $border_style pixel 3
@@ -108,6 +108,9 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
+# lock
+bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/scripts/i3exit lock
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -195,9 +198,7 @@ set $ws10 10:MPV
 
 # switch to workspace next/previous
 bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+l workspace next
 bindsym $mod+Ctrl+Left workspace prev
-bindsym $mod+Ctrl+h workspace prev
 
 # move focused container to workspace next/previous
 #bindsym $mod+Shift+h move container to workspace prev

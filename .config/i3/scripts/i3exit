@@ -18,16 +18,14 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
-        #lock
-        #sleep 1
-        #$ctl suspend
-        # The VoidLinux way ;)
         lock &
         sleep 1
-        zzz
+        $ctl suspend
         ;;
     hibernate)
-        lock && $ctl hibernate
+        lock &
+        sleep 1
+        $ctl hibernate
         ;;
     reboot)
         $ctl reboot
