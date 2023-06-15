@@ -56,7 +56,7 @@ do_copy_home ".bashrc .gtkrc-2.0 .Xresources .inputrc .xinitrc"
 do_copy_localbin
 do_copy_icons "BreezeX-Black default"
 #do_copy_themes
-do_copy_dotconfig "background lockscreen.png starship.toml window_titles.yml alacritty/ btop/ dunst/ fastfetch/ git/ gtk-3.0/ htop/ i3/ MangoHud/ neofetch/ nvim/ mpv/"
+do_copy_dotconfig "background lockscreen.png starship.toml window_titles.yml alacritty/ btop/ dunst/ fastfetch/ git/ gtk-3.0/ htop/ i3/ MangoHud/ neofetch/ nvim/ mpv/ rofi/"
 echo "Done"
 
 echo "Do you want to update git repo? [y/N]"

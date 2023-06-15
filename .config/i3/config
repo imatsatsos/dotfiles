@@ -20,6 +20,9 @@ set $launcher rofi -show drun -no-default-config -config /home/$USER/.config/rof
 set $window_tabber rofi -show window -no-default-config -config /home/$USER/.config/rofi/main.rasi
 set $power_menu exec /home/$USER/.local/bin/rofi-powermenu
 
+# default workspace layout (default|stacking|tabbed)
+workspace_layout default
+
 
 
 ##############################################################################
@@ -59,8 +62,8 @@ bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 ###################
 # BRIGHTNESS KEYS #
 ###################
-bindsym XF86MonBrightnessUp exec /home/$USER/.config/i3/scripts/backlight_notif &
-bindsym XF86MonBrightnessDown exec /home/$USER/.config/i3/scripts/backlight_notif &
+bindsym XF86MonBrightnessUp exec dunst-brightness &
+bindsym XF86MonBrightnessDown exec dunst-brightness &
 
 ############
 # KEYBINDS #
@@ -68,19 +71,14 @@ bindsym XF86MonBrightnessDown exec /home/$USER/.config/i3/scripts/backlight_noti
 # Global Modifier Key
 set $mod Mod4
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
 # Mouse keybinds
+floating_modifier $mod
 bindsym --release button2 kill
 bindsym --whole-window $mod+button2 kill
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
-
-# default workspace layout (default|stacking|tabbed)
-workspace_layout default
 
 ### Launch apps
 #bindsym $mod+Return exec i3-sensible-terminal
@@ -102,6 +100,7 @@ set_from_resource $selbg st.color5
 set_from_resource $bg st.background
 bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=14" -nb "$bg" -sb "$selbg"
 bindsym $mod+Tab exec --no-startup-id $window_tabber
+bindsym $mod+o exec --nostartup-id "rofi-asroot"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
