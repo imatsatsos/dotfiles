@@ -1,7 +1,7 @@
 /* Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com> */
 
 configuration {
-    font:                           "JetBrains Mono Medium 10";
+    font:                           "JetBrains Mono Medium 14";
     show-icons:                     false;
     display-drun: 					"";
     drun-display-format:            "{icon} {name}";
@@ -15,9 +15,9 @@ window {
     transparency:                   "real";
     background-color:               @background;
     text-color:                     @foreground;
-    border:                  		0px;
-    border-color:                  	@selected;
-    border-radius:                  12px;
+    border:                  		2px;
+    border-color:                  	@br;
+    border-radius:                  18px;
     width:                          300px;
     location:                       center;
     anchor:                         center;
@@ -39,11 +39,11 @@ prompt {
 textbox-prompt-colon {
 	expand: 						false;
 	str: 							"";
-    border-radius:                  10px;
+    border-radius:                  8px;
     background-color:               @highlight;
     text-color:                     @background;
-    padding:    					6px 10px 6px 10px;
-	font:							"Iosevka Nerd Font 10";
+    padding:    					10px 10px 10px 12px;
+	font:							"Iosevka Nerd Font 12";
 }
 
 entry {
@@ -82,7 +82,7 @@ listview {
     background-color:               @background;
     columns:                        1;
     lines:							5;
-    spacing:                        4px;
+    spacing:                        0%;
     cycle:                          true;
     dynamic:                        true;
     layout:                         vertical;
@@ -123,7 +123,7 @@ element-text {
 
 element selected {
     background-color:               @selected;
-    text-color:                     @background;
+    text-color:                     @foreground;
     border:                  		0px;
     border-radius:                  10px;
     border-color:                  	@selected;

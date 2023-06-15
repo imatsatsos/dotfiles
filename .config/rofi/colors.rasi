@@ -7,10 +7,12 @@
   fg:  #dedede;
   ac:  #16161e;
   br:  #343746;
-  background:		#1e222a;
+  border:  #343746;
+  background:		#1b1b25;
   background-alt:	#262A32;
-  foreground:		#c8ccd4;
-  selected:			#61afef;
+  foreground:		#dedede;
+  selected2:		#61afef;
+  selected:			#282a36;
   highlight:		#DF6B74;
   urgent:			#e06c75;
   on:				#98c379;

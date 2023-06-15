@@ -5,22 +5,22 @@
 * {
     background-color:       @background;
     text-color:             @foreground;
-	font:				 	"JetBrains Mono Medium 10";
+	font:				 	"JetBrains Mono Medium 12";
 }
 
 window {
-    width:      			280px;
+    width:      			260px;
     padding:    			20px;
-    border:					2px;
+    border:					3px;
     border-radius:          8px;
-    border-color:           @selected;
+    border-color:           @border;
     location:               center;
     x-offset:               0;
-    y-offset:               -4%;
+    y-offset:               -5%;
 }
 
 entry {
     expand: 				true;
     width: 					150px;
-    text-color:				@selected;
+    text-color:				@foreground;
 }

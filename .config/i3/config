@@ -18,7 +18,7 @@ set $files nautilus --new-window
 
 set $launcher rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi
 set $window_tabber rofi -show window -no-default-config -config /home/$USER/.config/rofi/main.rasi
-set $power_menu exec /home/$USER/.local/bin/rofi-powermenu
+#set $power_menu exec /home/$USER/.local/bin/rofi-powermenu
 
 # default workspace layout (default|stacking|tabbed)
 workspace_layout default
@@ -62,8 +62,8 @@ bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 ###################
 # BRIGHTNESS KEYS #
 ###################
-bindsym XF86MonBrightnessUp exec dunst-brightness &
-bindsym XF86MonBrightnessDown exec dunst-brightness &
+bindsym XF86MonBrightnessUp exec   --no-startup-id ~/.local/bin/dunst-brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.local/bin/dunst-brightness
 
 ############
 # KEYBINDS #
@@ -100,7 +100,7 @@ set_from_resource $selbg st.color5
 set_from_resource $bg st.background
 bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=14" -nb "$bg" -sb "$selbg"
 bindsym $mod+Tab exec --no-startup-id $window_tabber
-bindsym $mod+o exec --nostartup-id "rofi-asroot"
+bindsym $mod+x exec --no-startup-id ~/.local/bin/rofi-asroot
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
