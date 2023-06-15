@@ -57,7 +57,7 @@ do_copy_themes () {
 
 echo "Copying dots to folder: $GITREPO"
 sleep 1
-do_copy_home ".bashrc .gtkrc-2.0 .Xresources .inputrc .xinitrc"
+do_copy_home ".bashrc .bash_profile .gtkrc-2.0 .Xresources .inputrc .xinitrc"
 do_copy_localbin
 do_copy_icons "BreezeX-Black default"
 #do_copy_themes
