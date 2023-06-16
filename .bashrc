@@ -149,12 +149,14 @@ alias \
 		du='du -h' \
         mkd='mkdir -pv' \
 		treestat='rpm-ostree status' \
-		please='sudo !!' \
+		fuck='sudo !!' \
 		zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
 		itop='sudo intel_gpu_top' \
 		imeas='sudo intel-undervolt measure' \
 		vim='nvim' \
-		weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv && sudo vkpurge rm all' \
+		es='edit_script.sh' \
+        ec='edit_cfg.sh' \
+        weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv && sudo vkpurge rm all' \
 		errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
         envy='sudo python /home/$USER/.local/bin/envycontrol.py'
 

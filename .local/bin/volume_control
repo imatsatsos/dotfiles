@@ -1,0 +1,12 @@
+#!/bin/sh
+# script changes volume, mute state of default sink
+# REQUIRES: pactl
+
+case "$1" in
+    "up") pactl set-sink-volume @DEFAULT_SINK@ +4% ;;
+    "down") pactl set-sink-volume @DEFAULT_SINK@ -4% ;;
+    "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+    *) echo "volume_control up | down | mute" ;;
+esac
+
+paplay /usr/share/sounds/freedesktop/stereo/bell.oga

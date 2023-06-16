@@ -72,4 +72,3 @@ else
     echo "$SINK_ICON $VOLUME"
     echo "$VOLUME"
 fi
-paplay /usr/share/sounds/freedesktop/stereo/bell.oga

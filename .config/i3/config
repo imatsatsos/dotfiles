@@ -28,8 +28,7 @@ set $window_tabber rofi -show window -no-default-config -config /home/$USER/.con
 
 # Select default workspace layout (default|stacking|tabbed)
 workspace_layout default
-
-
+workspace_auto_back_and_forth yes
 
 ##############################################################################
 font pango:$font
@@ -53,10 +52,10 @@ font pango:$font
 ##############
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3blocks pkill -SIGRTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.local/bin/volume_control up && $refresh_i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.local/bin/volume_control down && $refresh_i3blocks
 
-bindsym XF86AudioMute    exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle   && $refresh_i3blocks
+bindsym XF86AudioMute    exec --no-startup-id ~/.local/bin/volume_control mute && $refresh_i3blocks
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3blocks
 
 bindsym XF86AudioPlay  exec --no-startup-id playerctl play
@@ -181,27 +180,18 @@ bindsym $mod+a focus parent
 ##############
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 1:WWW
-set $ws2 2:GEN
-set $ws3 3:DEV
-set $ws4 4:GAMES
-set $ws5 5:SCHOOL
-set $ws6 6:CHAT
+set $ws1 1: 
+set $ws2 2:󰀻 
+set $ws3 3: 
+set $ws4 4: 
+set $ws5 5: 
+set $ws6 6: 
 set $ws7 "7"
-set $ws8 8:TORR
-set $ws9 9:VM
-set $ws10 10:MPV
+set $ws8 8: 
+set $ws9 9: 
+set $ws10 10: 
 
-# 1: 
-# 2: 
-# 3: 
-# 4: 
-# 5: 
-# 6: 
-# 7: 
-# 8: 
-# 9: 
-# 10: 
+focus_wrapping no
 
 # switch to workspace next/previous
 bindsym $mod+Ctrl+Right workspace next
@@ -339,10 +329,10 @@ set_from_resource $txt     st.foreground
 
 client.background       $bg
 # class                 border   bground  text    indicator child_border
-client.focused          $purple  $bg      $txt    $cyan     $purple
-client.focused_inactive $black2  $bg      $txt    $black2   $black
-client.unfocused        $black2  $bg      $txt    $black2   $black
-client.urgent           $red     $red     $txt    $red      $black2
+client.focused          $purple  $bg      $txt    $blue     $purple
+client.focused_inactive $black2  $bg      $txt    $black    $bg
+client.unfocused        $black2  $bg      $txt    $black    $bg
+client.urgent           $red     $bg      $txt    $red      $red
 client.placeholder      $bg      $bg      $txt    $bg       $bg
 
 
@@ -355,13 +345,13 @@ bar {
         position top
         strip_workspace_numbers no
         colors {
-	            separator       $red
+	            separator       $purple
 		        background      $bg
-		        statusline      $white
+		        statusline      $txt
 #               class      	    	border 		    bg		    txt	    	indicator
-		        focused_workspace	$purple    	    $purple		$white    	$yellow
-		        active_workspace	$black          $purple     $txt    	$yellow
-		        inactive_workspace	$black      	$black  	$txt		$yellow
+		        focused_workspace	$purple    	    $blue		$bg     	$yellow
+		        active_workspace	$black2         $purple     $txt    	$yellow
+		        inactive_workspace	$black2      	$black  	$txt		$yellow
 		        urgent_workspace	$white    	    $red    	$txt		$yellow
         }
 }
