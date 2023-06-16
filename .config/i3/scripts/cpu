@@ -8,7 +8,7 @@ use utf8;
 use Getopt::Long;
 
 # default values
-my $t_warn = $ENV{T_WARN} // 50;
+my $t_warn = $ENV{T_WARN} // 60;
 my $t_crit = $ENV{T_CRIT} // 80;
 my $cpu_usage = -1;
 my $decimals = $ENV{DECIMALS} // 0;

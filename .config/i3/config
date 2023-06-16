@@ -56,7 +56,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.local/bin/volume_control up
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.local/bin/volume_control down && $refresh_i3blocks
 
 bindsym XF86AudioMute    exec --no-startup-id ~/.local/bin/volume_control mute && $refresh_i3blocks
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3blocks
+bindsym XF86AudioMicMute exec --no-startup-id ~/.local/bin/volume_control mic_mute && $refresh_i3blocks
 
 bindsym XF86AudioPlay  exec --no-startup-id playerctl play
 bindsym XF86AudioPause exec --no-startup-id playerctl pause
@@ -86,7 +86,7 @@ bindsym --whole-window $mod+button2 kill
 tiling_drag modifier titlebar
 
 ### Launch apps
-#bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id $term
 bindsym $mod+e exec --no-startup-id $files
 
@@ -103,7 +103,7 @@ bindsym $mod+d exec --no-startup-id $launcher
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 set_from_resource $selbg st.color5
 set_from_resource $bg st.background
-bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=14" -nb "$bg" -sb "$selbg"
+bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$selbg"
 bindsym $mod+Tab exec --no-startup-id $window_tabber
 bindsym $mod+x exec --no-startup-id ~/.local/bin/rofi-asroot
 bindcode $mod+49 exec --no-startup-id ~/.local/bin/i3-rofi-scratchpads
@@ -147,8 +147,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send 'tile horizontally'
-bindsym $mod+v split v;exec notify-send 'tile vertically'
+bindsym $mod+z split h;exec notify-send -t 500 'tile horizontally'
+bindsym $mod+v split v;exec notify-send -t 500 'tile vertically'
 bindsym $mod+n split toggle
 
 # enter fullscreen mode for the focused container
@@ -182,11 +182,11 @@ bindsym $mod+a focus parent
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 1: 
 set $ws2 2:󰀻 
-set $ws3 3: 
+set $ws3 3: 
 set $ws4 4: 
 set $ws5 5: 
 set $ws6 6: 
-set $ws7 "SEVEN"
+set $ws7 7:SEV
 set $ws8 8: 
 set $ws9 9: 
 set $ws10 10: 
@@ -282,6 +282,8 @@ for_window [class="virt-manager"]   focus
 for_window [class="MATLAB"]         focus
 
 # assign floating
+for_window [title="alsamixer"]			floating enable, border pixel 1, resize set 800 600
+for_window [title="nmtui"]              floating enable, border pixel 1, resize set 900 700
 for_window [class="Signal"]             floating enable
 for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
@@ -289,13 +291,11 @@ for_window [class="steam"]              floating enable
 for_window [class="Project Zomboid"]    floating enable
 for_window [class="Lutris"]             floating enable
 for_window [class="Lxappearance"]       floating enable
-for_window [title="alsamixer"]			floating enable, border pixel 0, resize set 800 600
-for_window [title="nmtui"]              floating enable, border pixel 0, resize set 900 700
 for_window [class="MATLAB"]             floating enable
 for_window [class="kooha"]              floating enable
 
 ### Scratchpads
-bindsym $mod+Shift+t exec ~/.config/i3/scripts/i3_scratchpad_show_create 'scratch-term' $term
+bindsym $mod+Shift+Return exec ~/.config/i3/scripts/i3-scratchpad-show-create 'scratch-term' $term
 
 # move the currently focused window to the scratchpad
 bindsym $mod+minus move scratchpad
@@ -330,8 +330,8 @@ set_from_resource $txt     st.foreground
 client.background       $bg
 # class                 border   bground  text    indicator child_border
 client.focused          $purple  $bg      $txt    $blue     $purple
-client.focused_inactive $black2  $bg      $txt    $black    $bg
-client.unfocused        $black2  $bg      $txt    $black    $bg
+client.focused_inactive $bg      $bg      $txt    $black    $bg
+client.unfocused        $bg      $bg      $txt    $black    $bg
 client.urgent           $red     $bg      $txt    $red      $red
 client.placeholder      $bg      $bg      $txt    $bg       $bg
 

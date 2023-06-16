@@ -6,6 +6,7 @@ case "$1" in
     "up") pactl set-sink-volume @DEFAULT_SINK@ +4% ;;
     "down") pactl set-sink-volume @DEFAULT_SINK@ -4% ;;
     "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+    "micmute") pactl set-source-mute @DEFAULT_SOURCE@ toggle ;;
     *) echo "volume_control up | down | mute" ;;
 esac
 

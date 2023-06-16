@@ -1,0 +1,25 @@
+#!/bin/sh
+
+tar -cpzf backup.tar.gz \
+--exclude="backup.tar.gz" \
+--exclude=.debug \
+--exclude=.gvfs \
+--exclude=Applications \
+--exclude=Downloads \
+--exclude="MATLAB Add-Ons" \
+--exclude=.cache \
+--exclude=.dbus \
+--exclude=.icons \
+--exclude=.java \
+--exclude=.local \
+--exclude=.mozilla \
+--exclude=.nmcli-history \
+--exclude=.nv \
+--exclude=.pki \
+--exclude=.pulse-cookie \
+--exclude=.steam \
+--exclude=.steampath \
+--exclude=.steamid \
+--exclude=.var \
+--exclude=.wine \
+--warning=no-file-changed .

@@ -7,35 +7,34 @@ DIR="$HOME/.local/bin/"
 rofi_command="rofi -theme /home/$USER/.config/rofi/asroot.rasi"
 
 # Apps
-terminal=" Terminal"
-files=" File Manager"
-editor=" Geany"
-clifm=" Ranger"
-vim=" Vim"
+terminal="Terminal"
+files="File Manager"
+editor="Geany"
+clifm="Ranger"
+vim="Vim"
 
 # Variable passed to rofi
 options="$terminal\n$files\n$editor\n$clifm\n$vim"
-#term='alacritty --class alacritty-float,alacritty-float --config-file /root/.config/alacritty/alacritty.yml'
-term='xst -g=89x32'
+#term='alacritty --class alacritty-float,alacritty-float
+term=alacritty
 
 # Functions
 chosen="$(echo -e "$options" | $rofi_command -p "Run as root:" -dmenu -selected-row 0)"
 case $chosen in
     $terminal)
-        "$DIR"/asroot.sh "$term"
+        "$DIR"/asroot.sh "$term -T term_as_root"
         ;;
     $files)
-        #"$DIR"/asroot.sh 'dbus-run-session thunar'
         "$DIR"/asroot.sh 'dbus-run-session nautilus'
         ;;
     $editor)
         "$DIR"/asroot.sh geany
         ;;
     $clifm)
-        "$DIR"/asroot.sh "$term -e ranger"
+        "$DIR"/asroot.sh "$term -T term_as_root -e ranger"
         ;;
     $vim)
-        "$DIR"/asroot.sh "$term -e vim"
+        "$DIR"/asroot.sh "$term -T term_as_root -e vim"
         ;;
 esac
 

@@ -42,11 +42,15 @@ mappings:
 - class: kitty
   # ...like this:
   icon: *term
-  title: Kitty
+  title: kitty
+
+- class: alacritty
+  icon: *term
+  title: alacritty
 
 - class: xst-256color
   icon: *term
-  title:
+  title: xst
   # if this is enabled, the native title is shown,
   # as well as the mapped title.
   # e.g. Kitty [~/]
