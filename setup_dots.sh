@@ -95,7 +95,7 @@ installCursor() {
 installFonts() {
     echo -e "${YELLOW}Installing fonts..${RC}"
     [ ! -d ${HOME}/.local/share/fonts ] && mkdir -p ${HOME}/.local/share/fonts
-    cp -rf ${GIPATH}/.local/share/fonts/ ${HOME}/.local/share/fonts/
+    cp -rf ${GITPATH}/.local/share/fonts/ ${HOME}/.local/share/fonts/
     fc-cache -f
 }
 
@@ -125,7 +125,7 @@ copyConfig() {
 
     echo -e "${YELLOW}Copying new config files...${RC}"
     # Copying files to destination and overwriting
-    cp -rf ${GITPATH}/.         ${HOME}
+    cp -rf ${GITPATH}/. ${HOME}
     # Moving existing files to clean up home directory
     mkdir -p ${HOME}/.local/state
     if [ -f ${HOME/.bash_history} ]; then
