@@ -186,10 +186,10 @@ set $ws3 3:
 set $ws4 4: 
 set $ws5 5: 
 set $ws6 6: 
-set $ws7 "7"
+set $ws7 "SEVEN"
 set $ws8 8: 
-set $ws9 9: 
-set $ws10 10: 
+set $ws9 9: 
+set $ws10 10: 
 
 focus_wrapping no
 
@@ -269,9 +269,9 @@ bindsym $mod+Shift+q mode $modeSession
 #########
 # assign to workspace
 assign [class="Brave"]              $ws1
-assign [class="mpv"]                $ws10
+assign [class="mpv"]                $ws9
 assign [class="Signal"]             $ws6
-assign [class="virt-manager"]       $ws9
+assign [class="virt-manager"]       $ws10
 assign [class="MATLAB"]             $ws5
 
 # automatic focus for windows opening on different worskpace
