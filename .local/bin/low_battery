@@ -1,6 +1,6 @@
 #!/bin/sh
 # sends a notification when battery is low
-# REQUIRES: dunst
+# REQUIRES: dunst, pulseaudio-utils(pipewire installs this)
 
 for pid in $(pidof -x low_battery); do
     if [ "$pid" != $$ ]; then
@@ -25,9 +25,10 @@ while true; do
   # check if battery is low and discharging
   if [ "$battery_level" -lt "$warning_level" ] && [ "$discharging" -eq 1 ]    
   then
-    dunstify -a "Battery" \
+      paplay /usr/share/sounds/freedesktop/stereo/suspend-error.oga
+      dunstify -a "Battery" \
         "Low battery: ${battery_level}%" \
-        "Battery is low ($time_to_empty minutes left)" \
+        "$time_to_empty minutes left!" \
         -u critical \
         -r 100 \
         -i $dir_icons/battery.svg

@@ -1,7 +1,7 @@
 # the icon to fall back to, if there is no mapping
 default_icon: ﬓ
 # spaces to insert between the icon & window title
-padding: 1
+padding: 0
 # auto-capitalize window titles, when they are not manually set.
 capitalize: true
 

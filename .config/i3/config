@@ -2,25 +2,31 @@
 ## i3 config file (v4) #
 ########################
 
+# Select i3 and bar font
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
 set $font FiraCode Nerd Font 11
 set $font_bar $font
 
+# Select border style
 set $border_style pixel 3
 set $border_style_float normal 1
 
+# Select gaps size
 set $gaps_in_size 6
 set $gaps_out_size -2
 
-set $term xst -g=89x32
+# Select terminal and file manager
+#set $term xst -g=89x32
+set $term alacritty
 set $files nautilus --new-window
 
+# Select launcher and window_tabber
 set $launcher rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi
-set $window_tabber rofi -show window -no-default-config -config /home/$USER/.config/rofi/main.rasi
+set $window_tabber rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi
 #set $power_menu exec /home/$USER/.local/bin/rofi-powermenu
 
-# default workspace layout (default|stacking|tabbed)
+# Select default workspace layout (default|stacking|tabbed)
 workspace_layout default
 
 
@@ -101,6 +107,7 @@ set_from_resource $bg st.background
 bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=14" -nb "$bg" -sb "$selbg"
 bindsym $mod+Tab exec --no-startup-id $window_tabber
 bindsym $mod+x exec --no-startup-id ~/.local/bin/rofi-asroot
+bindcode $mod+49 exec --no-startup-id ~/.local/bin/i3-rofi-scratchpads
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

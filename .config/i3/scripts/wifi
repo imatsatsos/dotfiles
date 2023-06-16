@@ -6,6 +6,9 @@
 # middle-click: toggles wifi state
 # REQUIRES: NetworkManager, iw
 
+TERM=${TERM:-xst}
+TERM=i3-sensible-terminal
+
 if [[ -z "$INTERFACE" ]] ; then
     INTERFACE="${BLOCK_INSTANCE:-wlp0s20f3}"
 fi
@@ -70,13 +73,10 @@ action_middle_click() {
 	fi
 	}
 
-#TERM=${TERM:-xst}
-#echo $TERM
-
 case "$BLOCK_BUTTON" in
     1) toggle_state ;;
     2) action_middle_click ;;
-    3) xst nmtui ;;
+    3) $TERM -e nmtui ;;
 esac
 
 if [[ "$state" == "1" ]]; then
