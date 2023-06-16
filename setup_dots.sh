@@ -129,7 +129,7 @@ copyConfig() {
     # Moving existing files to clean up home directory
     mkdir -p ${HOME}/.local/state
     if [ -f ${HOME/.bash_history} ]; then
-        cp -f ${HOME}/.bash_history ${HOME}/.local/state/bash_history
+        mv -f ${HOME}/.bash_history ${HOME}/.local/state/bash_history
     else
         touch ${HOME}/.local/state/bash_history
     fi
