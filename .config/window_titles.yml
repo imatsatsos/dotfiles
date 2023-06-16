@@ -11,7 +11,7 @@ workspace:
   enabled: true 
   # icon and title mapping for the workspace placeholder
   icon: ﬓ
-  title: Desktop
+  title: 
 
 # mappings for each application
 mappings:

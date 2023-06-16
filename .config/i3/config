@@ -5,11 +5,11 @@
 # Select i3 and bar font
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
-set $font FiraCode Nerd Font 11
+set $font FiraCode Nerd Font 10
 set $font_bar $font
 
-# Select border style
-set $border_style pixel 3
+# Select border style (normal | pixel | none)
+set $border_style normal 3
 set $border_style_float normal 1
 
 # Select gaps size
@@ -342,6 +342,7 @@ client.placeholder      $bg      $bg      $txt    $bg       $bg
 bar {
         #status_command i3status -c /home/$USER/.config/i3/i3status.conf
         status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
+        font pango:$font_bar
         position top
         strip_workspace_numbers no
         colors {
