@@ -6,7 +6,7 @@
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
 set $font FiraCode Nerd Font 10
-set $font_bar FiraCode Nerd Font 12
+set $font_bar FiraCode Nerd Font 11
 
 # Select border style (normal | pixel | none)
 set $border_style pixel 3
@@ -107,6 +107,7 @@ bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=12" -nb
 bindsym $mod+Tab exec --no-startup-id $window_tabber
 bindsym $mod+x exec --no-startup-id ~/.local/bin/rofi-asroot
 bindcode $mod+49 exec --no-startup-id ~/.local/bin/i3-rofi-scratchpads
+bindsym $mod+Shift+g exec --no-startup-id ~/.local/bin/picom-toggle
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

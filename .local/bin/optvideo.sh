@@ -4,8 +4,8 @@
 # Check that all arguments are passed
 
 if [ $# -ne 4 ]; then
-    echo "Usage: optvideo <input_file> <out_width> <encoder>      <out_folder>"
-    echo "Ex:    optvideo input.mp4    1920        x265|x264|vp9  ~/Videos"
+    echo "Usage: optvideo <input_file> <out_width> <encoder>          <out_folder>"
+    echo "Ex:    optvideo input.mp4    1920        x265|x264|vp9|av1  ~/Videos"
     exit 1
 fi
 
@@ -19,13 +19,17 @@ read -r ans
 
 case $ENCODER in
     x264)
-        ffmpeg -i "$1" -c:v libx264 -preset slow -crf 24 -vf scale=$2:-2 			-c:a copy "$4/${FILENAME}_h264.mp4" ;;
+        # default 264 crf: 23,
+        ffmpeg -i "$1" -c:v libx264    -vf scale=$2:-2 -preset slow -crf 24 		    -c:a copy "$4/${FILENAME}_h264.mp4" ;;
     x265)
-        ffmpeg -i "$1" -c:v libx265 			 -crf 28 -vf scale=$2:-2 -tag:v hvc1 -c:a copy "$4/${FILENAME}_h265.mp4" ;;
-    av1)
-        ffmpeg -i "$1" -c:v libsvtav1 -preset 4  -crf 28 -vf scale=$2:-2 -pix_fmt yuv420p10le -c:a libopus -b:a 128k "$4/${FILENAME}_av1.mkv" ;;
+        # default 265 crf:28, hvc1 tags are to support Apple devices
+        ffmpeg -i "$1" -c:v libx265	   -vf scale=$2:-2 -preset slow -crf 29 -tag:v hvc1 -c:a copy "$4/${FILENAME}_h265.mp4" ;;
     vp9)
-        ffmpeg -i "$1" -c:v libvpx-vp9 			 -crf 40 -vf scale=$2:-2 			-c:a copy "$4/${FILENAME}.webm" ;;
+        # crf 31 recommended for 1080p, b:v 0 needs to be used to trigger crf mode
+        ffmpeg -i "$1" -c:v libvpx-vp9 -vf scale=$2:-2		        -crf 32 -b:v 0      -c:a copy "$4/${FILENAME}_vp9.webm" ;;
+    av1)
+        # default svt-av1 crf:50
+        ffmpeg -i "$1" -c:v libsvtav1  -vf scale=$2:-2 -preset 5    -crf 50             -c:a libopus -b:a 128k "$4/${FILENAME}_av1.mkv" ;;
     *)
         echo "Available encoders: x264, x265, vp9, av1" ;;
 esac
