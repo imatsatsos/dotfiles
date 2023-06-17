@@ -70,7 +70,6 @@ do_copy_home ".bashrc \
 
 do_copy_dotconfig "background \
     lockscreen.png \
-    picom.conf \
     starship.toml \
     window_titles.yml \
     alacritty/ \
@@ -85,6 +84,7 @@ do_copy_dotconfig "background \
     neofetch/ \
     nvim/ \
     mpv/ \
+    picom/ \
     rofi/"
 
 echo "Do you want to update git repo? [y/N]"
