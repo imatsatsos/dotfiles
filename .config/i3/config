@@ -5,8 +5,10 @@
 # Select i3 and bar font
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
-set $font FiraCode Nerd Font 10
-set $font_bar FiraCode Nerd Font 11
+#JetBrainsMono Nerd Font 11
+#ShureTechMono Nerd Font
+set $font ShureTechMono Nerd Font 10
+set $font_bar ShureTechMono Nerd Font 11
 
 # Select border style (normal | pixel | none)
 set $border_style pixel 3
@@ -19,7 +21,8 @@ set $gaps_out_size -2
 # Select terminal and file manager
 #set $term xst -g=89x32
 set $term alacritty
-set $files nautilus --new-window
+#set $files nautilus --new-window
+set $files pcmanfm
 
 # Select launcher and window_tabber
 set $launcher rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi
@@ -349,6 +352,7 @@ bar {
         status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
         font pango: $font_bar
         position top
+        tray_padding 3
         strip_workspace_numbers no
         colors {
 	            separator       $purple

@@ -20,13 +20,13 @@ read -r ans
 case $ENCODER in
     x264)
         # default 264 crf: 23,
-        ffmpeg -i "$1" -c:v libx264    -vf scale=$2:-2 -preset slow -crf 24 		    -c:a copy "$4/${FILENAME}_h264.mp4" ;;
+        ffmpeg -i "$1" -c:v libx264    -vf scale=$2:-2 -preset slow -crf 23 		    -c:a copy "$4/${FILENAME}_h264.mp4" ;;
     x265)
         # default 265 crf:28, hvc1 tags are to support Apple devices
-        ffmpeg -i "$1" -c:v libx265	   -vf scale=$2:-2 -preset slow -crf 29 -tag:v hvc1 -c:a copy "$4/${FILENAME}_h265.mp4" ;;
+        ffmpeg -i "$1" -c:v libx265	   -vf scale=$2:-2 -preset slow -crf 28 -tag:v hvc1 -c:a copy "$4/${FILENAME}_h265.mp4" ;;
     vp9)
         # crf 31 recommended for 1080p, b:v 0 needs to be used to trigger crf mode
-        ffmpeg -i "$1" -c:v libvpx-vp9 -vf scale=$2:-2		        -crf 32 -b:v 0      -c:a copy "$4/${FILENAME}_vp9.webm" ;;
+        ffmpeg -i "$1" -c:v libvpx-vp9 -vf scale=$2:-2		        -crf 31 -b:v 0      -c:a copy "$4/${FILENAME}_vp9.webm" ;;
     av1)
         # default svt-av1 crf:50
         ffmpeg -i "$1" -c:v libsvtav1  -vf scale=$2:-2 -preset 5    -crf 50             -c:a libopus -b:a 128k "$4/${FILENAME}_av1.mkv" ;;
