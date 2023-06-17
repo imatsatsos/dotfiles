@@ -21,7 +21,7 @@ confedit_list[i3-blocks]="$HOME/.config/i3/i3blocks.conf"
 confedit_list[i3-window-titles]="$HOME/.config/window_titles.yml"
 confedit_list[mangohud]="$HOME/.config/MangoHud/MangoHud.conf"
 confedit_list[dunst]="$HOME/.config/dunst/dunstrc"
-confedit_list[picom]="$HOME/.config/picom.conf"
+confedit_list[picom]="$HOME/.config/picom/picom.conf"
 
 FMENU="fzf --border=rounded --margin=5% --color=dark --height 100% --reverse --header=$(basename "$0") --info=hidden --header-first --prompt"
 #FTERM="xst -g=89x32"

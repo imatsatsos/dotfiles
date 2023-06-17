@@ -8,30 +8,28 @@ for pid in $(pidof -x low_battery); do
     fi
 done
 
-dir_icons="/usr/local/bin/icons"
-
 # notify when below this percentage
 warning_level=15
 
 # how often to check battery status, in seconds
-check_interval=120
+check_interval=499
 
 path_to_battery=$(upower -e | grep BAT)
 while true; do
   battery_level=$(upower -i "$path_to_battery"  | grep -E "percentage" | sed 's/[^0-9]//g')
   discharging=$(upower -i "$path_to_battery"  | grep -E "state" | grep -c "discharging")
-  time_to_empty=$(upower -i "$path_to_battery"  | grep -E "time to empty" | sed 's/[^0-9,.]//g')
                                                  
   # check if battery is low and discharging
   if [ "$battery_level" -lt "$warning_level" ] && [ "$discharging" -eq 1 ]    
   then
+      time_to_empty=$(upower -i "$path_to_battery"  | grep -E "time to empty" | sed 's/[^0-9,.]//g')
       paplay /usr/share/sounds/freedesktop/stereo/suspend-error.oga
       dunstify -a "Battery" \
         "Low battery: ${battery_level}%" \
         "$time_to_empty minutes left!" \
         -u critical \
         -r 100 \
-        -i $dir_icons/battery.svg
+        -i /usr/share/icons/HighContrast/scalable/status/battery-low.svg
   fi
 
   sleep ${check_interval}s

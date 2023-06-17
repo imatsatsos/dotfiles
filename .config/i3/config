@@ -393,3 +393,4 @@ exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 exec --no-startup-id /home/$USER/.local/bin/low_battery &
 # Change language
 exec_always --no-startup-id "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
+exec --no-startup-id picom -b

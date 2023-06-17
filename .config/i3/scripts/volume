@@ -55,10 +55,10 @@ done < <(echo "$OUTPUT_INFO")
 
 VOLUME=$(echo "$VOLUME" | grep -o "[0-9]*%" | head -1)
 
-if [[ $DEFAULT_SINK == *"pci"* ]]; then
-    SINK_ICON="󰕾"
-else
+if [[ $DEFAULT_SINK == *"head"* ]]; then
     SINK_ICON="󰋋"
+else
+    SINK_ICON="󰕾"
 fi
 
 if [[ $MUTED == *"yes"* ]]; then
