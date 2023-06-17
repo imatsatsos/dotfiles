@@ -10,10 +10,10 @@ fi
 
 # "bat" as manpager
 #if type "bat" >/dev/null 2>&1; then
-#    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+#    export MANPAGER="/home/$USER/.local/bin/bat-wrapper"
+#    man 2 select
 #    export MANROFFOPT="-c"
 #fi
-#alias man="man $1 | bat"
 
 ## User specific environment
 # User scripts/bin to PATH
@@ -38,7 +38,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export HISTFILE="${XDG_STATE_HOME}"/bash_history
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export EDITOR=nvim
-export TERMINAL=xst
+export TERM=alacritty
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
@@ -81,11 +81,10 @@ export HISTFILESIZE=3000
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;91m'
 export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;93m'
-export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;92m'
-
+export LESS_TERMCAP_ue=$'\E[0m'
 
 ## Utilities
 # --- go back n directories ---
@@ -140,7 +139,8 @@ alias \
 		ll='ls -lh --color=auto --group-directories-first' \
 		grep='grep --color=auto' \
 		ip='ip --color=auto' \
-		cp='cp -iv' \
+		diff='diff --color=auto' \
+        cp='cp -iv' \
 		mv='mv -iv' \
 		rm='rm -Iv' \
 		ln='ln -i' \

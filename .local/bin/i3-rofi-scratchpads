@@ -3,7 +3,7 @@
 # REQUIRES: rofi, jq, i3
 
 i3-msg -t get_tree | \
-jq '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | .window,.name,.window_properties.title' | \
+jq '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | .window,.name,.window_properties.class' | \
 #jq ".nodes|.[]|.|.nodes|.[]|.nodes|.[]|select(.name==\"__i3_scratch\")|.floating_nodes|.[]|.nodes|.[]|.name" | \
 sed 's/\"//g' | \
 paste - - - | \

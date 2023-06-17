@@ -5,12 +5,12 @@
 # Select i3 and bar font
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
-set $font FiraCode Nerd Font 10
+set $font FiraCode Nerd Font 12
 set $font_bar $font
 
 # Select border style (normal | pixel | none)
-set $border_style normal 3
-set $border_style_float normal 1
+set $border_style pixel 3
+set $border_style_float normal
 
 # Select gaps size
 set $gaps_in_size 6
@@ -31,7 +31,7 @@ workspace_layout default
 workspace_auto_back_and_forth yes
 
 ##############################################################################
-font pango:$font
+font pango: $font
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 #exec --no-startup-id dex --autostart --environment i3
@@ -192,6 +192,7 @@ set $ws9 9:
 set $ws10 10: 
 
 focus_wrapping no
+force_display_urgency_hint 1000 ms
 
 # switch to workspace next/previous
 bindsym $mod+Ctrl+Right workspace next
@@ -282,8 +283,8 @@ for_window [class="virt-manager"]   focus
 for_window [class="MATLAB"]         focus
 
 # assign floating
-for_window [title="alsamixer"]			floating enable, border pixel 1, resize set 800 600
-for_window [title="nmtui"]              floating enable, border pixel 1, resize set 900 700
+for_window [title="alsamixer"]			floating enable, resize set 800 600
+for_window [title="nmtui"]              floating enable, resize set 900 700
 for_window [class="Signal"]             floating enable
 for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
@@ -299,6 +300,9 @@ bindsym $mod+Shift+Return exec ~/.config/i3/scripts/i3-scratchpad-show-create 's
 
 # move the currently focused window to the scratchpad
 bindsym $mod+minus move scratchpad
+
+# move all floating windows to the scratchpad
+bindsym $mod+Shift+minus [floating] move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
@@ -342,7 +346,7 @@ client.placeholder      $bg      $bg      $txt    $bg       $bg
 bar {
         #status_command i3status -c /home/$USER/.config/i3/i3status.conf
         status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
-        font pango:$font_bar
+        font pango: $font_bar
         position top
         strip_workspace_numbers no
         colors {
@@ -363,9 +367,10 @@ bar {
 ###########
 # normal, pixel <size>, none
 default_border $border_style
+for_window [tiling] $border_syle
 default_floating_border $border_style_float
+for_window [floating] $border_style_float
 hide_edge_borders smart_no_gaps
-
 
 ########
 # GAPS #

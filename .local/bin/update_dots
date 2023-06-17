@@ -2,9 +2,8 @@
 # Copies selected files and folders to a GITREPO folder
 # and provides the option to update a git repo
 
-#HOME="/home/$USER/"
 #GITREPO="$HOME/TESTREPO"
-GITREPO="$HOME/Documents/gitrepos/dotfiles"
+GITREPO="$HOME/Gitrepos/dotfiles"
 
 if [ ! -d $GITREPO ]; then
     echo "$GITREPO does not exist. Do you wish to create it? [Y/N]"

@@ -1,0 +1,8 @@
+#!/bin/sh
+# script outputs current package0 temp in C
+
+file="/sys/class/hwmon/hwmon4/temp1_input"
+
+temp=$(cat "$file")
+temp="${temp%???}"
+echo "$temp°C"

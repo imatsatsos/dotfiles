@@ -1,0 +1,3 @@
+#!/bin/sh
+# a wrapper for bat to work on Void Linux as a manpager
+col -bx < "$1" | bat --language man -p
