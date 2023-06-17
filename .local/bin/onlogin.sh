@@ -87,7 +87,6 @@ on_xorg(){
 #}
 
 # main
-xrdb -merge /home/$USER/.Xresources
 on_xorg
 setxkbmap -option caps:escape
 gnome_scaling_factor

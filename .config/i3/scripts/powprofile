@@ -15,6 +15,12 @@ case $current_profile in
 	    echo "󰚀 "
 	    #echo "#759EEA"
 	;;
+	balance_performance)
+	#   󰗑
+	    echo "󰚀 "
+	    echo "󰚀 "
+	    #echo "#759EEA"
+	;;
 	performance)
 	    echo ""
 	    echo ""

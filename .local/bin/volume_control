@@ -1,6 +1,6 @@
 #!/bin/sh
 # script changes volume, mute state of default sink
-# REQUIRES: pactl
+# REQUIRES: pulseaudio-utils(pipewire installs these)
 
 case "$1" in
     "up") pactl set-sink-volume @DEFAULT_SINK@ +4% ;;
