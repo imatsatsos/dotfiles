@@ -4,4 +4,10 @@
 [init]
     defaultBranch = main
 [alias]
+    st = status
+    aa = add -A .
+    cm = commit -m
+    reword = commit --amend
     acp = "! acp() { git add -A && git commit -m \"$1\" && git push; }; acp"
+[color]
+    ui = auto
