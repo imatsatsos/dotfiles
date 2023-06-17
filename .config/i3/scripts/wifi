@@ -29,6 +29,8 @@ if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
     echo $COLOR_DOWN
     if [[ "$BLOCK_BUTTON" -eq 2 ]]; then
 		nmcli device up	"$INTERFACE"
+    elif [[ "$BLOCK_BUTTON" -eq 3 ]]; then
+        $TERM -T nmtui -e nmtui
 	fi
     exit
 fi

@@ -4,5 +4,8 @@
 brightness=$(cat "/sys/class/backlight/intel_backlight/brightness")
 max_brightness=$(cat "/sys/class/backlight/intel_backlight/max_brightness")
 
+# if max_brightness is empty then script does not output anything
+[ -z $max_brightness ] && exit
+
 percent=$(( brightness * 100 / max_brightness ))
-echo "󰃠 $percent%"
+echo "$percent%"

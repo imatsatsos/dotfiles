@@ -49,7 +49,7 @@ checkEnv() {
     for sug in ${SUPERUSERGROUP}; do
         if groups | grep ${sug} >/dev/null; then
             SUGROUP=${sug}
-            echo -e "Super user group ${SUGROUP}"
+            echo -e "Super user group: ${SUGROUP}"
         fi
     done
 

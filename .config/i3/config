@@ -5,8 +5,8 @@
 # Select i3 and bar font
 #Liga SFMono Nerd Font Bold 11
 #Source Code Pro Bold 11
-set $font FiraCode Nerd Font 12
-set $font_bar $font
+set $font FiraCode Nerd Font 10
+set $font_bar FiraCode Nerd Font 12
 
 # Select border style (normal | pixel | none)
 set $border_style pixel 3
@@ -292,7 +292,7 @@ for_window [class="steam"]              floating enable
 for_window [class="Project Zomboid"]    floating enable
 for_window [class="Lutris"]             floating enable
 for_window [class="Lxappearance"]       floating enable
-for_window [class="MATLAB"]             floating enable
+for_window [class="MATLAB"]             floating enable, border normal
 for_window [class="kooha"]              floating enable
 
 ### Scratchpads

@@ -1,0 +1,23 @@
+#!/bin/sh
+# script to show current power profile
+
+current_profile=$(cat /sys/devices/system/cpu/cpufreq/policy0/energy_performance_preference)
+
+case $current_profile in
+	power)
+	    echo ""
+	    echo ""
+	    echo "#78DCA7"
+	;;
+	balance_power)
+	#   󰗑
+	    echo "󰚀 "
+	    echo "󰚀 "
+	    #echo "#759EEA"
+	;;
+	performance)
+	    echo ""
+	    echo ""
+	    echo "#D95177"
+	;;
+esac

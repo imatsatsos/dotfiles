@@ -16,8 +16,8 @@ case $current_profile in
 	;;
 	balanced)
 	#   󰗑
-	    echo "󰚀"
-	    echo "󰚀"
+	    echo "󰚀 "
+	    echo "󰚀 "
 	    #echo "#759EEA"
 	;;
 	performance)

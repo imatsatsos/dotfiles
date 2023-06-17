@@ -56,12 +56,36 @@ do_copy_themes () {
 
 echo "Copying dots to folder: $GITREPO"
 sleep 1
-do_copy_home ".bashrc .bash_profile .gtkrc-2.0 .Xresources .inputrc .xinitrc"
 do_copy_localbin
 do_copy_icons "BreezeX-Black default"
 #do_copy_themes
 do_copy_fonts
-do_copy_dotconfig "background lockscreen.png starship.toml window_titles.yml alacritty/ btop/ dunst/ fastfetch/ git/ gtk-3.0/ htop/ i3/ MangoHud/ neofetch/ nvim/ mpv/ rofi/"
+
+do_copy_home ".bashrc \
+    .bash_profile \
+    .gtkrc-2.0 \
+    .Xresources \
+    .inputrc \
+    .xinitrc"
+
+do_copy_dotconfig "background \
+    lockscreen.png \
+    picom.conf \
+    starship.toml \
+    window_titles.yml \
+    alacritty/ \
+    btop/ \
+    dunst/ \
+    fastfetch/ \
+    git/ \
+    gtk-3.0/ \
+    htop/ \
+    i3/ \
+    MangoHud/ \
+    neofetch/ \
+    nvim/ \
+    mpv/ \
+    rofi/"
 
 echo "Do you want to update git repo? [y/N]"
 read -r dm

@@ -39,6 +39,7 @@ export HISTFILE="${XDG_STATE_HOME}"/bash_history
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export EDITOR=nvim
 export TERM=alacritty
+export BAT_THEME="Dracula"
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
@@ -173,8 +174,6 @@ fi
 if type "bat" >/dev/null 2>&1; then
 	alias cat="bat"
 fi
-# bat theme
-export BAT_THEME="Dracula"
 
 # Aliases for package managers
 if type "xbps-install" >/dev/null 2>&1; then
@@ -182,7 +181,8 @@ if type "xbps-install" >/dev/null 2>&1; then
 			xinstall='sudo xbps-install -S' \
 			xremove='sudo xbps-remove -R' \
 			xupdate='sudo xbps-install -Su' \
-			xquery='xbps-query -Rs' \
+			xquery='sudo xbps-query' \
+            xsearch='xbps-query -Rs' \
 			xorphan='sudo xbps-remove -ov' \
 			xclean='sudo xbps-remove -Ov'
 fi
@@ -193,15 +193,16 @@ if type "flatpak" >/dev/null 2>&1; then
 			finstall='flatpak install' \
 			fremove='flatpak uninstall --delete-data' \
 			fupdate='flatpak update' \
-			fquery='flatpak search' \
+			fsearch='flatpak search' \
 			forphan='flatpak uninstall --unused --delete-data'
 fi
 
 # Directory aliases
 alias \
-		home='~' \
-		dl='$HOME/Downloads' \
-		doc='$HOME/Documents'
+		home='cd $HOME && ll' \
+		dl='cd $HOME/Downloads && ll' \
+		doc='cd $HOME/Documents && ll' \
+        gr='cd $HOME/Gitrepos/ && ll'
 
 # Prompt
 [ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
