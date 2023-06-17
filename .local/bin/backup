@@ -8,6 +8,7 @@ tar -cpzf backup.tar.gz \
 --exclude=.gvfs \
 --exclude=Applications \
 --exclude=Downloads \
+--exclude=Gitrepos \
 --exclude="MATLAB Add-Ons" \
 --exclude=.cache \
 --exclude=.dbus \

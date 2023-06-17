@@ -2,4 +2,6 @@
 	email = ipmatsatsos@gmail.com
 	name = imatsatsos
 [init]
-	defaultBranch = main
+    defaultBranch = main
+[alias]
+    acp = "! acp() { git add -A && git commit -m \"$1\" && git push; }; acp"
