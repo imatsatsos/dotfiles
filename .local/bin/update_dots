@@ -85,7 +85,8 @@ do_copy_dotconfig "background \
     nvim/ \
     mpv/ \
     picom/ \
-    rofi/"
+    rofi/ \
+    sway/"
 
 echo "Do you want to update git repo? [y/N]"
 read -r dm

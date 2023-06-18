@@ -181,7 +181,7 @@ if type "xbps-install" >/dev/null 2>&1; then
 			xinstall='sudo xbps-install -S' \
 			xremove='sudo xbps-remove -R' \
 			xupdate='sudo xbps-install -Su' \
-			xquery='sudo xbps-query' \
+			xquery='xbps-query' \
             xsearch='xbps-query -Rs' \
 			xorphan='sudo xbps-remove -ov' \
 			xclean='sudo xbps-remove -Ov'

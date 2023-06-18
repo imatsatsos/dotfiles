@@ -11,8 +11,11 @@
 
 ## startx
 # If DISPLAY=0 and TTY=1 then startx
-# When startx exits then logout
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    startx
+    # uncomment only one
+    #exec dbus-launch --sh-syntax --exit-with-session sway
+    #startx
+    
+    # When startx exits then logout
     logout
 fi

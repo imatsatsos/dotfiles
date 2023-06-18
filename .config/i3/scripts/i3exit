@@ -1,10 +1,14 @@
 #!/bin/sh
-# a system power menu
-# REQUIRES: i3lock
+# a system power menu for both X11 and Wayland
+# REQUIRES: i3lock, swaylock
 
 # set screen-locker command
 lock() {
-    i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png
+    if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+        swaylock -f -c 121314 -i ~/.config/lockscreen.png -s fit
+    else
+        i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png
+    fi
 }
 
 # systemd distros use systemctl, else use loginctl

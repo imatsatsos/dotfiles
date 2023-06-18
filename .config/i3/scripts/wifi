@@ -51,21 +51,6 @@ else
     COLOR=$COLOR_LOWR
 fi
 
-# toggle output
-state_file=~/.config/i3/scripts/state
-toggle_output(){
-	# Read current state
-	state=$(cat "$state_file")
-	# Toggle the state
-	if [[ "$state" == "1" ]]; then
-		state="0"
-	else
-		state="1"
-	fi
-	# Write new state
-	echo "$state" > "$state_file"
-	}
-
 action_middle_click() {
 	if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
 		nmcli device up	"$INTERFACE"
@@ -75,17 +60,11 @@ action_middle_click() {
 	}
 
 case "$BLOCK_BUTTON" in
-    1) toggle_output ;;
+    1) echo "$QUALITY% $SSID" ;;
     2) action_middle_click ;;
     3) $TERM -T nmtui -e nmtui ;;
 esac
 
-state=$(cat "$state_file")
-if [[ "$state" == "1" ]]; then
-	echo "$QUALITY% $SSID"
-else
-	#echo "$QUALITY% $SHORT_SSID"
-	echo "$QUALITY%"
-fi
-echo "$QUALITY% $SHORT_SSID"
+echo "$QUALITY%"
+#echo "$QUALITY% $SHORT_SSID"
 echo $COLOR

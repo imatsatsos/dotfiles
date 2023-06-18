@@ -1,6 +1,9 @@
 #!/bin/sh
 # script changes volume, mute state of default sink
 # REQUIRES: pulseaudio-utils(pipewire installs these)
+#
+# alternative for wireplumber:
+# wpctl set-volume @DEFAULT_AUDIO_SINK@ +5% -l 1.2
 
 case "$1" in
     "up") pactl set-sink-volume @DEFAULT_SINK@ +4% ;;

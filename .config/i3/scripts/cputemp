@@ -2,6 +2,8 @@
 # script outputs current package0 temp in C
 
 file="/sys/class/hwmon/hwmon4/temp1_input"
+# if file doesn't exit, then exit
+[ -f "$file" ] || exit
 
 temp=$(cat "$file")
 temp="${temp%???}"

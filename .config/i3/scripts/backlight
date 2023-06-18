@@ -1,11 +1,14 @@
 #!/bin/sh
 # script outputs current screen brightness %
 
-brightness=$(cat "/sys/class/backlight/intel_backlight/brightness")
-max_brightness=$(cat "/sys/class/backlight/intel_backlight/max_brightness")
+folder="/sys/class/backlight/intel_backlight"
+# if there isn't intel_backlight then exit
+[ -d "$folder" ] || exit
 
+max_brightness=$(cat "$folder/max_brightness")
 # if max_brightness is empty then script does not output anything
 [ -z $max_brightness ] && exit
 
+brightness=$(cat "$folder/brightness")
 percent=$(( brightness * 100 / max_brightness ))
 echo "$percent%"
