@@ -14,7 +14,7 @@
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     # uncomment only one
     #exec dbus-launch --sh-syntax --exit-with-session sway
-    #startx
+    startx
     
     # When startx exits then logout
     logout

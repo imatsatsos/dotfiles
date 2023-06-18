@@ -90,6 +90,7 @@ installCursor() {
     mkdir -p $HOME/.local/share/icons/
     # install the icons in .local and symlink to ~/.icons, or xcursor wont work
     cp -rf $GITPATH/.local/share/icons/ $HOME/.local/share/
+    [ -d $HOME/.icons ] && mv $HOME/.icons $HOME/.iconsbak
     ln -s $HOME/.local/share/icons/ $HOME/.icons
     echo -e "${GREEN}DONE\n${RC}"
 }
