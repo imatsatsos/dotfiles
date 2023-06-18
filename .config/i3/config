@@ -1,34 +1,35 @@
 ########################
-## i3 config file (v4) #
+## i3 config (v4.22)  ##
 ########################
 
-#Liga SFMono Nerd Font Bold 11
-#Source Code Pro Bold 11
-#JetBrainsMono Nerd Font 11
-#ShureTechMono Nerd Font
+## Select Fonts
 set $font ShureTechMono Nerd Font 10
 set $font_bar ShureTechMono Nerd Font 11
 
-# Select border style (normal | pixel | none)
+## Select Border style (normal | pixel <px> | none)
 set $border_style pixel 3
 set $border_style_float normal
 
-# Select gaps size
+## Select Gaps size
 set $gaps_in_size 6
 set $gaps_out_size -2
 
-# Select terminal and file manager
-#set $term xst -g=89x32
+## Select Terminal
 set $term alacritty
-#set $files nautilus --new-window
+
+## Select File Manager
 set $files pcmanfm
 
-# Select launcher and window_tabber
-set $launcher rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi
-set $window_tabber rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi
-#set $power_menu exec /home/$USER/.local/bin/rofi-powermenu
+## Select Launcher
+set $launcher "rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi"
 
-# Select default workspace layout (default|stacking|tabbed)
+## Select Alt tabber
+set $window_tabber "rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi"
+
+## Select Power menu
+#set $power_menu "/home/$USER/.local/bin/rofi-powermenu"
+
+## Select default workspace layout (default|stacking|tabbed)
 workspace_layout default
 workspace_auto_back_and_forth yes
 
@@ -64,7 +65,6 @@ bindsym XF86AudioPause exec --no-startup-id playerctl pause
 bindsym XF86AudioNext  exec --no-startup-id playerctl next
 bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 
-
 ###################
 # BRIGHTNESS KEYS #
 ###################
@@ -82,39 +82,34 @@ floating_modifier $mod
 bindsym --release button2 kill
 bindsym --whole-window $mod+button2 kill
 
+# Launch apps
+bindsym $mod+Return  exec --no-startup-id $term
+bindsym $mod+e       exec --no-startup-id $files
+bindsym $mod+d       exec --no-startup-id $launcher
+bindsym $mod+Tab     exec --no-startup-id $window_tabber
+# 49 = tilde key
+bindcode $mod+49     exec --no-startup-id ~/.local/bin/i3-rofi-scratchpads
+bindsym $mod+x       exec --no-startup-id ~/.local/bin/rofi-asroot
+bindsym $mod+Shift+g exec --no-startup-id ~/.local/bin/picom-toggle
+set_from_resource $selbg st.color5
+set_from_resource $bg st.background
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$selbg"
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# Lock
+bindsym $mod+Ctrl+l exec --no-startup-id "~/.config/i3/scripts/i3exit lock"
+# Exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+########################
+# WINDOWS & CONTAINERS #
+########################
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
-
-### Launch apps
-#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
-bindsym $mod+Return exec --no-startup-id $term
-bindsym $mod+e exec --no-startup-id $files
-bindsym $mod+d exec --no-startup-id $launcher
-
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-set_from_resource $selbg st.color5
-set_from_resource $bg st.background
-bindsym $mod+shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$selbg"
-bindsym $mod+Shift+g exec --no-startup-id ~/.local/bin/picom-toggle
-bindsym $mod+Tab     exec --no-startup-id $window_tabber
-bindsym $mod+x       exec --no-startup-id ~/.local/bin/rofi-asroot
-bindcode $mod+49     exec --no-startup-id ~/.local/bin/i3-rofi-scratchpads
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# lock
-bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/scripts/i3exit lock
-
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-
-### WINDOWS & CONTAINERS
 
 # kill focused window
 bindsym $mod+q kill
@@ -144,8 +139,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 500 'tile horizontally'
-bindsym $mod+v split v;exec notify-send -t 500 'tile vertically'
+bindsym $mod+z split h;exec notify-send -t 500 'Tile horizontally'
+bindsym $mod+v split v;exec notify-send -t 500 'Tile vertically'
 bindsym $mod+n split toggle
 
 # enter fullscreen mode for the focused container
@@ -160,10 +155,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+space floating toggle
+bindsym $mod+space floating toggle; [tiling] border $border_style; [floating] border $border_style_float
 
 # change focus between tiling / floating windows
-bindsym $mod+Shift+space focus mode_toggle
+bindsym $mod+Alt+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -171,22 +166,54 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+#########
+# MODES #
+#########
+# resize window (you can also use the mouse for that)
+set $modeResize "Resize: ( < > h l | ⌄ ^ j k )  ESC/Enter to exit"
+mode $modeResize {
+        bindsym h resize shrink width 3 px or 3 ppt
+        bindsym j resize grow height 3 px or 3 ppt
+        bindsym k resize shrink height 3 px or 3 ppt
+        bindsym l resize grow width 3 px or 3 ppt
+
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode $moderesize
+
+# control system session
+set $modesession "System: (l)ock, (s)uspend, (r)eboot, (p)oweroff"
+set $i3exit ~/.config/i3/scripts/i3exit
+mode $modesession {
+        bindsym l exec --no-startup-id $i3exit lock, mode "default"
+        bindsym s exec --no-startup-id $i3exit suspend, mode "default"
+        bindsym r exec --no-startup-id $i3exit reboot, mode "default"
+        bindsym p exec --no-startup-id $i3exit poweroff, mode "default"
+
+        bindsym return mode "default"
+        bindsym escape mode "default"
+}
+bindsym $mod+Shift+q mode $modesession
 
 ##############
 # WORKSPACES #
 ##############
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 1: 
-set $ws2 2:󰀻 
-set $ws3 3: 
-set $ws4 4: 
-set $ws5 5: 
-set $ws6 6: 
+set $ws1 1: WWW
+set $ws2 2:󰀻 GEN
+set $ws3 3: TERM
+set $ws4 4: READ
+set $ws5 5: GAME
+set $ws6 6: CHAT
 set $ws7 7:SEV
-set $ws8 8: 
-set $ws9 9: 
-set $ws10 10: 
+set $ws8 8: TORR
+set $ws9 9: MPV
+set $ws10 10: VM
 
 focus_wrapping no
 force_display_urgency_hint 1000 ms
@@ -223,45 +250,6 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-
-#########
-# MODES #
-#########
-# resize window (you can also use the mouse for that)
-set $modeResize "Resize: ( < > h l | ⌄ ^ j k )  ESC/Enter to exit"
-mode $modeResize {
-        bindsym h resize shrink width 3 px or 3 ppt
-        bindsym j resize grow height 3 px or 3 ppt
-        bindsym k resize shrink height 3 px or 3 ppt
-        bindsym l resize grow width 3 px or 3 ppt
-
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode $modeResize
-
-# control system session
-set $modeSession "System: (l)ock, (s)uspend, (r)eboot, (p)oweroff"
-set $i3exit ~/.config/i3/scripts/i3exit
-mode $modeSession {
-        bindsym l exec --no-startup-id $i3exit lock, mode "default"
-        bindsym s exec --no-startup-id $i3exit suspend, mode "default"
-        bindsym r exec --no-startup-id $i3exit reboot, mode "default"
-        bindsym p exec --no-startup-id $i3exit poweroff, mode "default"
-        
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+Shift+q mode $modeSession
-
-
 #########
 # RULES #
 #########
@@ -292,8 +280,12 @@ for_window [class="Lxappearance"]       floating enable
 for_window [class="MATLAB"]             floating enable, border normal
 for_window [class="kooha"]              floating enable
 
-### Scratchpads
+###############
+# Scratchpads #
+###############
+# Create or show specific scratchpads
 bindsym $mod+Shift+Return exec ~/.config/i3/scripts/i3-scratchpad-show-create 'scratch-term' $term
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/i3-scratchpad-show-create 'scratch-fm' $files
 
 # move the currently focused window to the scratchpad
 bindsym $mod+minus move scratchpad
@@ -305,10 +297,11 @@ bindsym $mod+Shift+minus [floating] move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+equal scratchpad show
 
-
 ##########
 # COLORS #
 ##########
+set_from_resource $bg      st.background
+set_from_resource $txt     st.foreground
 set_from_resource $black   st.color0
 set_from_resource $red     st.color1
 set_from_resource $green   st.color2
@@ -325,8 +318,6 @@ set_from_resource $blue2   st.color12
 set_from_resource $purple2 st.color13
 set_from_resource $cyan2   st.color14
 set_from_resource $white2  st.color15
-set_from_resource $bg      st.background
-set_from_resource $txt     st.foreground
 
 client.background       $bg
 # class                 border   bground  text    indicator child_border
@@ -336,7 +327,6 @@ client.unfocused        $bg      $bg      $txt    $black    $bg
 client.urgent           $red     $bg      $txt    $red      $red
 client.placeholder      $bg      $bg      $txt    $bg       $bg
 
-
 #######
 # BAR #
 #######
@@ -344,7 +334,7 @@ bar {
         #status_command i3status -c /home/$USER/.config/i3/i3status.conf
         status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
         font pango: $font_bar
-        position top
+        position bottom
         tray_padding 3
         strip_workspace_numbers no
         colors {
@@ -359,14 +349,12 @@ bar {
         }
 }
 
-
 ###########
 # BORDERS #
 ###########
-# normal, pixel <size>, none
 default_border $border_style
-for_window [tiling] $border_syle
 default_floating_border $border_style_float
+for_window [tiling] $border_syle
 for_window [floating] $border_style_float
 hide_edge_borders smart_no_gaps
 
@@ -381,13 +369,15 @@ smart_gaps on
 # AUTOSTART #
 #############
 exec --no-startup-id "xrdb -load ~/.Xresources"
+# important, don't remove
 exec --no-startup-id "dbus-update-activation-environment DISPLAY XAUTHORITY"
 exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
 exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11"
-exec --no-startup-id /usr/bin/pipewire
-exec --no-startup-id /usr/bin/pipewire-pulse
-exec --no-startup-id "/usr/bin/xwallpaper --maximize /home/$USER/.config/background"
+exec_always --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:swapescape"
+exec /usr/bin/pipewire
+exec /usr/bin/pipewire-pulse
+exec --no-startup-id "xwallpaper --maximize /home/$USER/.config/background"
 exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 exec --no-startup-id /home/$USER/.local/bin/low_battery
-exec_always --no-startup-id "/usr/bin/setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:swapescape"
 exec --no-startup-id picom -b
+

@@ -21,7 +21,7 @@ checkEnv() {
         exit 1
     fi
 
-    ## Check Package Handeler
+    ## Check Package Handler
     PACKAGEMANAGER='apt dnf pacman xbps-install'
     for pgm in ${PACKAGEMANAGER}; do
         if command_exists ${pgm}; then
@@ -34,7 +34,6 @@ checkEnv() {
         echo -e "${RED}Can't find a supported package manager${RC}"
         exit 1
     fi
-
 
     ## Check if the current directory is writable.
     #GITPATH="$(dirname "$(realpath "$0")")"
@@ -49,7 +48,7 @@ checkEnv() {
     for sug in ${SUPERUSERGROUP}; do
         if groups | grep ${sug} >/dev/null; then
             SUGROUP=${sug}
-            echo -e "Super user group: ${SUGROUP}"
+            echo -e "Super-user group: ${SUGROUP}"
         fi
     done
 
@@ -58,7 +57,13 @@ checkEnv() {
         echo -e "${RED}You need to be a member of the sudo group to run me!${RC}"
         exit 1
     fi
-    
+
+    ## Notify user of what is to come.
+    echo -e "${RED}This script doesn't backup files. This script will install \
+        config files in your ~ and .config folder. Backup configs you don't want \
+        to lose. Do you wish to continue?  [y/N]${RC}"
+    read -r ans
+    [ "$ans" = "y" ] || [ "$ans" = "Y" ] || exit
 }
 
 installDepend() {
@@ -67,13 +72,13 @@ installDepend() {
     echo -e "${YELLOW}Installing dependencies..${RC}"
     if [[ $PACKAGER == "pacman" ]]; then
         if ! command_exists paru; then
-            echo "Installing paru..\n"
+            echo -e "${YELLOW}Installing paru..\n${RC}"
             sudo $PACKAGER --noconfirm -S --needed base-devel
             git clone https://aur.archlinux.org/paru.git && \
-            sudo chown -R ${USER}:${USER} .paru && \
+            sudo chown -R ${USER}:${USER} paru && \
             cd paru && makepkg --noconfirm -si
         else
-            echo "Command paru already installed\n"
+            echo "${YELLOW}Command paru already installed\n${RC}"
         fi
     	paru --noconfirm -S --needed ${DEPENDENCIES}
     elif [[ $PACKAGER == "xbps-install" ]]; then

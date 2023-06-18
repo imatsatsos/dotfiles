@@ -1,0 +1,47 @@
+#!/bin/sh
+# power profile selector with rofi
+# REQUIRES: power-profiles-daemon, and it's service running
+
+# rofi theme
+theme="$HOME/.config/rofi/main_noicons.rasi"
+
+get_options() {
+  echo "Balanced"
+  echo "Performance"
+  echo "Battery"
+}
+
+pre_selection() {
+    curr_profile=$( powerprofilesctl get )
+}
+
+main() {
+  # get current profile to pre-select in rofi
+  pre_selection
+  
+  # get choice from rofi
+  choice=$( (get_options) | rofi -dmenu -i -fuzzy -select "$curr_profile" -p "Power profile:" -theme "$theme")
+
+  # run the selected command
+  case $choice in
+  'Balanced')
+      powerprofilesctl set balanced
+      notify-send "Profile changed to:" "󰚀 $choice"
+      ;;
+  'Performance')
+      powerprofilesctl set performance
+      notify-send "Profile changed to:" " $choice"
+    ;;
+  'Battery')
+      powerprofilesctl set power-saver
+      notify-send "Profile changed to:" " $choice"
+    ;;
+  esac
+
+  # done
+  set -e
+}
+
+main &
+
+exit 0

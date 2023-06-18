@@ -1,37 +1,38 @@
 ########################
 ##  Sway config file ##
 ########################
- 
-#Liga SFMono Nerd Font Bold 11
-#Source Code Pro Bold 11
-#JetBrainsMono Nerd Font 11
-#ShureTechMono Nerd Font
+
+## Select Fonts
 set $font ShureTechMono Nerd Font 10
 set $font_bar ShureTechMono Nerd Font 11
- 
-# Select border style (normal | pixel | none)
+
+## Select Border style (normal | pixel <px> | none)
 set $border_style pixel 3
 set $border_style_float normal
- 
-# Select gaps size
+
+## Select Gaps size
 set $gaps_in_size 6
 set $gaps_out_size -2
- 
-# Select terminal and file manager
-#set $term xst -g=89x32
+
+## Select Terminal
 set $term alacritty
-#set $files nautilus --new-window
+
+## Select File Manager
 set $files pcmanfm
- 
-# Select launcher and window_tabber
-set $launcher rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi
-set $window_tabber rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi
-#set $power_menu exec /home/$USER/.local/bin/rofi-powermenu
- 
-# Select default workspace layout (default|stacking|tabbed)
+
+## Select Launcher
+set $launcher "rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi"
+
+## Select Alt tabber
+set $window_tabber "rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi"
+
+## Select Power menu
+#set $power_menu "/home/$USER/.local/bin/rofi-powermenu"
+
+## Select default workspace layout (default|stacking|tabbed)
 workspace_layout default
 workspace_auto_back_and_forth yes
- 
+
 ### Output config
 output * bg ~/.config/background fill
 output Virtual-1 resolution 1600x900 position 0 0
@@ -66,18 +67,18 @@ font pango: $font
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 #exec --no-startup-id dex --autostart --environment i3
- 
+
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
- 
+
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
- 
+
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 #exec --no-startup-id nm-applet
- 
+
 ##############
 # AUDIO KEYS #
 ##############
@@ -92,139 +93,163 @@ bindsym XF86AudioPlay  exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext  exec playerctl next
 bindsym XF86AudioPrev  exec playerctl previous
- 
- 
+
 ###################
 # BRIGHTNESS KEYS #
 ###################
 bindsym XF86MonBrightnessUp exec   ~/.local/bin/dunst-brightness
 bindsym XF86MonBrightnessDown exec ~/.local/bin/dunst-brightness
- 
+
 ############
 # KEYBINDS #
 ############
 # Global Modifier Key
 set $mod Mod4
- 
+
 # Mouse keybinds
-floating_modifier $mod
+floating_modifier $mod normal
 bindsym --release button2 kill
 bindsym --whole-window $mod+button2 kill
- 
-# move tiling windows via drag & drop by left-clicking into the title bar,
-# or left-clicking anywhere into the window while holding the floating modifier.
-floating_modifier $mod normal
- 
-### Launch apps
-#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+
+# Launch apps
 bindsym $mod+Return exec $term
-bindsym $mod+e exec $files
-bindsym $mod+d exec $launcher
- 
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindsym $mod+e      exec $files
+bindsym $mod+d      exec $launcher
+bindsym $mod+Tab    exec $window_tabber
+# 49 = tilde key
+bindcode $mod+49    exec ~/.local/bin/i3-rofi-scratchpads
+bindsym $mod+x      exec ~/.local/bin/rofi-asroot
+bindsym $mod+Shift+g exec ~/.local/bin/picom-toggle
 set_from_resource $selbg st.color5
 set_from_resource $bg st.background
-bindsym $mod+shift+d exec dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$selbg"
-bindsym $mod+Shift+g exec ~/.local/bin/picom-toggle
-bindsym $mod+Tab     exec $window_tabber
-bindsym $mod+x       exec ~/.local/bin/rofi-asroot
-# 49 = tilde key
-bindcode $mod+49     exec ~/.local/bin/i3-rofi-scratchpads
- 
+bindsym $mod+Shift+d exec dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$selbg"
+
 # Reload the configuration file
 bindsym $mod+Shift+c reload
- 
 # Lock
-bindsym $mod+Ctrl+l exec ~/.config/i3/scripts/i3exit lock
- 
+bindsym $mod+Ctrl+l exec "~/.config/i3/scripts/i3exit lock"
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec "swaynag -t warning -m 'Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'"
- 
- 
-### WINDOWS & CONTAINERS
+#bindsym $mod+Shift+e exec "swaynag -t warning -m 'Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'"
+
+########################
+# WINDOWS & CONTAINERS #
+########################
 
 # kill focused window
 bindsym $mod+q kill
- 
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
- 
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
- 
+
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
- 
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
- 
+
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 500 'tile horizontally'
-bindsym $mod+v split v;exec notify-send -t 500 'tile vertically'
+bindsym $mod+z split h;exec notify-send -t 500 'Tile horizontally'
+bindsym $mod+v split v;exec notify-send -t 500 'Tile vertically'
 bindsym $mod+n split toggle
- 
+
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
- 
+
 # toggle sticky for current container
 bindsym $mod+Shift+s sticky toggle
- 
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+t layout toggle split
- 
+
 # toggle tiling / floating
 bindsym $mod+space floating toggle
- 
+
 # change focus between tiling / floating windows
-bindsym $mod+Shift+space focus mode_toggle
- 
+bindsym $mod+Alt+space focus mode_toggle
+
 # focus the parent container
 bindsym $mod+a focus parent
- 
+
 # focus the child container
 #bindsym $mod+d focus child
- 
+
+#########
+# MODES #
+#########
+# resize window (you can also use the mouse for that)
+set $modeResize "Resize: ( < > h l | ⌄ ^ j k )  ESC/Enter to exit"
+mode $modeResize {
+        bindsym h resize shrink width 3 px or 3 ppt
+        bindsym j resize grow height 3 px or 3 ppt
+        bindsym k resize shrink height 3 px or 3 ppt
+        bindsym l resize grow width 3 px or 3 ppt
+
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode $modeResize
+
+# control system session
+set $modeSession "System: (l)ock, (s)uspend, (r)eboot, (p)oweroff"
+set $i3exit ~/.config/i3/scripts/i3exit
+mode $modeSession {
+        bindsym l exec $i3exit lock, mode "default"
+        bindsym s exec $i3exit suspend, mode "default"
+        bindsym r exec $i3exit reboot, mode "default"
+        bindsym p exec $i3exit poweroff, mode "default"
+
+        bindsym return mode "default"
+        bindsym escape mode "default"
+}
+bindsym $mod+Shift+q mode $modeSession
+
 ##############
 # WORKSPACES #
 ##############
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 1: 
 set $ws2 2:󰀻 
 set $ws3 3: 
-set $ws4 4: 
-set $ws5 5: 
+set $ws4 4: 
+set $ws5 5: 
 set $ws6 6: 
 set $ws7 7:SEV
 set $ws8 8: 
 set $ws9 9: 
 set $ws10 10: 
- 
+
 focus_wrapping no
 force_display_urgency_hint 1000 ms
- 
+
 # switch to workspace next/previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
- 
+
 # move focused container to workspace next/previous
 #bindsym $mod+Shift+h move container to workspace prev
 #bindsym $mod+Shift+l move container to workspace next
- 
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -236,7 +261,7 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
- 
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -248,44 +273,7 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
- 
-#########
-# MODES #
-#########
-# resize window (you can also use the mouse for that)
-set $modeResize "Resize: ( < > h l | ⌄ ^ j k )  ESC/Enter to exit"
-mode $modeResize {
-        bindsym h resize shrink width 3 px or 3 ppt
-        bindsym j resize grow height 3 px or 3 ppt
-        bindsym k resize shrink height 3 px or 3 ppt
-        bindsym l resize grow width 3 px or 3 ppt
- 
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
- 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
- 
-bindsym $mod+r mode $modeResize
- 
-# control system session
-set $modeSession "System: (l)ock, (s)uspend, (r)eboot, (p)oweroff"
-set $i3exit ~/.config/i3/scripts/i3exit
-mode $modeSession {
-        bindsym l exec $i3exit lock, mode "default"
-        bindsym s exec $i3exit suspend, mode "default"
-        bindsym r exec $i3exit reboot, mode "default"
-        bindsym p exec $i3exit poweroff, mode "default"
- 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
- 
-bindsym $mod+Shift+q mode $modeSession
- 
+
 #########
 # RULES #
 #########
@@ -295,14 +283,14 @@ assign [class="mpv"]                $ws9
 assign [class="Signal"]             $ws6
 assign [class="virt-manager"]       $ws10
 assign [class="MATLAB"]             $ws5
- 
+
 # automatic focus for windows opening on different worskpace
 for_window [class="Brave"]          focus
 for_window [class="mpv"]            focus
 for_window [class="Signal"]         focus
 for_window [class="virt-manager"]   focus
 for_window [class="MATLAB"]         focus
- 
+
 # assign floating
 for_window [title="alsamixer"]			floating enable, resize set 800 600
 for_window [title="nmtui"]              floating enable, resize set 900 700
@@ -315,23 +303,29 @@ for_window [class="Lutris"]             floating enable
 for_window [class="Lxappearance"]       floating enable
 for_window [class="MATLAB"]             floating enable, border normal
 for_window [class="kooha"]              floating enable
- 
-### Scratchpads
+
+###############
+# Scratchpads #
+###############
+# Create or show specific scratchpads
 bindsym $mod+Shift+Return exec ~/.config/i3/scripts/i3-scratchpad-show-create 'scratch-term' $term
- 
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/i3-scratchpad-show-create 'scratch-fm' $files
+
 # move the currently focused window to the scratchpad
 bindsym $mod+minus move scratchpad
- 
+
 # move all floating windows to the scratchpad
 bindsym $mod+Shift+minus [floating] move scratchpad
- 
+
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+equal scratchpad show
- 
+
 ##########
 # COLORS #
 ##########
+set_from_resource $bg      st.background
+set_from_resource $txt     st.foreground
 set_from_resource $black   st.color0
 set_from_resource $red     st.color1
 set_from_resource $green   st.color2
@@ -348,9 +342,7 @@ set_from_resource $blue2   st.color12
 set_from_resource $purple2 st.color13
 set_from_resource $cyan2   st.color14
 set_from_resource $white2  st.color15
-set_from_resource $bg      st.background
-set_from_resource $txt     st.foreground
- 
+
 client.background       $bg
 # class                 border   bground  text    indicator child_border
 client.focused          $purple  $bg      $txt    $blue     $purple
@@ -358,8 +350,7 @@ client.focused_inactive $bg      $bg      $txt    $black    $bg
 client.unfocused        $bg      $bg      $txt    $black    $bg
 client.urgent           $red     $bg      $txt    $red      $red
 client.placeholder      $bg      $bg      $txt    $bg       $bg
- 
- 
+
 #######
 # BAR #
 #######
@@ -381,28 +372,28 @@ bar {
 		        urgent_workspace	$white    	    $red    	$txt		$yellow
         }
 }
- 
+
 ###########
 # BORDERS #
 ###########
-# normal, pixel <size>, none
 default_border $border_style
-for_window [tiling] $border_syle
 default_floating_border $border_style_float
+for_window [tiling] $border_syle
 for_window [floating] $border_style_float
 hide_edge_borders smart_no_gaps
- 
+
 ########
 # GAPS #
 ########
 gaps inner $gaps_in_size
 gaps outer $gaps_out_size
 smart_gaps on
- 
+
 #############
 # AUTOSTART #
 #############
 exec "xrdb -load ~/.Xresources"
+# important, don't remove
 exec "dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY SWAYSOCK"
 exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec "/usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11"
@@ -412,5 +403,5 @@ exec /home/$USER/.local/bin/onlogin.sh
 exec /home/$USER/.local/bin/low_battery
 #exec /usr/bin/picom -b
  
-## Important, do not remove
+# Important, do not remove
 include /etc/sway/config.d/*
