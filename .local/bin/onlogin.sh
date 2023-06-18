@@ -90,4 +90,4 @@ on_xorg(){
 on_xorg
 setxkbmap -option caps:escape
 gnome_scaling_factor
-notify-send "login script:" "run successfully"
+notify-send "Login script:" "run successfully"
