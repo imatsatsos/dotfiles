@@ -6,11 +6,20 @@
 # wpctl set-volume @DEFAULT_AUDIO_SINK@ +5% -l 1.2
 
 case "$1" in
-    "up") pactl set-sink-volume @DEFAULT_SINK@ +4% ;;
-    "down") pactl set-sink-volume @DEFAULT_SINK@ -4% ;;
-    "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
-    "micmute") pactl set-source-mute @DEFAULT_SOURCE@ toggle ;;
+    "up")
+        pactl set-sink-volume @DEFAULT_SINK@ +4%
+        paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+    ;;
+    "down")
+        pactl set-sink-volume @DEFAULT_SINK@ -4%
+        paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+    ;;
+    "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle
+        notify-send "Mute"
+    ;;
+    "micmute") pactl set-source-mute @DEFAULT_SOURCE@ toggle
+        notify-send "Mic mute"
+    ;;
     *) echo "volume_control up | down | mute" ;;
 esac
 
-paplay /usr/share/sounds/freedesktop/stereo/bell.oga

@@ -374,8 +374,8 @@ exec --no-startup-id "dbus-update-activation-environment DISPLAY XAUTHORITY"
 exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
 exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11"
 exec_always --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:swapescape"
-exec /usr/bin/pipewire
-exec /usr/bin/pipewire-pulse
+exec --no-startup-id /usr/bin/pipewire
+exec --no-startup-id /usr/bin/pipewire-pulse
 exec --no-startup-id "xwallpaper --maximize /home/$USER/.config/background"
 exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 exec --no-startup-id /home/$USER/.local/bin/low_battery

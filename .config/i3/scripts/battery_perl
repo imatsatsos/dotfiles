@@ -1,0 +1,90 @@
+#!/usr/bin/perl
+# script outputs current battery % and battery charge status
+# REQUIRES: upower
+
+use strict;
+use warnings;
+use utf8;
+
+# otherwise we get in console "Wide character in print at"
+binmode(STDOUT, ':utf8');
+
+# my $acpi;
+my $upower;
+my $percent;
+my $bat_state;
+my $status;
+my $ac_adapt;
+my $full_text;
+my $short_text;
+my $label = '';
+my $bat_number = $ENV{BLOCK_INSTANCE} || 0;
+
+open (UPOWER, "upower -i /org/freedesktop/UPower/devices/battery_BAT$bat_number | grep 'percentage' |") or die;
+$upower = <UPOWER>;
+close(UPOWER);
+
+# fail on unexpected output
+if ($upower !~ /:          (\d+)%/) {
+	die "$upower\n";
+}
+
+$percent = $1;
+$full_text = "$percent%";
+
+open (BAT_STATE, "upower -i /org/freedesktop/UPower/devices/battery_BAT$bat_number | grep 'state' |") or die;
+$bat_state = <BAT_STATE>;
+close(BAT_STATE);
+
+if ($bat_state !~ /:               (\w+)/) {
+	die "$bat_state\n";
+}
+$status = $1;
+
+$short_text = $full_text;
+
+if ($percent < 20) {
+  $label = ' ';
+} elsif ($percent < 35) {
+  $label = ' ';
+} elsif ($percent < 60) {
+  $label = ' ';
+} elsif ($percent < 90) {
+  $label = ' ';
+} else {
+  $label = ' ';
+}
+
+if ($status eq 'discharging') {
+	$label .= ' ';
+} elsif ($status eq 'charging') {
+	$label .= ' ';
+} else {
+	$label .= ' '
+}
+
+# print text
+print "${label}";
+print "$full_text\n";
+print "${label}";
+print "$short_text\n";
+
+# consider color and urgent flag only on discharge
+if ($status eq 'discharging') {
+
+	if ($percent < 20) {
+		print "#FF0000\n";
+	} elsif ($percent < 40) {
+		print "#FFAE00\n";
+	} elsif ($percent < 60) {
+		print "#FFF600\n";
+	} elsif ($percent < 85) {
+		print "#A8FF00\n";
+	}
+
+	if ($percent < 12) {
+		exit(33);
+	}
+}
+
+exit(0);

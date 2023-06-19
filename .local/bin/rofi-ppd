@@ -16,6 +16,12 @@ pre_selection() {
 }
 
 main() {
+  # Notify user if power-profiles-daemon is not installe or not configured
+    if ( ! command -v "powerprofilesctl" ); then
+        echo "Power-profiles-daemon not installed or service not running!" | rofi -dmenu -p "ERROR!"
+        exit
+    fi
+
   # get current profile to pre-select in rofi
   pre_selection
   

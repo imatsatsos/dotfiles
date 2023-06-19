@@ -7,7 +7,7 @@
 
 
 configuration {
-	font:							"Roboto mono 11";
+	font:							"Cantarell 12";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     display-drun: 					"";
@@ -38,7 +38,7 @@ prompt {
 	padding: 						0.30% 1% 0% -0.5%;
 	background-color: 				@al;
 	text-color: 					@fg;
-	font:							"Iosevka Nerd Font 12";
+	font:							"Cantarell 12";
 }
 
 entry {

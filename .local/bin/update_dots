@@ -54,6 +54,8 @@ do_copy_themes () {
     done
 }
 
+echo "Removing old dots from $GITREPO"
+rm -rf "$GITREPO/.config" "$GITREPO/.local"
 echo "Copying dots to folder: $GITREPO"
 sleep 1
 do_copy_localbin

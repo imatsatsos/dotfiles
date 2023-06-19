@@ -6,6 +6,7 @@
 # https://wiki.archlinux.org/title/CPU_frequency_scaling#power-profiles-daemon
 # used in i3-blocks: ~/.config/i3/i3blocks.conf together with: ~/.config/i3/scripts/power-profiles
 
+( command -v "powerprofilesctl" ) || exit
 current_profile=$(/usr/bin/powerprofilesctl get)
 
 case $current_profile in

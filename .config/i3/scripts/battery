@@ -1,90 +1,38 @@
-#!/usr/bin/perl
+#!/bin/sh
 # script outputs current battery % and battery charge status
 # REQUIRES: upower
 
-use strict;
-use warnings;
-use utf8;
+path_to_battery=$(upower -e | grep BAT)
 
-# otherwise we get in console "Wide character in print at"
-binmode(STDOUT, ':utf8');
+# if no battery found, exit
+[ $path_to_battery = "" ] && exit
 
-# my $acpi;
-my $upower;
-my $percent;
-my $bat_state;
-my $status;
-my $ac_adapt;
-my $full_text;
-my $short_text;
-my $label = '';
-my $bat_number = $ENV{BLOCK_INSTANCE} || 0;
+battery_level=$(upower -i "$path_to_battery"  | grep -E "percentage" | sed 's/[^0-9]//g')
+state=$(upower -i "$path_to_battery"  | grep -E "state" | sed 's/.*:[[:space:]]*//')
 
-open (UPOWER, "upower -i /org/freedesktop/UPower/devices/battery_BAT$bat_number | grep 'percentage' |") or die;
-$upower = <UPOWER>;
-close(UPOWER);
+if [ $battery_level -le 15 ]; then
+    label=" "
+    color="#ff0000"
+elif [ $battery_level -le 30 ]; then
+    label=" "
+    color="#ffae00"
+elif [ $battery_level -le 60 ]; then
+    label=" "
+    color="#fff600"
+elif [ $battery_level -le 85 ]; then
+    label=" "
+    color="#a8ff00"
+else
+    label=" "
+fi
 
-# fail on unexpected output
-if ($upower !~ /:          (\d+)%/) {
-	die "$upower\n";
-}
+if [ "$state" = "discharging" ]; then
+    label="$label"
+elif [ "$state" = "charging" ]; then
+    label="$label"
+fi
 
-$percent = $1;
-$full_text = "$percent%";
-
-open (BAT_STATE, "upower -i /org/freedesktop/UPower/devices/battery_BAT$bat_number | grep 'state' |") or die;
-$bat_state = <BAT_STATE>;
-close(BAT_STATE);
-
-if ($bat_state !~ /:               (\w+)/) {
-	die "$bat_state\n";
-}
-$status = $1;
-
-$short_text = $full_text;
-
-if ($percent < 20) {
-  $label = ' ';
-} elsif ($percent < 35) {
-  $label = ' ';
-} elsif ($percent < 60) {
-  $label = ' ';
-} elsif ($percent < 90) {
-  $label = ' ';
-} else {
-  $label = ' ';
-}
-
-if ($status eq 'discharging') {
-	$label .= ' ';
-} elsif ($status eq 'charging') {
-	$label .= ' ';
-} else {
-	$label .= ' '
-}
-
-# print text
-print "${label}";
-print "$full_text\n";
-print "${label}";
-print "$short_text\n";
-
-# consider color and urgent flag only on discharge
-if ($status eq 'discharging') {
-
-	if ($percent < 20) {
-		print "#FF0000\n";
-	} elsif ($percent < 40) {
-		print "#FFAE00\n";
-	} elsif ($percent < 60) {
-		print "#FFF600\n";
-	} elsif ($percent < 85) {
-		print "#A8FF00\n";
-	}
-
-	if ($percent < 12) {
-		exit(33);
-	}
-}
-
-exit(0);
+full_text="$battery_level%"
+echo "$label $full_text"
+echo "$label $full_text"
+echo "$color"

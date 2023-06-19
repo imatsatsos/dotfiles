@@ -3,13 +3,13 @@
 # Script checks for number of available updates, and sends a notification for how many
 #  there are and which of them. Also check for update errors and notifys appropriately
 
-/bin/xbps-install --dry-run --update --memory-sync 1>/tmp/updates 2>/tmp/error
+/bin/xbps-install --dry-run --update --memory-sync 1>/tmp/updates 2>/tmp/errors
 
 updates="$(wc -l < /tmp/updates)"
-broken="$(grep broken /tmp/error | wc -l)"
+broken="$(grep broken /tmp/errors | wc -l)"
 pkg="$(awk '{print $1" ---> "$2}' /tmp/updates)"
 pkgs="$(awk '{print $1}' /tmp/updates)"
-unresolved="$(grep broken /tmp/error | awk '{ print $1" "$5 }')"
+unresolved="$(grep broken /tmp/errors | awk '{ print $1" "$5 }')"
 xx=$(printf "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
 
 if [ "$broken" = 0 ] && [ "$updates" -ge 1 ]; then
@@ -17,11 +17,11 @@ if [ "$broken" = 0 ] && [ "$updates" -ge 1 ]; then
 	if [ "$updates" -eq 1 ]; then
 		notify-send "UPDATE AVAILABLE:" "$pkg"
 	elif [ "$updates" -gt 1 ]; then
-		notify-send "UPDATES AVAILABLE: $updates" "$xx $pkgs"
+		notify-send "UPDATES AVAILABLE: $updates" "\n $pkgs"
 	fi
 fi
 
 if [ "$broken" -ge 1 ]; then
-	notify-send -u critical "THERE ARE BROKEN PKGS:" "$xx $(cut -d " " -f 1,5 /tmp/error)"
+	notify-send -u critical "THERE ARE BROKEN PKGS:" "\n $(cut -d " " -f 1,5 /tmp/errors)"
 #	notify-send -u critical "THERE ARE BROKEN PKGS:" "$xx $unresolved"
 fi
