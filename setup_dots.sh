@@ -98,8 +98,10 @@ installCursor() {
     curl -fLO https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Black.tar.gz || return
     # extract it
     tar -xzf $GITPATH/BreezeX-Black.tar.gz
+    # clean up
+    rm -f $GITPATH/BreezeX-Black.tar.gz
     # move extracted folder ~/.local/share/icons
-    mv -f $GITPATH/BreezeX-Black $HOME/.local/share/BreezeX-Black
+    mv -f $GITPATH/BreezeX-Black "$HOME/.local/share/icons/BreezeX-Black/"
     #cp -rf $GITPATH/.local/share/icons/ $HOME/.local/share/
     # backup old ~/.icons
     [ -d $HOME/.icons ] && mv $HOME/.icons $HOME/.iconsbak
