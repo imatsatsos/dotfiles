@@ -14,6 +14,9 @@
 #export VDPAU_DRIVER=nvidia
 #fi
 
+# WILL NOT WORK HERE
+#  because there is no wayland session running yet
+#  must be moved after starting wayland compositor below
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     export XDG_SESSION_TYPE="wayland"
     export WLR_RENDERER="vulkan"

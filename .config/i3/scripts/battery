@@ -5,7 +5,7 @@
 path_to_battery=$(upower -e | grep BAT)
 
 # if no battery found, exit
-[ $path_to_battery = "" ] && exit
+[ "$path_to_battery" = "" ] && exit
 
 battery_level=$(upower -i "$path_to_battery"  | grep -E "percentage" | sed 's/[^0-9]//g')
 state=$(upower -i "$path_to_battery"  | grep -E "state" | sed 's/.*:[[:space:]]*//')

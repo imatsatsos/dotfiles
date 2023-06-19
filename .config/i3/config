@@ -193,11 +193,11 @@ set $i3exit ~/.config/i3/scripts/i3exit
 mode $modesession {
         bindsym l exec --no-startup-id $i3exit lock, mode "default"
         bindsym s exec --no-startup-id $i3exit suspend, mode "default"
-        bindsym r exec --no-startup-id $i3exit reboot, mode "default"
-        bindsym p exec --no-startup-id $i3exit poweroff, mode "default"
+        bindsym Shift+r exec --no-startup-id $i3exit reboot, mode "default"
+        bindsym Shift+p exec --no-startup-id $i3exit poweroff, mode "default"
 
-        bindsym return mode "default"
-        bindsym escape mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
 bindsym $mod+Shift+q mode $modesession
 
