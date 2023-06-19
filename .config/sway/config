@@ -1,5 +1,5 @@
 ########################
-##  Sway config file ##
+##  Sway config  ##
 ########################
 
 ## Select Fonts
@@ -228,16 +228,16 @@ bindsym $mod+Shift+q mode $modeSession
 ##############
 # WORKSPACES #
 ##############
-set $ws1 1: 
-set $ws2 2:󰀻 
-set $ws3 3: 
-set $ws4 4: 
-set $ws5 5: 
-set $ws6 6: 
+set $ws1 1: WWW
+set $ws2 2:󰀻 GEN
+set $ws3 3: TERM
+set $ws4 4: READ
+set $ws5 5: GAME
+set $ws6 6: CHAT
 set $ws7 7:SEV
-set $ws8 8: 
-set $ws9 9: 
-set $ws10 10: 
+set $ws8 8: TORR
+set $ws9 9: MPV
+set $ws10 10: VM
 
 focus_wrapping no
 force_display_urgency_hint 1000 ms

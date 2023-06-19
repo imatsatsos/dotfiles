@@ -75,7 +75,7 @@ on_xorg(){
         find_laptop_monitor_port
         find_benq_monitor_port
         disable_laptop_monitor
-        sleep 3
+        sleep 2
         set_benq_refresh
         set_touchpad_scrollspeed
         set_mouse_accel
