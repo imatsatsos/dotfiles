@@ -58,10 +58,10 @@ checkEnv() {
         exit 1
     fi
 
-    ## Notify user of what is to come.
+    ## Notify user of what it is to come.
     echo -e "${RED}This script doesn't backup files. This script will install \
-        config files in your ~ and .config folder. Backup configs you don't want \
-        to lose. Do you wish to continue?  [y/N]${RC}"
+config files in your ~ and ~/.config folder. Backup configs you don't want \
+to lose. Do you wish to continue?  [y/N]${RC}"
     read -r ans
     [ "$ans" = "y" ] || [ "$ans" = "Y" ] || exit
 }
@@ -92,10 +92,18 @@ installDepend() {
 installCursor() {
     echo -e "${YELLOW}Installing Breeze-Black cursor theme..\n${RC}"
     sleep 1
-    mkdir -p $HOME/.local/share/icons/
-    # install the icons in .local and symlink to ~/.icons, or xcursor wont work
-    cp -rf $GITPATH/.local/share/icons/ $HOME/.local/share/
+    # create icons dir
+    [ ! -d $HOME/.local/share/icons ] && mkdir -p $HOME/.local/share/icons/
+    # download cursors
+    curl -fLO https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Black.tar.gz || return
+    # extract it
+    tar -xzf $GITPATH/BreezeX-Black.tar.gz
+    # move extracted folder ~/.local/share/icons
+    mv -f $GITPATH/BreezeX-Black $HOME/.local/share/BreezeX-Black
+    #cp -rf $GITPATH/.local/share/icons/ $HOME/.local/share/
+    # backup old ~/.icons
     [ -d $HOME/.icons ] && mv $HOME/.icons $HOME/.iconsbak
+    # symlink .local/share/icons to ~/.icons, or X11 cursor won't work
     ln -s $HOME/.local/share/icons/ $HOME/.icons
     echo -e "${GREEN}DONE\n${RC}"
 }
@@ -144,7 +152,7 @@ copyConfig() {
         touch $HOME/.local/state/bash_history
     fi
     # clean up
-    rm -rf $HOME/setup_dots.sh $HOME/LICENSE $HOME/.git
+    rm -rf $HOME/setup_dots.sh $HOME/LICENSE $HOME/.git $HOME/download_fonts.sh $HOME/i3pkgs.sh
     echo -e "${GREEN}DONE\n${RC}"
 }
 
