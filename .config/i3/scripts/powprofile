@@ -12,23 +12,17 @@ case $current_profile in
 	    echo ""
 	    echo "#78DCA7"
 	;;
-	balance_power)
-	#   󰗑
-	    echo "󰚀 "
-	    echo "󰚀 "
-	    #echo "#759EEA"
-	;;
-	balance_performance)
-	#   󰗑
-	    echo "󰚀 "
-	    echo "󰚀 "
-	    #echo "#759EEA"
-	;;
 	performance)
 	    echo ""
 	    echo ""
 	    echo "#D95177"
 	;;
+    *)
+	    #   󰗑
+        echo "󰚀 "
+	    echo "󰚀 "
+	    echo "#759EEA"
+    ;;
 esac
 
 if [ "$button" = "1" ]; then

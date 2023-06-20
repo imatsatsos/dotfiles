@@ -32,8 +32,8 @@ elif [ "$state" = "charging" ]; then
     label="$label"
 # example of "pending-charge state", no colored label, battery not 100% label
 else
-    label=" "
-    color=""
+    label="<span color=\"$border\"> </span>"
+    color="#d4d7ff"
 fi
 
 full_text="$battery_level%"

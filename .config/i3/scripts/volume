@@ -56,9 +56,9 @@ done < <(echo "$OUTPUT_INFO")
 VOLUME=$(echo "$VOLUME" | grep -o "[0-9]*%" | head -1)
 
 if [[ $DEFAULT_SINK == *"head"* ]]; then
-    SINK_ICON="󰋋"
+    SINK_ICON="<span color=\"$border\">󰋋</span>"
 else
-    SINK_ICON="󰕾"
+    SINK_ICON="<span color=\"$border\">󰕾</span>"
 fi
 
 if [[ $MUTED == *"yes"* ]]; then

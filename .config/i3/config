@@ -7,7 +7,7 @@ set $font ShureTechMono Nerd Font 10
 set $font_bar ShureTechMono Nerd Font 11
 
 ## Select Border style (normal | pixel <px> | none)
-set $border_style pixel 3
+set $border_style pixel 2
 set $border_style_float normal
 
 ## Select Gaps size

@@ -5,7 +5,7 @@ output="$(i3-msg -t get_tree | jq '.nodes[] | .nodes[] | .nodes[] | select(.name
 number="$(i3-msg -r -t get_tree | jq -r 'recurse(.nodes[]) | first(select(.name=="__i3_scratch")) | .floating_nodes | length')"
 
 if [ "$number" -gt 0 ]; then
-    text=" $number"
+    text=" $number"
 else
     text=""
 fi
