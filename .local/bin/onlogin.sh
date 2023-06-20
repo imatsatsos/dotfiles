@@ -90,3 +90,4 @@ on_xorg(){
 on_xorg
 gnome_scaling_factor
 notify-send "Login script:" "run successfully"
+

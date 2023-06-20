@@ -95,10 +95,11 @@ do_copy_dotconfig "background \
 echo "Do you want to update git repo? [y/N]"
 read -r dm
 if [[ "$dm" == [Y/y] ]]; then
-
+    
+    cd $GITREPO
+    git status
     echo "Enter commit message:"
     read -r commit_msg
-    cd $GITREPO
     git add .
     git commit -m "$commit_msg"
     git push

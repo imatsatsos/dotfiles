@@ -3,27 +3,36 @@
 # REQUIRES: dunst
 
 dir_icons="/usr/local/bin/icons"
-max_bri=$(cat /sys/class/backlight/*/max_brightness)
-cur_bri=$(cat /sys/class/backlight/*/brightness)
 
-# calculating current percentage
-cur_per=$((cur_bri * 100 / max_bri))
+for folders in /sys/class/backlight/*/; do
+    backlight="$folders"
+done
+
+# if there isn't any backlight then exit
+[ -d "$backlight" ] || exit
+
+max_brightness=$(cat "$backlight/max_brightness")
+# if max_brightness is empty then script does not output anything
+[ -z $max_brightness ] && exit
+
+brightness=$(cat "$backlight/brightness")
+percent=$(( brightness * 100 / max_brightness ))
 
 # creating a string bar
 bar=""
 i=0
-while [ "$i" -lt "$cur_per" ]; do
+while [ "$i" -lt "$percent" ]; do
     bar="${bar}█"
     i=$((i + 10))
 done
+
 #notif_body="󰃠 $cur_per"
 #notif_body="${notif_body}\n${bar}"
-
 notif_body="Brightness:"
 
 dunstify -a "Screen" \
     "$notif_body" \
-    -h int:value:$cur_per \
+    -h int:value:$percent \
     -t 500 \
     -r 100 \
     -i "$dir_icons"/sun.svg

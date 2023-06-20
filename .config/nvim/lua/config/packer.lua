@@ -25,8 +25,13 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use 'EdenEast/nightfox.nvim'
-  
+  use ({
+		'EdenEast/nightfox.nvim',
+		config = function()
+					vim.cmd('colorscheme nightfox')
+		end
+	})
+	
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   
   use 'mbbill/undotree'

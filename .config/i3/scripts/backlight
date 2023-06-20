@@ -1,5 +1,6 @@
 #!/bin/sh
 # script outputs current screen brightness %
+
 for folders in /sys/class/backlight/*/; do
     backlight="$folders"
 done

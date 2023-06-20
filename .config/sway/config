@@ -1,5 +1,5 @@
 ########################
-##  Sway config  ##
+## Sway config (v1.8) ##
 ########################
 
 ## Select Fonts
@@ -59,7 +59,7 @@ input "type:keyboard" {
     repeat_rate 30
     xkb_layout us,gr
     xkb_model pc105
-    xkb_options grp:alt_shift_toggle,caps:swapescape
+    xkb_options grp:alt_shift_toggle,caps:escape
 }
  
 ##############################################################################
@@ -109,7 +109,7 @@ set $mod Mod4
 # Mouse keybinds
 floating_modifier $mod normal
 bindsym --release button2 kill
-bindsym --whole-window $mod+button2 kill
+bindsym --release button3 move scratchpad
 
 # Launch apps
 bindsym $mod+Return exec $term
@@ -212,7 +212,7 @@ mode $modeResize {
 bindsym $mod+r mode $modeResize
 
 # control system session
-set $modeSession "System: (l)ock, (s)uspend, (r)eboot, (p)oweroff"
+set $modeSession "System: (l)ock, (s)uspend, (R)eboot, (P)oweroff"
 set $i3exit ~/.config/i3/scripts/i3exit
 mode $modeSession {
         bindsym l exec $i3exit lock, mode "default"

@@ -4,7 +4,8 @@
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
 
 ## Environment variables
-# this one fixes apps that use egl from slow behaviour
+export SSH_AUTH_SOCK=run/user/$(id -u)/keyring/ssh
+# this one fixes apps that use egl from slow behaviour, seems to break mpv :(
 #if /home/$USER/.local/bin/envycontrol.py -q | grep -q integrated ; then
 #    export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
 #fi
