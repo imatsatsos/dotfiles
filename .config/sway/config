@@ -34,6 +34,7 @@ workspace_layout default
 workspace_auto_back_and_forth yes
 
 ### Output config
+## You can get the names of your outputs by running: swaymsg -t get_outputs
 output * bg ~/.config/background fill
 output Virtual-1 resolution 1600x900 position 0 0
 focus output Virtual-1
@@ -43,9 +44,9 @@ exec swayidle -w \
          timeout 300 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
-# You can get the names of your outputs by running: swaymsg -t get_outputs
  
 ### Input config         
+## You can get the names of your inputs by running: swaymsg -t get_inputs
 #   input "2:14:SynPS/2_Synaptics_TouchPad" {
 #       dwt enabled
 #       tap enabled
@@ -53,7 +54,6 @@ exec swayidle -w \
 #       middle_emulation enabled
 #       accel_profile "flat"
 #   }
-# You can get the names of your inputs by running: swaymsg -t get_inputs
 input "type:keyboard" {
     repeat_delay 350
     repeat_rate 30
