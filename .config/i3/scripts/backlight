@@ -9,10 +9,13 @@ done
 [ -d "$backlight" ] || exit
 
 max_brightness=$(cat "$backlight/max_brightness")
-# if max_brightness is empty then script does not output anything
+# if max_brightness is empty then do not output anything
 [ -z $max_brightness ] && exit
 
 brightness=$(cat "$backlight/brightness")
 percent=$(( brightness * 100 / max_brightness ))
+
+# full text
 echo "$percent"
+# short text
 echo ""

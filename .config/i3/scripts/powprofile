@@ -3,7 +3,10 @@
 # on click it calls a script to manage active power profile
 
 file="/sys/devices/system/cpu/cpufreq/policy0/energy_performance_preference"
+
+# if cpu does not support energe-performance pref, don't show anything
 [ -f "$file" ] || exit
+
 current_profile=$(cat "$file")
 
 case $current_profile in

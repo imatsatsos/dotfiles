@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# script outputs ram usage %
+# script outputs ram usage
 
 TYPE="${BLOCK_INSTANCE:-mem}"
 
@@ -37,9 +37,10 @@ END {
 		pct=used/total*100
 	}
 	# full text
-	# printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
+	#printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
+	printf("%.1fG\n", used)
 	# short text
-	printf("%.f%%\n", pct)
+	printf("%02.f%%\n", pct)
 	# color
 	if (pct > 90) {
 		print("#FF0000")

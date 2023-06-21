@@ -4,7 +4,7 @@
 # left-click: toggle SSID output
 # right-click: opens nmcli to manage connections
 # middle-click: toggles wifi state
-# REQUIRES: iw ti display info, NetworkManager for connection handling
+# REQUIRES: iw to display info, NetworkManager for connection handling
 
 TERM=i3-sensible-terminal
 
@@ -70,6 +70,9 @@ case "$BLOCK_BUTTON" in
     3) $TERM -T nmtui -e nmtui ;;
 esac
 
+# full text
 echo "$QUALITY"
+# short text
 echo "$label$QUALITY"
+# color
 echo "$COLOR"

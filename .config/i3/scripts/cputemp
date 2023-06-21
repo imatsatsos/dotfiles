@@ -1,11 +1,18 @@
 #!/bin/sh
 # script outputs current package0 temp in C
 
+# hwmon4-temp1 is cpu pkg temp
 file="/sys/class/hwmon/hwmon4/temp1_input"
+
 # if file doesn't exit, then exit
 [ -f "$file" ] || exit
 
 temp=$(cat "$file")
+
+# remove 3 trailing zeros
 temp="${temp%???}"
+
+# full text
 echo "$temp°C"
+# short text
 echo "$label$temp"

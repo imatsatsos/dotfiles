@@ -70,6 +70,8 @@ elif (( ${VOLUME%%%} > 100 )); then
     echo "$SINK_ICON ${VOLUME%%%}"
     echo "$BOOST_COLOR"
 else
+    # full text
     echo "$SINK_ICON ${VOLUME%%%}"
+    # short text
     echo "$SINK_ICON ${VOLUME%%%}"
 fi

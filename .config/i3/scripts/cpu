@@ -41,10 +41,10 @@ close(MPSTAT);
 
 $cpu_usage eq -1 and die 'Can\'t find CPU information';
 
-# Print full_text, short_text
+# Print full_text
 printf "${label}%02.${decimals}f%%\n", $cpu_usage;
+# Print short text
 printf " %02.${decimals}f%%\n", $cpu_usage;
-#printf "${label}%02.${decimals}f%%\n", $cpu_usage;
 
 # Print color, if needed
 if ($cpu_usage >= $t_crit) {
