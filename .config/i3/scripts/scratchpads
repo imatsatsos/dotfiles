@@ -10,10 +10,10 @@ else
     text=""
 fi
 
-output="$(echo "$output" | sed -r 's/[&]+/and/g')" # Replace unprintable & character with the word 'and'
-tooltip=" Scratchpad\n\n"
-tooltip+="$(echo "$output" | sed -z 's/\n/\\n/g')"
-tooltip=${tooltip::-2}
+#output="$(echo "$output" | sed -r 's/[&]+/and/g')" # Replace unprintable & character with the word 'and'
+#tooltip=" Scratchpad\n\n"
+#tooltip+="$(echo "$output" | sed -z 's/\n/\\n/g')"
+#tooltip=${tooltip::-2}
 
 echo "$text"
 #echo "$text, $tooltip"

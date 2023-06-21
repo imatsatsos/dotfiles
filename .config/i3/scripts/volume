@@ -66,10 +66,10 @@ if [[ $MUTED == *"yes"* ]]; then
     echo "󰝟"
     echo $MUTE_COLOR
 elif (( ${VOLUME%%%} > 100 )); then
-    echo "$SINK_ICON $VOLUME"
-    echo "$VOLUME"
-    echo $BOOST_COLOR
+    echo "$SINK_ICON ${VOLUME%%%}"
+    echo "$SINK_ICON ${VOLUME%%%}"
+    echo "$BOOST_COLOR"
 else
-    echo "$SINK_ICON $VOLUME"
-    echo "$VOLUME"
+    echo "$SINK_ICON ${VOLUME%%%}"
+    echo "$SINK_ICON ${VOLUME%%%}"
 fi

@@ -36,7 +36,6 @@ else
     color="#d4d7ff"
 fi
 
-full_text="$battery_level%"
-echo "$label $full_text"
-echo "$label $full_text"
+echo "$label $battery_level"
+echo "$label $battery_level"
 echo "$color"
