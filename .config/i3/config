@@ -83,7 +83,7 @@ floating_modifier $mod
 bindsym --release button2 kill
 bindsym --release button3 move scratchpad
 # mod+middle mouse over window
-bindsym --whole-window $mod+button3 move scratchpad
+bindsym --whole-window $mod+button2 move scratchpad
 bindsym --whole-window $mod+button8 scratchpad show
 
 # Launch apps
@@ -190,6 +190,18 @@ mode $modeResize {
         bindsym Escape mode "default"
 }
 bindsym $mod+r mode $moderesize
+
+# screenshot
+set $modescreenshot "Screenshot: (f)ullscreen, (w)indow, (s)election"
+mode $modescreenshot {
+        bindsym f exec --no-startup-id scrot -d 1 ~/Pictures/, mode "default"
+        bindsym w exec --no-startup-id scrot -u ~/Pictures/, mode "default"
+        bindsym s exec --no-startup-id scrot -s -d b1 -f ~/Pictures/, mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Print mode $modescreenshot
 
 # control system session
 set $modesession "System: (l)ock, (s)uspend, (R)eboot, (P)oweroff"

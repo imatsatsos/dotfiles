@@ -20,18 +20,10 @@
 # Use the provided interface, otherwise the device used for the default route.
 IF="${IFACE:-$BLOCK_INSTANCE}"
 #IF="${IF:-$(ip route | awk '/^default/ { print $5 ; exit }')}"
-for dev in /sys/class/net/enp*/; do
+for dev in /sys/class/net/e*/; do
     name=$(basename $dev)
     IF="${IF:-$(basename "$name")}"
 done
-
-## FIX THIS to detect both enp and eth interface
-if [[ -z "$IF" ]]; then
-    for dev in /sys/class/net/eth*/; do
-        name=$(basename $dev)
-        IF="${IF:-$(basename "$name")}"
-    done
-fi
 
 # Exit if there is no default route
 [[ -z "$IF" ]] && exit
@@ -72,7 +64,12 @@ fi
 IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^ \/]+).* scope global/ && print \$1 and exit")
 
 case $BLOCK_BUTTON in
-  3) echo -n "$IPADDR" | xclip -q -se c ;;
+    1)
+        echo "${label}${IPADDR}"
+        echo "${label}${IPADDR}"
+        exit
+        ;;
+    3) echo -n "$IPADDR" | xclip -q -se c ;;
 esac
 
 if [[ "${display_wifi_name}" == "1" ]]; then
@@ -86,12 +83,9 @@ if [[ "${display_wifi_name}" == "1" ]]; then
         message="$LABEL $WIFI_NAME"
     fi
 else
-    message="$LABEL $IPADDR"
+    message="$LABEL$IPADDR"
 fi
 #------------------------------------------------------------------------
 
-if [[ "${icons}" == "1" ]]; then
-    message="$LABEL 󰌗 "
-fi
-
-echo "$message"
+echo "${label}Up"
+echo "${label}Up"

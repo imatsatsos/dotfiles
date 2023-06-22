@@ -7,7 +7,7 @@ set $font ShureTechMono Nerd Font 10
 set $font_bar ShureTechMono Nerd Font 11
 
 ## Select Border style (normal | pixel <px> | none)
-set $border_style pixel 3
+set $border_style pixel 2
 set $border_style_float normal
 
 ## Select Gaps size
@@ -108,8 +108,12 @@ set $mod Mod4
 
 # Mouse keybinds
 floating_modifier $mod normal
+# middle mouse over titlebar
 bindsym --release button2 kill
 bindsym --release button3 move scratchpad
+# mod+middle mouse over window
+bindsym --whole-window $mod+button2 move scratchpad
+bindsym --whole-window $mod+button8 scratchpad show
 
 # Launch apps
 bindsym $mod+Return exec $term
@@ -182,7 +186,7 @@ bindsym $mod+t layout toggle split
 bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Alt+space focus mode_toggle
+bindsym $mod+Shift+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -210,6 +214,18 @@ mode $modeResize {
         bindsym Escape mode "default"
 }
 bindsym $mod+r mode $modeResize
+
+# screenshot
+set $modescreenshot "Screenshot: (f)ullscreen, (w)indow, (s)election"
+mode $modescreenshot {
+        bindsym f exec --no-startup-id scrot -d 1 ~/Pictures/, mode "default"
+        bindsym w exec --no-startup-id scrot -u ~/Pictures/, mode "default"
+        bindsym s exec --no-startup-id scrot -s -d b1 -f ~/Pictures/, mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Print mode $modescreenshot
 
 # control system session
 set $modeSession "System: (l)ock, (s)uspend, (R)eboot, (P)oweroff"
