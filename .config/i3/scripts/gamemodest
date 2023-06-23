@@ -1,0 +1,18 @@
+#!/bin/sh
+# script outputs only when gamemode is enabled, like the gnome
+#  extension
+# REQUIRES: gamemode
+
+# if gamemode is not installed, exit silently
+if ! command -v gamemoded >/dev/null 2>&1; then exit; fi
+
+# if gamemode is disabled, dont output anything
+if [ "$(gamemoded -s)" = "gamemod is inactive" ]; then
+    exit
+# if gamemode is running then output status
+else
+    echo "gamemode"
+    echo "gamemode"
+    echo "#78dca7"
+fi
+

@@ -29,6 +29,7 @@ set_mouse_accel( ){
 
 	# mouse Accel Profile with id
 	xinput set-prop $id "libinput Accel Profile Enabled" 0, 1
+    xinput set-prop $id "libinput Accel Speed" 0
 }
 
 find_laptop_monitor_port() {

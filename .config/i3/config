@@ -21,7 +21,8 @@ set $term alacritty
 set $files pcmanfm
 
 ## Select Launcher
-set $launcher "rofi -show drun -no-default-config -config /home/$USER/.config/rofi/main.rasi"
+set $launcher "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
+# rofi -show drun -show-icons -no-default-config -config ~/.config/rofi/spotlight-dark.rasi
 
 ## Select Alt tabber
 set $window_tabber "rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi"
