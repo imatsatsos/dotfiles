@@ -16,3 +16,10 @@ temp="${temp%???}"
 echo "$temp°C"
 # short text
 echo "$label$temp"
+
+# color
+if [ $temp -ge 80 ]; then
+    echo "#FF0000"
+elif [ $temp -ge 70 ]; then
+    echo "#FFFC00"
+fi
