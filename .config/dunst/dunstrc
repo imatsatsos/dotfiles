@@ -24,20 +24,21 @@
     width = (200, 400)
     height = 300
     origin = top-right
-    offset = 10x30
+    offset = 20x30
     scale = 0
     notification_limit = 0
 
     transparency = 0
-    frame_width = 2
-    frame_color = "#29293f"
-    
+    frame_width = 1
+    #frame_color = "#29293f"
+    frame_color = "#759eea"
+
     ### Progress bar ###
 
     # Turn on the progess bar. It appears when a progress hint is passed with
     # for example dunstify -h int:value:12
     progress_bar = true
-    progress_bar_height = 14
+    progress_bar_height = 12
     progress_bar_frame_width = 1
     progress_bar_min_width = 150
     progress_bar_max_width = 300
@@ -54,7 +55,7 @@
     separator_height = 2
 
     # Padding between text and separator.
-    padding = 8
+    padding = 12
 
     # Horizontal padding.
     horizontal_padding = 8
@@ -129,7 +130,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n%b\n%p"
+    format = "<b>%s</b>\n%b\n%n"
 
     alignment = left
     vertical_alignment = center
@@ -194,7 +195,7 @@
     # Define the class of the windows spawned by dunst
     class = Dunst
 
-    corner_radius = 12
+    corner_radius = 10
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -240,7 +241,7 @@
     # These values can be strung together for each mouse event, and
     # will be executed in sequence.
     mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
+    mouse_middle_click = do_action, open_url, close_current
     mouse_right_click = close_all
 
 [experimental]
@@ -262,7 +263,7 @@
 
 [urgency_critical]
     background = "#d95177"
-    foreground = "#e4e7ff"
+    foreground = "#12121F"
     frame_color = "#d4d7ff"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable

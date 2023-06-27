@@ -12,7 +12,7 @@ if [ "$(gamemoded -s)" = "gamemode is inactive" ]; then
 # if gamemode is running then output status
 else
     echo "Gamemode"
-    echo "Gamemode"
+    echo "Game"
     echo "#78dca7"
 fi
 

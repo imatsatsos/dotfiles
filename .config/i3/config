@@ -361,7 +361,7 @@ bar {
 #               class      	    	border 		    bg		    txt	    	indicator
 		        focused_workspace	$purple    	    $blue		$bg     	$yellow
 		        active_workspace	$black2         $purple     $txt    	$yellow
-		        inactive_workspace	$black2      	$black  	$txt		$yellow
+		        inactive_workspace	$black      	$bg       	$txt		$yellow
 		        urgent_workspace	$white    	    $red    	$txt		$yellow
         }
 }

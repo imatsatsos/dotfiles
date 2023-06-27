@@ -33,6 +33,6 @@ notif_body="Brightness:"
 dunstify -a "Screen" \
     "$notif_body" \
     -h int:value:$percent \
-    -t 500 \
+    -t 600 \
     -r 100 \
     -i "$dir_icons"/sun.svg

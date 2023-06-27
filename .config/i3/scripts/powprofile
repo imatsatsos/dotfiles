@@ -31,3 +31,4 @@ esac
 if [ "$button" = "1" ]; then
     "$HOME"/.local/bin/rofi-ppd
 fi
+

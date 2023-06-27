@@ -55,7 +55,7 @@ done < <(echo "$OUTPUT_INFO")
 
 VOLUME=$(echo "$VOLUME" | grep -o "[0-9]*%" | head -1)
 
-if [[ $DEFAULT_SINK == *"head"* ]]; then
+if [[ $DEFAULT_SINK == *"Jack"* ]]; then
     SINK_ICON="<span color=\"$border\">󰋋</span>"
 else
     SINK_ICON="<span color=\"$border\">󰕾</span>"

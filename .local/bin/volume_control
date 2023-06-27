@@ -8,18 +8,26 @@
 case "$1" in
     "up")
         pactl set-sink-volume @DEFAULT_SINK@ +4%
-        paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+        #paplay /usr/share/sounds/freedesktop/stereo/bell.oga
     ;;
     "down")
         pactl set-sink-volume @DEFAULT_SINK@ -4%
-        paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+        #paplay /usr/share/sounds/freedesktop/stereo/bell.oga
     ;;
-    "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle
-        notify-send "Mute"
+    "mute")
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
     ;;
-    "micmute") pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    "micmute") 
+        pactl set-source-mute @DEFAULT_SOURCE@ toggle
         notify-send "Mic mute"
     ;;
-    *) echo "volume_control up | down | mute" ;;
+    *) echo "volume_control up | down | mute | micmute" ;;
 esac
 
+volume=$(wpctl get-volume @DEFAULT_SINK@)
+
+dunstify -a "Volume" \
+    "$volume" \
+    -t 600 \
+    -r 200 \
+    -i "$dir_icons"/volume.svg

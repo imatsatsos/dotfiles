@@ -8,10 +8,15 @@ case $button in
     ;;
 esac
 
-/bin/xbps-install --dry-run --update --memory-sync 1>/tmp/updates 2>/tmp/error
-date >> $HOME/updates_log
+# check if file /tmp/updates was modified less than 60 mins ago
+file_modified=$(find "/tmp/updates" -type f -mmin -60 2>/dev/null)
+# if it was NOT modified within 60 mins, then do an update check
+if [ ! -n "$file_modified" ]; then
+    /bin/xbps-install --dry-run --update --memory-sync 1>/tmp/updates 2>/tmp/errors
+    date >> $HOME/updates_log
+fi
 updates="$(wc -l < /tmp/updates)"
-broken="$(grep broken /tmp/error | wc -l)"
+broken="$(grep broken /tmp/errors | wc -l)"
 
 if [ "$broken" -ge 1 ]; then
     echo " ERR!"

@@ -89,6 +89,7 @@ do_copy_dotconfig "background \
     mpv/ \
     picom/ \
     pcmanfm/ \
+    polybar/ \
     rofi/ \
     sway/"
 

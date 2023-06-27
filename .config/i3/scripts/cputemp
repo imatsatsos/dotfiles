@@ -8,7 +8,6 @@ file="/sys/class/hwmon/hwmon4/temp1_input"
 [ -f "$file" ] || exit
 
 temp=$(cat "$file")
-
 # remove 3 trailing zeros
 temp="${temp%???}"
 

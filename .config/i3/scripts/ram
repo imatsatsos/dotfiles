@@ -40,7 +40,7 @@ END {
 	#printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
 	printf("%.1fG\n", used)
 	# short text
-	printf("%s %02.f%%\n", label, pct)
+	printf("%s%02.f%%\n", label, pct)
 	# color
 	if (pct > 90) {
 		print("#FF0000")

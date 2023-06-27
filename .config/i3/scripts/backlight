@@ -18,4 +18,4 @@ percent=$(( brightness * 100 / max_brightness ))
 # full text
 echo "$percent"
 # short text
-echo ""
+echo "$label$percent"

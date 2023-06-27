@@ -23,6 +23,7 @@ list[mangohud]="$HOME/.config/MangoHud/MangoHud.conf"
 list[dunst]="$HOME/.config/dunst/dunstrc"
 list[picom]="$HOME/.config/picom/picom.conf"
 list[sway]="$HOME/.config/sway/config"
+list[polybar]="$HOME/.config/polybar/config.ini"
 
 FMENU="fzf --border=rounded --margin=5% --color=dark --height 100% --reverse --header=$(basename "$0") --info=hidden --header-first --prompt"
 #FTERM="xst -g=89x32"
