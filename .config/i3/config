@@ -8,7 +8,7 @@ set $font_bar ShureTechMono Nerd Font 11
 
 ## Select Border style (normal | pixel <px> | none)
 set $border_style pixel 2
-set $border_style_float normal
+set $border_style_float normal 0
 
 ## Select Gaps size
 set $gaps_in_size 6
@@ -154,6 +154,9 @@ bindsym $mod+f fullscreen toggle
 # toggle sticky for current container
 bindsym $mod+Shift+s sticky toggle
 
+# fullscreen sticky video playback "hack"
+bindsym $mod+y fullscreen disable; floating enable; border none; resize set 512 288; sticky enable; move window to position 1270 100
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -276,6 +279,7 @@ assign [class="mpv"]                $ws9
 assign [class="Signal"]             $ws6
 assign [class="virt-manager"]       $ws10
 assign [class="MATLAB"]             $ws5
+assign [class="qbittorrent"]        $ws8
 
 # automatic focus for windows opening on different worskpace
 for_window [class="Brave"]          focus
@@ -283,6 +287,7 @@ for_window [class="mpv"]            focus
 for_window [class="Signal"]         focus
 for_window [class="virt-manager"]   focus
 for_window [class="MATLAB"]         focus
+for_window [class="qbittorrent"]    focus
 
 # assign floating
 for_window [title="alsamixer"]			floating enable, resize set 800 600
@@ -296,6 +301,7 @@ for_window [class="Lutris"]             floating enable
 for_window [class="Lxappearance"]       floating enable
 for_window [class="MATLAB"]             floating enable, border normal
 for_window [class="kooha"]              floating enable
+for_window [class="qbittorrent"]        floating enable
 
 ###############
 # Scratchpads #
