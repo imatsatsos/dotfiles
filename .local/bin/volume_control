@@ -26,6 +26,9 @@ esac
 
 volume=$(wpctl get-volume @DEFAULT_SINK@)
 
+#percentage=$((volume * 100))
+#vol=$(printf("%.2f%%\n" "$percentage"))
+
 dunstify -a "Volume" \
     "$volume" \
     -t 600 \

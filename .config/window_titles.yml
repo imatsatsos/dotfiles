@@ -1,7 +1,7 @@
 # the icon to fall back to, if there is no mapping
 default_icon: ﬓ
 # spaces to insert between the icon & window title
-padding: 0
+padding: 1
 # auto-capitalize window titles, when they are not manually set.
 capitalize: true
 
@@ -11,7 +11,7 @@ workspace:
   enabled: true 
   # icon and title mapping for the workspace placeholder
   icon: ﬓ
-  title: 
+  title: Desktop
 
 # mappings for each application
 mappings:

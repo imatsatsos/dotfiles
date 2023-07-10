@@ -69,9 +69,9 @@ gnome_scaling_factor() {
 
 # functions that only have a reason to run on X11 session
 on_xorg(){
-    if [[ $XDG_SESSION_TYPE != "x11" ]]; then
-        return
-    else
+    #if [[ $XDG_SESSION_TYPE != "x11" ]]; then
+    #    return
+    #else
         xrdb -merge /home/$USER/.Xresources
         find_laptop_monitor_port
         find_benq_monitor_port
@@ -80,7 +80,7 @@ on_xorg(){
         set_benq_refresh
         set_touchpad_scrollspeed
         set_mouse_accel
-    fi
+    #fi
 }
 
 #fix_intel_power_mangohud(){

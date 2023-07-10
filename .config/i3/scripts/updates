@@ -3,8 +3,13 @@
 #  there are and which of them. Also check for update errors and notifys appropriately
 
 case $button in
+    # show updates
     1) $TERM -e sh -c "less /tmp/updates"
         exit
+    ;;
+    
+    # hide
+    3) exit
     ;;
 esac
 
