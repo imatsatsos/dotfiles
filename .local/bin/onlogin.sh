@@ -9,6 +9,7 @@
 # setting gnome text scaling factor to 1 when using an external monitor
 # setting touchpad scroll speed
 # disabling accel on mouse only
+# disable bluetooth (soft-block)
 
 set_touchpad_scrollspeed( ){
 	# find touchpad device from xinput
@@ -90,5 +91,6 @@ on_xorg(){
 # main
 on_xorg
 gnome_scaling_factor
+rfkill block bluetooth
 notify-send "Login script:" "run successfully"
 
