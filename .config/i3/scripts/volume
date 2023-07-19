@@ -7,7 +7,8 @@
 # mousewheel: change volume
 # REQUIRES: pactl, alsamixer
 
-TERM=i3-sensible-terminal
+# export this as env variable in .shellrc
+#TERM=i3-sensible-terminal
 MUTE_COLOR="#a0a0a0"
 BOOST_COLOR="#d95177"
 

@@ -6,7 +6,7 @@
 # middle-click: toggles wifi state
 # REQUIRES: iw to display info, NetworkManager for connection handling
 
-TERM=i3-sensible-terminal
+#TERM=i3-sensible-terminal
 
 if [[ -z "$INTERFACE" ]] ; then
     INTERFACE="${BLOCK_INSTANCE:-wlp0s20f3}"
@@ -38,7 +38,8 @@ fi
 #SSID=$(LANG=C nmcli d | grep -Ei 'wifi.*connected' | grep -vi 'disconnected' | awk '{print $4}')
 SSID=$(iw "$INTERFACE" info | awk '/ssid / {$1=""; print $0}')
 SHORT_SSID="*${SSID: -3}"
-QUALITY=$(iw dev ${INTERFACE} link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '{print  ($1 > -50 ? 100 :($1 < -100 ? 0 : ($1+100)*2))}')
+QUALITY=$(iw ${INTERFACE} link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '{print  ($1 > -50 ? 100 :($1 < -100 ? 0 : ($1+100)*2))}')
+QUALITYdBm=$(iw ${INTERFACE} link | grep dBm | grep -Eoe '-[0-9]{2} dBm')
 
 # color
 if [[ $QUALITY -ge 75 ]]; then
@@ -51,7 +52,7 @@ else
     COLOR=$COLOR_LOWR
 fi
 
-action_middle_click() {
+toggle_wifi() {
 	if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
 		nmcli device up	"$INTERFACE"
 	else
@@ -61,12 +62,12 @@ action_middle_click() {
 
 case "$BLOCK_BUTTON" in
     1)
-        echo "$QUALITY% $SSID"
+        echo "$QUALITYdBm$SSID"
         echo "$label$SSID"
         echo "$COLOR"
         exit
         ;;
-    2) action_middle_click ;;
+    2) toggle_wifi ;;
     3) $TERM -T nmtui -e nmtui ;;
 esac
 

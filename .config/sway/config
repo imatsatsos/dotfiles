@@ -55,7 +55,7 @@ exec swayidle -w \
 #       accel_profile "flat"
 #   }
 input "type:keyboard" {
-    repeat_delay 350
+    repeat_delay 300
     repeat_rate 30
     xkb_layout us,gr
     xkb_model pc105
@@ -228,7 +228,7 @@ mode $modescreenshot {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Print mode $modescreenshot
+bindsym $mod+Print mode $modeScreenshot
 
 # control system session
 set $modeSession "System: (l)ock, (s)uspend, (R)eboot, (P)oweroff"
@@ -259,7 +259,7 @@ set $ws9 9: MPV
 set $ws10 10: VM
 
 focus_wrapping no
-force_display_urgency_hint 1000 ms
+force_display_urgency_hint 2000 ms
 
 # switch to workspace next/previous
 bindsym $mod+Ctrl+Right workspace next
@@ -313,8 +313,8 @@ for_window [class="MATLAB"]         focus
 for_window [class="qbittorrent"]    focus
 
 # assign floating
-for_window [title="alsamixer"]			floating enable, resize set 800 600
-for_window [title="nmtui"]              floating enable, resize set 900 700
+for_window [title="alsamixer"]			floating enable, border none, resize set 900 700
+for_window [title="nmtui"]              floating enable, border none, resize set 900 700
 for_window [class="Signal"]             floating enable
 for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
@@ -380,7 +380,7 @@ bar {
         #status_command i3status -c /home/$USER/.config/i3/i3status.conf
         status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
         font pango: $font_bar
-        position top
+        position bottom
         tray_padding 3
         strip_workspace_numbers no
         colors {

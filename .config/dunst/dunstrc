@@ -132,7 +132,7 @@
     # Markup is allowed
     format = "<b>%s</b>\n%b\n%n"
 
-    alignment = left
+    alignment = center
     vertical_alignment = center
 
     # Show age of message if message is older than show_age_threshold
