@@ -21,10 +21,10 @@ set $term alacritty
 set $files pcmanfm
 
 ## Select Launcher
-set $launcher "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
+set $launcher "~/.local/bin/rofi-launcher"
 
 ## Select Alt tabber
-set $window_tabber "rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi"
+set $window_tabber "rofi -show window -no-default-config -config ~/.config/rofi/alt_tab.rasi"
 
 ## Select Power menu
 #set $power_menu "/home/$USER/.local/bin/rofi-powermenu"
@@ -55,8 +55,8 @@ exec swayidle -w \
 #       accel_profile "flat"
 #   }
 input "type:keyboard" {
-    repeat_delay 300
-    repeat_rate 30
+    repeat_delay 280
+    repeat_rate 40
     xkb_layout us,gr
     xkb_model pc105
     xkb_options grp:alt_shift_toggle,caps:escape
@@ -85,10 +85,10 @@ font pango: $font
 set $refresh_i3blocks pkill -SIGRTMIN+10 i3blocks
 bindsym XF86AudioRaiseVolume exec ~/.local/bin/volume_control up && $refresh_i3blocks
 bindsym XF86AudioLowerVolume exec ~/.local/bin/volume_control down && $refresh_i3blocks
- 
+
 bindsym XF86AudioMute    exec ~/.local/bin/volume_control mute && $refresh_i3blocks
 bindsym XF86AudioMicMute exec ~/.local/bin/volume_control mic_mute && $refresh_i3blocks
- 
+
 bindsym XF86AudioPlay  exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext  exec playerctl next
@@ -97,8 +97,8 @@ bindsym XF86AudioPrev  exec playerctl previous
 ###################
 # BRIGHTNESS KEYS #
 ###################
-bindsym XF86MonBrightnessUp exec   ~/.local/bin/dunst-brightness
-bindsym XF86MonBrightnessDown exec ~/.local/bin/dunst-brightness
+bindsym XF86MonBrightnessUp exec   ~/.local/bin/dunst_backlight && pkill -SIGRTMIN+9 i3blocks
+bindsym XF86MonBrightnessDown exec ~/.local/bin/dunst_backlight && pkill -SIGRTMIN+9 i3blocks
 
 ############
 # KEYBINDS #
@@ -131,7 +131,7 @@ bindsym $mod+Shift+d exec dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$sel
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 # Lock
-bindsym $mod+Ctrl+l exec "~/.config/i3/scripts/i3exit lock"
+bindsym $mod+Ctrl+l exec "~/.local/bin/i3exit lock"
 # Exit sway (logs you out of your Wayland session)
 #bindsym $mod+Shift+e exec "swaynag -t warning -m 'Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'"
 
@@ -167,8 +167,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 500 'Tile horizontally'
-bindsym $mod+v split v;exec notify-send -t 500 'Tile vertically'
+bindsym $mod+z split h;exec notify-send -t 700 'Tile horizontally'
+bindsym $mod+v split v;exec notify-send -t 700 'Tile vertically'
 bindsym $mod+n split toggle
 
 # enter fullscreen mode for the focused container
@@ -232,9 +232,10 @@ bindsym $mod+Print mode $modeScreenshot
 
 # control system session
 set $modeSession "System: (l)ock, (s)uspend, (R)eboot, (P)oweroff"
-set $i3exit ~/.config/i3/scripts/i3exit
+set $i3exit ~/.local/bin/i3exit
 mode $modeSession {
         bindsym l exec $i3exit lock, mode "default"
+        bindsym e exec --no-startup-id $i3exit logout, mode "default"
         bindsym s exec $i3exit suspend, mode "default"
         bindsym Shift+r exec $i3exit reboot, mode "default"
         bindsym Shift+p exec $i3exit poweroff, mode "default"
@@ -377,8 +378,8 @@ client.placeholder      $bg      $bg      $txt    $bg       $bg
 # BAR #
 #######
 bar {
-        #status_command i3status -c /home/$USER/.config/i3/i3status.conf
-        status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
+        #status_command i3status -c ~/.config/i3/i3status.conf
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
         font pango: $font_bar
         position bottom
         tray_padding 3

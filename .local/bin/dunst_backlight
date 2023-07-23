@@ -2,8 +2,6 @@
 # send a notification with the current screen brightness %
 # REQUIRES: dunst
 
-dir_icons="/usr/local/bin/icons"
-
 for folders in /sys/class/backlight/*/; do
     backlight="$folders"
 done
@@ -26,13 +24,12 @@ while [ "$i" -lt "$percent" ]; do
     i=$((i + 10))
 done
 
-#notif_body="󰃠 $cur_per"
 #notif_body="${notif_body}\n${bar}"
-notif_body="Brightness:"
+notif_body="󰃠 Brightness:"
 
-dunstify -a "Screen" \
+dunstify -a "Brightness" \
     "$notif_body" \
     -h int:value:$percent \
-    -t 600 \
+    -t 1000 \
     -r 100 \
-    -i "$dir_icons"/sun.svg
+    -i weather-clear

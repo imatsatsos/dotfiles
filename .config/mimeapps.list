@@ -1,0 +1,24 @@
+[Default Applications]
+image/jpeg=org.gnome.eog.desktop
+image/png=org.gnome.eog.desktop
+x-scheme-handler/http=com.brave.Browser.desktop
+x-scheme-handler/https=com.brave.Browser.desktop
+video/mp4=mpv.desktop
+video/mkv=mpv.desktop
+TerminalEmulator=xst.desktop
+video/webm=mpv.desktop
+video/x-matroska=mpv.desktop
+application/xml=geany.desktop
+
+[Added Associations]
+image/jpeg=org.gnome.eog.desktop;
+application/x-zerosize=geany.desktop;
+image/png=org.gnome.eog.desktop;
+video/mp4=mpv.desktop;
+video/mkv=mpv.desktop;
+TerminalEmulator=xst.desktop;
+video/webm=mpv.desktop;
+video/x-matroska=mpv.desktop;
+application/xml=geany.desktop;
+text/plain=nvim.desktop;
+application/x-trash=nvim.desktop;

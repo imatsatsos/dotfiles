@@ -1,0 +1,59 @@
+#!/bin/sh
+# power menu with rofi
+
+# rofi theme
+theme="$HOME/.config/rofi/power"
+
+# commands
+uptime="`uptime -p | sed -e 's/up //g'`"
+i3exit="$HOME/.local/bin/i3exit"
+
+# display
+poweroff='󰐥'
+reboot='󰓦'
+lock=''
+suspend=''
+logout='󰍃'
+
+get_options() {
+  echo "$poweroff"
+  echo "$reboot"
+  echo "$suspend"
+  echo "$lock"
+  echo "$logout"
+}
+
+main() {
+
+  # get choice from rofi
+  choice=$( (get_options) | rofi -dmenu -p "Goodbye ${USER}" -mesg "Uptime: $uptime" -no-default-config -theme $theme)
+
+  # run the selected command
+  case $choice in
+  "$poweroff")
+    rofi-prompt --query 'Power off?' && $i3exit poweroff
+    ;;
+  "$reboot")
+    rofi-prompt --query 'Reboot?' && $i3exit reboot
+    ;;
+  'Hibernate')
+    $i3exit hibernate
+    ;;
+  "$lock")
+    $i3exit lock
+    ;;
+  "$suspend")
+    $i3exit suspend
+    ;;
+  "$logout")
+    rofi-prompt --query 'Log out?' && $i3exit logout
+    ;;
+  esac
+
+  # done
+  set -e
+}
+
+main &
+
+exit 0

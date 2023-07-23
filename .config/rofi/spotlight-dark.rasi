@@ -27,8 +27,9 @@ window {
     background-color:   @bg0;
 
     location:       center;
-    width:          640;
-    border-radius:  8;
+    width:          38%;
+    height:         38%;
+    border-radius:  12;
 }
 
 inputbar {

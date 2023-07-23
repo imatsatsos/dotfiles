@@ -1,0 +1,27 @@
+#!/bin/sh
+# Script is a screenshot wrapper for maim
+# Take a screenshot of scree, active window, selection
+# Image is saved in Pictures/Screenshots and copied in clipboard
+# Depends: maim xdotool xclip dunst
+
+save_path="$HOME/Pictures/Screenshots"
+name="$(date +%s).png"
+
+case $1 in
+    fullscreen) args=" " ;;
+
+    selection) args="-s -b 2" ;;
+    
+    window) args="-i $(xdotool getactivewindow)" ;;
+
+    *) echo "arg required: fullscreen, selection, window"; exit 1 ;;
+esac
+
+[ ! -d "$save_path" ] && mkdir -p "$save_path"
+maim -u --quiet $args | tee "$save_path/$name" | xclip -selection clipboard -t 'image/png'
+
+dunstify -a "Screenshot" \
+    "Saved:" \
+    "<i>$name</i>" \
+    -t 3000 \
+    -i "$save_path/$name"

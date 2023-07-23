@@ -8,7 +8,7 @@
 # REQUIRES: pactl, alsamixer
 
 # export this as env variable in .shellrc
-#TERM=i3-sensible-terminal
+#TERMINAL=i3-sensible-terminal
 MUTE_COLOR="#a0a0a0"
 BOOST_COLOR="#d95177"
 
@@ -42,7 +42,7 @@ change_to_next_sink() {
 case "$BLOCK_BUTTON" in
     1) change_to_next_sink ;;
     2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
-    3) $TERM -T alsamixer -e alsamixer ;;
+    3) setsid -f "$TERMINAL" -T alsamixer -e alsamixer ;;
     4) pactl set-sink-volume @DEFAULT_SINK@ +2% ;;
     5) pactl set-sink-volume @DEFAULT_SINK@ -2% ;;
 esac
@@ -57,22 +57,19 @@ done < <(echo "$OUTPUT_INFO")
 VOLUME=$(echo "$VOLUME" | grep -o "[0-9]*%" | head -1)
 
 if [[ $DEFAULT_SINK == *"Jack"* ]]; then
-    SINK_ICON="<span color=\"$border\">󰋋</span>"
+    SINK_ICON="󰋋"
 else
-    SINK_ICON="<span color=\"$border\">󰕾</span>"
+    SINK_ICON="󰕾"
+fi
+
+if [[ ! -z $border ]]; then
+    SINK_ICON="<span color=\"$border\">$SINK_ICON</span>"
 fi
 
 if [[ $MUTED == *"yes"* ]]; then
-    echo "󰝟 M"
-    echo "󰝟"
-    echo $MUTE_COLOR
+    echo "<span color=\"$MUTE_COLOR\">󰝟 M</span>"
 elif (( ${VOLUME%%%} > 100 )); then
-    echo "$SINK_ICON ${VOLUME%%%}"
-    echo "$SINK_ICON ${VOLUME%%%}"
-    echo "$BOOST_COLOR"
+    echo "<span color=\"$BOOST_COLOR\">$SINK_ICON ${VOLUME%%%}</span>"
 else
-    # full text
-    echo "$SINK_ICON ${VOLUME%%%}"
-    # short text
     echo "$SINK_ICON ${VOLUME%%%}"
 fi

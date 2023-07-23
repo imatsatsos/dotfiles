@@ -16,11 +16,11 @@ if [ "$broken" = 0 ] && [ "$updates" -ge 1 ]; then
 	if [ "$updates" -eq 1 ]; then
 		notify-send "UPDATE AVAILABLE:" "$pkg"
 	elif [ "$updates" -gt 1 ]; then
-		notify-send "UPDATES AVAILABLE: $updates" "\n $pkgs"
+		notify-send "UPDATES AVAILABLE: $updates" "\n$pkgs"
 	fi
 fi
 
 if [ "$broken" -ge 1 ]; then
-	notify-send -u critical "THERE ARE BROKEN PKGS:" "\n $(cut -d " " -f 1,5 /tmp/errors)"
+	notify-send -u critical "THERE ARE BROKEN PKGS:" "\n$(cut -d " " -f 1,5 /tmp/errors)"
 #	notify-send -u critical "THERE ARE BROKEN PKGS:" "$xx $unresolved"
 fi

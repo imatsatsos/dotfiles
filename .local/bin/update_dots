@@ -2,7 +2,6 @@
 # Copies selected files and folders to a GITREPO folder
 # and provides the option to update a git repo
 
-#GITREPO="$HOME/TESTREPO"
 GITREPO="$HOME/Gitrepos/dotfiles"
 
 if [ ! -d $GITREPO ]; then
@@ -53,10 +52,9 @@ do_copy_themes () {
     done
 }
 
-echo "Removing old dots from $GITREPO"
-rm -rf "$GITREPO/.config" "$GITREPO/.local"
-echo "Copying dots to folder: $GITREPO"
-sleep 1
+echo "Removing old dots from: ${GITREPO}"
+rm -rf "${GITREPO}/.config" "${GITREPO}/.local"
+echo "Copying dots to folder: ${GITREPO}"
 do_copy_localbin
 do_copy_fonts
 #do_copy_themes
@@ -73,6 +71,7 @@ do_copy_home ".bashrc \
 
 do_copy_dotconfig "background \
     lockscreen.png \
+    mimeapps.list \
     starship.toml \
     window_titles.yml \
     alacritty/ \
@@ -85,24 +84,29 @@ do_copy_dotconfig "background \
     i3/ \
     MangoHud/ \
     neofetch/ \
-    nvim/ \
     mpv/ \
     picom/ \
     pcmanfm/ \
     polybar/ \
     rofi/ \
     sway/"
+# nvim/
 
-echo "Do you want to update git repo? [y/N]"
-read -r dm
-if [[ "$dm" == [Y/y] ]]; then
-    
+sleep 1
+echo "Copy operation complete!"
+sleep 2
+if [ -d $GITREPO/.git ]; then
+  git -C "$GITREPO" status
+  echo "Do you want to update the dotfiles git repo? [y/N]"
+  read -r dm
+  if [[ "$dm" == [Y/y] ]]; then
+
     cd $GITREPO
-    git status
     echo "Enter commit message:"
     read -r commit_msg
     git add .
     git commit -m "$commit_msg"
     git push
+  fi
 fi
 

@@ -26,3 +26,5 @@ tar -cpzf backup.tar.gz \
 --exclude=.var \
 --exclude=.wine \
 --warning=no-file-changed .
+
+notify-send "Backup completed:" "$(pwd)"

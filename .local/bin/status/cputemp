@@ -11,14 +11,16 @@ temp=$(cat "$file")
 # remove 3 trailing zeros
 temp="${temp%???}"
 
-# full text
-echo "$temp°C"
-# short text
-echo "$label$temp"
-
-# color
 if [ $temp -ge 80 ]; then
-    echo "#FF0000"
+    temp="<span color=\"#FF0000\">$temp</span>"
 elif [ $temp -ge 70 ]; then
-    echo "#FFFC00"
+    temp="<span color=\"#FFFC00\">$temp</span>"
 fi
+
+label=''
+
+if [ "$border" != "" ]; then
+    label="<span color=\"$border\">$label</span>"
+fi
+
+echo "$label $temp°C"

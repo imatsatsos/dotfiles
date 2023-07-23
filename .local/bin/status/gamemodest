@@ -11,8 +11,6 @@ if [ "$(gamemoded -s)" = "gamemode is inactive" ]; then
     exit
 # if gamemode is running then output status
 else
-    echo "Gamemode"
-    echo "Game"
-    echo "#78dca7"
+    echo "<span color=\"#78dca7\">Gamemode</span>"
 fi
 

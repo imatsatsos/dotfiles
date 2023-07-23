@@ -38,7 +38,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export HISTFILE="${XDG_STATE_HOME}"/bash_history
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export EDITOR=nvim
-export TERM=alacritty
+export TERMINAL=st
 export BAT_THEME="Dracula"
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:

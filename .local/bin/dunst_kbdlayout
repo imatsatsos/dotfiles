@@ -1,0 +1,16 @@
+#!/bin/sh
+# script outputs current active keyboard layout
+
+layout=$(xset -q | grep -A 0 'LED' | cut -c59-67)
+
+# if layout isn't set, then exit
+[ -z "$layout" ] && exit
+
+if [ "$layout" = "00000000" ] || [ "$layout" = "00000002" ]; then
+    output="en"
+else
+    output="gr"
+fi
+
+dunstify -a "Layout" "󰌌 $output" -t 1000 -r 231
+

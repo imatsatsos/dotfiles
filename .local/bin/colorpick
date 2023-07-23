@@ -1,0 +1,5 @@
+#!/bin/sh
+hex=$(xcolor -P 154 -S 7)
+[ "$hex" ] && (
+echo "$hex" | xclip -r -sel clipboard && notify-send "Color $hex in clipboard"
+)

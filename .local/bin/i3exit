@@ -19,7 +19,7 @@ case "$1" in
         lock &
         ;;
     logout)
-        i3-msg exit
+        i3-msg exit || pkill dwm
         ;;
     suspend)
         lock &
@@ -38,7 +38,7 @@ case "$1" in
         $ctl poweroff
         ;;
     *)
-        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|poweroff}"
+        echo "Usage: {lock|logout|suspend|hibernate|reboot|poweroff}"
         exit 2
 esac
 

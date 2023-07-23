@@ -1,0 +1,25 @@
+#!/bin/bash
+set_touchpad_scrollspeed() {
+  # find touchpad device from xinput
+  line="$( xinput | grep -iP '(?=.*DELL)(?=.*Touchpad)' )"
+  # save touchpad id to var 'id'
+  id=$( echo "$line" | grep -oP 'id=\K\d+' )
+
+  # touchpad scroll speed with id
+  xinput set-prop $id "libinput Scrolling Pixel Distance" 50
+}
+
+set_mouse_accel() {
+  # find mouse device from xinput
+  line="$( xinput | grep -iP '(?=.*G305)(?=.*pointer)' )"
+
+  # save mouse id to var 'id'
+  id=$( echo "$line" | grep -oP 'id=\K\d+' )
+
+  # mouse Accel Profile with id
+  xinput set-prop $id "libinput Accel Profile Enabled" 0, 1
+  xinput set-prop $id "libinput Accel Speed" 0
+}
+
+set_touchpad_scrollspeed
+set_mouse_accel

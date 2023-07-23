@@ -1,75 +1,55 @@
- See dunst(5) for all configuration options
-
 [global]
     ### Display ###
-
     # Which monitor should the notifications be displayed on.
     monitor = 0
-
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
     #   keyboard: follow window with keyboard focus
     #   none: don't follow anything
-    #
-    # "keyboard" needs a window manager that exports the
-    # _NET_ACTIVE_WINDOW property.
-    # This should be the case for almost all modern window managers.
-    #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
     follow = none
 
-    ### Geometry ###
 
-    width = (200, 400)
+    ### Geometry ###
+    width = (50, 400)
     height = 300
     origin = top-right
-    offset = 20x30
+    offset = 25x25
     scale = 0
     notification_limit = 0
-
     transparency = 0
-    frame_width = 1
-    #frame_color = "#29293f"
+    frame_width = 0
     frame_color = "#759eea"
 
-    ### Progress bar ###
 
+    ### Progress bar ###
     # Turn on the progess bar. It appears when a progress hint is passed with
     # for example dunstify -h int:value:12
     progress_bar = true
     progress_bar_height = 12
-    progress_bar_frame_width = 1
+    progress_bar_frame_width = 0
     progress_bar_min_width = 150
-    progress_bar_max_width = 300
+    progress_bar_max_width = 150
     highlight = "#f2f2f2"
     # Show how many messages are currently hidden (because of
     # notification_limit).
     indicate_hidden = yes
 
-
-    # Draw a line of "separator_height" pixel height between two
-    # notifications.
-    # Set to 0 to disable.
+    
+    ### Look ###
     # If gap_size is greater than 0, this setting will be ignored.
     separator_height = 2
-
     # Padding between text and separator.
-    padding = 12
-
+    padding = 8
     # Horizontal padding.
     horizontal_padding = 8
-
     # Padding between text and icon.
     text_icon_padding = 8
 
 
     # Size of gap to display between notifications - requires a compositor.
-    # If value is greater than 0, separator_height will be ignored and a border
-    # of size frame_width will be drawn around each notification instead.
-    # Click events on gaps do not currently propagate to applications below.
-    gap_size = 0
-
+    gap_size = 16
     # Define a color for the separator.
     # possible values are:
     #  * auto: dunst tries to find a color fitting to the background;
@@ -77,10 +57,8 @@
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
     separator_color = frame
-
     # Sort messages by urgency.
     sort = yes
-
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
     # Set to 0 to disable.
@@ -88,14 +66,12 @@
     # section for how to disable this if necessary
     # idle_threshold = 120
 
+
     ### Text ###
-
-    font = Monospace 12
-
+    font = Monospace 11
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
     line_height = 0
-
     # Possible values are:
     # full: Allow a small subset of html markup in notifications:
     #        <b>bold</b>
@@ -105,19 +81,6 @@
     #
     #        For a complete reference see
     #        <https://docs.gtk.org/Pango/pango_markup.html>.
-    #
-    # strip: This setting is provided for compatibility with some broken
-    #        clients that send markup even though it's not enabled on the
-    #        server. Dunst will try to strip the markup but the parsing is
-    #        simplistic so using this option outside of matching rules for
-    #        specific applications *IS GREATLY DISCOURAGED*.
-    #
-    # no:    Disable markup parsing, incoming notifications will be treated as
-    #        plain text. Dunst will not advertise that it has the body-markup
-    #        capability if this is set as a global setting.
-    #
-    # It's important to note that markup inside the format option will be parsed
-    # regardless of what this is set to.
     markup = full
 
     # The format of the message.  Possible variables are:
@@ -131,77 +94,59 @@
     #   %%  Literal %
     # Markup is allowed
     format = "<b>%s</b>\n%b\n%n"
-
-    alignment = center
+    alignment = left
     vertical_alignment = center
-
     # Show age of message if message is older than show_age_threshold
     # seconds.
     # Set to -1 to disable.
     show_age_threshold = 60
-
     # Specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
     ellipsize = middle
-
     ignore_newline = no
     stack_duplicates = true
     hide_duplicate_count = false
-
     # Display indicators for URLs (U) and actions (A).
     show_indicators = yes
 
-    ### Icons ###
 
+    ### Icons ###
     # Recursive icon lookup. You can set a single theme, instead of having to
     # define all lookup paths.
-    enable_recursive_icon_lookup = true
-
+    enable_recursive_icon_lookup = false
     # Set icon theme (only used for recursive icon lookup)
-    icon_theme = Adwaita
-    # You can also set multiple icon themes, with the leftmost one being used first.
-    # icon_theme = "Adwaita, breeze"
-
+    icon_theme = "HighContrast, Adwaita"
     icon_position = left
     min_icon_size = 32
     max_icon_size = 64
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-
+    # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/:/usr/icons/Adwaita/16x16/status:/usr/share/icons/HighContrast/32x32/status/
+    icon_path = /usr/share/icons/HighContrast/scalable/status/:
+    
     ### History ###
-
-    # Should a notification popped up from history be sticky or timeout
-    # as if it would normally do.
+    # Should a notification popped up from history be sticky or timeout as if it would normally do.
     sticky_history = yes
-
     # Maximum amount of notifications kept in history
-    history_length = 50
+    history_length = 20
+
 
     ### Misc/Advanced ###
-
     # dmenu path.
     dmenu = /usr/bin/dmenu -p dunst:
-
     # Browser for opening urls in context menu.
     browser = /usr/bin/xdg-open
-
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
-
     # Define the title of the windows spawned by dunst
     title = Dunst
-
     # Define the class of the windows spawned by dunst
     class = Dunst
-
-    corner_radius = 10
-
+    corner_radius = 8
     # Ignore the dbus closeNotification message.
-    # Useful to enforce the timeout set by dunst configuration. Without this
-    # parameter, an application may close the notification sent before the
-    # user defined timeout.
+    # Useful to enforce the timeout set by dunst configuration. Without this parameter, an application may close the notification sent before the user defined timeout.
     ignore_dbusclose = false
+
 
     ### Wayland ###
     # These settings are Wayland-specific. They have no effect when using X11
@@ -240,9 +185,9 @@
     # * context_all: Open context menu for all notifications.
     # These values can be strung together for each mouse event, and
     # will be executed in sequence.
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, open_url, close_current
-    mouse_right_click = close_all
+    mouse_left_click = do_action, open_url, close_current
+    mouse_middle_click = close_all
+    mouse_right_click = close_current
 
 [experimental]
     per_monitor_dpi = false
@@ -252,14 +197,14 @@
     foreground = "#d4d7ff"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
-    #default_icon = /path/to/icon
+    default_icon = NONE
 
 [urgency_normal]
     background = "#12121F"
     foreground = "#d4d7ff"
     timeout = 8
     # Icon for notifications with normal urgency, uncomment to enable
-    #default_icon = /path/to/icon
+    default_icon = NONE
 
 [urgency_critical]
     background = "#d95177"
@@ -387,8 +332,31 @@
 #    summary = *twitter.com*
 #    urgency = normal
 #
-#[stack-volumes]
-#    appname = "some_volume_notifiers"
-#    set_stack_tag = "volume"
-#
+[volume]
+    appname = "Volume"
+    
+    set_stack_tag = "volume"
+    format = "<b>%n %b</b>"
+    alignment = center 
+
+[brightness]
+    appname = "Brightness"
+    
+    set_stack_tag = "brightness"
+    format = "<b>%n %b</b>"
+    alignment = center 
+
+[screenshot]
+    appname = "Screenshot"
+    
+    format = "%b"
+    alignment = center
+    max_icon_size = 128
+    icon_position = top
+
+[spotify]
+    appname = "Spotify"
+    
+    format = "%s\n%b"
+    max_icon_size = 128
 # vim: ft=cfg

@@ -15,7 +15,10 @@ max_brightness=$(cat "$backlight/max_brightness")
 brightness=$(cat "$backlight/brightness")
 percent=$(( brightness * 100 / max_brightness ))
 
-# full text
-echo "$percent"
-# short text
-echo "$label$percent"
+if [ ! -z $border ]; then
+    label="<span color=\"$border\">󰃟</span>"
+else
+    label="󰃟"
+fi
+
+echo "$label $percent"

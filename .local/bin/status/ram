@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# script outputs ram usage
+
+awk -v brd="$border" '
+/^MemTotal:/ {
+	mem_total=$2
+}
+/^MemFree:/ {
+	mem_free=$2
+}
+/^Buffers:/ {
+	mem_free+=$2
+}
+/^Cached:/ {
+	mem_free+=$2
+}
+/^SwapTotal:/ {
+	swap_total=$2
+}
+/^SwapFree:/ {
+	swap_free=$2
+}
+END {
+	used=(mem_total-mem_free)/1024/1024
+	total=mem_total/1024/1024
+	
+	pct=0
+	if (total > 0) {
+		pct=used/total*100
+	}
+    
+    if (length(brd) != 0) {
+        label="<span color=\"" brd "\"> </span>";
+    } else {
+        label=" "
+    }
+
+	#printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
+	if (pct > 90){
+		printf("%s<span color=\"#FF0000\">%.1fG</span>\n", label, used)
+	} else if (pct > 80){
+		printf("%s<span color=\"#FFFC00\">%.1fG</span>\n", label, used)
+	} else {
+		printf("%s%.1fG\n", label, used)
+	}
+}
+' /proc/meminfo
+
+case $BLOCK_BUTTON in
+    1) notify-send "Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head -n 5)" ;;
+    3) setsid -f "$TERMINAL" -e htop ;;
+esac

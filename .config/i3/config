@@ -21,11 +21,10 @@ set $term alacritty
 set $files pcmanfm
 
 ## Select Launcher
-set $launcher "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
-# rofi -show drun -show-icons -no-default-config -config ~/.config/rofi/spotlight-dark.rasi
+set $launcher "~/.local/bin/rofi-launcher"
 
 ## Select Alt tabber
-set $window_tabber "rofi -show window -no-default-config -config /home/$USER/.config/rofi/alt_tab.rasi"
+set $window_tabber "rofi -show window -no-default-config -config ~/.config/rofi/alt_tab.rasi"
 
 ## Select Power menu
 #set $power_menu "/home/$USER/.local/bin/rofi-powermenu"
@@ -69,8 +68,9 @@ bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 ###################
 # BRIGHTNESS KEYS #
 ###################
-bindsym XF86MonBrightnessUp exec   --no-startup-id ~/.local/bin/dunst-brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/.local/bin/dunst-brightness
+bindsym XF86MonBrightnessUp exec   --no-startup-id ~/.local/bin/dunst_backlight && pkill -SIGRTMIN+9 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.local/bin/dunst_backlight && pkill -SIGRTMIN+9 i3blocks
+
 
 ############
 # KEYBINDS #
@@ -99,13 +99,15 @@ bindsym $mod+Shift+g exec --no-startup-id ~/.local/bin/picom-toggle
 set_from_resource $selbg st.color5
 set_from_resource $bg st.background
 bindsym $mod+Shift+d exec --no-startup-id dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$selbg"
+#bindsym Mod1+L_Shift exec --no-startup-id ~/.local/bin/dunst_kbdlayout
+bindsym $mod+Escape exec --no-startup-id ~/.local/bin/rofi-power
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # Lock
-bindsym $mod+Ctrl+l exec --no-startup-id "~/.config/i3/scripts/i3exit lock"
+bindsym $mod+Ctrl+l exec --no-startup-id "~/.local/bin/i3exit lock"
 # Exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -144,8 +146,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 500 'Tile horizontally'
-bindsym $mod+v split v;exec notify-send -t 500 'Tile vertically'
+bindsym $mod+z split h;exec notify-send -t 700 'Tile horizontally'
+bindsym $mod+v split v;exec notify-send -t 700 'Tile vertically'
 bindsym $mod+n split toggle
 
 # enter fullscreen mode for the focused container
@@ -209,9 +211,10 @@ bindsym $mod+Print mode $modeScreenshot
 
 # control system session
 set $modeSession "System: (l)ock, (s)uspend, (R)eboot, (P)oweroff"
-set $i3exit ~/.config/i3/scripts/i3exit
+set $i3exit ~/.local/bin/i3exit
 mode $modeSession {
         bindsym l exec --no-startup-id $i3exit lock, mode "default"
+        bindsym e exec --no-startup-id $i3exit logout, mode "default"
         bindsym s exec --no-startup-id $i3exit suspend, mode "default"
         bindsym Shift+r exec --no-startup-id $i3exit reboot, mode "default"
         bindsym Shift+p exec --no-startup-id $i3exit poweroff, mode "default"
@@ -354,8 +357,8 @@ client.placeholder      $bg      $bg      $txt    $bg       $bg
 # BAR #
 #######
 bar {
-        #status_command i3status -c /home/$USER/.config/i3/i3status.conf
-        status_command i3blocks -c /home/$USER/.config/i3/i3blocks.conf
+        #status_command i3status -c ~/.config/i3/i3status.conf
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
         font pango: $font_bar
         position bottom
         tray_padding 3
@@ -397,10 +400,11 @@ exec --no-startup-id "dbus-update-activation-environment DISPLAY XAUTHORITY"
 exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
 exec --no-startup-id "/usr/bin/gnome-keyring-daemon --start --components=ssh,secrets,pkcs11"
 exec_always --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escape"
+exec_always --no-startup-id "xset r rate 280 40"
 exec --no-startup-id /usr/bin/pipewire
 exec --no-startup-id /usr/bin/pipewire-pulse
-exec --no-startup-id "xwallpaper --maximize /home/$USER/.config/background"
+exec --no-startup-id "xwallpaper --maximize ~/.config/background"
 exec --no-startup-id /home/$USER/.local/bin/onlogin.sh
 exec --no-startup-id /home/$USER/.local/bin/low_battery
-exec --no-startup-id picom -b
+exec --no-startup-id /usr/bin/picom -b
 
