@@ -293,8 +293,7 @@ for_window [class="MATLAB"]         focus
 for_window [class="qbittorrent"]    focus
 
 # assign floating
-for_window [title="alsamixer"]			floating enable, border none, resize set 900 700
-for_window [title="nmtui"]              floating enable, border none, resize set 900 700
+for_window [title="termfloat"]    			floating enable, border none, resize set 900 700
 for_window [class="Signal"]             floating enable
 for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
@@ -364,14 +363,14 @@ bar {
         tray_padding 3
         strip_workspace_numbers no
         colors {
-	            separator       $purple
+	            separator     $purple
 		        background      $bg
 		        statusline      $txt
 #               class      	    	border 		    bg		    txt	    	indicator
-		        focused_workspace	$purple    	    $blue		$bg     	$yellow
-		        active_workspace	$black2         $purple     $txt    	$yellow
-		        inactive_workspace	$black      	$bg       	$txt		$yellow
-		        urgent_workspace	$white    	    $red    	$txt		$yellow
+		        focused_workspace   	$purple    	  $blue		  $bg     	$yellow
+		        active_workspace	    $black2       $purple   $txt    	$yellow
+		        inactive_workspace    $black        $bg    	  $txt	  	$yellow
+		        urgent_workspace	    $white    	  $red      $txt  		$yellow
         }
 }
 

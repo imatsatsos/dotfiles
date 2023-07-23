@@ -6,6 +6,7 @@
 yes='Confirm'
 no='Cancel'
 query='Are you sure?'
+theme='confirm.rasi'
 
 while [ $# -ne 0 ]; do
     case "$1" in
@@ -23,13 +24,18 @@ while [ $# -ne 0 ]; do
             [ -n "$2" ] && query="$2"
             shift
             ;;
+        -t | --theme)
+            [ -n "$2" ] && theme="$2"
+            shift
+            ;;
     esac
     shift
 done
 
 #| rofi -theme-str '@import "prompt.rasi"' \
 chosen=$(printf '%s;%s\n' "$yes" "$no" \
-    | rofi \
+    | rofi -no-default-config \
+           -theme $theme \
            -p "$query" \
            -dmenu \
            -sep ';' \

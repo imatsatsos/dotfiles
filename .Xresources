@@ -24,7 +24,8 @@ st.termname: st-256color
 st.borderless: 0
 
 ! --- The following options options can be reloaded via USR1 signal. ---
-st.font: JetBrainsMono Nerd Font:size=11
+st.font: Liga SFMono Nerd Font:size=11
+
 ! NERD FONTS LIST:
 !Hack Nerd Font
 !FiraCode Nerd Font

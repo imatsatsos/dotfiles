@@ -34,6 +34,9 @@ set_wayland() {
     export __VK_LAYER_NV_optimus="NVIDIA_only"
 }
 
+# ssh-agent
+eval `ssh-agent`
+
 ## startx
 # If DISPLAY=0 and TTY=1 then startx
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then

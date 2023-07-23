@@ -42,7 +42,7 @@ change_to_next_sink() {
 case "$BLOCK_BUTTON" in
     1) change_to_next_sink ;;
     2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
-    3) setsid -f "$TERMINAL" -T alsamixer -e alsamixer ;;
+    3) setsid -f "$TERMINAL" -T termfloat -e alsamixer ;;
     4) pactl set-sink-volume @DEFAULT_SINK@ +2% ;;
     5) pactl set-sink-volume @DEFAULT_SINK@ -2% ;;
 esac

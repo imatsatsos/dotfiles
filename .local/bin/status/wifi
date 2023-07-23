@@ -34,7 +34,7 @@ toggle_wifi() {
 
 case "$BLOCK_BUTTON" in
     2) toggle_wifi ;;
-    3) setsid -f "$TERMINAL" -T nmtui -e nmtui ;;
+    3) setsid -f "$TERMINAL" -T termfloat -e nmtui ;;
 esac
 
 # If the wifi interface exists but no connection is active, "down" shall be displayed.

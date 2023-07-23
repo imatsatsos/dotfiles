@@ -2,7 +2,8 @@
 # power menu with rofi
 
 # rofi theme
-theme="$HOME/.config/rofi/power"
+theme="$HOME/.config/rofi/power.rasi"
+confirm_theme="$HOME/.config/rofi/confirm.rasi"
 
 # commands
 uptime="`uptime -p | sed -e 's/up //g'`"
@@ -23,6 +24,10 @@ get_options() {
   echo "$logout"
 }
 
+rofi_confirm() {
+  echo -e "$yes\n$no" | rofi -dmenu -p "Confirm" -mesg "Are you sure?" -theme $confirm_theme
+}
+
 main() {
 
   # get choice from rofi
@@ -31,10 +36,10 @@ main() {
   # run the selected command
   case $choice in
   "$poweroff")
-    rofi-prompt --query 'Power off?' && $i3exit poweroff
+    rofi-prompt --query 'Power off?' --yes '' --no '' --theme $confirm_theme && $i3exit poweroff
     ;;
   "$reboot")
-    rofi-prompt --query 'Reboot?' && $i3exit reboot
+    rofi-prompt --query 'Reboot?' --yes '' --no '' --theme $confirm_theme && $i3exit reboot
     ;;
   'Hibernate')
     $i3exit hibernate
@@ -46,7 +51,7 @@ main() {
     $i3exit suspend
     ;;
   "$logout")
-    rofi-prompt --query 'Log out?' && $i3exit logout
+    rofi-prompt --query 'Log out?' --yes '' --no '' --theme $confirm_theme && $i3exit logout
     ;;
   esac
 

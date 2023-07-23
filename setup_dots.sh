@@ -110,7 +110,7 @@ installCursor() {
     echo -e "${GREEN}DONE\n${RC}"
 }
 
-installFonts() {
+copyFonts() {
     echo -e "${YELLOW}Installing fonts..${RC}"
     [ ! -d $HOME/.local/share/fonts ] && mkdir -p $HOME/.local/share/fonts
     cp -rf $GITPATH/.local/share/fonts/* $HOME/.local/share/fonts/
@@ -162,7 +162,7 @@ checkEnv
 installDepend
 installCursor
 installStarship
-installFonts
+copyFonts
 if copyConfig; then
     echo -e "${GREEN}Restart your shell to see the changes.${RC}"
 else

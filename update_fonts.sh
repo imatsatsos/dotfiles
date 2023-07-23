@@ -6,6 +6,7 @@ url_nerdfonts="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts"
 echo "Downloading fonts.."
 curl -fLO $url_nerdfonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf
 curl -fLO $url_nerdfonts/Ubuntu/Regular/UbuntuNerdFont-Regular.ttf
+curl -flO $url_nerdfonts/UbuntuMono/Regular/UbuntuMonoNerdFont-Regular.ttf
 curl -fLO $url_nerdfonts/ShareTechMono/ShureTechMonoNerdFont-Regular.ttf
 curl -fLO $url_nerdfonts/FiraCode/Regular/FiraCodeNerdFont-Regular.ttf
 curl -fLO $url_nerdfonts/Hack/Regular/HackNerdFont-Regular.ttf
