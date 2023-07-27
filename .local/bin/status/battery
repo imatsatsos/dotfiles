@@ -26,18 +26,29 @@ else
     label=" "
 fi
 
-if [ ! -z $border ]; then
-	label="<span color=\"$border\">$label</span>"
-fi
-
 if [ "$state" = "discharging" ]; then
-    label="$label"
+  label="$label"
 elif [ "$state" = "charging" ]; then
-    label="$label"
-# example of "pending-charge state", no colored label, no arrow
+  label="󰂄"
+  # example of "pending-charge state", no colored label, no arrow
 else
-    echo "$label $battery_level"
-    exit
+  label="󰂄"
+  unset color
 fi
 
-echo "$label<span color=\"$color\">$battery_level</span>"
+if [ ! -z $border ]; then
+  label="<span color=\"$border\">$label</span>"
+fi
+
+if [ ! -z $color ]; then
+  echo "$label <span color=\"$color\">$battery_level</span>"
+else
+  echo "$label $battery_level"
+fi
+
+profile=$(powerprofilesctl get)
+case $BLOCK_BUTTON in 
+  1) notify-send "Current profile:" "$profile" ;;
+esac
+
+

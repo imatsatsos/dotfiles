@@ -37,16 +37,16 @@ END {
 
 	#printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
 	if (pct > 90){
-		printf("%s<span color=\"#FF0000\">%.1fG</span>\n", label, used)
+		printf("%s <span color=\"#FF0000\">%.1fG</span>\n", label, used)
 	} else if (pct > 80){
-		printf("%s<span color=\"#FFFC00\">%.1fG</span>\n", label, used)
+		printf("%s <span color=\"#FFFC00\">%.1fG</span>\n", label, used)
 	} else {
-		printf("%s%.1fG\n", label, used)
+		printf("%s %.1fG\n", label, used)
 	}
 }
 ' /proc/meminfo
 
 case $BLOCK_BUTTON in
     1) notify-send "Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head -n 5)" ;;
-    3) setsid -f "$TERMINAL" -e htop ;;
+    3) setsid -f "$TERMINAL" -T termfloat -e htop ;;
 esac

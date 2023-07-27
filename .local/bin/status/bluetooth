@@ -1,0 +1,55 @@
+#!/bin/sh
+# script outputs bluetooth status (on/off) and if connected, the name of the device
+
+device="Galaxy Buds+"
+
+# Checks if bluetooth controller is powered on
+power_on() {
+    if bluetoothctl show | grep -q "Powered: yes"; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Toggles power state
+toggle_power() {
+    if power_on; then
+        bluetoothctl power off >/dev/null
+    else
+        if rfkill list bluetooth | grep -q 'blocked: yes'; then
+            rfkill unblock bluetooth && sleep 3
+        fi
+        bluetoothctl power on >/dev/null
+    fi
+}
+
+# Checks if a device is connected
+device_connected() {
+    device_info=$(bluetoothctl info "$1")
+    if echo "$device_info" | grep -q "Connected: yes"; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+case $BLOCK_BUTTON in
+  1) toggle_power ;;
+  3) rofi-bluetooth ;;
+esac
+
+if power_on; then
+  output=''
+  if device_connected "$device"; then
+    output='󰥰 $device'
+  fi
+else
+  output='󰂲'
+fi
+
+if [ ! -z $border ]; then
+  printf "<span color='$border'>$output</span>"
+else
+  printf "$output"
+fi

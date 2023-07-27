@@ -3,7 +3,7 @@
 
 # rofi theme
 theme="$HOME/.config/rofi/power.rasi"
-confirm_theme="$HOME/.config/rofi/confirm.rasi"
+confirm_theme="$HOME/.config/rofi/main_noicons.rasi"
 
 # commands
 uptime="`uptime -p | sed -e 's/up //g'`"

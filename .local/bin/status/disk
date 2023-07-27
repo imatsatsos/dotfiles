@@ -30,3 +30,7 @@ df -h -P $LOCAL_FLAG "$DIR" | awk -v brd="$border" -v alert_low=$ALERT_LOW '
 	print label $4
 }
 '
+
+case $BLOCK_BUTTON in
+	1) notify-send "💽 Disk space" "$(df -h --output=target,used,size)" ;;
+esac

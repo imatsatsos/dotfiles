@@ -1,32 +1,43 @@
 #!/bin/sh
-# script changes volume, mute state of default sink
-# REQUIRES: pulseaudio-utils(pipewire installs these)
+# script changes volume, mute state of default sink(output) and mute state of defaut source(mic) and sends a notification
+# REQUIRES: pipewire-wireplumber, dunst
 #
 # alternative for wireplumber:
 # wpctl set-volume @DEFAULT_AUDIO_SINK@ +5% -l 1.2
 
 case "$1" in
-    "up") pactl set-sink-volume @DEFAULT_SINK@ +4% ;;
-    "down") pactl set-sink-volume @DEFAULT_SINK@ -4% ;;
-    "mute") pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
-    "micmute") pactl set-source-mute @DEFAULT_SOURCE@ toggle ;;
+    "up") wpctl set-volume @DEFAULT_SINK@ 2%+ ;;
+    "down") wpctl set-volume @DEFAULT_SINK@ 2%- ;;
+    "mute") wpctl set-mute @DEFAULT_SINK@ toggle ;;
+    "micmute") wpctl set-mute @DEFAULT_SOURCE@ toggle ;;
     *) echo "\$1: up | down | mute | micmute"; exit 1 ;;
 esac
 
-output=$(wpctl get-volume @DEFAULT_SINK@)
-volume=$(echo "$output" | awk '{print $2}')
-percentage=$(awk -v vol="$volume" 'BEGIN { print int(vol * 100) }')
-state=$(echo "$output" | grep -q 'MUTED' && echo "MUTED" || echo "")
-args=$([ "$state" = "MUTED" ] && echo "string:fgcolor:#a0a0a0")
+case "$1" in
+  "micmute")
+    state=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -q 'MUTED' && echo "MUTED" || echo "")
+    if [ "$state" = "MUTED" ]; then
+      dunstify -a "Volume" "Mic:" "Mic mute" -t 1000 -r 200 -i "$HOME/.config/dunst/micw-off.svg" -h "string:fgcolor:#a0a0a0"
+    else
+      dunstify -a "Volume" "Mic" "Mic on" -t 1000 -r 200 -i "$HOME/.config/dunst/micw-on.svg"
+    fi
+    ;;
+  *)
+    output=$(wpctl get-volume @DEFAULT_SINK@)
+    volume=$(echo "$output" | awk '{print $2}')
+    percentage=$(awk -v vol="$volume" 'BEGIN { print int(vol * 100) }')
+    state=$(echo "$output" | grep -q 'MUTED' && echo "MUTED" || echo "")
+    args=$([ "$state" = "MUTED" ] && echo "string:fgcolor:#a0a0a0")
 
-case "$percentage" in
-  [7-9][0-9] | 100) icon=audio-volume-high ;;
-  [4-6][0-9]) icon=audio-volume-medium ;;
-  [0-3][0-9] | [0-9]) icon=audio-volume-low ;;
-  *) icon=dialog-warning ;;
+    case "$percentage" in
+      [7-9][0-9] | 100) icon=audio-volume-high ;;
+      [4-6][0-9]) icon=audio-volume-medium ;;
+      [0-3][0-9] | [0-9]) icon=audio-volume-low ;;
+      *) icon=dialog-warning ;;
+    esac
+    [ "$state" = "MUTED" ] && icon=audio-volume-muted
+
+    #paplay /usr/share/sounds/freedesktop/stereo/bell.oga
+    dunstify -a "Volume" "Volume:" "$state" -t 1000 -r 200 -h int:value:$percentage -i $icon -h "$args"
+;;
 esac
-[ "$state" = "MUTED" ] && icon=audio-volume-muted
-
-#paplay /usr/share/sounds/freedesktop/stereo/bell.oga
-dunstify -a "Volume" "Volume:" "$state" -t 1000 -r 200 -h int:value:$percentage -i $icon -h "$args"
-

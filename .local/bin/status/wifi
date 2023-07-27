@@ -18,7 +18,7 @@ COLOR_GE60=${COLOR_GE60:-#FCF39C}
 COLOR_GE40=${COLOR_GE40:-#DBC074}
 COLOR_LOWR=${COLOR_LOWR:-#D95177}
 COLOR_DOWN=${COLOR_DOWN:-#D95177}
-LABEL=""
+LABEL=" "
 
 # As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
 # connection (think desktop), the corresponding block should not be displayed.
@@ -39,7 +39,7 @@ esac
 
 # If the wifi interface exists but no connection is active, "down" shall be displayed.
 if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
-    echo "<span color=\"$COLOR_DOWN\">$LABEL down</span>"
+    echo "<span color=\"$COLOR_DOWN\">󰤭  down</span>"
     exit
 fi
 

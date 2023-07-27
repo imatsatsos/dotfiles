@@ -1,11 +1,11 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
+/*****----- Global Properties -----*****/
+* {
+    background-window:           black/75%;
+    background-normal:           white/3%;
+    background-selected:         white/15%;
+    foreground-normal:           white;
+    foreground-selected:         white;
+}
 
 /*****----- Configuration -----*****/
 configuration {
@@ -13,18 +13,16 @@ configuration {
     font: "JetBrains Mono Nerd Font 12";
 }
 
-/*****----- Global Properties -----*****/
-@import                          "colors_onedark.rasi"
-
 /*****----- Main Window -----*****/
 window {
+    transparency:                "real";
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       500px;
+    width:                       25%;
     border-radius:               20px;
     cursor:                      "default";
-    background-color:            @background;
+    background-color:            var(background-window);
 }
 
 /*****----- Main Box -----*****/
@@ -32,6 +30,7 @@ mainbox {
     spacing:                     30px;
     padding:                     30px;
     background-color:            transparent;
+    text-color:                  var(foreground-normal);
     children:                    [ "message", "listview" ];
 }
 
@@ -40,17 +39,8 @@ message {
     margin:                      0px;
     padding:                     20px;
     border-radius:               20px;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
-}
-textbox {
-    background-color:            inherit;
-    text-color:                  inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
-    placeholder-color:           @foreground;
-    blink:                       true;
-    markup:                      true;
+    background-color:            var(background-normal);
+    text-color:                  var(foreground-normal);
 }
 
 /*****----- Listview -----*****/
@@ -67,20 +57,19 @@ listview {
     
     spacing:                     30px;
     background-color:            transparent;
-    text-color:                  @foreground;
     cursor:                      "default";
 }
 
 /*****----- Elements -----*****/
 element {
     padding:                     60px 10px;
-    border-radius:               20px;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
+    border-radius:               10px;
+    background-color:            var(background-normal);
+    text-color:                  var(foreground-normal);
     cursor:                      pointer;
 }
 element-text {
-    font:                        "feather 48";
+    font:                        "feather 24";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
@@ -88,6 +77,6 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            var(selected);
-    text-color:                  var(background);
+    background-color:            var(background-selected);
+    text-color:                  var(foreground-selected);
 }

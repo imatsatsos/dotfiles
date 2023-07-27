@@ -1,9 +1,27 @@
 ########################
 ## Sway config (v1.8) ##
 ########################
+### COLORS
+## imachina
+set $bg       #12121f
+set $txt      #d4d7ff
+set $txtb     #222236
+set $focusbrd #8783d9
+set $focusind #759eea
+set $urgbrd   #d95177
+set $urgbg    #d95177
+
+set $wfbrd    #6d98e8
+set $wfbg     #759eea
+set $wftxt    #222236
+set $wabg     #8783d9
+set $wabrd    #29293f
+set $winabrd  #222236
+set $sep      #8783d9
+set $wind     #fcf39c
 
 ## Select Fonts
-set $font ShureTechMono Nerd Font 10
+set $font ShureTechMono Nerd Font 11
 set $font_bar ShureTechMono Nerd Font 11
 
 ## Select Border style (normal | pixel <px> | none)
@@ -12,7 +30,7 @@ set $border_style_float normal 0
 
 ## Select Gaps size
 set $gaps_in_size 6
-set $gaps_out_size -2
+set $gaps_out_size 0
 
 ## Select Terminal
 set $term alacritty
@@ -27,7 +45,7 @@ set $launcher "~/.local/bin/rofi-launcher"
 set $window_tabber "rofi -show window -no-default-config -config ~/.config/rofi/alt_tab.rasi"
 
 ## Select Power menu
-#set $power_menu "/home/$USER/.local/bin/rofi-powermenu"
+set $power_menu "~/.local/bin/rofi-power"
 
 ## Select default workspace layout (default|stacking|tabbed)
 workspace_layout default
@@ -68,16 +86,9 @@ font pango: $font
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 #exec --no-startup-id dex --autostart --environment i3
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-#exec --no-startup-id nm-applet
 
 ##############
 # AUDIO KEYS #
@@ -89,8 +100,7 @@ bindsym XF86AudioLowerVolume exec ~/.local/bin/volume_control down && $refresh_i
 bindsym XF86AudioMute    exec ~/.local/bin/volume_control mute && $refresh_i3blocks
 bindsym XF86AudioMicMute exec ~/.local/bin/volume_control mic_mute && $refresh_i3blocks
 
-bindsym XF86AudioPlay  exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay  exec playerctl play-pause
 bindsym XF86AudioNext  exec playerctl next
 bindsym XF86AudioPrev  exec playerctl previous
 
@@ -118,15 +128,15 @@ bindsym --whole-window $mod+button8 scratchpad show
 # Launch apps
 bindsym $mod+Return exec $term
 bindsym $mod+e      exec $files
-bindsym $mod+d      exec $launcher
-bindsym $mod+Tab    exec $window_tabber
+bindsym $mod+p      exec $launcher
+bindsym Mod1+Tab    exec $window_tabber
 # 49 = tilde key
 bindcode $mod+49    exec ~/.local/bin/i3-rofi-scratchpads
 bindsym $mod+x      exec ~/.local/bin/rofi-asroot
 bindsym $mod+Shift+g exec ~/.local/bin/picom-toggle
-set_from_resource $selbg st.color5
-set_from_resource $bg st.background
-bindsym $mod+Shift+d exec dmenu_run -p "RUN:" -fn ":size=12" -nb "$bg" -sb "$selbg"
+set_from_resource $sel color5
+set_from_resource $bg background
+bindsym $mod+Shift+d exec dmenu_run -p "RUN:" -b -fn "ShureTechMono Nerd Font:size=11" -nb "$bg" -sb "$sel"
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -167,8 +177,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 700 'Tile horizontally'
-bindsym $mod+v split v;exec notify-send -t 700 'Tile vertically'
+bindsym $mod+z split h;exec notify-send -t 700 -r 587 'Tile horizontally ||'
+bindsym $mod+v split v;exec notify-send -t 700 -r 587 'Tile vertically =='
 bindsym $mod+n split toggle
 
 # enter fullscreen mode for the focused container
@@ -178,11 +188,11 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+s sticky toggle
 
 # fullscreen sticky video playback "hack"
-bindsym $mod+y fullscreen disable; floating enable; border none; resize set 512 288; sticky enable; move window to position 1270 100
+bindsym $mod+y fullscreen disable; floating enable; border none; resize set 512 288; sticky enable; move window position 1270 100
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+#bindsym $mod+s layout stacking
+bindsym $mod+m layout tabbed
 bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
@@ -221,9 +231,9 @@ bindsym $mod+r mode $modeResize
 # screenshot
 set $modescreenshot "Screenshot: (f)ullscreen, (w)indow, (s)election"
 mode $modescreenshot {
-        bindsym f exec --no-startup-id scrot -d 1 ~/Pictures/, mode "default"
-        bindsym w exec --no-startup-id scrot -u ~/Pictures/, mode "default"
-        bindsym s exec --no-startup-id scrot -s -d b1 -f ~/Pictures/, mode "default"
+        bindsym f exec --no-startup-id screenshot fullscreen, mode "default"
+        bindsym w exec --no-startup-id screenshot window, mode "default"
+        bindsym s exec --no-startup-id screenshot selection, mode "default"
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -231,12 +241,12 @@ mode $modescreenshot {
 bindsym $mod+Print mode $modeScreenshot
 
 # control system session
-set $modeSession "System: (l)ock, (s)uspend, (R)eboot, (P)oweroff"
+set $modeSession "System: (l)ock, (s)uspend, (L)ogout, (R)eboot, (P)oweroff"
 set $i3exit ~/.local/bin/i3exit
 mode $modeSession {
         bindsym l exec $i3exit lock, mode "default"
-        bindsym e exec --no-startup-id $i3exit logout, mode "default"
         bindsym s exec $i3exit suspend, mode "default"
+        bindsym Shift+l exec $i3exit logout, mode "default"
         bindsym Shift+r exec $i3exit reboot, mode "default"
         bindsym Shift+p exec $i3exit poweroff, mode "default"
 
@@ -314,7 +324,7 @@ for_window [class="MATLAB"]         focus
 for_window [class="qbittorrent"]    focus
 
 # assign floating
-for_window [title="termfloat"]			floating enable, border none, resize set 900 700
+for_window [title="termfloat"]          floating enable, border none, resize set 900 700, move window position 510 180
 for_window [class="Signal"]             floating enable
 for_window [class="calculator"]         floating enable
 for_window [class="Eog"]                floating enable
@@ -331,7 +341,6 @@ for_window [class="qbittorrent"]        floating enable
 ###############
 # Create or show specific scratchpads
 bindsym $mod+Shift+Return exec ~/.config/i3/scripts/i3-scratchpad-show-create 'scratch-term' $term
-bindsym $mod+Shift+e exec ~/.config/i3/scripts/i3-scratchpad-show-create 'scratch-fm' $files
 
 # move the currently focused window to the scratchpad
 bindsym $mod+minus move scratchpad
@@ -346,32 +355,13 @@ bindsym $mod+equal scratchpad show
 ##########
 # COLORS #
 ##########
-set_from_resource $bg      st.background
-set_from_resource $txt     st.foreground
-set_from_resource $black   st.color0
-set_from_resource $red     st.color1
-set_from_resource $green   st.color2
-set_from_resource $yellow  st.color3
-set_from_resource $blue    st.color4
-set_from_resource $purple  st.color5
-set_from_resource $cyan    st.color6
-set_from_resource $white   st.color7
-set_from_resource $black2  st.color8
-set_from_resource $red2    st.color9
-set_from_resource $green2  st.color10
-set_from_resource $yellow2 st.color11
-set_from_resource $blue2   st.color12
-set_from_resource $purple2 st.color13
-set_from_resource $cyan2   st.color14
-set_from_resource $white2  st.color15
-
 client.background       $bg
-# class                 border   bground  text    indicator child_border
-client.focused          $purple  $bg      $txt    $blue     $purple
-client.focused_inactive $bg      $bg      $txt    $black    $bg
-client.unfocused        $bg      $bg      $txt    $black    $bg
-client.urgent           $red     $bg      $txt    $red      $red
-client.placeholder      $bg      $bg      $txt    $bg       $bg
+# class                 border    bground  text    indicator  child_border
+client.focused          $fborder  $bg      $txt    $focusind  $focusbrd
+client.focused_inactive $bg       $bg      $txt    $txtb      $bg
+client.unfocused        $bg       $bg      $txt    $txtb      $bg
+client.urgent           $urgbrd   $bg      $txtb   $urgbrd    $urgbrd
+client.placeholder      $bg       $bg      $txt    $bg        $bg
 
 #######
 # BAR #
@@ -384,14 +374,14 @@ bar {
         tray_padding 3
         strip_workspace_numbers no
         colors {
-	            separator     $purple
+	          separator       $sep
 		        background      $bg
 		        statusline      $txt
 #               class      	    	border 		    bg		    txt	    	indicator
-		        focused_workspace   	$purple    	  $blue		  $bg     	$yellow
-		        active_workspace	    $black2       $purple   $txt    	$yellow
-		        inactive_workspace    $black        $bg    	  $txt	  	$yellow
-		        urgent_workspace	    $white    	  $red      $txt  		$yellow
+		        focused_workspace   	$wfbrd   	    $wfbg	    $bg     	$wind
+		        active_workspace	    $wabrd        $wabg     $txt    	$wind
+		        inactive_workspace    $winabrd      $bg    	  $txt	  	$wind
+		        urgent_workspace	    $urgbrd       $urgbg    $txt  		$wind
         }
 }
 

@@ -39,9 +39,18 @@ change_to_next_sink() {
     pactl set-default-sink $next_sink
 }
 
+get_mic_state() {
+  micstate=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -q 'MUTED' && echo "MUTED" || echo "")
+  if [ "$micstate" = "MUTED" ]; then
+    ICON="󰍭 "
+  else
+    ICON=""
+  fi
+}
+
 case "$BLOCK_BUTTON" in
     1) change_to_next_sink ;;
-    2) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
+    2) volume_control mute ;;
     3) setsid -f "$TERMINAL" -T termfloat -e alsamixer ;;
     4) pactl set-sink-volume @DEFAULT_SINK@ +2% ;;
     5) pactl set-sink-volume @DEFAULT_SINK@ -2% ;;
@@ -56,20 +65,22 @@ done < <(echo "$OUTPUT_INFO")
 
 VOLUME=$(echo "$VOLUME" | grep -o "[0-9]*%" | head -1)
 
-if [[ $DEFAULT_SINK == *"Jack"* ]]; then
-    SINK_ICON="󰋋"
+get_mic_state
+
+if [[ $MUTED == *"yes"* ]]; then
+  [[ $DEFAULT_SINK == *"Jack"* ]] && ICON="$ICON󰟎" || ICON="$ICON󰝟"
 else
-    SINK_ICON="󰕾"
+  [[ $DEFAULT_SINK == *"Jack"* ]] && ICON="$ICON󰋋" || ICON="$ICON󰕾"
 fi
 
 if [[ ! -z $border ]]; then
-    SINK_ICON="<span color=\"$border\">$SINK_ICON</span>"
+    ICON="<span color=\"$border\">$ICON</span>"
 fi
 
 if [[ $MUTED == *"yes"* ]]; then
-    echo "<span color=\"$MUTE_COLOR\">󰝟 M</span>"
+    echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
 elif (( ${VOLUME%%%} > 100 )); then
-    echo "<span color=\"$BOOST_COLOR\">$SINK_ICON ${VOLUME%%%}</span>"
+    echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
 else
-    echo "$SINK_ICON ${VOLUME%%%}"
+    echo "$ICON ${VOLUME%%%}"
 fi

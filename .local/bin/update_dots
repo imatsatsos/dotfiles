@@ -74,10 +74,12 @@ do_copy_dotconfig "background \
     mimeapps.list \
     starship.toml \
     window_titles.yml \
+    autostart/onlogin \
     alacritty/ \
     btop/ \
     dunst/ \
     fastfetch/ \
+    fontconfig/ \
     git/ \
     gtk-3.0/ \
     htop/ \
@@ -85,10 +87,12 @@ do_copy_dotconfig "background \
     MangoHud/ \
     neofetch/ \
     mpv/ \
+    nsxiv/ \
     picom/ \
     pcmanfm/ \
     polybar/ \
     rofi/ \
+    sxhkd/ \
     sway/"
 # nvim/
 

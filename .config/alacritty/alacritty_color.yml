@@ -396,6 +396,32 @@ schemes:
       cyan: "#72e7e5"
       white: "#d4d7ff"
 
+  ### Yoru
+  Yoru: &Yoru
+    primary:
+      background: "#0c0e0f"
+      foreground: "#edeff0"
+
+    normal:
+      black: "#232526"
+      red: "#df5b61"
+      green: "#78b892"
+      yellow: "#de8f78"
+      blue: "#6791c9"
+      cyan: "#67afc1"
+      magenta: "#bc83e3"
+      white: "#e4e6e7"
+
+    bright:
+      black: "#2c2e2f"
+      red: "#e8646a"
+      green: "#81c19b"
+      yellow: "#e79881"
+      blue: "#709ad2"
+      cyan: "#70b8ca"
+      magenta: "#c58cec"
+      white: "#f2f4f5"
+
 ######################################################################
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
 ## ###################################################################
@@ -413,7 +439,7 @@ schemes:
 # *TomorrowNightBright
 # *IMachina
 
-colors: *DoomOne
+colors: *Yoru
 
 # Colors (Tomorrow Night)
 #colors:

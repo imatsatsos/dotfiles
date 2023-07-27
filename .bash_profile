@@ -1,10 +1,8 @@
-# .bash_profile
-
 ## Get the aliases and functions
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
 
 ## Environment variables
-export SSH_AUTH_SOCK=run/user/$(id -u)/keyring/ssh
+#export SSH_AUTH_SOCK=run/user/$(id -u)/keyring/ssh
 # this one fixes apps that use egl from slow behaviour, seems to break mpv :(
 #if /home/$USER/.local/bin/envycontrol.py -q | grep -q integrated ; then
 #    export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
@@ -35,16 +33,20 @@ set_wayland() {
 }
 
 # ssh-agent
-eval `ssh-agent`
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval `ssh-agent`
+fi
 
-## startx
-# If DISPLAY=0 and TTY=1 then startx
+# If DISPLAY=0 and TTY=1 then start WM
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    ## Uncomment only ONE
+    ### Uncomment only ONE
     
+    ## WAYLAND
     #pgrep -x sway || exec dbus-run-session /usr/bin/sway
+    
+    ## X11
     startx
     
-    # When startx exits then logout
+    # When WM exits, logout
     logout
 fi

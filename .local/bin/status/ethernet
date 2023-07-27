@@ -35,7 +35,7 @@ done
 [[ ! -d /sys/class/net/${IF} ]] && exit
 #------------------------------------------------------------------------
 AF=${ADDRESS_FAMILY:-inet6?}
-LABEL="${LABEL:-}"
+LABEL="${LABEL:-󰌗}"
 
 for flag in "$1" "$2"; do
   case "$flag" in
@@ -52,10 +52,12 @@ for flag in "$1" "$2"; do
   esac
 done
 
+if [ ! -z "$border" ]; then
+  LABEL="<span color=\"$border\">$LABEL</span>"
+fi
+
 if [[ "$IF" = "" ]] || [[ "$(cat /sys/class/net/$IF/operstate)" = 'down' ]]; then
-  echo "down" # full text
-  echo "${LABEL}down" # short text
-  echo "#D95177" # color
+  echo "${LABEL}<span color=\"#D95177\">down</span>" # short text
   exit
 fi
 
@@ -65,7 +67,6 @@ IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^ \/]+).* scope global/ && print 
 
 case $BLOCK_BUTTON in
     1)
-        echo "${IPADDR}"
         echo "${label}${IPADDR}"
         exit
         ;;
@@ -87,5 +88,4 @@ else
 fi
 #------------------------------------------------------------------------
 
-echo "Up"
 echo "${label}Up"

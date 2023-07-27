@@ -12,5 +12,5 @@ else
     output="gr"
 fi
 
-dunstify -a "Layout" "󰌌 $output" -t 1000 -r 231
+dunstify -a "Layout" "󰌌   $output   " -t 1000 -r 231
 

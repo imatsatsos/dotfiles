@@ -28,28 +28,17 @@ on_xorg() {
     #displays   # in development
     fix_input
     xset r rate 280 40
-    xwallpaper --maximize ~/.config/background
+    setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escape
   fi
 }
 
-# one-shot-stuff
 on_xorg
 #gnome_scaling_factor
 rfkill block bluetooth
 wpctl set-volume @DEFAULT_SINK@ 50%
 wpctl set-volume @DEFAULT_SOURCE@ 16%
-eval `ssh-agent`
-
-# apps
-pidof -sx "gnome-keyring-daemon" || gnome-keyring-daemon --start --components=ssh,secrets,pkcs11 &
-pidof -sx "polkit-gnome-authentication-agent-1" || "/usr/libexec/polkit-gnome-authentication-agent-1" &
-pidof -sx "low_battery" || low_battery &
-pidof -sx "picom" || picom -b &
-
-#autostart=""
-#for program in $autostart; do
-#	pidof -sx "$program" || "$program" &
-#done >/dev/null 2>&1
+# probablye not needed as i start it in my bashprofile
+#eval `ssh-agent`
 
 notify-send "Login script run!"
 

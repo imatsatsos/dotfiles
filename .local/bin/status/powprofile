@@ -11,24 +11,22 @@ current_profile=$(cat "$file")
 
 case $current_profile in
 	power)
-	    echo ""
-	    echo ""
-	    echo "#78DCA7"
+	    echo "<span color=\"#78DCA7\"></span>"
 	;;
 	performance)
-	    echo ""
-	    echo ""
-	    echo "#D95177"
+	    echo "<span color=\"#D95177\"></span>"
 	;;
     *)
 	    #   󰗑
-        echo "󰚀 "
-	    echo "󰚀 "
-	    echo "#759EEA"
+	    echo "<span color=\"#759EEA\">󰚀 </span>"
     ;;
 esac
 
-if [ "$button" = "1" ]; then
+if [ "$button" = "3" ]; then
     "$HOME"/.local/bin/rofi-ppd
 fi
 
+case $button in
+  1) notify-send "Current profile is:" "$current_profile" ;;
+  3) rofi-ppd ;;
+esac

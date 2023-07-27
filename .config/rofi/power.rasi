@@ -28,9 +28,9 @@ configuration {
     textbox-font:                "Iosevka Nerd Font 14";
     element-text-font:           "feather 64";
 
-    background-window:           black/94%;
-    background-normal:           white/5%;
-    background-selected:         white/20%;
+    background-window:           black/75%;
+    background-normal:           white/3%;
+    background-selected:         white/15%;
     foreground-normal:           white;
     foreground-selected:         white;
 }

@@ -8,8 +8,9 @@ FEDITOR="vim"
 
 SCRIPTS_FOLDER1="$HOME/.local/bin/*"
 SCRIPTS_FOLDER2="$HOME/.config/i3/scripts/*"
+SCRIPTS_FOLDER3="$HOME/.local/bin/status/*"
 
-SCRIPTS="$SCRIPTS_FOLDER1 $SCRIPTS_FOLDER2"
+SCRIPTS="$SCRIPTS_FOLDER1 $SCRIPTS_FOLDER2 $SCRIPTS_FOLDER3"
 
  # Piping the above array (cleaned) into fzf.
  # We use "printf '%s\n'" to format the array one item to a line.

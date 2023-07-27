@@ -4,7 +4,7 @@
 
 case $button in
     # show updates
-    1) $TERM -e sh -c "less /tmp/updates"
+    1) $TERM -T termfloat -e sh -c "cat /tmp/updates"
         exit
     ;;
     

@@ -1,0 +1,47 @@
+super + e
+  pcmanfm
+
+super + w
+  flatpak run --branch=stable --arch=x86_64 --command=brave com.brave.Browser --password-store=gnome
+
+super + a
+  rofi-launcher > /home/john/rofilog 2> /home/john/rofilog
+
+super + shift + g
+  picom-toggle
+
+super + ctrl + l
+  i3exit lock
+
+super + Escape
+  rofi-power
+
+super + Print
+  rofi-screenshot
+
+Print
+  screenshot fullscreen
+
+shift + Print
+  screenshot selection
+
+ctrl + Print
+  screenshot window
+
+{XF86AudioPrev, XF86AudioPlay, XF86AudioNext}
+  playerctl {previous, play-pause, next}
+
+{XF86MonBrightnessUp, XF86MonBrightnessDown}
+  pkill -SIGRTMIN+9 i3blocks
+
+XF86AudioRaiseVolume
+  volume_control up && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
+
+XF86AudioLowerVolume
+  volume_control down && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
+
+XF86AudioMute
+  volume_control mute && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
+
+ctrl + XF86AudioMute
+  volume_control micmute && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
