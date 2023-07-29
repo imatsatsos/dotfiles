@@ -7,6 +7,25 @@ super + w
 super + a
   rofi-launcher > /home/john/rofilog 2> /home/john/rofilog
 
+super + shift + e
+  rofi -modi emoji -show emoji
+
+super + Num_Lock
+  rofi -show calc -modi calc -no-show-match -no-sort
+
+XF86Search
+  fsearch
+
+## tests
+#super + KP_{0-9,Divide,Multiply,Subtract,Add,Decimal,Enter,Separator}
+#    notify-send {0-9,Divide,Multiply,Subtract,Add,Decimal,Enter,Separator}
+#
+#super + {Num_Lock,@Print,Insert,Home,Prior,Delete,End,Next,Scroll_Lock,Pause}
+#    notify-send {Num_Lock,Print,Insert,Home,Prior,Delete,End,Next,Scroll_Lock,Pause}
+
+ctrl + grave
+  dunstctl history-pop
+
 super + shift + g
   picom-toggle
 
@@ -16,17 +35,8 @@ super + ctrl + l
 super + Escape
   rofi-power
 
-super + Print
-  rofi-screenshot
-
-Print
-  screenshot fullscreen
-
-shift + Print
-  screenshot selection
-
-ctrl + Print
-  screenshot window
+{_, super +, shift +, ctrl +} @Print
+  screenshot {fullscreen, rofi, selection, window}
 
 {XF86AudioPrev, XF86AudioPlay, XF86AudioNext}
   playerctl {previous, play-pause, next}
@@ -34,14 +44,6 @@ ctrl + Print
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
   pkill -SIGRTMIN+9 i3blocks
 
-XF86AudioRaiseVolume
-  volume_control up && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
+{XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86AudioMute, ctrl + XF86AudioMute}
+  volume_control {up, down, mute, micmute}; kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
 
-XF86AudioLowerVolume
-  volume_control down && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
-
-XF86AudioMute
-  volume_control mute && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
-
-ctrl + XF86AudioMute
-  volume_control micmute && kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks

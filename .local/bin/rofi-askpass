@@ -1,10 +1,8 @@
-#!/usr/bin/env bash
-
-## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+#!/usr/bin/env sh
 
 rofi -dmenu \
      -password \
      -i \
      -no-fixed-num-lines \
      -p "Password: " \
-     -theme /home/$USER/.config/rofi/askpass.rasi &
+     -theme /home/$USER/.config/rofi/theme_askpass.rasi &

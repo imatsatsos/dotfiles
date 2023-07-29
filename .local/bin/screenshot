@@ -1,27 +1,46 @@
 #!/bin/sh
 # Script is a screenshot wrapper for maim
-# Take a screenshot of scree, active window, selection
+# Take a screenshot of screen, active window, selection
+# If rofi is passed as $1, then a rofi menu opens to select the screenshot type
 # Image is saved in Pictures/Screenshots and copied in clipboard
 # Depends: maim xdotool xclip dunst
 
 save_path="$HOME/Pictures/Screenshots"
 name="$(date +%s).png"
 
-case $1 in
-    fullscreen) args=" " ;;
+fullscreen="󰹑"
+window=""
+selection="󰒉"
 
-    selection) args="-s -b 2" ;;
+if [ "$1" = "rofi" ]; then
+  choice=$(echo "$fullscreen\n$window\n$selection" | rofi -dmenu -mesg "Screenshot" \
+		-theme-str "listview {columns: 1; lines: 3;}" \
+    -theme $HOME/.config/rofi/theme_screenshot.rasi ) 
+echo $choice
+fi
+
+one="$1"
+choice=${choice:-$one}
+
+case $choice in
+    fullscreen|"$fullscreen") args=" " ;;
+
+    selection|"$selection") args="-s -b 2 -c 0.35,0.55,0.85,0.25" ;;
     
-    window) args="-i $(xdotool getactivewindow)" ;;
+    window|"$window") args="-i $(xdotool getactivewindow)" ;;
 
-    *) echo "arg required: fullscreen, selection, window"; exit 1 ;;
+    *) echo "arg required: rofi, fullscreen, selection, window"; exit 1 ;;
 esac
 
 [ ! -d "$save_path" ] && mkdir -p "$save_path"
-maim -u --quiet $args | tee "$save_path/$name" | xclip -selection clipboard -t 'image/png'
+sleep 0.5; maim -u --quiet $args | tee "$save_path/$name" | xclip -selection clipboard -t 'image/png'
+
+[ -f "$save_path/$name" ] || exit 1
 
 dunstify -a "Screenshot" \
-    "Saved:" \
+    "Screenshot captured:" \
     "<i>$name</i>" \
     -t 3000 \
     -i "$save_path/$name"
+
+paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga

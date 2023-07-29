@@ -11,7 +11,7 @@
     bg1:  #363636;
     bg2:  #f5f5f520;
     bg3:  #f5f5f540;
-    bg4:  #0860f2E6;
+    bg4:  #0860f2b6;
 
     fg0:  #f5f5f5;
     fg1:  #f5f5f580;
@@ -35,11 +35,11 @@ mainbox {
 inputbar {
   background-color: @bg2;
 
-  margin:   0px calc( 50% - 120px );
-  padding:  2px 4px;
+  margin:   1em calc( 50% - 120px );
+  padding:  4px 4px;
   spacing:  4px;
 
-  border:         1px;
+  border:         2px;
   border-radius:  2px;
   border-color:   @bg3;
 
@@ -62,9 +62,9 @@ entry {
 }
 
 listview {
-  margin:   48px calc( 35% - 560px );
-  spacing:  48px;
-  columns:  7;
+  margin:   14px calc( 37% - 560px );
+  spacing:  50px;
+  columns:  6;
   fixed-columns: true;
 }
 
@@ -73,8 +73,8 @@ element, element-text, element-icon {
 }
 
 element {
-  padding:      8px;
-  spacing:      14px;
+  padding:      5px;
+  spacing:      10px;
 
   orientation:    vertical;
   border-radius:  16px;

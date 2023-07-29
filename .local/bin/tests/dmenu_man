@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+dmenucmd=$(man -k . | cut -d ' ' -f 1,2 | dmenu $@)
+[[ -z $dmenucmd ]] && exit
+dmenucmd=$(echo $dmenucmd | tr -d '([0-9])' | awk '{print $1}')
+echo $dmenucmd
+sh -c "st -e man $dmenucmd"

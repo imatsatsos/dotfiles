@@ -18,7 +18,7 @@ COLOR_GE60=${COLOR_GE60:-#FCF39C}
 COLOR_GE40=${COLOR_GE40:-#DBC074}
 COLOR_LOWR=${COLOR_LOWR:-#D95177}
 COLOR_DOWN=${COLOR_DOWN:-#D95177}
-LABEL=" "
+LABEL="󰖩"
 
 # As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
 # connection (think desktop), the corresponding block should not be displayed.
@@ -39,11 +39,13 @@ esac
 
 # If the wifi interface exists but no connection is active, "down" shall be displayed.
 if [[ "$(cat /sys/class/net/$INTERFACE/operstate)" = 'down' ]]; then
-    echo "<span color=\"$COLOR_DOWN\">󰤭  down</span>"
+    echo "<span color=\"$COLOR_DOWN\">󰖪 down</span>"
     exit
 fi
 
-SSID=$(iw "$INTERFACE" info | awk '/ssid / {$1=""; print $0}')
+
+SSID=$(iw "$INTERFACE" link | awk '/SSID: / {$1=""; print $0}')
+#SSID=$(iw "$INTERFACE" info | awk '/ssid / {$1=""; print $0}')
 SHORT_SSID="*${SSID: -3}"
 QUALITY=$(iw ${INTERFACE} link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '{print  ($1 > -50 ? 100 :($1 < -100 ? 0 : ($1+100)*2))}')
 QUALITYdBm=$(iw ${INTERFACE} link | grep dBm | grep -Eoe '-[0-9]{2} dBm')
@@ -69,4 +71,4 @@ if [[ ! -z $border ]]; then
     LABEL="<span color=\"$border\">$LABEL</span>"
 fi
 
-echo "$LABEL <span color=\"$COLOR\">$OUTPUT</span>"
+echo "$LABEL  <span color=\"$COLOR\">$OUTPUT</span>"

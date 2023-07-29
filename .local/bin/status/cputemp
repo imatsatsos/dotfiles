@@ -23,9 +23,9 @@ case $BLOCK_BUTTON in
 esac
 
 if [ $temp -ge 80 ]; then
-  echo "$label <span color='#FF0000'>$temp°C</span>"
-elif [ $temp -ge 70 ]; then
-  echo "$label <span color='#FFFC00'>$temp°C</span>"
+  echo "$label <span color='#ff1600'>$temp°C</span>"
+elif [ $temp -ge 72 ]; then
+  echo "$label <span color='#ff9600'>$temp°C</span>"
 else
   echo "$label $temp°C"
 fi

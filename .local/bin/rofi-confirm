@@ -3,10 +3,10 @@
 # Rofi powered menu to prompt a message and get a yes/no answer.
 # Uses: rofi
 
-yes='Confirm'
+yes='Do as I say'
 no='Cancel'
 query='Are you sure?'
-theme='confirm.rasi'
+theme='theme_confirm.rasi'
 
 while [ $# -ne 0 ]; do
     case "$1" in
@@ -32,15 +32,14 @@ while [ $# -ne 0 ]; do
     shift
 done
 
-#| rofi -theme-str '@import "prompt.rasi"' \
-chosen=$(printf '%s;%s\n' "$yes" "$no" \
-    | rofi -no-default-config \
+chosen=$(printf '%s;%s' "$yes" "$no" | rofi \
+           -dmenu \
+           -i \
+           -no-fixed-num-lines \
+           -no-default-config \
            -theme $theme \
            -p "$query" \
-           -dmenu \
            -sep ';' \
-           -a 0 \
-           -u 1 \
            -selected-row 1)
 
 case "$chosen" in

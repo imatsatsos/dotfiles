@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set_touchpad_scrollspeed() {
   # find touchpad device from xinput
   line="$( xinput | grep -iP '(?=.*DELL)(?=.*Touchpad)' )"

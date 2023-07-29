@@ -9,6 +9,7 @@ TerminalEmulator=st.desktop
 video/webm=mpv.desktop
 video/x-matroska=mpv.desktop
 application/xml=geany.desktop
+image/gif=org.gnome.eog.desktop
 
 [Added Associations]
 image/jpeg=org.gnome.eog.desktop;
@@ -22,3 +23,6 @@ video/x-matroska=mpv.desktop;
 application/xml=geany.desktop;
 text/plain=nvim.desktop;
 application/x-trash=nvim.desktop;
+application/x-mozilla-bookmarks=com.brave.Browser.desktop;
+application/octet-stream=geany.desktop;
+image/gif=org.gnome.eog.desktop;

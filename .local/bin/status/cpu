@@ -13,9 +13,9 @@ cpu(){
     total=$((a+b+c+idle))
     usage=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
     if [ $usage -ge 90 ]; then
-      usage="<span color=\"#FF0000\">$usage</span>"
+      usage="<span color=\"#ff1600\">$usage</span>"
     elif [ $usage -ge 70 ]; then
-      usage="<span color=\"#FFFC00\">$usage</span>"
+      usage="<span color=\"#ff9600\">$usage</span>"
     fi
     echo "$label  $usage%"
 }

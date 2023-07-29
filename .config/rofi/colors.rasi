@@ -1,20 +1,8 @@
-/* colors */
-
 * {
-  al:  #00000000;
-  bg:  #1b1b25;
-  se:  #282a36;
-  fg:  #dedede;
-  ac:  #16161e;
-  br:  #343746;
-  border:  #343746;
-  background:		#1b1b25;
-  background-alt:	#262A32;
-  foreground:		#dedede;
-  selected2:		#61afef;
-  selected:			#282a36;
-  highlight:		#DF6B74;
-  urgent:			#e06c75;
-  on:				#98c379;
-  off:				#e06c75;
+    bg:          #24242496;
+	  bg-sel:      #5a84bcc8;
+    brd:         #7e7e7e80;
+	  txt:         #eeeeee;
+  background-color: transparent;
+  text-color:       @txt;
 }

@@ -4,7 +4,7 @@
 
 file="/sys/devices/system/cpu/cpufreq/policy0/energy_performance_preference"
 
-# if cpu does not support energe-performance pref, don't show anything
+# if cpu does not support energy-performance pref, don't show anything
 [ -f "$file" ] || exit
 
 current_profile=$(cat "$file")
@@ -22,11 +22,7 @@ case $current_profile in
     ;;
 esac
 
-if [ "$button" = "3" ]; then
-    "$HOME"/.local/bin/rofi-ppd
-fi
-
 case $button in
   1) notify-send "Current profile is:" "$current_profile" ;;
-  3) rofi-ppd ;;
+  3) setsid -f rofi-ppd &;;
 esac

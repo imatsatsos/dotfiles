@@ -1,7 +1,9 @@
 #!/bin/sh
 # script outputs bluetooth status (on/off) and if connected, the name of the device
 
-device="Galaxy Buds+"
+# input mac address of devices, find with bluetoothctl list Paired
+headset="1C:E6:1D:56:18:C3"
+speaker="F8:DF:15:B2:38:7A"
 
 # Checks if bluetooth controller is powered on
 power_on() {
@@ -36,13 +38,15 @@ device_connected() {
 
 case $BLOCK_BUTTON in
   1) toggle_power ;;
-  3) rofi-bluetooth ;;
+  3) setsid -f rofi-bluetooth & ;;
 esac
 
 if power_on; then
   output=''
-  if device_connected "$device"; then
-    output='󰥰 $device'
+  if device_connected "$headset"; then
+    output='󰥰 GB+'
+  elif device_connected $speaker; then
+    output='󰦢 JBL'
   fi
 else
   output='󰂲'

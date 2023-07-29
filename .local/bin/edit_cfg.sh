@@ -14,7 +14,7 @@ list[mpv]="$HOME/.config/mpv/mpv.conf"
 list[neofetch]="$HOME/.config/neofetch/config.conf"
 list[starship]="$HOME/.config/starship.toml"
 list[neovim]="$HOME/.config/nvim/init.lua"
-#list[ssh]="$HOME/.ssh/config"
+list[ssh]="$HOME/.ssh/config"
 list[xresources]="$HOME/.Xresources"
 list[i3-config]="$HOME/.config/i3/config"
 list[i3-blocks]="$HOME/.config/i3/i3blocks.conf"
@@ -40,6 +40,6 @@ if [ "$choice" ]; then
     $FEDITOR "$cfg"
 # What to do if we just escape without choosing anything.
 else
-    echo "Program terminated." && exit 0
+    echo "No selection." && exit 0
 fi
 

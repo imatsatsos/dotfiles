@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ## main app launcher
-rofi -show combi -modes combi -combi-modes "window,drun,run" -display-drun "App:" -show-icons -theme ~/.config/rofi/spotlight-dark.rasi
+rofi -show combi -modes combi -combi-modes "window,drun,run" -show-icons
 
 ## dmenu app launcher
 # rofi -combi-modes "drun,run" -show combi -display-drun "" -drun-display-format "{name}" -show-icons -theme dmenu

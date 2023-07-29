@@ -7,10 +7,7 @@ layout=$(xset -q | grep -A 0 'LED' | cut -c59-67)
 [ -z "$layout" ] && exit
 
 if [ "$layout" = "00000000" ] || [ "$layout" = "00000002" ]; then
-    output="en"
+    echo " en "
 else
-    output="gr"
+    echo "<span bgcolor='#6aa6e6' fgcolor='#ffffff'> gr </span>"
 fi
-
-dunstify -a "Layout" "󰌌   $output   " -t 1000 -r 231
-

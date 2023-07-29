@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-
 ## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
 
 DIR="$HOME/.local/bin/"
 
-rofi_command="rofi -theme /home/$USER/.config/rofi/asroot.rasi"
+rofi_command="rofi -theme /$HOME/.config/rofi/theme_asroot.rasi"
 
 # Apps
 terminal="Terminal"
@@ -15,26 +14,25 @@ vim="Vim"
 
 # Variable passed to rofi
 options="$terminal\n$files\n$editor\n$clifm\n$vim"
-#term='alacritty --class alacritty-float,alacritty-float
-term=alacritty
+term=st
 
 # Functions
 chosen="$(echo -e "$options" | $rofi_command -p "Run as root:" -dmenu -selected-row 0)"
 case $chosen in
     $terminal)
-        "$DIR"/asroot.sh "$term -T term_as_root"
+        asroot "$term -T term_as_root"
         ;;
     $files)
-        "$DIR"/asroot.sh 'dbus-run-session nautilus'
+        asroot 'dbus-run-session nautilus'
         ;;
     $editor)
-        "$DIR"/asroot.sh geany
+        asroot geany
         ;;
     $clifm)
-        "$DIR"/asroot.sh "$term -T term_as_root -e ranger"
+        asroot "$term -T term_as_root -e ranger"
         ;;
     $vim)
-        "$DIR"/asroot.sh "$term -T term_as_root -e vim"
+        asroot "$term -T term_as_root -e vim"
         ;;
 esac
 

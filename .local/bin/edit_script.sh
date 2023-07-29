@@ -21,6 +21,6 @@ if [ "$choice" ]; then
     $FEDITOR "$choice"
 # What to do if we just escape without choosing anything.
 else
-    echo "Program terminated." && exit 0
+    echo "No selection." && exit 0
 fi
 

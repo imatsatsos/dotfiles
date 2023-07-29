@@ -74,7 +74,7 @@ do_copy_dotconfig "background \
     mimeapps.list \
     starship.toml \
     window_titles.yml \
-    autostart/onlogin \
+    autostart/onlogin.sh \
     alacritty/ \
     btop/ \
     dunst/ \

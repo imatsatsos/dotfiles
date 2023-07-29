@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Simple Terminal Timer
+
+time=$(dmenu -p "Timer:" < /dev/null)
+[ -z "$time" ] && printf "No time interval specified...\n" && exit 1
+
+calc() {
+	seconds="$(echo "$time*$2" | bc | sed 's/\..*$//')"
+}
+
+case "$time" in
+	*h) calc "${time%?}" 3600;;
+	*m) calc "${time%?}"   60;;
+	*s) seconds="${time%?}"  ;;
+	*)  calc "$time"       60;;
+esac
+
+echo "timer set for $time ($seconds) ${2:+- $2}"
+{
+	sleep "$seconds" || exit 1
+
+	paplay "/usr/share/sounds/freedesktop/stereo/complete.oga" |: &
+  notify-send -u critical "Time's Up! {$time}" "$2"
+} &

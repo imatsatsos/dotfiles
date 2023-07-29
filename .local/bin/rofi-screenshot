@@ -1,8 +1,0 @@
-#!/bin/sh
-#
-# Rofi powered menu to take a screenshot
-# (See $HOME/.local/bin/screenshot for more info)
-
-choice=$(echo "fullscreen\nwindow\nselection\n" | rofi -dmenu)
-
-$HOME/.local/bin/screenshot "$choice"

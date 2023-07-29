@@ -18,7 +18,7 @@
     offset = 25x25
     scale = 0
     notification_limit = 0
-    transparency = 12
+    transparency = 15
     background = "#151515"
     frame_width = 2
     frame_color = "#dddddd"
@@ -194,7 +194,7 @@
     per_monitor_dpi = false
 
 [urgency_low]
-    foreground = "#bbbbbb"
+    foreground = "#cccccc"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     default_icon = NONE
@@ -311,25 +311,10 @@
 #    summary = "foobar"
 #    skip_display = yes
 
-#[signed_on]
-#    appname = Pidgin
-#    summary = "*signed on*"
-#    urgency = low
-#
 #[signed_off]
 #    appname = Pidgin
 #    summary = *signed off*
 #    urgency = low
-#
-#[says]
-#    appname = Pidgin
-#    summary = *says*
-#    urgency = critical
-#
-#[twitter]
-#    appname = Pidgin
-#    summary = *twitter.com*
-#    urgency = normal
 #
 [volume]
     appname = "Volume"
@@ -365,7 +350,6 @@
     alignment = center
     max_icon_size = 128
     icon_position = top
-    history_ignore = yes
 
 [spotify]
     appname = "*spotify*"

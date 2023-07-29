@@ -1,0 +1,86 @@
+configuration {
+	hover-select: true;
+	me-select-entry: "";
+	me-accept-entry: [MousePrimary];
+}
+
+* {
+    bg:          #24242496;
+	  bg-sel:      #5a84bcc8;
+    brd:         #7e7e7e80;
+	  txt:         #eeeeee;
+    font: "Sans 11";
+    background-color:   transparent;
+    text-color:         @txt;
+}
+
+window {
+    transparency:                "real";
+    location:                    east;
+    anchor:                      east;
+    fullscreen:                  false;
+    width:                       120px;
+    x-offset:                    -20px;
+    y-offset:                    0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               10px;
+    border-color:                @bg-sel;
+    cursor:                      "default";
+    background-color:            @bg;
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     12px;
+    children:                    [ listview, message ];
+}
+
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       5;
+    cycle:                       true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    
+    spacing:                     12px;
+    cursor:                      "default";
+}
+
+element {
+    enabled:                     true;
+    padding:                     24px 10px 24px 2px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @bg-sel;
+    cursor:                      pointer;
+}
+
+element-text {
+    font:                        "feather 24";
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+element selected {
+    background-color:            @bg-sel;
+}
+
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     10px 0px;
+    border-radius:               8px;
+    background-color:            @bg;
+}
+textbox {
+    str: "test";
+    placeholder: "test";
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}

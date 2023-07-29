@@ -2,8 +2,8 @@
 # power menu with rofi
 
 # rofi theme
-theme="$HOME/.config/rofi/power.rasi"
-confirm_theme="$HOME/.config/rofi/main_noicons.rasi"
+theme="$HOME/.config/rofi/theme_power.rasi"
+confirm_theme="$HOME/.config/rofi/theme_confirm.rasi"
 
 # commands
 uptime="`uptime -p | sed -e 's/up //g'`"
@@ -15,6 +15,8 @@ reboot='󰓦'
 lock=''
 suspend=''
 logout='󰍃'
+yes='Confirm'
+no='Cancel'
 
 get_options() {
   echo "$poweroff"
@@ -32,14 +34,16 @@ main() {
 
   # get choice from rofi
   choice=$( (get_options) | rofi -dmenu -p "Goodbye ${USER}" -mesg "Uptime: $uptime" -no-default-config -theme $theme)
+  # get choice from dmenu
+  #choice=$( (get_options) | dmenu -p "Goodbye ${USER}" )
 
   # run the selected command
   case $choice in
   "$poweroff")
-    rofi-prompt --query 'Power off?' --yes '' --no '' --theme $confirm_theme && $i3exit poweroff
+    rofi-confirm --query 'Power off?' --yes $yes --no $no --theme $confirm_theme && $i3exit poweroff
     ;;
   "$reboot")
-    rofi-prompt --query 'Reboot?' --yes '' --no '' --theme $confirm_theme && $i3exit reboot
+    rofi-confirm --query 'Reboot?' --yes $yes --no $no --theme $confirm_theme && $i3exit reboot
     ;;
   'Hibernate')
     $i3exit hibernate
@@ -51,7 +55,7 @@ main() {
     $i3exit suspend
     ;;
   "$logout")
-    rofi-prompt --query 'Log out?' --yes '' --no '' --theme $confirm_theme && $i3exit logout
+    rofi-confirm --query 'Log out?' --yes $yes --no $no --theme $confirm_theme && $i3exit logout
     ;;
   esac
 

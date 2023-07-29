@@ -37,7 +37,7 @@ on_xorg
 rfkill block bluetooth
 wpctl set-volume @DEFAULT_SINK@ 50%
 wpctl set-volume @DEFAULT_SOURCE@ 16%
-# probablye not needed as i start it in my bashprofile
+# probably not needed as i start it in my bashprofile
 #eval `ssh-agent`
 
 notify-send "Login script run!"

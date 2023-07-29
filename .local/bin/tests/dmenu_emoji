@@ -1,0 +1,19 @@
+#!/bin/sh
+# based on HexDSL's: https://gitlab.com/hexdsl/dots/tree/master/stow_home/bin/.bin
+# uses wl-clipboard: https://github.com/bugaevc/wl-clipboard
+
+# prevent Xwayland from being started needlessly
+#unset DISPLAY
+
+chosen=$(grep -v "#" ./emojis.txt | rofi -dmenu -p "select emoji" -i -l 10)
+
+# nothing selected
+[ "$chosen" != "" ] || exit
+
+# only keep the emoji itself
+c=$(echo "$chosen" | cut -f1 -d' ')
+
+# pop notification and copy to clipboard
+notify-send "'$c' copied to clipboard." &
+#echo -n "$c" | wl-copy
+echo -n "$c" | xclip

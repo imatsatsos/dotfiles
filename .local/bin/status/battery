@@ -10,18 +10,18 @@ path_to_battery=$(upower -e | grep BAT)
 battery_level=$(upower -i "$path_to_battery"  | grep -E "percentage" | sed 's/[^0-9]//g')
 state=$(upower -i "$path_to_battery"  | grep -E "state" | sed 's/.*:[[:space:]]*//')
 
-if [ $battery_level -le 15 ]; then
+if [ $battery_level -le 20 ]; then
     label=" "
-    color="#ff0000"
+    color="#ff1600"
 elif [ $battery_level -le 30 ]; then
     label=" "
-    color="#ffae00"
+    color="#ff9600"
 elif [ $battery_level -le 60 ]; then
     label=" "
-    color="#fff600"
+    color="#e9ff00"
 elif [ $battery_level -le 85 ]; then
     label=" "
-    color="#a8ff00"
+    color="#69ff00"
 else
     label=" "
 fi
@@ -49,6 +49,7 @@ fi
 profile=$(powerprofilesctl get)
 case $BLOCK_BUTTON in 
   1) notify-send "Current profile:" "$profile" ;;
+  3) rofi-ppd &
 esac
 
 

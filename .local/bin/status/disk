@@ -23,7 +23,7 @@ df -h -P $LOCAL_FLAG "$DIR" | awk -v brd="$border" -v alert_low=$ALERT_LOW '
     }
 
 	if (100 - use < alert_low) {
-		print label "<span color=\"#FF0000\">" $4 "</span>"
+		print label "<span color=\"#FF1600\">" $4 "</span>"
         exit 0
 	}
 	
