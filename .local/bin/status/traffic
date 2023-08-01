@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env sh
 #
 # Module showing network traffic. Shows how much data has been received (RX) or
 # transmitted (TX) since the previous time this script ran. So if run every
@@ -19,7 +19,7 @@ update() {
 rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
 tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
 
-printf " %4sB  %4sB\\n" $(numfmt --to=iec $rx $tx)
+printf " %4sB  %4sB\\n" $(numfmt --to=iec "$rx" "$tx")
 
 case $BLOCK_BUTTON in
 	1) setsid -f "$TERMINAL" -T termfloat -e bmon ;;

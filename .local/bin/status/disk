@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-# script outputs free disk space
+#!/usr/bin/env sh
+# Outputs free disk space in GB
 
 DIR="${DIR:-$BLOCK_INSTANCE}"
 DIR="${DIR:-$HOME}"
@@ -11,7 +11,7 @@ if [ "$1" = "-n" ] || [ "$2" = "-n" ]; then
     LOCAL_FLAG=""
 fi
 
-df -h -P $LOCAL_FLAG "$DIR" | awk -v brd="$border" -v alert_low=$ALERT_LOW '
+df -h -P $LOCAL_FLAG "$DIR" | awk -v brd="$border" -v alert_low="$ALERT_LOW" '
 /\/.*/ {
 	use=$5
 	gsub(/%$/,"",use)

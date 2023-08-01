@@ -1,0 +1,16 @@
+#!/bin/env sh
+# Touchpad toggle script
+# DEPENDS: xinput
+
+id=$( xinput | grep -iP '(?=.*DELL)(?=.*Touchpad)' | grep -oP 'id=\K\d+' )
+
+state=$( xinput list-props "$id" | grep 'Device Enabled' | awk '{print $4}' )
+
+if [ "$state" -eq 1 ]
+then
+    xinput disable "$id"
+    notify-send -u low -i '/usr/share/icons/HighContrast/256x256/status/touchpad-disabled.png' 'Disabled touchpad'
+else
+    xinput enable "$id"
+    notify-send -u low -i '/usr/share/icons/HighContrast/256x256/devices/input-touchpad.png' 'Enabled touchpad'
+fi

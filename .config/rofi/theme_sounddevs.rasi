@@ -1,10 +1,10 @@
 configuration {
-  show-icons:		false;
-	sidebar-mode: 	false;
-	hover-select: true;
+  show-icons:		   false;
+	sidebar-mode:    false;
+	hover-select:    true;
 	me-select-entry: "";
 	me-accept-entry: [MousePrimary];
-  location: 5;
+  location:        5;
   fixed-num-lines: false;
 }
 
@@ -14,7 +14,7 @@ configuration {
     brd:         #7e7e7e80;
 	  txt:         #eeeeee;
     background-color: transparent;
-    text-color:       @txt;
+    text-color:  @txt;
 }
 
 window {
@@ -22,9 +22,9 @@ window {
 	background-color: @bg;
   border-radius: 		12px;
   x-offset: -20px;
-  border: 3px;
+  border: 1px;
   border-color: @brd;
-  y-offset: -44px;
+  y-offset: -34px;
 }
 
 mainbox {
@@ -35,7 +35,7 @@ mainbox {
 
 message {
   padding: 8px 4px;
-  border: 0px 0px 2px 0px;
+  border: 0px 0px 1px 0px;
   border-color: @brd;
   horizontal-align: 0.5;
 }

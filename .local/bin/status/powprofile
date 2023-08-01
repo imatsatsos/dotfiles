@@ -1,6 +1,6 @@
-#!/bin/sh
-# script to show current power profile
-# on click it calls a script to manage active power profile
+#!/bin/env sh
+# Output current power profile
+# On right click it calls a script to select power profile
 
 file="/sys/devices/system/cpu/cpufreq/policy0/energy_performance_preference"
 

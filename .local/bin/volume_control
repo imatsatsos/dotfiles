@@ -1,9 +1,6 @@
-#!/bin/sh
+#!/bin/env sh
 # script changes volume, mute state of default sink(output) and mute state of defaut source(mic) and sends a notification
-# REQUIRES: pipewire-wireplumber, dunst
-#
-# alternative for wireplumber:
-# wpctl set-volume @DEFAULT_AUDIO_SINK@ +5% -l 1.2
+# DEPENDS: pipewire/wireplumber, dunst
 
 case "$1" in
     "up") wpctl set-volume @DEFAULT_SINK@ 2%+ ;;
@@ -14,14 +11,16 @@ case "$1" in
 esac
 
 case "$1" in
+  
   "micmute")
     state=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -q 'MUTED' && echo "MUTED" || echo "")
     if [ "$state" = "MUTED" ]; then
-      dunstify -a "Volume" "Mic:" "Mic mute" -t 1000 -r 200 -i "$HOME/.config/dunst/micw-off.svg" -h "string:fgcolor:#a0a0a0"
+      dunstify -a "Volume" "Mic:" "Mic mute" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-off.svg" -h "string:fgcolor:#a0a0a0"
     else
-      dunstify -a "Volume" "Mic" "Mic on" -t 1000 -r 200 -i "$HOME/.config/dunst/micw-on.svg"
+      dunstify -a "Volume" "Mic" "Mic on" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-on.svg"
     fi
     ;;
+    
   *)
     output=$(wpctl get-volume @DEFAULT_SINK@)
     volume=$(echo "$output" | awk '{print $2}')

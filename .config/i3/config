@@ -2,7 +2,7 @@
 ## i3 config (v4.22)  ##
 ########################
 ### COLORS
-## imachina
+## nightfox (imachina)
 set $bg       #12121f
 set $txt      #d4d7ff
 set $txtb     #222236
@@ -36,7 +36,7 @@ set $gaps_out_size 0
 set $term alacritty
 
 ## Select Alt tabber
-set $window_tabber "rofi -show window -no-default-config -config ~/.config/rofi/alt_tab.rasi"
+set $window_tabber "rofi -show window -theme ~/.config/rofi/theme_main-noicons.rasi"
 
 ## Select default workspace layout (default|stacking|tabbed)
 workspace_layout default
@@ -66,7 +66,7 @@ bindsym $mod+Return  exec --no-startup-id $term
 bindsym Mod1+Tab     exec --no-startup-id $window_tabber
 # 49 = tilde key
 bindcode $mod+49     exec --no-startup-id ~/.local/bin/i3-rofi-scratchpads
-bindsym $mod+Shift+d exec --no-startup-id dmenu_run -b -fn "$font_bar" -nb "$bg" -nf "white2" -sb "$sel" -sf "$white"
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run -b -fn "$font_bar" -nb "$bg" -nf "$txt" -sb "$wfbg" -sf "$bg"
 #bindsym Mod1+L_Shift exec --no-startup-id ~/.local/bin/dunst_kbdlayout
 
 # Reload the configuration file
@@ -111,9 +111,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 700 -r 587 'Tile horizontally ||'
-bindsym $mod+v split v;exec notify-send -t 700 -r 587 'Tile vertically =='
-bindsym $mod+n split toggle
+bindsym $mod+z split h;exec notify-send -t 700 -r 587 'Horizontal split ||'
+bindsym $mod+v split v;exec notify-send -t 700 -r 587 'Vertical split =='
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -291,7 +290,7 @@ bindsym $mod+equal scratchpad show
 ##########
 client.background       $bg
 # class                 border    bground  text    indicator  child_border
-client.focused          $fborder  $bg      $txt    $focusind  $focusbrd
+client.focused          $focusbrd $bg      $txt    $focusind  $focusbrd
 client.focused_inactive $bg       $bg      $txt    $txtb      $bg
 client.unfocused        $bg       $bg      $txt    $txtb      $bg
 client.urgent           $urgbrd   $bg      $txtb   $urgbrd    $urgbrd
@@ -301,7 +300,6 @@ client.placeholder      $bg       $bg      $txt    $bg        $bg
 # BAR #
 #######
 bar {
-        #status_command i3status -c ~/.config/i3/i3status.conf
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         font pango: $font_bar
         position bottom
@@ -315,7 +313,7 @@ bar {
 		        focused_workspace   	$wfbrd   	    $wfbg	    $bg     	$wind
 		        active_workspace	    $wabrd        $wabg     $txt    	$wind
 		        inactive_workspace    $winabrd      $bg    	  $txt	  	$wind
-		        urgent_workspace	    $urgbrd    	  $urgbg    $txt  		$wind
+		        urgent_workspace	    $urgbrd       $urgbg    $txt  		$wind
         }
 }
 

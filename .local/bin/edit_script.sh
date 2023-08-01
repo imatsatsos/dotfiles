@@ -1,6 +1,7 @@
-#!/usr/bin/bash
+#!/usr/bin/env sh
 #
 # Script displays a fzf menu of scripts to edit
+# DEPENDS: fzf, vim
 
 FMENU="fzf --border=rounded --margin=5% --color=dark --height 100% --reverse --header=$(basename "$0") --info=hidden --header-first --prompt"
 #FTERM="xst -g=89x32"

@@ -1,5 +1,5 @@
-#!/bin/sh
-# send a notification with the current screen brightness %
+#!/bin/env sh
+# sends a notification with the current screen brightness %
 # REQUIRES: dunst
 
 for folders in /sys/class/backlight/*/; do
@@ -11,20 +11,11 @@ done
 
 max_brightness=$(cat "$backlight/max_brightness")
 # if max_brightness is empty then script does not output anything
-[ -z $max_brightness ] && exit
+[ -z "$max_brightness" ] && exit
 
 brightness=$(cat "$backlight/brightness")
 percent=$(( brightness * 100 / max_brightness ))
 
-# creating a string bar
-bar=""
-i=0
-while [ "$i" -lt "$percent" ]; do
-    bar="${bar}█"
-    i=$((i + 10))
-done
-
-#notif_body="${notif_body}\n${bar}"
 notif_body="󰃠 Brightness:"
 
 dunstify -a "Brightness" \

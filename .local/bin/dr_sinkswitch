@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# load config
+. "$HOME/.local/bin/menus.conf"
+menu=${menu:-dmenu}
+
+# Create an associative array
+declare -A sinks
+
+# Get the list of sinks and their descriptions
+sink_info=$(pactl list sinks)
+
+# Retrieve the names and descriptions using sed
+names=$(echo "$sink_info" | sed -n 's/.*Name: \(.*\)/\1/p')
+#echo names $names
+
+descriptions=$(echo "$sink_info" | sed -n 's/.*Description: \(.*\)/\1/p')
+#echo descs $descriptions
+
+# Populate the associative array
+IFS=$'\n' read -r -d '' -a names_arr <<<"$names"
+IFS=$'\n' read -r -d '' -a descriptions_arr <<<"$descriptions"
+
+for ((i = 0; i < ${#descriptions_arr[@]}; i++)); do
+    sinks["${descriptions_arr[$i]}"]="${names_arr[$i]}"
+done
+#echo sinks ${sinks[@]}
+
+case $menu in
+	"rofi") description=$(echo "$descriptions" | rofi -dmenu -p "Select Audio Sink" -fuzzy -theme $HOME/.config/rofi/theme_sounddevs.rasi) ;;
+	*) description=$(echo "$descriptions" | dmenu -p "Select sink" -l ${#sinks[@]} $dmenu_args -W 750 -X 1160 -Y 34) ;;
+esac
+
+#echo choice $description
+if [ -n "${description}" ]; then
+    pactl set-default-sink "${sinks[${description}]}" &&
+        notify-send --icon=notification-audio-volume-high -a "sound_devices" "Default Audio Sink" "$description" || \
+        notify-send --icon=dialog-error -a "sound_devices" "Couldn't set default audio sink!"
+#else
+#    echo "No sink selected. Default audio sink unchanged."
+fi

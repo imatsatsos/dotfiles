@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/env sh
 # toggles picom process
 
 pid=$(pidof -s 'picom')
 
 if [ -z "$pid" ]; then
     /usr/bin/picom -b
-    notify-send "Compositor: ON"
+    notify-send -a "compositor" "󰂵  Compositor ON"
 else
     kill "$pid"
-    notify-send "Compositor: OFF"
+    notify-send -a "compositor" "󰂷  Compositor OFF"
 fi

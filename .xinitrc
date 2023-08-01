@@ -24,19 +24,20 @@ xrandr -s 1920x1080
 export XDG_SESSION_TYPE="x11"
 
 # update dbus environment variables
-dbus-update-activation-environment DISPLAY XAUTHORITY
+dbus-update-activation-environment DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 # WM apps
 pidof -sx "pipewire" || pipewire &
-pidof -sx "pipewire-pulse" || pipewire-pulse &
+# disabled cause i start pipewire-pulse using pipewire.conf
+#pidof -sx "pipewire-pulse" || pipewire-pulse &
 gnome-keyring-daemon --start --components=secrets,pkcs11 &
 pidof -sx "polkit-gnome-authentication-agent-1" || "/usr/libexec/polkit-gnome-authentication-agent-1" &
 pidof -sx "dwmblocks" || dwmblocks -b &
-pidof -sx "sxhkd" || sxhkd &
 pidof -sx "low_battery" || low_battery &
 pidof -sx "picom" || picom -b &
 xwallpaper --maximize ~/.config/background &
 pidof -sx "onlogin.sh" || onlogin.sh &
+pidof -sx "sxhkd" || sxhkd &
 
 #autostart="programs"
 #for program in $autostart; do
@@ -45,4 +46,4 @@ pidof -sx "onlogin.sh" || onlogin.sh &
 
 ## start window-manager
 exec dbus-run-session /usr/local/bin/dwm
-#exec dbus-run-session /usr/bin/i3
+# exec dbus-run-session /usr/bin/i3

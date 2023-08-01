@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/env sh
 # Script is a screenshot wrapper for maim
 # Take a screenshot of screen, active window, selection
-# If rofi is passed as $1, then a rofi menu opens to select the screenshot type
-# Image is saved in Pictures/Screenshots and copied in clipboard
-# Depends: maim xdotool xclip dunst
+# If "menu" is passed as $1, then a rofi menu opens to select the screenshot function
+# Image is saved in Pictures/Screenshots and copied to clipboard
+# DEPENDS: maim xdotool xclip dunst
 
 save_path="$HOME/Pictures/Screenshots"
 name="$(date +%s).png"
@@ -12,20 +12,29 @@ fullscreen="󰹑"
 window=""
 selection="󰒉"
 
-if [ "$1" = "rofi" ]; then
-  choice=$(echo "$fullscreen\n$window\n$selection" | rofi -dmenu -mesg "Screenshot" \
+if [ "$1" = menu ]; then
+	. "$HOME"/.local/bin/menus.conf
+	menu=${menu:-dmenu}
+	case $menu in
+	"rofi")
+		choice=$(printf "%s\n%s\n%s" "$fullscreen" "$window" "$selection" | rofi -dmenu -mesg "Screenshot" \
 		-theme-str "listview {columns: 1; lines: 3;}" \
-    -theme $HOME/.config/rofi/theme_screenshot.rasi ) 
-echo $choice
+		-theme "$HOME"/.config/rofi/theme_screenshot.rasi ) 
+	;;
+	*)
+		fullscreen="󰹑  Fullscreen"
+		window="  Window"
+		selection="󰒉  Selection"
+		choice=$(printf "%s\n%s\n%s" "$fullscreen" "$window" "$selection" | dmenu -p "Screenshot:" $dmenu_args)
+	;;
+	esac
 fi
 
-one="$1"
-choice=${choice:-$one}
-
+choice=${choice:-$1}
 case $choice in
     fullscreen|"$fullscreen") args=" " ;;
 
-    selection|"$selection") args="-s -b 2 -c 0.35,0.55,0.85,0.25" ;;
+    selection|"$selection") args="-s -b 2 -c 0.35,0.55,0.85,0.75" ;;
     
     window|"$window") args="-i $(xdotool getactivewindow)" ;;
 
@@ -33,7 +42,7 @@ case $choice in
 esac
 
 [ ! -d "$save_path" ] && mkdir -p "$save_path"
-sleep 0.5; maim -u --quiet $args | tee "$save_path/$name" | xclip -selection clipboard -t 'image/png'
+maim --delay=1 -u --quiet $args | tee "$save_path/$name" | xclip -selection clipboard -t 'image/png'
 
 [ -f "$save_path/$name" ] || exit 1
 

@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/env sh
 # script will create a tar backup of $PWD folder
 # if it is run in home it will exclude files and folders
+# DEPENDS: tar
 
 tar -cpzf backup.tar.gz \
 --exclude="backup.tar.gz" \

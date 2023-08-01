@@ -1,0 +1,11 @@
+#!/bin/env sh
+# Script to launch rofi main window as an app launcher
+
+## main app launcher
+rofi -show combi -modes combi -combi-modes "window,drun,run"
+
+## dmenu app launcher
+# rofi -combi-modes "drun,run" -show combi -display-drun "" -drun-display-format "{name}" -run-display ">_" -theme dmenu
+
+## fullscreen app launcher
+# rofi -show drun -theme ~/.config/rofi/theme_launchpad.rasi

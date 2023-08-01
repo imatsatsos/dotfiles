@@ -1,6 +1,5 @@
-#!/bin/sh
-# script outputs current battery % and battery charge status
-# REQUIRES: upower
+#!/bin/env sh
+# Outputs current battery % and battery charge status
 
 path_to_battery=$(upower -e | grep BAT)
 
@@ -10,16 +9,16 @@ path_to_battery=$(upower -e | grep BAT)
 battery_level=$(upower -i "$path_to_battery"  | grep -E "percentage" | sed 's/[^0-9]//g')
 state=$(upower -i "$path_to_battery"  | grep -E "state" | sed 's/.*:[[:space:]]*//')
 
-if [ $battery_level -le 20 ]; then
+if [ "$battery_level" -le 20 ]; then
     label=" "
     color="#ff1600"
-elif [ $battery_level -le 30 ]; then
+elif [ "$battery_level" -le 30 ]; then
     label=" "
     color="#ff9600"
-elif [ $battery_level -le 60 ]; then
+elif [ "$battery_level" -le 60 ]; then
     label=" "
     color="#e9ff00"
-elif [ $battery_level -le 85 ]; then
+elif [ "$battery_level" -le 85 ]; then
     label=" "
     color="#69ff00"
 else
@@ -36,11 +35,11 @@ else
   unset color
 fi
 
-if [ ! -z $border ]; then
+if [ -n "$border" ]; then
   label="<span color=\"$border\">$label</span>"
 fi
 
-if [ ! -z $color ]; then
+if [ -n "$color" ]; then
   echo "$label <span color=\"$color\">$battery_level</span>"
 else
   echo "$label $battery_level"
@@ -49,7 +48,6 @@ fi
 profile=$(powerprofilesctl get)
 case $BLOCK_BUTTON in 
   1) notify-send "Current profile:" "$profile" ;;
-  3) rofi-ppd &
+  3) dr_profile ;;
 esac
-
 

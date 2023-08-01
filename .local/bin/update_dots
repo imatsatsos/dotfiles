@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/env sh
 # Copies selected files and folders to a GITREPO folder
 # and provides the option to update a git repo
+# DEPENDS: git
 
 GITREPO="$HOME/Gitrepos/dotfiles"
 
@@ -74,7 +75,7 @@ do_copy_dotconfig "background \
     mimeapps.list \
     starship.toml \
     window_titles.yml \
-    autostart/onlogin.sh \
+    autostart/myonlogin.desktop \
     alacritty/ \
     btop/ \
     dunst/ \

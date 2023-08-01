@@ -1,9 +1,8 @@
-#!/bin/sh
-# script outputs current active keyboard layout
-
+#!/bin/env sh
+# Outputs current active keyboard layout
+# Sends a notification if called with "notify"
 layout=$(xset -q | grep -A 0 'LED' | cut -c59-67)
 
-# if layout isn't set, then exit
 [ -z "$layout" ] && exit
 
 if [ "$layout" = "00000000" ] || [ "$layout" = "00000002" ]; then
@@ -11,8 +10,18 @@ if [ "$layout" = "00000000" ] || [ "$layout" = "00000002" ]; then
     echo "EN "
 else
     output="GR"
-    echo "<span bgcolor='#5a84bc' fgcolor='#ffffff'> GR </span>"
+    if [ -z "$border" ]; then
+      echo "GR "
+    else
+      echo "<span bgcolor='#5a84bc' fgcolor='#ffffff'> GR </span>"
+    fi
 fi
 
-[ "$1" = "notify" ] && dunstify -a "Layout" "󰌌   $output   " -t 1000 -r 231
-
+if [ "$1" = "notify" ];then 
+  case $output in
+    "EN")
+      dunstify -a "Layout" "󰌌   $output " "| English (US)" -t 1000 -r 231 ;;
+    "GR")
+      dunstify -a "Layout" "󰌌   $output " "| Ελληνικά" -t 1000 -r 231 ;;
+  esac
+fi

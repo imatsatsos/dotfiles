@@ -1,0 +1,69 @@
+#!/bin/env sh
+# Rofi power menu
+
+# load config
+. "$HOME/.local/bin/menus.conf"
+menu=${menu:-dmenu}
+
+# rofi theme
+theme="$HOME/.config/rofi/theme_power.rasi"
+confirm_theme="$HOME/.config/rofi/theme_confirm.rasi"
+
+# commands
+uptime=$(uptime -p | sed -e 's/up //g')
+i3exit="$HOME/.local/bin/i3exit"
+
+# display for ROFI
+if [ "$menu" = "rofi" ]; then
+	poweroff='󰐥'
+	reboot='󰓦'
+	lock=''
+	suspend=''
+	logout='󰍃'
+else
+	poweroff='💻 Power Off'
+	reboot='🔄 Reboot'
+	lock='🔒 Lock'
+	suspend='💤 Sleep'
+	logout='🚪 Log Out'
+fi
+yes='✅ Confirm'
+no='❌ Cancel'
+
+get_options() {
+	printf "%s\n%s\n%s\n%s\n%s" "$poweroff" "$reboot" "$suspend" "$lock" "$logout"
+}
+
+main() {
+
+case $menu in
+	"rofi") choice=$( get_options | rofi -dmenu -p "Goodbye ${USER}" -mesg "Uptime: $uptime" -no-default-config -theme "$theme") ;;
+	*) choice=$( get_options | dmenu -p "Goodbye ${USER} | Uptime: $uptime" $dmenu_args -Y -3 -h 27) ;;
+esac
+
+# run the selected command
+  case "$choice" in
+  "$poweroff")
+    dr_confirm --query 'Power off?' --yes "$yes" --no "$no" --theme "$confirm_theme" && $i3exit poweroff
+    ;;
+  "$reboot")
+    dr_confirm --query 'Reboot?' --yes "$yes" --no "$no" --theme "$confirm_theme" && $i3exit reboot
+    ;;
+  "$lock")
+    $i3exit lock
+    ;;
+  "$suspend")
+    $i3exit suspend
+    ;;
+  "$logout")
+    dr_confirm --query 'Log out?' --yes "$yes" --no "$no" --theme "$confirm_theme" && $i3exit logout
+    ;;
+  esac
+
+  # done
+  #set -e
+}
+
+main &
+
+exit 0

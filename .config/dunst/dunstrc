@@ -1,55 +1,38 @@
 [global]
-    ### Display ###
-    # Which monitor should the notifications be displayed on.
     monitor = 0
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
     #   keyboard: follow window with keyboard focus
     #   none: don't follow anything
-    # If this option is set to mouse or keyboard, the monitor option
-    # will be ignored.
     follow = none
 
-
     ### Geometry ###
-    width = (50, 300)
+    width = (70, 300)
     height = 200
     origin = top-right
-    offset = 25x25
+    offset = 30x30
     scale = 0
-    notification_limit = 0
-    transparency = 15
+    transparency = 20
+    corner_radius = 10
     background = "#151515"
-    frame_width = 2
     frame_color = "#dddddd"
-    corner_radius = 8
-
-
-    ### Progress bar ###
-    # Turn on the progess bar. It appears when a progress hint is passed with
-    # for example dunstify -h int:value:12
+    frame_width = 2
+    
+    ### Progress Bar ###
     progress_bar = true
-    progress_bar_height = 6
+    progress_bar_height = 8
     progress_bar_frame_width = 0
     progress_bar_min_width = 130
     progress_bar_max_width = 130
     highlight = "#eeeeee"
-    # Show how many messages are currently hidden (because of
-    # notification_limit).
-    indicate_hidden = yes
 
-    
     ### Look ###
     # If gap_size is greater than 0, this setting will be ignored.
     separator_height = 2
     # Padding between text and separator.
-    padding = 8
-    # Horizontal padding.
-    horizontal_padding = 8
-    # Padding between text and icon.
-    text_icon_padding = 8
-
-
+    padding = 12
+    horizontal_padding = 12
+    text_icon_padding = 12
     # Size of gap to display between notifications - requires a compositor.
     gap_size = 16
     # Define a color for the separator.
@@ -68,9 +51,10 @@
     # section for how to disable this if necessary
     # idle_threshold = 120
 
-
     ### Text ###
-    font = sans 11
+    font = mono 11
+    alignment = left
+    vertical_alignment = center
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
     line_height = 0
@@ -84,7 +68,6 @@
     #        For a complete reference see
     #        <https://docs.gtk.org/Pango/pango_markup.html>.
     markup = full
-
     # The format of the message.  Possible variables are:
     #   %a  appname
     #   %s  summary
@@ -95,22 +78,23 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n%b\n%n"
-    alignment = left
-    vertical_alignment = center
+    format = "<i>%a</i>\n<b>%s</b>\n%b\n%n"
     # Show age of message if message is older than show_age_threshold
     # seconds.
     # Set to -1 to disable.
-    show_age_threshold = 60
+    show_age_threshold = 30
+    notification_limit = 0
+    # Show how many messages are currently hidden (because of
+    # notification_limit).
+    indicate_hidden = yes
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = true
+    # Display indicators for URLs (U) and actions (A).
+    show_indicators = yes
     # Specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
     ellipsize = middle
-    ignore_newline = no
-    stack_duplicates = true
-    hide_duplicate_count = false
-    # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
-
 
     ### Icons ###
     # Recursive icon lookup. You can set a single theme, instead of having to
@@ -130,8 +114,7 @@
     # Should a notification popped up from history be sticky or timeout as if it would normally do.
     sticky_history = yes
     # Maximum amount of notifications kept in history
-    history_length = 20
-
+    history_length = 30
 
     ### Misc/Advanced ###
     # dmenu path.
@@ -151,7 +134,6 @@
 
     ### Wayland ###
     # These settings are Wayland-specific. They have no effect when using X11
-
     # Uncomment this if you want to let notications appear under fullscreen
     # applications (default: overlay)
     # layer = top
@@ -160,7 +142,6 @@
     force_xwayland = false
 
     ### Legacy
-
     # Use the Xinerama extension instead of RandR for multi-monitor support.
     # This setting is provided for compatibility with older nVidia drivers that
     # do not support RandR and using it on systems that support RandR is highly
@@ -172,7 +153,6 @@
     force_xinerama = false
 
     ### mouse
-
     # Defines list of actions for each mouse event
     # Possible values are:
     # * none: Don't do anything.
@@ -187,32 +167,35 @@
     # These values can be strung together for each mouse event, and
     # will be executed in sequence.
     mouse_left_click = do_action, open_url, close_current
-    mouse_middle_click = close_all
-    mouse_right_click = close_current
+    mouse_middle_click = open_url
+    mouse_right_click = close_all
 
 [experimental]
     per_monitor_dpi = false
 
 [urgency_low]
     foreground = "#cccccc"
+    frame_color = "#cccccc"
     timeout = 5
-    # Icon for notifications with low urgency, uncomment to enable
     default_icon = NONE
 
 [urgency_normal]
     foreground = "#eeeeee"
     timeout = 10
-    # Icon for notifications with normal urgency, uncomment to enable
     default_icon = NONE
 
 [urgency_critical]
-    background = "#d95177"
-    foreground = "#12121F"
-    frame_color = "#dddddd"
+    foreground = "#f2f4f5"
+    background = "#232526"
+    frame_color = "#df5b61"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     #default_icon = /path/to/icon
 
+# ___ _   _ _    ___ ___ 
+#| _ \ | | | |  | __/ __|
+#|   / |_| | |__| _|\__ \
+#|_|_\\___/|____|___|___/
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 #
@@ -338,7 +321,7 @@
     appname = "Layout"
     
     set_stack_tag = "kbdlayout"
-    format = "<b>%s</b>"
+    format = "<b>%s</b>%b"
     max_icon_size = 24
     alignment = center 
     history_ignore = yes
@@ -360,8 +343,12 @@
     icon_position = top
     history_ignore = yes
 
+[calendar]
+    appname = "Calendar"
+    alignment = left
+    history_ignore = yes
+
 [signal]
-    appname = "*Signal*"
-    
-    max_icon_size = 32
+    appname = "Signal"
+    urgency = normal
 # vim: ft=cfg

@@ -1,13 +1,13 @@
-#!/bin/bash
-# script uses rofi to display all minimized i3 scratchpads
-# REQUIRES: rofi, jq, i3
+#!/bin/env sh
+# Uses rofi to display all minimized i3 scratchpads
+# REQUIRES: rofi, jq, i3, xargs
 
 i3-msg -t get_tree | \
 jq '.nodes[] | .nodes[] | .nodes[] | select(.name=="__i3_scratch") | .floating_nodes[] | .nodes[] | .window,.name,.window_properties.class' | \
 #jq ".nodes|.[]|.|.nodes|.[]|.nodes|.[]|select(.name==\"__i3_scratch\")|.floating_nodes|.[]|.nodes|.[]|.name" | \
 sed 's/\"//g' | \
 paste - - - | \
-rofi -dmenu -p "Scratchpads:" -theme /home/$USER/.config/rofi/alt_tab.rasi | \
+rofi -dmenu -p "Scratchpads:" -theme /home/$USER/.config/rofi/theme_main-noicons.rasi | \
 cut -f1 | \
 xargs -I "PID" i3-msg "[id=PID] scratchpad show"
 

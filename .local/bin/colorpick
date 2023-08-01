@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/env sh
+# uses xcolor to pick a pixel's color and copies the hex value to the clipboard
+# DEPENDS: xcolor, xclip
+
 hex=$(xcolor -P 154 -S 7)
 [ "$hex" ] && (
 echo "$hex" | xclip -r -sel clipboard && notify-send -u low "Color $hex in clipboard"

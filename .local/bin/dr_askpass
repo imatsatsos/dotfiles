@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# Use rofi as a sudo password prompt
+
+. "$HOME"/.local/bin/menus.conf
+menu=${menu:-dmenu}
+
+case $menu in
+  "rofi")
+    rofi -dmenu \
+      -password \
+      -i \
+      -no-fixed-num-lines \
+      -p "Password: " \
+      -theme "$HOME"/.config/rofi/theme_askpass.rasi &
+    ;;
+  *)
+    # hide the entry by making font color same as background
+    nb=${nb:-'#22226'}
+    nf=$nb
+    dmenu -p "Password:" $dmenu_args -nf "$nf" -nb "$nb" -W 400 -X 760 -Y 540 &
+    ;;
+esac
+

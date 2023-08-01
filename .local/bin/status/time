@@ -1,0 +1,15 @@
+#!/bin/sh
+# Outputs the current date and time
+
+case $BLOCK_BUTTON in
+  1) dunst_cal curr & ;;
+  4) dunst_cal prev & ;;
+  5) dunst_cal next & ;;
+esac
+
+if [ -z "$border" ]; then
+  date '+%a %d, %H:%M'
+else
+  echo "<span bgcolor=\"$border\" fgcolor=\"#ffffff\"> $(date '+%a %d, %H:%M') </span>"
+fi
+

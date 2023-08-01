@@ -1,5 +1,5 @@
-#!/bin/sh
-# script outputs current screen brightness %
+#!/bin/env sh
+# Outputs current screen brightness %
 
 for folders in /sys/class/backlight/*/; do
     backlight="$folders"
@@ -10,12 +10,12 @@ done
 
 max_brightness=$(cat "$backlight/max_brightness")
 # if max_brightness is empty then do not output anything
-[ -z $max_brightness ] && exit
+[ -z "$max_brightness" ] && exit
 
 brightness=$(cat "$backlight/brightness")
 percent=$(( brightness * 100 / max_brightness ))
 
-if [ ! -z $border ]; then
+if [ -n "$border" ]; then
     label="<span color=\"$border\">󰃟</span>"
 else
     label="󰃟"

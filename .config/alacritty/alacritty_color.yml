@@ -25,7 +25,7 @@ schemes:
       red:     '#da8548'
       green:   '#4db5bd'
       yellow:  '#ecbe7b'
-      blue:    '#2257a0'   # Distrotube uses 3071db, but it's 2257a0 in Doom Emacs
+      blue:    '#2257a0'   # Distrotube uses #3071db, but it's #2257a0 in Doom Emacs
       magenta: '#a9a1e1'
       cyan:    '#46d9ff'
       white:   '#dfdfdf'
@@ -438,9 +438,13 @@ schemes:
 # *TomorrowNight
 # *TomorrowNightBright
 # *IMachina
+# *Yoru
+colors: *IMachina
 
-colors: *Yoru
-
+# _____  __   _   __  __ ___ _    ___ 
+#| __\ \/ /  /_\ |  \/  | _ \ |  | __|
+#| _| >  <  / _ \| |\/| |  _/ |__| _| 
+#|___/_/\_\/_/ \_\_|  |_|_| |____|___|
 # Colors (Tomorrow Night)
 #colors:
   # Default colors

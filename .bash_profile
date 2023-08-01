@@ -1,5 +1,5 @@
 ## Get the aliases and functions
-[ -f $HOME/.bashrc ] && . $HOME/.bashrc
+[ -f "$HOME"/.bashrc ] && . "$HOME"/.bashrc
 
 ## Environment variables
 #export SSH_AUTH_SOCK=run/user/$(id -u)/keyring/ssh
@@ -34,10 +34,14 @@ set_wayland() {
 
 # ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
-  eval `ssh-agent`
+  eval $(ssh-agent)
 fi
 
-# If DISPLAY=0 and TTY=1 then start WM
+#    _  _   _ _____ ___    ___ _____ _   ___ _______  __
+#   /_\| | | |_   _/ _ \  / __|_   _/_\ | _ \_   _\ \/ /
+#  / _ \ |_| | | || (_) | \__ \ | |/ _ \|   / | |  >  < 
+# /_/ \_\___/  |_| \___/  |___/ |_/_/ \_\_|_\ |_| /_/\_\
+                                                      
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
     ### Uncomment only ONE
     

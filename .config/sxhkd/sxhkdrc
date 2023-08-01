@@ -2,26 +2,19 @@ super + e
   pcmanfm
 
 super + w
-  flatpak run --branch=stable --arch=x86_64 --command=brave com.brave.Browser --password-store=gnome
+  flatpak run com.brave.Browser 
 
 super + a
-  rofi-launcher > /home/john/rofilog 2> /home/john/rofilog
+  dr_launcher > /home/john/rofilog 2> /home/john/rofilog
 
 super + shift + e
-  rofi -modi emoji -show emoji
+  dr_emoji
 
 super + Num_Lock
   rofi -show calc -modi calc -no-show-match -no-sort
 
-XF86Search
-  fsearch
-
-## tests
-#super + KP_{0-9,Divide,Multiply,Subtract,Add,Decimal,Enter,Separator}
-#    notify-send {0-9,Divide,Multiply,Subtract,Add,Decimal,Enter,Separator}
-#
-#super + {Num_Lock,@Print,Insert,Home,Prior,Delete,End,Next,Scroll_Lock,Pause}
-#    notify-send {Num_Lock,Print,Insert,Home,Prior,Delete,End,Next,Scroll_Lock,Pause}
+super + Escape
+  dr_power
 
 ctrl + grave
   dunstctl history-pop
@@ -32,11 +25,8 @@ super + shift + g
 super + ctrl + l
   i3exit lock
 
-super + Escape
-  rofi-power
-
 {_, super +, shift +, ctrl +} @Print
-  screenshot {fullscreen, rofi, selection, window}
+  screenshot {fullscreen, menu, selection, window}
 
 {XF86AudioPrev, XF86AudioPlay, XF86AudioNext}
   playerctl {previous, play-pause, next}
@@ -47,3 +37,5 @@ super + Escape
 {XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86AudioMute, ctrl + XF86AudioMute}
   volume_control {up, down, mute, micmute}; kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
 
+XF86Search
+  fsearch

@@ -1,0 +1,64 @@
+#!/usr/bin/env sh
+# Dmenu/Rofi emoji picker
+# Write/insert the selected emoji automatically
+
+file_path="$HOME/.local/bin/resources/allemojis.txt"
+
+. "$HOME"/.local/bin/menus.conf
+menu=${menu:-dmenu}
+
+case $menu in
+  "rofi")
+    # this command uses this script to perform the rofi part
+    #rofi_command="rofi -dmenu -theme /$HOME/.config/rofi/theme_emoji.rasi"
+    # this command calls rofi-emoji from the repo and exits
+    rofi -modi emoji -show emoji -theme "$HOME"/.config/rofi/theme_emoji.rasi; exit 0
+    ;;
+  *)
+    rofi_command="dmenu $dmenu_args -l 6 -g 6 -W 370 -X 775 -Y 500"
+    ;;
+esac
+
+main() {
+
+	# If you run this command with an argument, it will automatically insert the character.
+	# Otherwise, copy and show a message that the emoji has been copied.
+	if [ -n "$1" ]; then
+		if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+			helpText
+		elif [ "$1" = "-w" ]; then
+			chooseEmoji
+		else
+      helpText
+    fi
+  else
+    chooseEmoji
+		xdotool type "$chosen"
+    printf "%s" "$chosen" | xclip -selection clipboard
+    notify-send -u low "'$chosen' copied." &
+    exit 0
+  fi
+}
+
+chooseEmoji() {
+	# Get user selection via dmenu from emoji file.
+	chosen="$(cut -d ';' -f1 "$file_path" | $rofi_command | sed "s/ .*//")"
+
+	# Exit if none chosen.
+	[ -z "$chosen" ] && exit
+}
+
+helpText() {
+	cat <<EOF
+emojimenu - select, copy and use emoji from dmenu and rofi.
+
+Usage:
+  emojimenu 
+  emojimenu [-w]
+Options:
+  -h, --help	show this help text
+  -c 		do not insert automatically, copy to clipboard only
+EOF
+}
+
+main "$@"

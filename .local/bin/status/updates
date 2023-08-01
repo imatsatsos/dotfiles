@@ -1,27 +1,24 @@
-#!/bin/sh
+#!/bin/env sh
 # Script checks for number of available updates, and sends a notification for how many
 #  there are and which of them. Also check for update errors and notifys appropriately
 
-case $button in
-    # show updates
-    1) setsid -f $TERMINAL -T termfloat -e sh -c "cat /tmp/updates"
-        exit
-    ;;
-    
-    # hide
-    3) exit
-    ;;
+case "$button" in
+  # show updates
+  1) setsid -f "$TERMINAL" -T termfloat -e sh -c "cat /tmp/updates"
+     exit ;;
+  # hide
+  3) exit ;;
 esac
 
 # check if file /tmp/updates was modified less than 60 mins ago
 file_modified=$(find "/tmp/updates" -type f -mmin -60 2>/dev/null)
 # if it was NOT modified within 60 mins, then do an update check
-if [ ! -n "$file_modified" ]; then
+if [ -z "$file_modified" ]; then
     /bin/xbps-install --dry-run --update --memory-sync 1>/tmp/updates 2>/tmp/errors
-    date >> $HOME/updates_log
+    date >> "$HOME"/updates_log
 fi
 updates="$(wc -l < /tmp/updates)"
-broken="$(grep broken /tmp/errors | wc -l)"
+broken="$(grep -c broken /tmp/errors)"
 
 if [ "$broken" -ge 1 ]; then
     echo " ERR!"

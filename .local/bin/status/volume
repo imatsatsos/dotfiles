@@ -1,11 +1,10 @@
 #!/bin/bash
-# script outputs current default output sink, it's volume, mute state
-# used in i3blocks
-# left-click: change to next output sink
-# right-click: open alsamixer
-# middle-click: mute sound
-# mousewheel: change volume
-# REQUIRES: pactl, alsamixer
+# Outputs current default output sink, volume, mute state
+# Left-click: change output sink
+# Right-click: open alsamixer
+# Middle-click: toggle mute
+# Mousewheel: change volume
+# DEPENDS: pactl, alsamixer
 
 # export this as env variable in .shellrc
 #TERMINAL=i3-sensible-terminal
@@ -14,28 +13,28 @@ BOOST_COLOR="#ff4331"
 
 get_default_sink() {
     DEFAULT_SINK=$(pactl info | grep "Default Sink" | cut -d ' ' -f3)
-    DEFAULT_SINK_INDEX=$(pactl list short sinks | grep $DEFAULT_SINK | cut -f1)
+    DEFAULT_SINK_INDEX=$(pactl list short sinks | grep "$DEFAULT_SINK" | cut -f1)
 }
 
 change_sink() {
     get_default_sink
     sinks=($(pactl list short sinks | cut -f1))
     
-    if [ "${#sinks[@]}" -gt 2 ]; then
-      rofi-sounddevsold
+    if [ "${#sinks[@]}" -gt 1 ]; then
+      dr_sinkswitch &
       return
     fi
 
     # if sinks[0] is the current default, then change it to the next. else next will be sinks[0]
-    [ ${sinks[0]} == $DEFAULT_SINK_INDEX ] && next_sink=${sinks[1]} || next_sink=${sinks[0]}
+    [ "${sinks[0]}" == "$DEFAULT_SINK_INDEX" ] && next_sink=${sinks[1]} || next_sink=${sinks[0]}
     
-    pactl set-default-sink $next_sink
+    pactl set-default-sink "$next_sink"
 }
 
 get_mic_state() {
   micstate=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -q 'MUTED' && echo "MUTED" || echo "")
   if [ "$micstate" = "MUTED" ]; then
-    ICON="󰍭 "
+    ICON="<span fgcolor='$BOOST_COLOR'>󰍭</span> "
   else
     ICON=""
   fi
@@ -51,7 +50,7 @@ esac
 
 get_default_sink
 
-OUTPUT_INFO=$(pactl list sinks | grep $DEFAULT_SINK -A 8 | grep "Volume: \(front-left\)\|Mute" )
+OUTPUT_INFO=$(pactl list sinks | grep "$DEFAULT_SINK" -A 8 | grep "Volume: \(front-left\)\|Mute" )
 for name in MUTED VOLUME; do
     read $name
 done < <(echo "$OUTPUT_INFO")
@@ -60,19 +59,19 @@ VOLUME=$(echo "$VOLUME" | grep -o "[0-9]*%" | head -1)
 
 get_mic_state
 
-if [[ $MUTED == *"yes"* ]]; then
-  [[ $DEFAULT_SINK == *"Jack"* ]] && ICON="$ICON󰟎" || ICON="$ICON󰝟"
+if [[ "$MUTED" == *"yes"* ]]; then
+  [[ "$DEFAULT_SINK" == *"Jack"* ]] && ICON="$ICON󰟎" || ICON="$ICON󰝟"
 else
-  [[ $DEFAULT_SINK == *"Jack"* ]] && ICON="$ICON󰋋" || ICON="$ICON󰕾"
+  [[ "$DEFAULT_SINK" == *"Jack"* ]] && ICON="$ICON󰋋" || ICON="$ICON󰕾"
 fi
 
-if [[ ! -z $border ]]; then
+if [ -n "$border" ]; then
     ICON="<span color=\"$border\">$ICON</span>"
 fi
 
-if [[ $MUTED == *"yes"* ]]; then
+if [[ "$MUTED" == *"yes"* ]]; then
     echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
-elif (( ${VOLUME%%%} > 100 )); then
+elif [ "${VOLUME%%%}" -ge 100 ]; then
     echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
 else
     echo "$ICON ${VOLUME%%%}"

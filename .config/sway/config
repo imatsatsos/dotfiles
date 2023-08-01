@@ -2,7 +2,7 @@
 ## Sway config (v1.8) ##
 ########################
 ### COLORS
-## imachina
+## nightfox (imachina)
 set $bg       #12121f
 set $txt      #d4d7ff
 set $txtb     #222236
@@ -42,7 +42,7 @@ set $files pcmanfm
 set $launcher "~/.local/bin/rofi-launcher"
 
 ## Select Alt tabber
-set $window_tabber "rofi -show window -no-default-config -config ~/.config/rofi/alt_tab.rasi"
+set $window_tabber "rofi -show window -theme ~/.config/rofi/theme_main-noicons.rasi"
 
 ## Select Power menu
 set $power_menu "~/.local/bin/rofi-power"
@@ -177,9 +177,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 700 -r 587 'Tile horizontally ||'
-bindsym $mod+v split v;exec notify-send -t 700 -r 587 'Tile vertically =='
-bindsym $mod+n split toggle
+bindsym $mod+z split h;exec notify-send -t 700 -r 587 'Horizontal split ||'
+bindsym $mod+v split v;exec notify-send -t 700 -r 587 'Vertical split =='
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -357,7 +356,7 @@ bindsym $mod+equal scratchpad show
 ##########
 client.background       $bg
 # class                 border    bground  text    indicator  child_border
-client.focused          $fborder  $bg      $txt    $focusind  $focusbrd
+client.focused          $focusbrd $bg      $txt    $focusind  $focusbrd
 client.focused_inactive $bg       $bg      $txt    $txtb      $bg
 client.unfocused        $bg       $bg      $txt    $txtb      $bg
 client.urgent           $urgbrd   $bg      $txtb   $urgbrd    $urgbrd
@@ -367,7 +366,6 @@ client.placeholder      $bg       $bg      $txt    $bg        $bg
 # BAR #
 #######
 bar {
-        #status_command i3status -c ~/.config/i3/i3status.conf
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         font pango: $font_bar
         position bottom

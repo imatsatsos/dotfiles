@@ -1,2 +1,6 @@
-#!/bin/sh
-convert $1 -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB -resize $2 $3
+#!/bin/env sh
+# Simple Web JPEG optimizer
+
+[ $# -ne 3 ] && echo "usage: webjpeg file widthpx heightpx" && exit 2
+
+convert "$1" -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB -resize "$2" "$3"

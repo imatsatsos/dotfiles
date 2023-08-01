@@ -1,0 +1,29 @@
+#!/bin/env sh
+#
+# Simple Timer
+
+. $HOME/.local/bin/menus.conf
+menu=${menu:-dmenu}
+
+time=$(dmenu -p "Timer - Enter a time interval:" $dmenu_args < /dev/null)
+[ -z "$time" ] && printf "No time interval specified...\n" && exit 1
+
+calc() {
+	seconds="$(echo "$time*$2" | bc | sed 's/\..*$//')"
+}
+
+case "$time" in
+	*h) calc "${time%?}" 3600;;
+	*m) calc "${time%?}"   60;;
+	*s) seconds="${time%?}"  ;;
+	*)  calc "$time"       60;;
+esac
+
+echo "Timer set for $time ($seconds) ${2:+- $2}"
+notify-send "Timer set for $time (${seconds}s) ${2:+- $2}"
+{
+	sleep "$seconds" || exit 1
+
+	paplay "/usr/share/sounds/freedesktop/stereo/complete.oga" |: &
+	notify-send -u critical "Time's Up! ($time)" "$2"
+} &

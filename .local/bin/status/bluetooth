@@ -1,5 +1,5 @@
-#!/bin/sh
-# script outputs bluetooth status (on/off) and if connected, the name of the device
+#!/bin/env sh
+# Outputs bluetooth status (on/off) and if connected, the name of the device
 
 # input mac address of devices, find with bluetoothctl list Paired
 headset="1C:E6:1D:56:18:C3"
@@ -52,8 +52,8 @@ else
   output='󰂲'
 fi
 
-if [ ! -z $border ]; then
-  printf "<span color='$border'>$output</span>"
+if [ -n "$border" ]; then
+  printf "<span color='%s'>%s</span>" "$border" "$output"
 else
-  printf "$output"
+  printf "%s" "$output"
 fi

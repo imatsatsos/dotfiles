@@ -1,0 +1,56 @@
+#!/bin/env sh
+# Rofi power profile
+# REQUIRES: power-profiles-daemon, and it's service running
+
+# load config
+. "$HOME/.local/bin/menus.conf"
+menu=${menu:-dmenu}
+
+# rofi theme
+theme="$HOME/.config/rofi/theme_sounddevs.rasi"
+
+get_options() {
+  echo "Balanced"
+  echo "Performance"
+  echo "Power-saver"
+}
+
+curr_profile=$( powerprofilesctl get )
+
+
+main() {
+  # Notify user if power-profiles-daemon is not installed or not configured
+    if ( ! command -v "powerprofilesctl" 1 > /dev/null 2 >&1 ); then
+         err="Power-profiles-daemon not installed or service not running!"
+        rofi -e "$err" -theme $HOME/.config/rofi/main_noicons.rasi
+        exit
+    fi
+  
+	case $menu in
+		"rofi") choice=$( (get_options) | rofi -dmenu -p "Set profile" -fuzzy -select "$curr_profile" -theme $theme -mesg "Active profile: $curr_profile") ;;
+		*) choice=$( (get_options) | dmenu -p "Set profile: ($curr_profile)" $dmenu_args -X 1480 -Y 34 -W 430 -l 3) ;;
+	esac
+	
+  # run the selected command
+  case $choice in
+  'Balanced')
+      powerprofilesctl set balanced && \
+      notify-send "Profile switched" "󰚀  $choice" || notify-send "ERROR changing profile!"
+      ;;
+  'Performance')
+      powerprofilesctl set performance && \
+      notify-send "Profile switched" "  $choice" || notify-send "ERROR changing profile!"
+    ;;
+  'Power-saver')
+      powerprofilesctl set power-saver && \
+      notify-send "Profile switched" "   $choice"|| notify-send "ERROR changing profile!"
+    ;;
+  esac
+
+  # done
+  set -e
+}
+
+main
+
+exit 0

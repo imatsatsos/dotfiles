@@ -1,13 +1,15 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #
 # Scripts displays a fzf menu of configs to edit
+# DEPENDS: fzf, vim
 
 declare -A list
 list[alacritty]="$HOME/.config/alacritty/alacritty.yml"
 list[alacritty_color]="$HOME/.config/alacritty/alacritty_color.yml"
 list[alacritty_font]="$HOME/.config/alacritty/alacritty_font.yml"
-list[bash]="$HOME/.bashrc"
+list[bashrc]="$HOME/.bashrc"
 list[fastfetch]="$HOME/.config/fastfetch/config.conf"
+list[fontconfig]="$HOME/.config/fontconfig/fonts.conf"
 list[git]="$HOME/.config/git/config"
 list[inputrc]="$HOME/.inputrc"
 list[mpv]="$HOME/.config/mpv/mpv.conf"
@@ -15,7 +17,7 @@ list[neofetch]="$HOME/.config/neofetch/config.conf"
 list[starship]="$HOME/.config/starship.toml"
 list[neovim]="$HOME/.config/nvim/init.lua"
 list[ssh]="$HOME/.ssh/config"
-list[xresources]="$HOME/.Xresources"
+list[Xresources]="$HOME/.Xresources"
 list[i3-config]="$HOME/.config/i3/config"
 list[i3-blocks]="$HOME/.config/i3/i3blocks.conf"
 list[i3-window-titles]="$HOME/.config/window_titles.yml"

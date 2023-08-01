@@ -1,48 +1,11 @@
-# .bashrc
+#!/bin/env bash
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-# "bat" as manpager
-#if type "bat" >/dev/null 2>&1; then
-#    export MANPAGER="/home/$USER/.local/bin/bat-wrapper"
-#    man 2 select
-#    export MANROFFOPT="-c"
-#fi
-
-## User specific environment
-# User scripts/bin to PATH
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-# Flatpaks to PATH
-if [ -d "/var/lib/flatpak/exports/bin/" ]; then
-    PATH="/var/lib/flatpak/exports/bin/:$PATH"
-fi
-# AppImages to PATH
-if [ -d "$HOME/Applications" ]; then
-    PATH="$HOME/Applications:$PATH"
-fi
-export PATH
-
-# ENVIRONMENT VARIABLES
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export HISTFILE="${XDG_STATE_HOME}"/bash_history
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
-export EDITOR=nvim
-export TERMINAL=st
-export BAT_THEME="GitHub"
-
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
 
 # Enable bash programmable completion features in interactive shells
 if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -60,6 +23,41 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
+#  ___ _  ___   __ __   ___   ___  ___ 
+# | __| \| \ \ / / \ \ / /_\ | _ \/ __|
+# | _|| .` |\ V /   \ V / _ \|   /\__ \
+# |___|_|\_| \_/     \_/_/ \_\_|_\|___/
+# User scripts/bin to PATH
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+# Flatpaks to PATH
+if [ -d "/var/lib/flatpak/exports/bin/" ]; then
+    PATH="/var/lib/flatpak/exports/bin/:$PATH"
+fi
+# AppImages to PATH
+if [ -d "$HOME/Applications" ]; then
+    PATH="$HOME/Applications:$PATH"
+fi
+export PATH
+
+# ENVIRONMENT VARIABLES
+export EDITOR=nvim
+export TERMINAL=st
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export HISTFILE="${XDG_STATE_HOME}"/bash_history
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+#  ___ _  _  ___  ___ _____ ___ 
+# / __| || |/ _ \| _ \_   _/ __|
+# \__ \ __ | (_) |  _/ | | \__ \
+# |___/_||_|\___/|_|   |_| |___/
 # Turn on parallel history (= do not override history)
 shopt -s histappend
 # Turn on check window size after each command
@@ -73,11 +71,19 @@ shopt -s expand_aliases
 # Expand dot filenames
 shopt -s dotglob
 
+#  _  _ ___ ___ _____ ___  _____   __
+# | || |_ _/ __|_   _/ _ \| _ \ \ / /
+# | __ || |\__ \ | || (_) |   /\ V / 
+# |_||_|___|___/ |_| \___/|_|_\ |_|  
 # Disable history for consecutive identical commands and commands that start with space
 export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTSIZE=3000
 export HISTFILESIZE=3000
 
+#  __  __   _   _  _ 
+# |  \/  | /_\ | \| |
+# | |\/| |/ _ \| .` |
+# |_|  |_/_/ \_\_|\_|
 # Colored manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;91m'
@@ -86,41 +92,51 @@ export LESS_TERMCAP_so=$'\E[01;44;93m'
 export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;92m'
 export LESS_TERMCAP_ue=$'\E[0m'
+export BAT_THEME="GitHub"
+## "bat" as manpager
+# if type "bat" >/dev/null 2>&1; then
+#    export MANPAGER="/home/$USER/.local/bin/bat-wrapper"
+#    man 2 select
+#    export MANROFFOPT="-c"
+# fi
 
-## Utilities
-# --- go back n directories ---
+#  ___ _   _ _  _  ___ ___ 
+# | __| | | | \| |/ __/ __|
+# | _|| |_| | .` | (__\__ \
+# |_|  \___/|_|\_|\___|___/
+# --- Go-back-n directories ---
 function b {
     str=""
     count=0
     while [ "$count" -lt "$1" ];
     do
         str=$str"../"
-        let count=count+1
+        count=$((count+1))
     done
-    cd $str
+    cd $str || return
 }
 
-# --- ARCHIVE EXTRACT ---
+# --- Archive Extract ---
 
 ex ()
 {
-	if [ -f $1 ] ; then
+	if [ -f "$1" ] ; then
 		case $1 in
-			*.tar.bz2)   tar xjf $1   ;;
-			*.tar.gz)    tar xzf $1   ;;
-			*.bz2)       bunzip2 $1   ;;
-			*.rar)       unrar x $1   ;;
-			*.gz)        gunzip $1    ;;
-			*.tar)       tar xf $1    ;;
-			*.tbz2)      tar xjf $1   ;;
-			*.tgz)       tar xzf $1   ;;
-			*.zip)       unzip $1     ;;
-			*.Z)         uncompress $1;;
-			*.7z)        7z x $1   ;;
-			*.deb)       ar x $1      ;;
-			*.tar.xz)    tar xf $1    ;;
-			*.tar.zst)   unzstd $1    ;;
-			*)           echo "'$1' cannot be extracted via ex()" ;;
+			*.tar.bz2) tar xjf    "$1" ;;
+			*.tar.gz)  tar xzf    "$1" ;;
+			*.bz2)     bunzip2    "$1" ;;
+			*.rar)     unrar x    "$1" ;;
+			*.gz)      gunzip     "$1" ;;
+			*.tar)     tar xf     "$1" ;;
+			*.tbz2)    tar xjf    "$1" ;;
+			*.tgz)     tar xzf    "$1" ;;
+			*.zip)     unzip      "$1" ;;
+			*.Z)       uncompress "$1" ;;
+			*.7z)      7z x       "$1" ;;
+			*.deb)     ar x       "$1" ;;
+			*.tar.xz)  tar xf     "$1" ;;
+			*.tar.zst) unzstd     "$1" ;;
+			*)         echo "'$1' cannot be extracted via ex()" ;;
 		esac
 	else
 		echo "'$1' is not a valid file"
@@ -129,14 +145,18 @@ ex ()
 
 # --- mkdir && cd ---
 mkcd () {
-	mkdir -p "$1" && cd "$1";
+	mkdir -p "$1" && cd "$1" || return
 }
 
+# --- list monospace fonts only ---
 listmono () {
    fc-list :mono | awk -F: '{print $2}' | sort -u
 }
 
-## Aliases
+#    _   _    ___   _   ___ 
+#   /_\ | |  |_ _| /_\ / __|
+#  / _ \| |__ | | / _ \\__ \
+# /_/ \_\____|___/_/ \_\___/
 alias \
 		ls='ls --color=auto --group-directories-first' \
 		la='ls -lhA --color=auto --group-directories-first' \
@@ -144,14 +164,14 @@ alias \
 		grep='grep --color=auto' \
 		ip='ip --color=auto' \
 		diff='diff --color=auto' \
-        cp='cp -iv' \
+    cp='cp -iv' \
 		mv='mv -iv' \
 		rm='rm -Iv' \
 		ln='ln -i' \
 		df='df -h' \
 		bc='bc -ql' \
 		du='du -h' \
-        mkd='mkdir -pv' \
+    mkd='mkdir -pv' \
 		treestat='rpm-ostree status' \
 		fuck='sudo !!' \
 		zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
@@ -162,7 +182,8 @@ alias \
     ec='edit_cfg.sh' \
     weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv && sudo vkpurge rm all' \
 		errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
-    envy='sudo python /home/$USER/.local/bin/envycontrol.py'
+    envy='sudo python /home/$USER/.local/bin/envycontrol.py' \
+    brave='flatpak run com.brave.Browser'
 
 # exa for ls
 if type "exa" >/dev/null 2>&1; then
@@ -175,7 +196,7 @@ fi
 
 # bat for cat
 if type "bat" >/dev/null 2>&1; then
-	alias cat="bat"
+  alias cat="bat"
 fi
 
 # Aliases for package managers
@@ -185,9 +206,11 @@ if type "xbps-install" >/dev/null 2>&1; then
 			xremove='sudo xbps-remove -R' \
 			xupdate='sudo xbps-install -Su' \
 			xquery='xbps-query' \
-            xsearch='xbps-query -Rs' \
+      xsearch='xbps-query -Rs' \
 			xorphan='sudo xbps-remove -ov' \
-			xclean='sudo xbps-remove -Ov'
+			xclean='sudo xbps-remove -Ov' \
+      xfzf="xbps-query -m | fzf --preview 'xbps-query -S {}' --height=97% --layout=reverse --bind 'enter:execute(xbps-query -S {} | less)'"
+
 fi
 
 # Aliases for flatpak
@@ -197,27 +220,31 @@ if type "flatpak" >/dev/null 2>&1; then
 			fremove='flatpak uninstall --delete-data' \
 			fupdate='flatpak update' \
 			fsearch='flatpak search' \
-			forphan='flatpak uninstall --unused --delete-data'
+			forphan='flatpak uninstall --unused --delete-data' \
+      fdep='flatpak list --app --columns=application,runtime'
 fi
 
 # Directory aliases
 alias \
-		home='cd $HOME && ll' \
+		h='cd $HOME && ll' \
 		dl='cd $HOME/Downloads && ll' \
 		doc='cd $HOME/Documents && ll' \
-        gr='cd $HOME/Gitrepos/ && ll'
+    gr='cd $HOME/Gitrepos/ && ll'
 
-# Prompt
-#[ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
+#  ___  ___ _ 
+# | _ \/ __/ |
+# |  _/\__ \ |
+# |_|  |___/_|
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
+
 # get current branch in git repo
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 	if [ ! "${BRANCH}" == "" ]
 	then
-		STAT=`parse_git_dirty`
+    STAT=$(parse_git_dirty)
 		echo " [${BRANCH}${STAT}]"
 	else
 		echo ""
@@ -226,13 +253,13 @@ function parse_git_branch() {
 
 # get current status of git repo
 function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+  status=$(git status 2>&1 | tee)
+  dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
+  untracked=$(echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
+  ahead=$(echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
+  newfile=$(echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
+  renamed=$(echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
+  deleted=$(echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
 	bits=''
 	if [ "${renamed}" == "0" ]; then
 		bits=">${bits}"
@@ -262,5 +289,10 @@ function parse_git_dirty {
 #old PS1='\n\[\e[34m\]\u\[\e[0;2;3m\]@\h \[\e[0m\]\w ($(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)) [$?] \$ '
 PS1='\n\[\e[34m\]\u\[\e[0;2;3m\]@\h \[\e[0m\]\w\[\e[93m\]$(parse_git_branch)\[\e[0m\] \$ '
 
-# Nice
+#  ___ _    ___ _  _  ___ 
+# | _ ) |  |_ _| \| |/ __|
+# | _ \ |__ | || .` | (_ |
+# |___/____|___|_|\_|\___|
+                        
 type "neofetch" >/dev/null 2>&1 && neofetch
+#[ -f /usr/local/bin/starship ] && eval "$(starship init bash)"

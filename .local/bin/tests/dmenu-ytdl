@@ -4,4 +4,7 @@
 url="$(dmenu -p 'Paste video link to download > ' </dev/null)"
 
 # Pass targeturl to youtube downloader (works for any kind of video)
-[ -z "$url" ] || yt-dlp -P $Home/Videos "$url" && notify-send "Video download Completed!" || notify-send "Video download Failed.."
+
+if [ -n "$url" ];then
+  yt-dlp -P $Home/Videos "$url" && notify-send "Video download Completed!" || notify-send "Video download Failed.."
+fi

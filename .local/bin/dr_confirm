@@ -1,0 +1,47 @@
+#!/usr/bin/env sh
+#
+# Rofi menu to prompt a message and get a yes/no answer.
+
+# import config
+. "$HOME/.local/bin/menus.conf"
+menu=${menu:-dmenu}
+
+yes='Do as I say'
+no='Cancel'
+query='Are you sure?'
+theme='theme_confirm.rasi'
+
+while [ $# -ne 0 ]; do
+    case "$1" in
+        -y | --yes)
+            [ -n "$2" ] && yes="$2" || yes=''
+            shift
+            ;;
+
+        -n | --no)
+            [ -n "$2" ] && no="$2" || no=''
+            shift
+            ;;
+
+        -q | --query)
+            [ -n "$2" ] && query="$2"
+            shift
+            ;;
+        -t | --theme)
+            [ -n "$2" ] && theme="$2"
+            shift
+            ;;
+    esac
+    shift
+done
+
+case $menu in
+	"rofi") chosen=$(printf "%s\n%s" "$yes" "$no" | rofi -dmenu -p "$query" -no-fixed-num-lines -theme "$theme"  -selected-row 1) ;;
+	*) chosen=$(printf "%s\n%s" "$yes" "$no" | dmenu -p "$query" $dmenu_args -W 400 -X 760 -Y 540 -l 2) ;;
+esac
+
+case "$chosen" in
+    "$yes") exit 0 ;;
+    *)      exit 1 ;;
+esac
+

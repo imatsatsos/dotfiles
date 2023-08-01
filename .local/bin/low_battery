@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/env sh
 # sends a notification when battery is low
-# REQUIRES: dunst, pulseaudio-utils(pipewire installs this)
+# DEPENDS: dunst, pulseaudio-utils
 
 # only one instance of low_battery can be running
 for pid in $(pidof -x low_battery); do
@@ -32,15 +32,16 @@ while true; do
         "Battery Critical: ${battery_level}%" \
         "$time_to_empty minutes left!" \
         -u critical \
-        -r 100 \
+        -r 101 \
         -i /usr/share/icons/HighContrast/scalable/status/battery-low.svg
+
   elif [ "$battery_level" -lt 26 ] && [ "$discharging" -eq 1 ]    
   then
       time_to_empty=$(upower -i "$path_to_battery"  | grep -E "time to empty" | sed 's/[^0-9,.]//g')
       dunstify -a "Battery" \
         "Battery Low: ${battery_level}%" \
         "$time_to_empty minutes left!" \
-        -r 100 \
+        -r 101 \
         -i /usr/share/icons/HighContrast/scalable/status/battery-low.svg
   fi
 
