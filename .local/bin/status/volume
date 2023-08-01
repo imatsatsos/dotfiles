@@ -21,7 +21,7 @@ change_sink() {
     sinks=($(pactl list short sinks | cut -f1))
     
     if [ "${#sinks[@]}" -gt 1 ]; then
-      dr_sinkswitch &
+      setsid -f dr_sinkswitch &
       return
     fi
 
