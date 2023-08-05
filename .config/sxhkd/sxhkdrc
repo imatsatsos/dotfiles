@@ -1,16 +1,19 @@
 super + e
   pcmanfm
 
+super + g
+  $HOME/.local/bin/search/rofi-websearch
+
 super + w
   flatpak run com.brave.Browser 
 
 super + a
-  dr_launcher > /home/john/rofilog 2> /home/john/rofilog
+  dr_launcher
 
 super + shift + e
   dr_emoji
 
-super + Num_Lock
+super + KP_Divide
   rofi -show calc -modi calc -no-show-match -no-sort
 
 super + Escape
@@ -29,7 +32,7 @@ super + ctrl + l
   screenshot {fullscreen, menu, selection, window}
 
 {XF86AudioPrev, XF86AudioPlay, XF86AudioNext}
-  playerctl {previous, play-pause, next}
+  playerctl {--player=spotify previous, play-pause, --player=spotify next}
 
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
   pkill -SIGRTMIN+9 i3blocks

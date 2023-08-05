@@ -2,7 +2,7 @@
 #
 # Simple Timer
 
-. $HOME/.local/bin/menus.conf
+[ -e "$HOME"/.local/bin/menus.conf ] && . $HOME/.local/bin/menus.conf
 menu=${menu:-dmenu}
 
 time=$(dmenu -p "Timer - Enter a time interval:" $dmenu_args < /dev/null)

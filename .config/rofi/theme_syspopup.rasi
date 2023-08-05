@@ -1,0 +1,58 @@
+/* sys status menu for selecting sound devices or power profiles */
+
+configuration {
+	show-icons:	 false;
+	hover-select:    true;
+	me-select-entry: "";
+	me-accept-entry: [MousePrimary];
+	location:        5;
+	fixed-num-lines: false;
+}
+
+@import "colors.rasi"
+
+* {
+	font: "sans 12";
+}
+
+window {
+	width:     400px;
+	x-offset: -20px;
+	border:   2px;
+	y-offset: -40px;
+	background-color: @bg;
+}
+
+mainbox {
+	padding: 	2px;
+  text-color: inherit;
+  children: [message, listview];
+}
+
+message {
+	padding: 8px 4px;
+	border: 0px 0px 1px 0px;
+	border-color: @brd;
+	border-radius: 0px;
+	horizontal-align: 0.5;
+}
+
+textbox {
+	horizontal-align: 0.5;
+}
+
+listview {
+ 	columns: 1;
+  	cycle:   true;
+  	layout:  vertical;
+}
+
+element {
+	padding:     8px 4px;
+	border-radius:	12px;
+}
+
+element selected {
+	background-color: @bg-sel;
+}
+

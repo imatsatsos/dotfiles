@@ -4,7 +4,7 @@
 
 file_path="$HOME/.local/bin/resources/allemojis.txt"
 
-. "$HOME"/.local/bin/menus.conf
+[ -e "$HOME"/.local/bin/menus.conf ] && . "$HOME"/.local/bin/menus.conf
 menu=${menu:-dmenu}
 
 case $menu in
@@ -15,7 +15,7 @@ case $menu in
     rofi -modi emoji -show emoji -theme "$HOME"/.config/rofi/theme_emoji.rasi; exit 0
     ;;
   *)
-    rofi_command="dmenu $dmenu_args -l 6 -g 6 -W 370 -X 775 -Y 500"
+    rofi_command="dmenu -i $dmenu_args -l 7 -g 6 -W 370 -X 775 -Y 380"
     ;;
 esac
 

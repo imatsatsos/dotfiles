@@ -1,27 +1,12 @@
-/* Confirm Dialog */
+/* Confirm Dialog for 2 choices */
 
 @import "colors.rasi"
-/*
-USE_ICON=1
-*/
-* {
-    bg:          #24242496;
-	  bg-sel:      #5a84bcc8;
-    brd:         #7e7e7e80;
-	  txt:         #eeeeee;
-    background-color: transparent;
-    text-color:       @txt;
-    border-color:     @brd;
-    font: "Sans 14";
-    border-radius: 14px;
-}
 
 window {
     background-color: @bg;
     width: 400px;
     padding: 12px;
     border: 2px;
-    border-radius: 14px;
     location: center;
     y-offset: -20px;
 }

@@ -1,12 +1,12 @@
 configuration{
 
-    window-format: "[{c}] {w} {t:50}";
-    display-window: "";
+    window-format: "{w} <b>{t:50}</b>";
+    display-window: "<b>󱂬 </b>";
     display-drun: "Launch";
 }
 
 * {
-    font:   "Montserrat 12";
+    font:   "Sans 12";
 
     bg0:    #242424dc;
     bga:    #22222296;
@@ -35,7 +35,7 @@ window {
 }
 
 inputbar {
-    font:       "Montserrat 20";
+    font:       "Sans 18";
     padding:    14px;
     spacing:    12px;
     children:   [ textbox-icon, entry ];
@@ -72,7 +72,7 @@ message {
 }
 
 textbox {
-    font:       "Montserrat 18";
+    font:       "Sans 18";
     padding:    20px 16px;
     vertical-align: 0.5;
 }

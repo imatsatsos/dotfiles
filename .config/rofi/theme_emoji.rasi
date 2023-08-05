@@ -1,64 +1,59 @@
+/* Emoji menu */
 configuration {
-  show-icons:		   false;
-	sidebar-mode:    false;
+	show-icons:      false;
 	hover-select:    true;
 	me-select-entry: "";
 	me-accept-entry: [MousePrimary];
-  location:        0;
-  fixed-num-lines: false;
+  	location:        0;
+  	fixed-num-lines: false;
 }
 
+@import "colors.rasi"
+
 * {
-    bg:          #24242496;
-	  bg-sel:      #5a84bcc8;
-    brd:         #7e7e7e80;
-	  txt:         #eeeeee;
-    background-color: transparent;
-    text-color:  @txt;
     font: "monospace 16";
 }
 
 window {
-  width:            400px;
-  height:           372px;
+  	width:            400px;
+  	height:           372px;
+  	border: 	  1px;
+  	y-offset:         50px;
 	background-color: @bg;
-  border-radius: 		12px;
-  border: 1px;
-  border-color: @brd;
-  y-offset: -34px;
 }
 
 mainbox {
-	padding: 	12px;
-  text-color: inherit;
-  children: [entry, listview];
+	padding:    12px;
+  	text-color: inherit;
+  	children:   [entry, listview];
 }
 
 entry {
-  placeholder: "Search emoji";
-  text-color:  #aaaaaa;
-  expand: false;
+	placeholder: "Search emoji";
+  	text-color:  #aaaaaa;
+  	expand: false;
+	border-radius: 0px;
 }
 
 listview {
-  columns:          6;
-  cycle: true;
-  fixed-height:  true;
-  fixed-columns: true;
-  layout:           vertical;
-  dynamic: true;
+	columns:          6;
+  	cycle: 	       true;
+  	fixed-height:  true;
+  	fixed-columns: true;
+  	layout:        vertical;
+ 	dynamic:       true;
 }
 
 element {
 	border-radius:	12px;
-  vertical-align:   0.5;
-  padding: 12 0 12 17; 
-  horizontal-align: 0.5;
-  vertical-align: 0.5;
+  	vertical-align:   0.5;
+  	padding: 12 0 12 17; 
+  	horizontal-align: 0.5;
+  	vertical-align: 0.5;
 }
 
 element-text {
-  text-color: #00000001;
+  text-color: #24242401;
 }
 
 element selected {

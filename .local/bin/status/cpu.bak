@@ -1,0 +1,30 @@
+#!/bin/env sh
+# Outputs cpu usage %
+
+label=""
+
+if [ -n "$border" ]; then
+  label="<span color=\"$border\">$label</span>"
+fi
+
+cpu(){
+    read -r cpu a b c previdle rest < /proc/stat
+    prevtotal=$((a+b+c+previdle))
+    sleep 0.5
+    read -r cpu a b c idle rest < /proc/stat
+    total=$((a+b+c+idle))
+    usage=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+    if [ $usage -ge 90 ]; then
+      usage="<span color=\"#ff1600\">$usage</span>"
+    elif [ $usage -ge 70 ]; then
+      usage="<span color=\"#ff9600\">$usage</span>"
+    fi
+    echo "$label $usage%"
+}
+
+case $BLOCK_BUTTON in
+	1) notify-send "CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
+	3) setsid -f "$TERMINAL" -T termfloat -e htop ;;
+esac
+
+cpu

@@ -29,17 +29,20 @@ unset rc
 # |___|_|\_| \_/     \_/_/ \_\_|_\|___/
 # User scripts/bin to PATH
 if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
+	PATH="$HOME/.local/bin/:$PATH"
 fi
 # Flatpaks to PATH
 if [ -d "/var/lib/flatpak/exports/bin/" ]; then
-    PATH="/var/lib/flatpak/exports/bin/:$PATH"
+	PATH="/var/lib/flatpak/exports/bin/:$PATH"
 fi
 # AppImages to PATH
 if [ -d "$HOME/Applications" ]; then
-    PATH="$HOME/Applications:$PATH"
+	PATH="$HOME/Applications/:$PATH"
 fi
 export PATH
+
+# NIX
+. /home/john/.nix-profile/etc/profile.d/nix.sh
 
 # ENVIRONMENT VARIABLES
 export EDITOR=nvim
@@ -77,8 +80,8 @@ shopt -s dotglob
 # |_||_|___|___/ |_| \___/|_|_\ |_|  
 # Disable history for consecutive identical commands and commands that start with space
 export HISTCONTROL=ignoredups:erasedups:ignorespace
-export HISTSIZE=3000
-export HISTFILESIZE=3000
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 
 #  __  __   _   _  _ 
 # |  \/  | /_\ | \| |
@@ -106,14 +109,14 @@ export BAT_THEME="GitHub"
 # |_|  \___/|_|\_|\___|___/
 # --- Go-back-n directories ---
 function b {
-    str=""
-    count=0
-    while [ "$count" -lt "$1" ];
-    do
-        str=$str"../"
-        count=$((count+1))
-    done
-    cd $str || return
+	str=""
+	count=0
+	while [ "$count" -lt "$1" ];
+	do
+		str=$str"../"
+		count=$((count+1))
+	done
+	cd $str || return
 }
 
 # --- Archive Extract ---
@@ -150,7 +153,7 @@ mkcd () {
 
 # --- list monospace fonts only ---
 listmono () {
-   fc-list :mono | awk -F: '{print $2}' | sort -u
+	fc-list :mono | awk -F: '{print $2}' | sort -u
 }
 
 #    _   _    ___   _   ___ 
@@ -158,93 +161,96 @@ listmono () {
 #  / _ \| |__ | | / _ \\__ \
 # /_/ \_\____|___/_/ \_\___/
 alias \
-		ls='ls --color=auto --group-directories-first' \
-		la='ls -lhA --color=auto --group-directories-first' \
-		ll='ls -lh --color=auto --group-directories-first' \
-		grep='grep --color=auto' \
-		ip='ip --color=auto' \
-		diff='diff --color=auto' \
-    cp='cp -iv' \
-		mv='mv -iv' \
-		rm='rm -Iv' \
-		ln='ln -i' \
-		df='df -h' \
-		bc='bc -ql' \
-		du='du -h' \
-    mkd='mkdir -pv' \
-		treestat='rpm-ostree status' \
-		fuck='sudo !!' \
-		zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
-		itop='sudo intel_gpu_top' \
-		imeas='sudo intel-undervolt measure' \
-		vim='nvim' \
-		es='edit_script.sh' \
-    ec='edit_cfg.sh' \
-    weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv && sudo vkpurge rm all' \
-		errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
-    envy='sudo python /home/$USER/.local/bin/envycontrol.py' \
-    brave='flatpak run com.brave.Browser'
-
-# exa for ls
-if type "exa" >/dev/null 2>&1; then
-	alias \
+	ls='ls --color=auto --group-directories-first' \
+	la='ls -lhA --color=auto --group-directories-first' \
+	ll='ls -lh --color=auto --group-directories-first' \
+	grep='grep --color=auto' \
+	ip='ip --color=auto' \
+	diff='diff --color=auto' \
+	cp='cp -iv' \
+	mv='mv -iv' \
+	rm='rm -Iv' \
+	ln='ln -i' \
+	df='df -h' \
+	bc='bc -ql' \
+	du='du -h' \
+	mkd='mkdir -pv' \
+	treestat='rpm-ostree status' \
+	fuck='sudo !!' \
+	zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
+	itop='sudo intel_gpu_top' \
+	imeas='sudo intel-undervolt measure' \
+	vim='nvim' \
+	es='edit_script.sh' \
+	ec='edit_cfg.sh' \
+	weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv && sudo vkpurge rm all' \
+	errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
+	envy='sudo python /home/$USER/.local/bin/envycontrol.py' \
+	brave='LIBVA_DRI3_DISABLE=1 LIBVA_DRIVER_NAME=iHD nixGLIntel brave' \
+	zap="tar -cvf archive.tar.xz --use-compress-program='xz -T0' \"$1\""
+	# exa for ls
+	if type "exa" >/dev/null 2>&1; then
+		alias \
 			ls='exa --icons --group-directories-first' \
 			la='exa -al --icons --group-directories-first' \
 			ll='exa -l --icons --group-directories-first' \
 			lg='exa -al --git --icons'
-fi
+	fi
 
 # bat for cat
 if type "bat" >/dev/null 2>&1; then
-  alias cat="bat"
+	alias cat="bat"
 fi
 
 # Aliases for package managers
 if type "xbps-install" >/dev/null 2>&1; then
 	alias \
-			xinstall='sudo xbps-install -S' \
-			xremove='sudo xbps-remove -R' \
-			xupdate='sudo xbps-install -Su' \
-			xquery='xbps-query' \
-      xsearch='xbps-query -Rs' \
-			xorphan='sudo xbps-remove -ov' \
-			xclean='sudo xbps-remove -Ov' \
-      xfzf="xbps-query -m | fzf --preview 'xbps-query -S {}' --height=97% --layout=reverse --bind 'enter:execute(xbps-query -S {} | less)'"
+		xinstall='sudo xbps-install -S' \
+		xremove='sudo xbps-remove -R' \
+		xupdate='sudo xbps-install -Su' \
+		xquery='xbps-query' \
+		xsearch='xbps-query -Rs' \
+		xowned='xbps-query -o' \
+		xorphan='sudo xbps-remove -ov' \
+		xclean='sudo xbps-remove -Ov' \
+		xinf="xbps-query -Rs \"\" | cut --delimiter \" \" --fields 1-2 | fzf --multi --exact --cycle --reverse --preview 'xbps-query -R {2}' | cut --delimiter \" \" --fields 2 | xargs -ro sudo xbps-install" \
+		xrmf="xbps-query -m | fzf --prompt=\"Select package(s) to remove: \" --multi --margin 10% --padding 10% --border | xargs -ro sudo xbps-remove -Ro" \
+		xfzf="xbps-query -m | fzf --preview 'xbps-query -S {}' --height=97% --layout=reverse --bind 'enter:execute(xbps-query -S {} | less)'"
 
 fi
 
 # Aliases for flatpak
 if type "flatpak" >/dev/null 2>&1; then
 	alias \
-			finstall='flatpak install' \
-			fremove='flatpak uninstall --delete-data' \
-			fupdate='flatpak update' \
-			fsearch='flatpak search' \
-			forphan='flatpak uninstall --unused --delete-data' \
-      fdep='flatpak list --app --columns=application,runtime'
+		finstall='flatpak install' \
+		fremove='flatpak uninstall --delete-data' \
+		fupdate='flatpak update' \
+		fsearch='flatpak search' \
+		forphan='flatpak uninstall --unused --delete-data' \
+		flist='flatpak list --app --columns=name,application,runtime,version'
 fi
 
 # Directory aliases
 alias \
-		h='cd $HOME && ll' \
-		dl='cd $HOME/Downloads && ll' \
-		doc='cd $HOME/Documents && ll' \
-    gr='cd $HOME/Gitrepos/ && ll'
+	h='cd $HOME && ll' \
+	dl='cd $HOME/Downloads && ll' \
+	doc='cd $HOME/Documents && ll' \
+	gr='cd $HOME/Gitrepos/ && ll'
 
 #  ___  ___ _ 
 # | _ \/ __/ |
 # |  _/\__ \ |
 # |_|  |___/_|
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 # get current branch in git repo
 function parse_git_branch() {
-  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+	BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 	if [ ! "${BRANCH}" == "" ]
 	then
-    STAT=$(parse_git_dirty)
+		STAT=$(parse_git_dirty)
 		echo " [${BRANCH}${STAT}]"
 	else
 		echo ""
@@ -253,13 +259,13 @@ function parse_git_branch() {
 
 # get current status of git repo
 function parse_git_dirty {
-  status=$(git status 2>&1 | tee)
-  dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
-  untracked=$(echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
-  ahead=$(echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
-  newfile=$(echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
-  renamed=$(echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
-  deleted=$(echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
+	status=$(git status 2>&1 | tee)
+	dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
+	untracked=$(echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
+	ahead=$(echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
+	newfile=$(echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
+	renamed=$(echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
+	deleted=$(echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
 	bits=''
 	if [ "${renamed}" == "0" ]; then
 		bits=">${bits}"
@@ -293,6 +299,6 @@ PS1='\n\[\e[34m\]\u\[\e[0;2;3m\]@\h \[\e[0m\]\w\[\e[93m\]$(parse_git_branch)\[\e
 # | _ ) |  |_ _| \| |/ __|
 # | _ \ |__ | || .` | (_ |
 # |___/____|___|_|\_|\___|
-                        
+
 type "neofetch" >/dev/null 2>&1 && neofetch
 #[ -f /usr/local/bin/starship ] && eval "$(starship init bash)"

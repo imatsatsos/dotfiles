@@ -28,26 +28,26 @@ fi
 if [ "$state" = "discharging" ]; then
   label="$label"
 elif [ "$state" = "charging" ]; then
-  label="󰂄"
+  label=""
   # example of "pending-charge state", no colored label, no arrow
 else
   label="󰂄"
   unset color
 fi
 
-if [ -n "$border" ]; then
-  label="<span color=\"$border\">$label</span>"
-fi
+# if [ -n "$border" ]; then
+#   label="<span color=\"$border\">$label</span>"
+# fi
 
+. /home/john/.local/bin/status/sbcol
 if [ -n "$color" ]; then
-  echo "$label <span color=\"$color\">$battery_level</span>"
+  display "$battery_level" "$color"
 else
-  echo "$label $battery_level"
+  display "$battery_level"
 fi
 
-profile=$(powerprofilesctl get)
 case $BLOCK_BUTTON in 
-  1) notify-send "Current profile:" "$profile" ;;
+  1) notify-send -a "sysui" "Current profile" "$(powerprofilesctl get)" ;;
   3) dr_profile ;;
 esac
 

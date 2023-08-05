@@ -37,8 +37,8 @@ device_connected() {
 }
 
 case $BLOCK_BUTTON in
-  1) toggle_power ;;
-  3) setsid -f rofi-bluetooth & ;;
+  2) toggle_power ;;
+  1) setsid -f rofi-bluetooth & ;;
 esac
 
 if power_on; then
@@ -52,8 +52,10 @@ else
   output='󰂲'
 fi
 
-if [ -n "$border" ]; then
-  printf "<span color='%s'>%s</span>" "$border" "$output"
-else
-  printf "%s" "$output"
-fi
+. /home/john/.local/bin/status/sbcol
+display "$output"
+# if [ -n "$border" ]; then
+#   printf "<span color='%s'>%s</span>" "$border" "$output"
+# else
+#   printf "%s" "$output"
+# fi

@@ -15,7 +15,7 @@
     transparency = 20
     corner_radius = 10
     background = "#151515"
-    frame_color = "#dddddd"
+    frame_color = "#202020"
     frame_width = 2
     
     ### Progress Bar ###
@@ -24,7 +24,7 @@
     progress_bar_frame_width = 0
     progress_bar_min_width = 130
     progress_bar_max_width = 130
-    highlight = "#eeeeee"
+    highlight = "#efeff1"
 
     ### Look ###
     # If gap_size is greater than 0, this setting will be ignored.
@@ -78,7 +78,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<i>%a</i>\n<b>%s</b>\n%b\n%n"
+    format = "<b>%s</b>\n%b\n%n"
     # Show age of message if message is older than show_age_threshold
     # seconds.
     # Set to -1 to disable.
@@ -174,19 +174,18 @@
     per_monitor_dpi = false
 
 [urgency_low]
-    foreground = "#cccccc"
-    frame_color = "#cccccc"
+    foreground = "#aaaaaa"
     timeout = 5
     default_icon = NONE
 
 [urgency_normal]
-    foreground = "#eeeeee"
+    foreground = "#efeff1"
     timeout = 10
     default_icon = NONE
 
 [urgency_critical]
-    foreground = "#f2f4f5"
-    background = "#232526"
+    foreground = "#df5b61"
+    background = "#151515"
     frame_color = "#df5b61"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
@@ -299,22 +298,13 @@
 #    summary = *signed off*
 #    urgency = low
 #
-[volume]
-    appname = "Volume"
+[systemui]
+    appname = "sysui"
     
-    set_stack_tag = "volume"
-    format = "<b>%n %b</b>"
+    set_stack_tag = "sysui"
+    format = "<b>%s%n</b>\n%b"
     max_icon_size = 24
-    alignment = center
-    history_ignore = yes
-
-[brightness]
-    appname = "Brightness"
-    
-    set_stack_tag = "brightness"
-    format = "<b>%n %b</b>"
-    max_icon_size = 24
-    alignment = center 
+    alignment = right
     history_ignore = yes
 
 [kbd_layout]
@@ -331,7 +321,7 @@
     
     format = "%b"
     alignment = center
-    max_icon_size = 128
+    max_icon_size = 200
     icon_position = top
 
 [spotify]
@@ -345,6 +335,7 @@
 
 [calendar]
     appname = "Calendar"
+    format = "<b>%s</b>\n%b"
     alignment = left
     history_ignore = yes
 

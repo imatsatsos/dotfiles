@@ -1,8 +1,13 @@
 * {
-    bg:          #24242496;
-	  bg-sel:      #5a84bcc8;
-    brd:         #7e7e7e80;
-	  txt:         #eeeeee;
-  background-color: transparent;
-  text-color:       @txt;
+	bg:          #24242496;
+	bg-sel:      #5a84bcc8;
+	brd:         #7e7e7e80;
+	txt:         #eeeeee;
+
+	background-color: transparent;
+	text-color:       @txt;
+	border-color:     @brd;
+	border-radius:    14px;
+
+	font: "Sans 14";
 }

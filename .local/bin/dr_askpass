@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # Use rofi as a sudo password prompt
 
-. "$HOME"/.local/bin/menus.conf
+[ -e "$HOME"/.local/bin/menus.conf ] && . "$HOME"/.local/bin/menus.conf
 menu=${menu:-dmenu}
 
 case $menu in
@@ -15,7 +15,7 @@ case $menu in
     ;;
   *)
     # hide the entry by making font color same as background
-    nb=${nb:-'#22226'}
+    nb=${nb:-'#222226'}
     nf=$nb
     dmenu -p "Password:" $dmenu_args -nf "$nf" -nb "$nb" -W 400 -X 760 -Y 540 &
     ;;

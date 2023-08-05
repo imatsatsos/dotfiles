@@ -7,9 +7,16 @@ case $BLOCK_BUTTON in
   5) dunst_cal next & ;;
 esac
 
-if [ -z "$border" ]; then
-  date '+%a %d, %H:%M'
-else
-  echo "<span bgcolor=\"$border\" fgcolor=\"#ffffff\"> $(date '+%a %d, %H:%M') </span>"
-fi
+## IDEA 1
+output=$(date '+%a %d, %H:%M')
+#./statuscolwrap "$output" "$1" "$2"
 
+## ORIG
+# if [ -z "$border" ]; then
+#   date '+%a %d, %H:%M'
+# else
+#   echo "<span bgcolor=\"$border\" fgcolor=\"#ffffff\"> $(date '+%a %d, %H:%M') </span>"
+# fi
+
+. /home/john/.local/bin/status/sbcol
+display "$output"

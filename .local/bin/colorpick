@@ -1,8 +1,11 @@
 #!/bin/env sh
 # uses xcolor to pick a pixel's color and copies the hex value to the clipboard
-# DEPENDS: xcolor, xclip
+# DEPENDS: xcolor, xclip, convert (imagemagick)
 
 hex=$(xcolor -P 154 -S 7)
-[ "$hex" ] && (
-echo "$hex" | xclip -r -sel clipboard && notify-send -u low "Color $hex in clipboard"
-)
+if [ -n "$hex" ]; then
+	fname="${hex#?}"
+	convert -size 64x64 xc:"$hex" "/tmp/${fname}.png"
+	echo "$hex" | xclip -r -sel clipboard
+	notify-send -u low "Color $hex in clipboard" --icon="/tmp/${fname}.png"
+fi

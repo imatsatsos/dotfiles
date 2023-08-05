@@ -6,22 +6,19 @@ layout=$(xset -q | grep -A 0 'LED' | cut -c59-67)
 [ -z "$layout" ] && exit
 
 if [ "$layout" = "00000000" ] || [ "$layout" = "00000002" ]; then
-    output="EN"
-    echo "EN "
+    output="en"
 else
-    output="GR"
-    if [ -z "$border" ]; then
-      echo "GR "
-    else
-      echo "<span bgcolor='#5a84bc' fgcolor='#ffffff'> GR </span>"
-    fi
+    output="gr"
 fi
 
 if [ "$1" = "notify" ];then 
   case $output in
-    "EN")
-      dunstify -a "Layout" "󰌌   $output " "| English (US)" -t 1000 -r 231 ;;
-    "GR")
-      dunstify -a "Layout" "󰌌   $output " "| Ελληνικά" -t 1000 -r 231 ;;
+    "en")
+      dunstify -a "Layout" "󰌌  EN " "| English " -t 1000 -r 231 ;;
+    "gr")
+      dunstify -a "Layout" "󰌌  GR " "| Ελληνικά" -t 1000 -r 231 ;;
   esac
+else 
+  . /home/john/.local/bin/status/sbcol
+  display "$output"
 fi

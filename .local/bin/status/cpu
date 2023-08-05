@@ -1,12 +1,6 @@
 #!/bin/env sh
 # Outputs cpu usage %
 
-label=""
-
-if [ -n "$border" ]; then
-  label="<span color=\"$border\">$label</span>"
-fi
-
 cpu(){
     read -r cpu a b c previdle rest < /proc/stat
     prevtotal=$((a+b+c+previdle))
@@ -14,12 +8,6 @@ cpu(){
     read -r cpu a b c idle rest < /proc/stat
     total=$((a+b+c+idle))
     usage=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-    if [ $usage -ge 90 ]; then
-      usage="<span color=\"#ff1600\">$usage</span>"
-    elif [ $usage -ge 70 ]; then
-      usage="<span color=\"#ff9600\">$usage</span>"
-    fi
-    echo "$label  $usage%"
 }
 
 case $BLOCK_BUTTON in
@@ -28,3 +16,11 @@ case $BLOCK_BUTTON in
 esac
 
 cpu
+    . /home/john/.local/bin/status/sbcol
+    if [ "$usage" -ge 85 ]; then
+      display "$usage%" "#ff1600"
+    elif [ "$usage" -ge 70 ]; then
+      display "$usage%" "#ff9600"
+    else
+      display "$usage%"
+    fi

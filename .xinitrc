@@ -1,16 +1,20 @@
-userresources=$HOME/.Xresources
 sysresources=/etc/X11/xinit/.Xresources
+userresources=$HOME/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+usermodmap=$HOME/.Xmodmap
 
-# merge in defaults
+# merge in defaults and keymaps
 [ -f "$sysresources" ] && xrdb -merge $sysresources
 [ -f "$userresources" ]  &&  xrdb -merge "$userresources"
+[ -f $sysmodmap ] && xmodmap $sysmodmap
+[ -f "$usermodmap" ] && xmodmap "$usermodmap"
 
 # start some nice programs
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-        [ -x "$f" ] && . "$f"
-    done
-    unset f
+ for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+  [ -x "$f" ] && . "$f"
+ done
+ unset f
 fi
 
 # source xprofile
@@ -23,14 +27,16 @@ xrandr -s 1920x1080
 # set some X11 env variables
 export XDG_SESSION_TYPE="x11"
 
-# update dbus environment variables
-dbus-update-activation-environment DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+# IMPORTANT, to start dbus and set it's address like in DEs!
+[ -z "$DBUS_SESSION_BUS_ADDRESS" ]  && eval $(dbus-launch --sh-syntax)
+echo $DBUS_SESSION_BUS_ADDRESS
+export DBUS_SESSION_BUS_ADDRESS
 
 # WM apps
 pidof -sx "pipewire" || pipewire &
-# disabled cause i start pipewire-pulse using pipewire.conf
+# disabled cause i start pipewire-pulse using /usr/share/pipewire/pipewire.conf last line
 #pidof -sx "pipewire-pulse" || pipewire-pulse &
-gnome-keyring-daemon --start --components=secrets,pkcs11 &
+export $(gnome-keyring-daemon --start --components=pkcs11,secrets,gpg)
 pidof -sx "polkit-gnome-authentication-agent-1" || "/usr/libexec/polkit-gnome-authentication-agent-1" &
 pidof -sx "dwmblocks" || dwmblocks -b &
 pidof -sx "low_battery" || low_battery &
@@ -38,6 +44,10 @@ pidof -sx "picom" || picom -b &
 xwallpaper --maximize ~/.config/background &
 pidof -sx "onlogin.sh" || onlogin.sh &
 pidof -sx "sxhkd" || sxhkd &
+
+# update dbus environment variables
+#dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+dbus-update-activation-environment DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 #autostart="programs"
 #for program in $autostart; do

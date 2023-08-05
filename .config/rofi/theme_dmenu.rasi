@@ -1,0 +1,69 @@
+/* rofi dmenu theme */
+
+configuration {
+    window-format: "{w} <b>{t:50}</b>";
+    drun-display-format:"{name}";
+    display-window: "<b>󱂬 </b>";
+    display-drun: "";
+}
+
+* {
+    bg: #0c0e0f;
+    bg-sel: #6791c9;
+    txt: #e4e6e7;
+    txt-sel: @bg;
+
+    background-color: @bg; 
+    border-color:     @bg-sel;
+    text-color:       @txt;
+    font:            "sans medium 13";
+}
+
+window {
+    anchor:     south;
+    location:   south;
+    width:      100%;
+    border:     2px;
+    children:   [ horibox ];
+}
+
+horibox {
+    orientation: horizontal;
+    children:   [ entry, listview ];
+}
+
+entry {
+    background-color:               @bg;
+    text-color:                     @bg-sel;
+    placeholder-color:              @txt;
+    padding:  4px 12px;
+    expand:                         false;
+    width:      10em;
+    placeholder:                    "Run:";
+}
+
+listview {
+    layout:     horizontal;
+    spacing:    0px;
+    lines:      20;
+}
+
+element {
+	padding: 4px 12px;
+}
+
+element selected {
+    text-color: @txt-sel;
+    background-color: @bg-sel;
+}
+
+element-text, element-icon {
+  background-color: inherit;
+  text-color: inherit;
+}
+element-text normal {
+  highlight: cyan;
+}
+element-text selected {
+  highlight: white;
+}

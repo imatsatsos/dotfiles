@@ -11,21 +11,16 @@ temp=$(cat "$file")
 # remove 3 trailing zeros
 temp="${temp%???}"
 
-label='󱃃'
-
-if [ -n "$border" ]; then
-    label="<span color=\"$border\">$label</span>"
-fi
-
 case $BLOCK_BUTTON in
 	1) notify-send "CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
 	3) setsid -f "$TERMINAL" -T termfloat -e htop ;;
 esac
 
+. /home/john/.local/bin/status/sbcol
 if [ "$temp" -ge 80 ]; then
-  echo "$label <span color='#ff1600'>$temp°C</span>"
+  display "$temp°C" "#ff1600"
 elif [ "$temp" -ge 72 ]; then
-  echo "$label <span color='#ff9600'>$temp°C</span>"
+  display "$temp°C" "#ff9600"
 else
-  echo "$label $temp°C"
+  display "$temp°C"
 fi

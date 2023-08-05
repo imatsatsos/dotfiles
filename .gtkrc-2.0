@@ -3,12 +3,11 @@
 
 include "/home/john/.gtkrc-2.0.mine"
 gtk-theme-name="Yaru-blue-dark"
-gtk-icon-theme-name="Yaru-dark"
+gtk-icon-theme-name="Yaru-blue-dark"
 gtk-font-name="Sans 10"
-gtk-cursor-theme-name="BreezeX-Black"
 gtk-cursor-theme-size=32
 gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-toolbar-icon-size=GTK_ICON_SIZE_SMALL_TOOLBAR
 gtk-button-images=1
 gtk-menu-images=1
 gtk-enable-event-sounds=1

@@ -3,11 +3,11 @@
 # REQUIRES: power-profiles-daemon, and it's service running
 
 # load config
-. "$HOME/.local/bin/menus.conf"
+[ -e "$HOME/.local/bin/menus.conf" ] && . "$HOME/.local/bin/menus.conf"
 menu=${menu:-dmenu}
 
 # rofi theme
-theme="$HOME/.config/rofi/theme_sounddevs.rasi"
+theme="$HOME/.config/rofi/theme_syspopup.rasi"
 
 get_options() {
   echo "Balanced"
@@ -22,13 +22,13 @@ main() {
   # Notify user if power-profiles-daemon is not installed or not configured
     if ( ! command -v "powerprofilesctl" 1 > /dev/null 2 >&1 ); then
          err="Power-profiles-daemon not installed or service not running!"
-        rofi -e "$err" -theme $HOME/.config/rofi/main_noicons.rasi
+        rofi -e "$err"
         exit
     fi
   
 	case $menu in
 		"rofi") choice=$( (get_options) | rofi -dmenu -p "Set profile" -fuzzy -select "$curr_profile" -theme $theme -mesg "Active profile: $curr_profile") ;;
-		*) choice=$( (get_options) | dmenu -p "Set profile: ($curr_profile)" $dmenu_args -X 1480 -Y 34 -W 430 -l 3) ;;
+		*) choice=$( (get_options) | dmenu -i -p "Set profile: ($curr_profile)" $dmenu_args -X 1550 -Y 40 -W 350 -l 3) ;;
 	esac
 	
   # run the selected command

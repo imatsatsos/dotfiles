@@ -30,16 +30,20 @@ on_xorg() {
     # Set repeat delay, repeat rate
     xset r rate 280 40
     # Set keyboard layout and layout switch key
-    setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escape
+    setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escapegrp_led:caps
   fi
 }
 
 on_xorg
 
+xrdb -merge "$HOME/.Xresources"
+xset r rate 280 40
+setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escapegrp_led:caps
+se
+fixinput
 # gnome_scaling_factor
-## probably not needed as i start it in my bashprofile
-# eval `ssh-agent`
-
+# Update dbus stuff ffs
+dbus-update-activation-environment DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 # Disable bluetooth (soft-block)
 rfkill block bluetooth
 # Set default output volume

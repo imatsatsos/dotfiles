@@ -24,9 +24,9 @@ configuration {
     element-padding:             40px 40px;
     element-border-radius:       18px;
 
-    prompt-font:                 "Iosevka Nerd Font Bold 72";
-    textbox-font:                "Iosevka Nerd Font 14";
-    element-text-font:           "feather 62";
+    prompt-font:                 "sans Bold 72";
+    textbox-font:                "sans 16";
+    element-text-font:           "mono 64";
 
     background-window:           black/92%;
     background-normal:           white/3%;

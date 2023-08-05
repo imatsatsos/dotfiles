@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Use rofi to search the web.
+
+declare -A URLS
+
+URLS=(
+  ["startpage"]="https://www.startpage.com/do/search?q="
+  ["duckduckgo"]="https://www.duckduckgo.com/?q="
+  ["searx"]="https://searxng.nicfab.eu/searxng/search?q="
+  ["google"]="https://www.google.com/search?q="
+  ["youtube"]="https://www.youtube.com/results?search_query="
+  ["bing"]="https://www.bing.com/search?q="
+  ["yahoo"]="https://search.yahoo.com/search?p="
+  ["yandex"]="https://yandex.ru/yandsearch?text="
+  ["imdb"]="http://www.imdb.com/find?ref_=nv_sr_fn&q="
+  ["rottentomatoes"]="https://www.rottentomatoes.com/search/?search="
+  ["github"]="https://github.com/search?q="
+  ["goodreads"]="https://www.goodreads.com/search?q="
+  ["stackoverflow"]="http://stackoverflow.com/search?q="
+  ["searchcode"]="https://searchcode.com/?q="
+  ["openhub"]="https://www.openhub.net/p?ref=homepage&query="
+  ["superuser"]="http://superuser.com/search?q="
+  ["askubuntu"]="http://askubuntu.com/search?q="
+  ["vimawesome"]="http://vimawesome.com/?q="
+  ["skroutz"]="https://www.skroutz.gr/search?keyphrase="
+  ["1337"]="https://1337x.to/search/"
+)
+
+# List for rofi
+gen_list() {
+    for i in "${!URLS[@]}"
+    do
+      echo "$i"
+    done
+}
+
+main() {
+  # Pass the list to rofi
+  platform=$( (gen_list) | rofi -dmenu -p "Search > " -fuzzy )
+
+  if [[ -n "$platform" ]]; then
+    query=$( (echo ) | rofi -dmenu -p "Query > " -fuzzy )
+
+    if [[ -n "$query" ]]; then
+      url=${URLS[$platform]}$query
+      xdg-open "$url"
+    fi
+  fi
+}
+
+main
+
+exit 0

@@ -1,0 +1,121 @@
+#!/bin/sh
+# Utility functions for theming statusbar scripts.
+
+display() {
+    
+    case "$(basename "$0")" in
+        kbdlayout)
+            icbg=#6791c9
+            bg=#e79881
+            label=󰌌
+            ;;
+        traffic)    
+            icbg=#6791c9
+            bg=#e79881
+            label=t
+            ;;
+        cputemp)    
+            icbg=#6791c9
+            bg=#e79881
+            label=󱃃
+            ;;
+        cpu)       
+            icbg=#5a84bc
+            bg=#e79881
+            label=
+            ;;
+        ram)        
+            icbg=#5a84bc
+            bg=#e79881
+            label=
+            ;;
+        disk)       
+            icbg=#6791c9
+            bg=#e79881
+            label=
+            ;;
+        bluetooth)  
+            icbg=#6791c9
+            bg=#e79881
+            label=
+            ;;
+        wifi)
+            icbg=#6791c9
+            bg=#e79881
+            label=󰖩
+            ;;
+        backlight)  
+            icbg=#6791c9
+            bg=#e79881
+            label=󰃟
+            ;;
+        volume)
+            icbg=#6791c9
+            bg=#e79881
+            label=󰕾
+            ;;
+        battery)
+            icbg=#6791c9
+            bg=#e79881
+            label=󰁹
+            ;;
+        powprofile) 
+            icbg=#6791c9
+            bg=#e79881
+            label=t
+            ;;
+        time)       
+            icbg=#6791c9
+            bg=#e79881
+            label=󰃰
+            ;;
+        gamemodest)
+            icbg=#6791c9
+            bg=#e79881
+            label=t
+            ;;
+        updates)
+            icbg=#6791c9
+            bg=#e79881
+            label=t
+            ;;
+        *)
+            icbg=#6791c9
+            bg=#e79881
+            label=t
+            ;;
+    esac
+    
+    ## UNIVERSAL OVERRIDES
+    icfg=#0c0e0f
+    icbg=#6791c9
+    bg=#99b7e0
+    #fg="#e0e1e2"
+    
+    ## if we get called with a color in arg2, its for the text color
+    if [ -n "$2" ]; then
+        fg="$2"
+        bg="#222324"
+    else
+        fg="#0c0e0f"
+    fi
+
+    ## differentiate between bars. work in progress..
+    # case "$STATUSBAR" in
+    #     "dwmblocks")
+    #         echo "<span bgcolor=\"$color\">$1</span>"
+    #         ;;
+    #     *)
+    #         echo "$1"
+    #         ;;
+    # esac
+
+    ## SIMPLE!
+    # COLORED ICON + TEXT FG
+    #printf "^c%s^^b%s^ %s ^d^^c%s^%s " "$icfg" "$icbg" "$label" "$fg" "$1"
+    # COLORED ICON, rest managed by dwm
+    #printf "^c%s^^b%s^ %s ^d^ %s" "$icfg" "$icbg" "$label" "$1"
+                                    
+    ## BLOCKS!
+    printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s ^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"
+}

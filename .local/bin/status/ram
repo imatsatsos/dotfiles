@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 # Output ram usage
 
-awk -v brd="$border" '
+output=$(awk '
 /^MemTotal:/ {
 	mem_total=$2
 }
@@ -29,22 +29,19 @@ END {
 		pct=used/total*100
 	}
     
-    if (length(brd) != 0) {
-        label="<span color=\"" brd "\"> </span>";
-    } else {
-        label=" "
-    }
-
 	#printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
 	if (pct > 90){
-		printf("%s <span color=\"#ff1600\">%.1fG</span>\n", label, used)
+		printf("<span color=\"#ff1600\">%.1fG</span>\n", used)
 	} else if (pct > 80){
-		printf("%s <span color=\"#ff9600\">%.1fG</span>\n", label, used)
+		printf("<span color=\"#ff9600\">%.1fG</span>\n", used)
 	} else {
-		printf("%s %.1fG\n", label, used)
+		printf("%.1fG\n", used)
 	}
 }
-' /proc/meminfo
+' /proc/meminfo)
+
+. $HOME/.local/bin/status/sbcol
+display "$output"
 
 case $BLOCK_BUTTON in
     1) notify-send "Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head -n 5)" ;;

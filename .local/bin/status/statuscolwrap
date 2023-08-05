@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ ! -z $2 ]; then
+  bg="<span bgcolor=\"$2\">"
+  clear="</span>"
+elif [ ! -z $3]; then
+  fg="<span fgcolor=\"$3\">"
+  clear="</span>"
+fi
+if [ ! -z $2 ] && [ ! -z $3 ]; then
+  bg="<span bgcolor=\"$2\" "
+  fg="fgcolor=\"$3\">"
+fi
+
+echo "$bg""$fg"$1"$clear"

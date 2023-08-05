@@ -12,7 +12,7 @@ if [ ! -d $GITREPO ]; then
         mkdir -p $GITREPO
     else
         echo "Can't proceed. Please create a git repo in: $GITREPO"
-
+        exit 1
     fi
 fi
 
@@ -75,7 +75,7 @@ do_copy_dotconfig "background \
     mimeapps.list \
     starship.toml \
     window_titles.yml \
-    autostart/myonlogin.desktop \
+    autostart/ \
     alacritty/ \
     btop/ \
     dunst/ \
@@ -89,13 +89,13 @@ do_copy_dotconfig "background \
     neofetch/ \
     mpv/ \
     nsxiv/ \
+    nvim/ \
     picom/ \
     pcmanfm/ \
     polybar/ \
     rofi/ \
     sxhkd/ \
     sway/"
-# nvim/
 
 sleep 1
 echo "Copy operation complete!"

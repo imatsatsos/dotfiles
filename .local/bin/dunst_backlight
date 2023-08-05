@@ -1,6 +1,5 @@
 #!/bin/env sh
 # sends a notification with the current screen brightness %
-# REQUIRES: dunst
 
 for folders in /sys/class/backlight/*/; do
     backlight="$folders"
@@ -16,11 +15,11 @@ max_brightness=$(cat "$backlight/max_brightness")
 brightness=$(cat "$backlight/brightness")
 percent=$(( brightness * 100 / max_brightness ))
 
-notif_body="󰃠 Brightness:"
+notif_body="    "
 
-dunstify -a "Brightness" \
+notify-send -a "sysui" \
     "$notif_body" \
     -h int:value:$percent \
     -t 1000 \
-    -r 100 \
+    -r 106 \
     -i weather-clear

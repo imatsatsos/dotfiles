@@ -6,12 +6,13 @@
 # Middle click: toggles wifi state
 # DEPENDS: iw to display info, NetworkManager for connection handling
 
+. /home/john/.local/bin/status/sbcol
+
 if [ -z "$INTERFACE" ] ; then
     INTERFACE="${BLOCK_INSTANCE:-wlp0s20f3}"
 fi
 
-#COLOR_GE80=${COLOR_GE80:-#78DCA7}
-COLOR_GE80=${COLOR_GE80:-#bbbbbb}
+COLOR_GE80=${COLOR_GE80:-#78DCA7}
 COLOR_GE60=${COLOR_GE60:-#FCF39C}
 COLOR_GE40=${COLOR_GE40:-#DBC074}
 COLOR_LOWR=${COLOR_LOWR:-#D95177}
@@ -37,7 +38,7 @@ esac
 
 # If the wifi interface exists but no connection is active, "down" shall be displayed.
 if [ "$(cat /sys/class/net/"$INTERFACE"/operstate)" = 'down' ]; then
-    echo "<span color=\"$COLOR_DOWN\">󰖪 down</span>"
+    display "󰖪  down" "$COLOR_DOWN"
     exit
 fi
 
@@ -49,8 +50,8 @@ QUALITY=$(iw "${INTERFACE}" link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '{p
 QUALITYdBm=$(iw "${INTERFACE}" link | grep dBm | grep -Eoe '-[0-9]{2} dBm')
 
 # color
-if [ "$QUALITY" -ge 80 ]; then
-    COLOR=$COLOR_GE80
+if [ "$QUALITY" -ge 80 ]; then 
+    test=''
 elif [ "$QUALITY" -ge 60 ]; then
     COLOR=$COLOR_GE60
 elif [ "$QUALITY" -ge 40 ]; then
@@ -65,8 +66,9 @@ case "$BLOCK_BUTTON" in
     1) OUTPUT="$SSID" ;;
 esac
 
-if [ -n "$border" ]; then
-    LABEL="<span color=\"$border\">$LABEL</span>"
-fi
-
-echo "$LABEL  <span color=\"$COLOR\">$OUTPUT</span>"
+# if [ -n "$border" ]; then
+#     LABEL="<span color=\"$border\">$LABEL</span>"
+# fi
+#
+# echo "$LABEL  <span color=\"$COLOR\">$OUTPUT</span>"
+display "$OUTPUT" "$COLOR"

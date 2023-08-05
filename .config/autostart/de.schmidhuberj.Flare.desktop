@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=de.schmidhuberj.Flare
+Exec=flatpak run --command=flare de.schmidhuberj.Flare --gapplication-service
+X-Flatpak=de.schmidhuberj.Flare

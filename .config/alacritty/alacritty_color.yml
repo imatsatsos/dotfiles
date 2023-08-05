@@ -360,7 +360,7 @@ schemes:
       cyan:    '#54ced6'
       white:   '#2a2a2a'
 
-  ### Nightfox (I-Machina variant)
+  ### Nightfox (I-Machina variant) ###
   IMachina: &IMachina
     primary:
       background: "#12121f"
@@ -396,7 +396,7 @@ schemes:
       cyan: "#72e7e5"
       white: "#d4d7ff"
 
-  ### Yoru
+  ### Yoru ###
   Yoru: &Yoru
     primary:
       background: "#0c0e0f"
@@ -422,7 +422,124 @@ schemes:
       magenta: "#c58cec"
       white: "#f2f4f5"
 
-######################################################################
+  ### Kanagawa ###
+  Kanagawa: &Kanagawa
+    primary:
+      background: '0x1f1f28'
+      foreground: '0xdcd7ba'
+
+    normal:
+      black:   '0x090618'
+      red:     '0xc34043'
+      green:   '0x76946a'
+      yellow:  '0xc0a36e'
+      blue:    '0x7e9cd8'
+      magenta: '0x957fb8'
+      cyan:    '0x6a9589'
+      white:   '0xc8c093'
+  
+    bright:
+      black:   '0x727169'
+      red:     '0xe82424'
+      green:   '0x98bb6c'
+      yellow:  '0xe6c384'
+      blue:    '0x7fb4ca'
+      magenta: '0x938aa9'
+      cyan:    '0x7aa89f'
+      white:   '0xdcd7ba'
+  
+    selection:
+      background: '0x2d4f67'
+      foreground: '0xc8c093'
+  
+    indexed_colors:
+      - { index: 16, color: '0xffa066' }
+      - { index: 17, color: '0xff5d62' }
+
+  ### Catppuccin Mocha ###
+  CatppuccinMocha: &CatppuccinMocha
+    primary:
+      background: "#1E1E2E" # base
+      foreground: "#CDD6F4" # text
+      dim_foreground: "#CDD6F4" # text
+      bright_foreground: "#CDD6F4" # text
+
+      # Cursor colors
+    cursor:
+      text: "#1E1E2E" # base
+      cursor: "#F5E0DC" # rosewater
+    vi_mode_cursor:
+      text: "#1E1E2E" # base
+      cursor: "#B4BEFE" # lavender
+
+        # Search colors
+    search:
+      matches:
+        foreground: "#1E1E2E" # base
+        background: "#A6ADC8" # subtext0
+      focused_match:
+        foreground: "#1E1E2E" # base
+        background: "#A6E3A1" # green
+      footer_bar:
+        foreground: "#1E1E2E" # base
+        background: "#A6ADC8" # subtext0
+
+          # Keyboard regex hints
+    hints:
+      start:
+        foreground: "#1E1E2E" # base
+        background: "#F9E2AF" # yellow
+      end:
+        foreground: "#1E1E2E" # base
+        background: "#A6ADC8" # subtext0
+
+            # Selection colors
+    selection:
+      text: "#1E1E2E" # base
+      background: "#F5E0DC" # rosewater
+
+            # Normal colors
+    normal:
+      black: "#45475A" # surface1
+      red: "#F38BA8" # red
+      green: "#A6E3A1" # green
+      yellow: "#F9E2AF" # yellow
+      blue: "#89B4FA" # blue
+      magenta: "#F5C2E7" # pink
+      cyan: "#94E2D5" # teal
+      white: "#BAC2DE" # subtext1
+
+      # Bright colors
+    bright:
+      black: "#585B70" # surface2
+      red: "#F38BA8" # red
+      green: "#A6E3A1" # green
+      yellow: "#F9E2AF" # yellow
+      blue: "#89B4FA" # blue
+      magenta: "#F5C2E7" # pink
+      cyan: "#94E2D5" # teal
+      white: "#A6ADC8" # subtext0
+
+      # Dim colors
+    dim:
+      black: "#45475A" # surface1
+      red: "#F38BA8" # red
+      green: "#A6E3A1" # green
+      yellow: "#F9E2AF" # yellow
+      blue: "#89B4FA" # blue
+      magenta: "#F5C2E7" # pink
+      cyan: "#94E2D5" # teal
+      white: "#BAC2DE" # subtext1
+
+    indexed_colors:
+      - { index: 16, color: "#FAB387" }
+      - { index: 17, color: "#F5E0DC" }
+
+#   ___ _  _  ___   ___  ___ ___ 
+#  / __| || |/ _ \ / _ \/ __| __|
+# | (__| __ | (_) | (_) \__ \ _| 
+#  \___|_||_|\___/ \___/|___/___|
+#                                
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
 ## ###################################################################
 # Available themes are:
@@ -439,7 +556,9 @@ schemes:
 # *TomorrowNightBright
 # *IMachina
 # *Yoru
-colors: *IMachina
+# *Kanagawa
+# *CatppuccinMocha
+colors: *CatppuccinMocha
 
 # _____  __   _   __  __ ___ _    ___ 
 #| __\ \/ /  /_\ |  \/  | _ \ |  | __|

@@ -2,7 +2,7 @@
 # Rofi power menu
 
 # load config
-. "$HOME/.local/bin/menus.conf"
+[ -e  "$HOME"/.local/bin/menus.conf ] && . "$HOME/.local/bin/menus.conf"
 menu=${menu:-dmenu}
 
 # rofi theme
@@ -38,7 +38,7 @@ main() {
 
 case $menu in
 	"rofi") choice=$( get_options | rofi -dmenu -p "Goodbye ${USER}" -mesg "Uptime: $uptime" -no-default-config -theme "$theme") ;;
-	*) choice=$( get_options | dmenu -p "Goodbye ${USER} | Uptime: $uptime" $dmenu_args -Y -3 -h 27) ;;
+	*) choice=$( get_options | dmenu -i -p "Goodbye ${USER} | Uptime: $uptime" $dmenu_args) ;;
 esac
 
 # run the selected command

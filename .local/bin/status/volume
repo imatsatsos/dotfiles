@@ -69,10 +69,15 @@ if [ -n "$border" ]; then
     ICON="<span color=\"$border\">$ICON</span>"
 fi
 
+. /home/john/.local/bin/status/sbcol
 if [[ "$MUTED" == *"yes"* ]]; then
-    echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
-elif [ "${VOLUME%%%}" -ge 100 ]; then
-    echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
+#    echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
+display "MUTE" "$MUTE_COLOR"
+elif [ "${VOLUME%%%}" -ge 101 ]; then
+#    echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
+display "OVER" "$BOOST_COLOR"
 else
-    echo "$ICON ${VOLUME%%%}"
+    #echo "$ICON ${VOLUME%%%}"
+    vol=${VOLUME%%%}
+    display "$vol"
 fi

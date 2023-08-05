@@ -1,6 +1,6 @@
 #!/bin/env sh
 # script changes volume, mute state of default sink(output) and mute state of defaut source(mic) and sends a notification
-# DEPENDS: pipewire/wireplumber, dunst
+# DEPENDS: pipewire/wireplumber
 
 case "$1" in
     "up") wpctl set-volume @DEFAULT_SINK@ 2%+ ;;
@@ -15,9 +15,9 @@ case "$1" in
   "micmute")
     state=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -q 'MUTED' && echo "MUTED" || echo "")
     if [ "$state" = "MUTED" ]; then
-      dunstify -a "Volume" "Mic:" "Mic mute" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-off.svg" -h "string:fgcolor:#a0a0a0"
-    else
-      dunstify -a "Volume" "Mic" "Mic on" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-on.svg"
+      notify-send -a "sysui" "Mic mute" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-off.svg" -h string:fgcolor:#ffa0a0 -h string:frcolor:#ffa0a0
+   else
+      notify-send -a "sysui" "Mic on" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-on.svg"
     fi
     ;;
     
@@ -26,7 +26,7 @@ case "$1" in
     volume=$(echo "$output" | awk '{print $2}')
     percentage=$(awk -v vol="$volume" 'BEGIN { print int(vol * 100) }')
     state=$(echo "$output" | grep -q 'MUTED' && echo "MUTED" || echo "")
-    args=$([ "$state" = "MUTED" ] && echo "string:fgcolor:#a0a0a0")
+    args=$([ "$state" = "MUTED" ] && echo "-h string:fgcolor:#ffa0a0 -h string:frcolor:#ffa0a0 -h string:hlcolor:#ffa0a0")
 
     case "$percentage" in
       [7-9][0-9] | 100) icon=audio-volume-high ;;
@@ -37,6 +37,6 @@ case "$1" in
     [ "$state" = "MUTED" ] && icon=audio-volume-muted
 
     #paplay /usr/share/sounds/freedesktop/stereo/bell.oga
-    dunstify -a "Volume" "Volume:" "$state" -t 1000 -r 200 -h int:value:$percentage -i $icon -h "$args"
+    notify-send -a "sysui" "    " "$state" -t 1000 -r 200 -h int:value:$percentage -i $icon $args
 ;;
 esac

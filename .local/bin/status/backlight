@@ -21,4 +21,5 @@ else
     label="󰃟"
 fi
 
-echo "$label $percent"
+. "$HOME"/.local/bin/status/sbcol
+display "$percent" || echo "$label $percent"
