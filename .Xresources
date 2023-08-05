@@ -25,7 +25,7 @@ Xcursor.size: 32
 
 st.termname: st-256color
 ! format: font name:style=bold:size=11
-st.font: Iosevka Mats:size=12
+st.font: Iosevka Mats:size=11
 
 !! Fonts:
 !e Cascadia Code
