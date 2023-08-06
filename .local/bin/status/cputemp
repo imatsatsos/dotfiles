@@ -16,7 +16,7 @@ case $BLOCK_BUTTON in
 	3) setsid -f "$TERMINAL" -T termfloat -e htop ;;
 esac
 
-. /home/john/.local/bin/status/sbcol
+. "$HOME"/.local/bin/status/sbcol
 if [ "$temp" -ge 80 ]; then
   display "$temp°C" "#ff1600"
 elif [ "$temp" -ge 72 ]; then

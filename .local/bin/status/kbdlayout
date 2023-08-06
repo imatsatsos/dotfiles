@@ -19,6 +19,6 @@ if [ "$1" = "notify" ];then
       dunstify -a "Layout" "󰌌  GR " "| Ελληνικά" -t 1000 -r 231 ;;
   esac
 else 
-  . /home/john/.local/bin/status/sbcol
+  . "$HOME"/.local/bin/status/sbcol
   display "$output"
-fi
+if

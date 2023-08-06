@@ -39,7 +39,7 @@ fi
 #   label="<span color=\"$border\">$label</span>"
 # fi
 
-. /home/john/.local/bin/status/sbcol
+. "$HOME"/.local/bin/status/sbcol
 if [ -n "$color" ]; then
   display "$battery_level" "$color"
 else

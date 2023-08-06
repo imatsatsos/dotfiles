@@ -6,7 +6,7 @@
 # Middle click: toggles wifi state
 # DEPENDS: iw to display info, NetworkManager for connection handling
 
-. /home/john/.local/bin/status/sbcol
+. $"HOME"/.local/bin/status/sbcol
 
 if [ -z "$INTERFACE" ] ; then
     INTERFACE="${BLOCK_INSTANCE:-wlp0s20f3}"

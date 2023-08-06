@@ -40,7 +40,7 @@ END {
 }
 ' /proc/meminfo)
 
-. $HOME/.local/bin/status/sbcol
+. "$HOME"/.local/bin/status/sbcol
 display "$output"
 
 case $BLOCK_BUTTON in

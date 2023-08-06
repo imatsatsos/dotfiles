@@ -307,6 +307,7 @@ show_menu() {
 # Rofi command to pipe into, can add any options here
 rofi_command="rofi -dmenu $* -p Bluetoothctl -mesg Bluetoothctl"
 
+if type bluetoothctl > /dev/null 2>&1; then
 case "$1" in
     --status)
         print_status
@@ -315,3 +316,4 @@ case "$1" in
         show_menu
         ;;
 esac
+fi

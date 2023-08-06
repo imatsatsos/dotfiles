@@ -70,7 +70,7 @@ if [ -n "$border" ]; then
     ICON="<span color=\"$border\">$ICON</span>"
 fi
 
-. /home/john/.local/bin/status/sbcol
+. "$HOME"/.local/bin/status/sbcol
 if [[ "$MUTED" == *"yes"* ]]; then
 #    echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
 display "MUTE" "$MUTE_COLOR" "$ICON"

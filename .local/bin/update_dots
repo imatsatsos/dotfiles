@@ -8,7 +8,7 @@ GITREPO="$HOME/Gitrepos/dotfiles"
 if [ ! -d $GITREPO ]; then
     echo "$GITREPO does not exist. Do you wish to create it? [Y/N]"
     read -r ans1
-    if [[ "$ans1" == [Y/y] ]]; then
+    if [ "$ans1" == "Y" ] || [ "$ans1" = "y" ]; then
         mkdir -p $GITREPO
     else
         echo "Can't proceed. Please create a git repo in: $GITREPO"

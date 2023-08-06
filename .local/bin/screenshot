@@ -38,7 +38,7 @@ case $choice in
     
     window|"$window") args="-i $(xdotool getactivewindow)" ;;
 
-    *) echo "arg required: rofi, fullscreen, selection, window"; exit 1 ;;
+    *) echo "arg required: menu, fullscreen, selection, window"; exit 1 ;;
 esac
 
 [ ! -d "$save_path" ] && mkdir -p "$save_path"
@@ -52,4 +52,4 @@ dunstify -a "Screenshot" \
     -t 3000 \
     -i "$save_path/$name"
 
-paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga
+paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga || exit 0

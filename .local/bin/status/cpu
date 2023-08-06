@@ -16,7 +16,7 @@ case $BLOCK_BUTTON in
 esac
 
 cpu
-    . /home/john/.local/bin/status/sbcol
+    . "$HOME"/.local/bin/status/sbcol
     if [ "$usage" -ge 85 ]; then
       display "$usage%" "#ff1600"
     elif [ "$usage" -ge 70 ]; then

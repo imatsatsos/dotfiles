@@ -52,7 +52,7 @@ else
   output='󰂲'
 fi
 
-. /home/john/.local/bin/status/sbcol
+. "$HOME"/.local/bin/status/sbcol
 display "$output"
 # if [ -n "$border" ]; then
 #   printf "<span color='%s'>%s</span>" "$border" "$output"

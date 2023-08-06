@@ -38,7 +38,7 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 
 # NIX
-if [ -e /home/john/.nix-profile/etc/profile.d/nix.sh ]; then . /home/john/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+if [ -e "$HOME"/.nix-profile/etc/profile.d/nix.sh ]; then . "$HOME"/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 #    _  _   _ _____ ___    ___ _____ _   ___ _______  __
 #   /_\| | | |_   _/ _ \  / __|_   _/_\ | _ \_   _\ \/ /

@@ -18,5 +18,5 @@ output=$(date '+%a %d, %H:%M')
 #   echo "<span bgcolor=\"$border\" fgcolor=\"#ffffff\"> $(date '+%a %d, %H:%M') </span>"
 # fi
 
-. /home/john/.local/bin/status/sbcol
+. "$HOME"/.local/bin/status/sbcol
 display "$output"

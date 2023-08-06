@@ -39,7 +39,7 @@ on_xorg
 xrdb -merge "$HOME/.Xresources"
 xset r rate 280 40
 setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escapegrp_led:caps
-se
+
 fixinput
 # gnome_scaling_factor
 # Update dbus stuff ffs
