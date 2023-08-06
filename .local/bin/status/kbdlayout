@@ -11,7 +11,7 @@ else
     output="gr"
 fi
 
-if [ "$1" = "notify" ];then 
+if [ "$1" = "notify" ]; then 
   case $output in
     "en")
       dunstify -a "Layout" "󰌌  EN " "| English " -t 1000 -r 231 ;;
@@ -21,4 +21,4 @@ if [ "$1" = "notify" ];then
 else 
   . "$HOME"/.local/bin/status/sbcol
   display "$output"
-if
+fi
