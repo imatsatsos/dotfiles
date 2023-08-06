@@ -38,7 +38,7 @@ esac
 
 # If the wifi interface exists but no connection is active, "down" shall be displayed.
 if [ "$(cat /sys/class/net/"$INTERFACE"/operstate)" = 'down' ]; then
-    display "󰖪  down" "$COLOR_DOWN"
+    display "down" "$COLOR_DOWN" "󰖪"
     exit
 fi
 

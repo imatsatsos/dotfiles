@@ -29,7 +29,6 @@ export XDG_SESSION_TYPE="x11"
 
 # IMPORTANT, to start dbus and set it's address like in DEs!
 [ -z "$DBUS_SESSION_BUS_ADDRESS" ]  && eval $(dbus-launch --sh-syntax)
-echo $DBUS_SESSION_BUS_ADDRESS
 export DBUS_SESSION_BUS_ADDRESS
 
 # WM apps

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ps --user "$USER" -F | dmenu -l 10 -p "Which process to kill? 🔫" | awk '{print $11}' | xargs pkill

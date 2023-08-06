@@ -34,7 +34,8 @@ change_sink() {
 get_mic_state() {
   micstate=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -q 'MUTED' && echo "MUTED" || echo "")
   if [ "$micstate" = "MUTED" ]; then
-    ICON="<span fgcolor='$BOOST_COLOR'>󰍭</span> "
+    #ICON="<span fgcolor='$BOOST_COLOR'>󰍭</span> "
+    ICON="󰍭"
   else
     ICON=""
   fi
@@ -72,12 +73,12 @@ fi
 . /home/john/.local/bin/status/sbcol
 if [[ "$MUTED" == *"yes"* ]]; then
 #    echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
-display "MUTE" "$MUTE_COLOR"
+display "MUTE" "$MUTE_COLOR" "$ICON"
 elif [ "${VOLUME%%%}" -ge 101 ]; then
 #    echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
-display "OVER" "$BOOST_COLOR"
+display ">100" "$BOOST_COLOR"
 else
     #echo "$ICON ${VOLUME%%%}"
     vol=${VOLUME%%%}
-    display "$vol"
+    display "$vol" "" "$ICON"
 fi

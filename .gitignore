@@ -1,5 +1,5 @@
-.config/nvim/.git/
-.config/nvim/.github/
+.config/nvim/.git/*
+.config/nvim/.github/*
 .config/nvim/.gitignore
 .config/nvim/LICENSE.md
 .config/nvim/README.md

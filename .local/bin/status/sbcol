@@ -90,14 +90,18 @@ display() {
     icfg=#0c0e0f
     icbg=#6791c9
     bg=#99b7e0
-    #fg="#e0e1e2"
+    fg="#e0e1e2"
+    #fg="#0c0e0f"
     
-    ## if we get called with a color in arg2, its for the text color
+    ## if we get called with arg2, its for the text color
     if [ -n "$2" ]; then
         fg="$2"
         bg="#222324"
-    else
-        fg="#0c0e0f"
+    fi
+    
+    ## if we get called with arg3, its for the label
+    if [ -n "$3" ]; then
+        label="$3"
     fi
 
     ## differentiate between bars. work in progress..
@@ -111,11 +115,13 @@ display() {
     # esac
 
     ## SIMPLE!
-    # COLORED ICON + TEXT FG
+    # COLORED ICON BG+FG + TEXT FG
     #printf "^c%s^^b%s^ %s ^d^^c%s^%s " "$icfg" "$icbg" "$label" "$fg" "$1"
-    # COLORED ICON, rest managed by dwm
+    # COLORED ICON BG+FG
     #printf "^c%s^^b%s^ %s ^d^ %s" "$icfg" "$icbg" "$label" "$1"
-                                    
+    # COLORED TEXT FG
+    printf "^c%s^%s %s " "$fg" "$label" "$1"
+
     ## BLOCKS!
-    printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s ^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"
+    #printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s ^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"
 }

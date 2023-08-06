@@ -40,9 +40,7 @@ if [ -d "$HOME/Applications" ]; then
 	PATH="$HOME/Applications/:$PATH"
 fi
 export PATH
-
-# NIX
-. /home/john/.nix-profile/etc/profile.d/nix.sh
+export XDG_DATA_DIRS="$HOME/.nix-profile/share:${XDG_DATA_DIRS}"
 
 # ENVIRONMENT VARIABLES
 export EDITOR=nvim
@@ -302,3 +300,7 @@ PS1='\n\[\e[34m\]\u\[\e[0;2;3m\]@\h \[\e[0m\]\w\[\e[93m\]$(parse_git_branch)\[\e
 
 type "neofetch" >/dev/null 2>&1 && neofetch
 #[ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
+
+# make delete key work in st terminal
+tput smkx
+

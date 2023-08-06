@@ -10,6 +10,9 @@ super + w
 super + a
   dr_launcher
 
+super + shift + q
+  dr_kill
+
 super + shift + e
   dr_emoji
 
