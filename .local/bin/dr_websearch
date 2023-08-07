@@ -28,18 +28,27 @@ URLS=(
 
 # List for rofi
 gen_list() {
-    for i in "${!URLS[@]}"
+    for link in "${!URLS[@]}"
     do
-      echo "$i"
+      echo "$link"
     done
-}
+  }
+
+# load config
+[ -e "$HOME"/.local/bin/menus.conf ] && . "$HOME/.local/bin/menus.conf"
+menu=${menu:-dmenu}
 
 main() {
-  # Pass the list to rofi
-  platform=$( (gen_list) | rofi -dmenu -p "Search > " -fuzzy )
+  case $menu in
+    "rofi") platform=$( (gen_list) | rofi -dmenu -p "Search >" -fuzzy) ;;
+    *) platform=$( (gen_list) | dmenu -i -p "Search >" -l 5 $dmenu_args -W 900 -X 400) ;;
+  esac
 
   if [[ -n "$platform" ]]; then
-    query=$( (echo ) | rofi -dmenu -p "Query > " -fuzzy )
+    case $menu in
+      "rofi") query=$( rofi -dmenu -p "Search >") ;;
+      *) query=$( dmenu -p "Search >" $dmenu_args -W 900 -X 400) ;;
+    esac
 
     if [[ -n "$query" ]]; then
       url=${URLS[$platform]}$query

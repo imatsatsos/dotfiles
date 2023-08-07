@@ -8,6 +8,11 @@ set colored-completion-prefix on
 set show-all-if-ambiguous on
 set completion-ignore-case on
 
+# -- Make delete key work in st --
+# warning: disables arrow for history search below!
+#set enable-keypad on
+
 # -- History search --
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+

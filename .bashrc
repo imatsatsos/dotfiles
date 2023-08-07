@@ -93,7 +93,7 @@ export LESS_TERMCAP_so=$'\E[01;44;93m'
 export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;92m'
 export LESS_TERMCAP_ue=$'\E[0m'
-export BAT_THEME="GitHub"
+export BAT_THEME="base16"
 ## "bat" as manpager
 # if type "bat" >/dev/null 2>&1; then
 #    export MANPAGER="/home/$USER/.local/bin/bat-wrapper"
@@ -300,7 +300,4 @@ PS1='\n\[\e[34m\]\u\[\e[0;2;3m\]@\h \[\e[0m\]\w\[\e[93m\]$(parse_git_branch)\[\e
 
 type "neofetch" >/dev/null 2>&1 && neofetch
 #[ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
-
-# make delete key work in st terminal
-tput smkx
 

@@ -18,11 +18,13 @@ power_on() {
 toggle_power() {
     if power_on; then
         bluetoothctl power off >/dev/null
+        notify-send -t 2000 "󰂲 Bluetooth off"
     else
         if rfkill list bluetooth | grep -q 'blocked: yes'; then
             rfkill unblock bluetooth && sleep 3
         fi
         bluetoothctl power on >/dev/null
+        notify-send -t 2000 " Bluetooth on"
     fi
 }
 
@@ -42,18 +44,18 @@ case $BLOCK_BUTTON in
 esac
 
 if power_on; then
-  output=''
+  label=""
   if device_connected "$headset"; then
     output='󰥰 GB+'
   elif device_connected $speaker; then
     output='󰦢 JBL'
   fi
 else
-  output='󰂲'
+  label='󰂲'
 fi
 
 . "$HOME"/.local/bin/status/sbcol
-display "$output"
+display "$output" "$fg" "$label"
 # if [ -n "$border" ]; then
 #   printf "<span color='%s'>%s</span>" "$border" "$output"
 # else

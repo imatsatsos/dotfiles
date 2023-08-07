@@ -22,7 +22,8 @@ fi
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 # set X11 screen resolution
-xrandr -s 1920x1080
+#xrandr -s 1920x1080
+xrdb -load "$HOME"/.Xresources
 
 # set some X11 env variables
 export XDG_SESSION_TYPE="x11"
@@ -54,5 +55,5 @@ dbus-update-activation-environment DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 #done >/dev/null 2>&1
 
 ## start window-manager
-exec dbus-run-session /usr/local/bin/dwm
+exec dbus-run-session /usr/local/bin/dwm 2>"$HOME"/.dwmlog
 # exec dbus-run-session /usr/bin/i3

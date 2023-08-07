@@ -20,8 +20,6 @@ on_xorg() {
   if [ "$XDG_SESSION_TYPE" = "x11" ]; then
     # Update dbus variables
     dbus-update-activation-environment DISPLAY XAUTHORITY
-    # Merge .Xresources,
-    xrdb -merge "$HOME/.Xresources"
     
     #displayssetup     # in development
     
@@ -36,7 +34,6 @@ on_xorg() {
 
 on_xorg
 
-xrdb -merge "$HOME/.Xresources"
 xset r rate 280 40
 setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escapegrp_led:caps
 

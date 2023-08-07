@@ -2,7 +2,7 @@ super + e
   pcmanfm
 
 super + g
-  $HOME/.local/bin/search/rofi-websearch
+  dr_websearch
 
 super + w
   flatpak run com.brave.Browser 

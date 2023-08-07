@@ -12,7 +12,7 @@ temp=$(cat "$file")
 temp="${temp%???}"
 
 case $BLOCK_BUTTON in
-	1) notify-send "CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
+	1) notify-send "CPU temps" "$(sensors | head -10 | tail -7 | cut -d' ' -f1,2,10)" ;;
 	3) setsid -f "$TERMINAL" -T termfloat -e htop ;;
 esac
 

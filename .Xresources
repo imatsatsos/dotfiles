@@ -25,24 +25,24 @@ Xcursor.size: 32
 
 st.termname: st-256color
 ! format: font name:style=bold:size=11
-st.font: Iosevka Mats:size=11
+st.font: Source Code Pro:size=11
 
 !! Fonts:
 !e Cascadia Code
+! Dejavu Sans Mono
 ! FiraCode
 ! Hack
 ! Hasklig
 ! Input
 ! Iosevka Mats
 ! JetBrains Mono
+! Liberation Mono
 ! Monoid
+! Source Code Pro
 !e UbuntuMono
 !* e: errors with some characters
 
 !! Nerd Fonts:
-! Liberation Mono
-! Dejavu Sans Mono
-! Source Code Pro 
 ! AestheticIosevka Nerd Font Mono
 ! FiraCode Nerd Font
 ! Hack Nerd Font

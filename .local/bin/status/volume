@@ -8,8 +8,8 @@
 
 # export this as env variable in .shellrc
 #TERMINAL=i3-sensible-terminal
-MUTE_COLOR="#a0a0a0"
-BOOST_COLOR="#ff4331"
+MUTE_COLOR="#707580"
+BOOST_COLOR="#f01600"
 
 get_default_sink() {
     DEFAULT_SINK=$(pactl info | grep "Default Sink" | cut -d ' ' -f3)
@@ -73,7 +73,7 @@ fi
 . "$HOME"/.local/bin/status/sbcol
 if [[ "$MUTED" == *"yes"* ]]; then
 #    echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
-display "MUTE" "$MUTE_COLOR" "$ICON"
+display "" "$MUTE_COLOR" "$ICON"
 elif [ "${VOLUME%%%}" -ge 101 ]; then
 #    echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
 display ">100" "$BOOST_COLOR"

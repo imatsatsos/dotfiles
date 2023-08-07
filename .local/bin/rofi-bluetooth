@@ -282,7 +282,7 @@ show_menu() {
     # Match chosen option to command
     case "$chosen" in
         "" | "$divider")
-            echo "No option chosen."
+            exit 0
             ;;
         "$power")
             toggle_power

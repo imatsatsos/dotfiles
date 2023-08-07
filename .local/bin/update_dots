@@ -100,7 +100,7 @@ do_copy_dotconfig "background \
 
 sleep 1
 echo "Copy operation complete!"
-sleep 2
+sleep 1
 if [ -d $GITREPO/.git ]; then
   git -C "$GITREPO" status
   echo "Do you want to update the dotfiles git repo? [y/N]"

@@ -4,15 +4,15 @@
 path_to_battery=$(upower -e | grep BAT)
 
 # if no battery found, exit
-[ "$path_to_battery" = "" ] && exit
+[ -z "$path_to_battery" ] && exit
 
 battery_level=$(upower -i "$path_to_battery"  | grep -E "percentage" | sed 's/[^0-9]//g')
 state=$(upower -i "$path_to_battery"  | grep -E "state" | sed 's/.*:[[:space:]]*//')
 
 if [ "$battery_level" -le 20 ]; then
     label=" "
-    color="#ff1600"
-elif [ "$battery_level" -le 30 ]; then
+    color="#f01600"
+elif [ "$battery_level" -le 35 ]; then
     label=" "
     color="#ff9600"
 elif [ "$battery_level" -le 60 ]; then
@@ -25,13 +25,11 @@ else
     label=" "
 fi
 
-if [ "$state" = "discharging" ]; then
-  label="$label"
-elif [ "$state" = "charging" ]; then
-  label=""
-  # example of "pending-charge state", no colored label, no arrow
-else
+if [ "$state" = "charging" ]; then
   label="󰂄"
+  # example of "pending-charge state", no colored label, no arrow
+elif [ "$state" != "discharging" ]; then
+  label="󰚥"
   unset color
 fi
 
@@ -41,13 +39,13 @@ fi
 
 . "$HOME"/.local/bin/status/sbcol
 if [ -n "$color" ]; then
-  display "$battery_level" "$color"
+  display "$battery_level" "$color" "$label"
 else
-  display "$battery_level"
+  display "$battery_level" "$color" "$label"
 fi
 
 case $BLOCK_BUTTON in 
-  1) notify-send -a "sysui" "Current profile" "$(powerprofilesctl get)" ;;
+  1) notify-send -a "sysui" "Current profile" "$(powerprofilesctl get)" -t 3000 ;;
   3) dr_profile ;;
 esac
 
