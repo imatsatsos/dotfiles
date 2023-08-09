@@ -6,7 +6,7 @@ display() {
     case "$(basename "$0")" in
         kbdlayout)
             icbg=#6791c9
-            bg=#e79881
+            bg=#A0BADD
             label=󰌌
             ;;
         traffic)    
@@ -16,17 +16,17 @@ display() {
             ;;
         cputemp)    
             icbg=#6791c9
-            bg=#e79881
+            bg=#8DADD7
             label=󱃃
             ;;
         cpu)       
             icbg=#5a84bc
-            bg=#e79881
+            bg=#7A9FD0
             label=
             ;;
         ram)        
             icbg=#5a84bc
-            bg=#e79881
+            bg=#5a84bc
             label=
             ;;
         disk)       
@@ -36,12 +36,12 @@ display() {
             ;;
         bluetooth)  
             icbg=#6791c9
-            bg=#e79881
+            bg=#4B7DBF
             label=
             ;;
         wifi)
             icbg=#6791c9
-            bg=#e79881
+            bg=#4B7DBF
             label=󰖩
             ;;
         backlight)  
@@ -51,12 +51,12 @@ display() {
             ;;
         volume)
             icbg=#6791c9
-            bg=#e79881
+            bg=#3C6AA8
             label=󰕾
             ;;
         battery)
             icbg=#6791c9
-            bg=#e79881
+            bg=#32598C
             label=󰁹
             ;;
         powprofile) 
@@ -66,7 +66,7 @@ display() {
             ;;
         time)       
             icbg=#6791c9
-            bg=#e79881
+            bg=#284770
             label=󰃰
             ;;
         gamemodest)
@@ -89,14 +89,14 @@ display() {
     ## UNIVERSAL OVERRIDES
     icfg=#0c0e0f
     icbg=#6791c9
-    bg=#99b7e0
+    #bg=#99b7e0
     fg="#e0e1e2"
     #fg="#0c0e0f"
     
     ## if we get called with arg2, its for the text color
     if [ -n "$2" ]; then
         fg="$2"
-        bg="#222324"
+        #bg="#222324"
     fi
     
     ## if we get called with arg3, its for the label
@@ -120,8 +120,10 @@ display() {
     # COLORED ICON BG+FG
     #printf "^c%s^^b%s^ %s ^d^ %s" "$icfg" "$icbg" "$label" "$1"
     # COLORED TEXT FG
-    printf "^c%s^%s %s " "$fg" "$label" "$1"
+    #printf "^c%s^%s %s " "$fg" "$label" "$1"
 
     ## BLOCKS!
     #printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s ^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"
+    # BLOCK, SINGLE COLORS
+    printf "^c%s^^b%s^ %s %s ^d^" "$icfg" "$bg" "$label" "$1"
 }

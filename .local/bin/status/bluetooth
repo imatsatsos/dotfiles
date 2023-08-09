@@ -44,7 +44,7 @@ case $BLOCK_BUTTON in
 esac
 
 if power_on; then
-  label=""
+  label=''
   if device_connected "$headset"; then
     output='󰥰 GB+'
   elif device_connected $speaker; then

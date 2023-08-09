@@ -185,15 +185,17 @@ alias \
 	errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
 	envy='sudo python /home/$USER/.local/bin/envycontrol.py' \
 	brave='LIBVA_DRI3_DISABLE=1 LIBVA_DRIVER_NAME=iHD nixGLIntel brave' \
-	zap="tar -cvf archive.tar.xz --use-compress-program='xz -T0' \"$1\""
-	# exa for ls
-	if type "exa" >/dev/null 2>&1; then
-		alias \
-			ls='exa --icons --group-directories-first' \
-			la='exa -al --icons --group-directories-first' \
-			ll='exa -l --icons --group-directories-first' \
-			lg='exa -al --git --icons'
-	fi
+	zap="tar -cvf archive.tar.xz --use-compress-program='xz -T0' \"$1\"" \
+	hst='inpt=$(history | cut -c 5 | fzf -0 --tac) && echo "$inpt" | xclip -r -selection c'
+
+# exa for ls
+if type "exa" >/dev/null 2>&1; then
+	alias \
+		ls='exa --icons --group-directories-first' \
+		la='exa -al --icons --group-directories-first' \
+		ll='exa -l --icons --group-directories-first' \
+		lg='exa -al --git --icons'
+fi
 
 # bat for cat
 if type "bat" >/dev/null 2>&1; then
