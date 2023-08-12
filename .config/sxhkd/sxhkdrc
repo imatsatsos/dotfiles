@@ -4,8 +4,9 @@ super + e
 super + g
   dr_websearch
 
+#flatpak run com.brave.Browser 
 super + w
-  flatpak run com.brave.Browser 
+  LIBVA_DRI3_DISABLE=1 LIBVA_DRIVER_NAME=iHD nixGLIntel brave
 
 super + a
   dr_launcher

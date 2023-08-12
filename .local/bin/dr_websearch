@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
+#
 # Use rofi to search the web.
+
+[ -e "$HOME"/.local/bin/menus.conf ] && . "$HOME/.local/bin/menus.conf"
+
+menu=${menu:-dmenu}
 
 declare -A URLS
 
@@ -26,28 +31,23 @@ URLS=(
   ["1337"]="https://1337x.to/search/"
 )
 
-# List for rofi
 gen_list() {
     for link in "${!URLS[@]}"
     do
       echo "$link"
     done
-  }
-
-# load config
-[ -e "$HOME"/.local/bin/menus.conf ] && . "$HOME/.local/bin/menus.conf"
-menu=${menu:-dmenu}
+}
 
 main() {
   case $menu in
     "rofi") platform=$( (gen_list) | rofi -dmenu -p "Search >" -fuzzy) ;;
-    *) platform=$( (gen_list) | dmenu -i -p "Search >" -l 5 $dmenu_args -W 900 -X 400) ;;
+    *) platform=$( (gen_list) | dmenu -i -p "Search >" -l 10 $dmenu_args -W 600 -X 640 -Y 400) ;;
   esac
 
   if [[ -n "$platform" ]]; then
     case $menu in
       "rofi") query=$( rofi -dmenu -p "Search >") ;;
-      *) query=$( dmenu -p "Search >" $dmenu_args -W 900 -X 400) ;;
+      *) query=$( dmenu -p "Search >" $dmenu_args -W 600 -X 640 -Y 540) ;;
     esac
 
     if [[ -n "$query" ]]; then

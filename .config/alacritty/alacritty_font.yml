@@ -1,34 +1,38 @@
 font:
   normal:
-    #family: Liberation Mono
+    family: monospace
+    ## REGULAR FONTS
     #family: Dejavu Sans Mono
-    #family: Source Code Pro 
-    #family: AestheticIosevka Nerd Font Mono
-    #family: FiraCode Nerd Font
-    #family: Hack Nerd Font
+    #family: FiraCode
+    #family: Hack
+    #family: Hasklig
     #family: Input
-    family: Iosevka Mats
-    #family: Iosevka Mats Extended
-    #family: JetBrainsMono Nerd Font
+    #family: Iosevka Mats
+    #family: JetBrains Mono
+    #family: Liberation Mono
+    #family: Monoid
+    #family: Share Tech Mono
+    #family: Source Code Pro 
+    #family: Cascadia Code
+    #family: UbuntuMono
+    ## NERD FONTS
+    #family: AestheticIosevka Nerd Font Mono
     #family: LigaSFMono Nerd Font
-    #family: ProggyClean Nerd Font
-    #family: ShureTechMono Nerd Font
-    #family: UbuntuMono Nerd Font
     style: Regular
 
   bold:
-    #family: Ubuntu Nerd Font
+    #family: Dejavu Sans Mono
     style: Bold
 
   italic:
-    #family: Ubuntu Nerd Font
+    #family: Dejavu Sans Mono
     style: Italic
 
   bold_italic:
-    #family: Ubuntu Nerd Font
+    #family: Dejavu Sans Mono
     style: Bold Italic
 
-  size: 12.0
+  size: 11.0
 
   #offset:
   #  x: 0

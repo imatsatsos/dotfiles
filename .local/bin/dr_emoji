@@ -15,29 +15,16 @@ case $menu in
     rofi -modi emoji -show emoji -theme "$HOME"/.config/rofi/theme_emoji.rasi; exit 0
     ;;
   *)
-    rofi_command="dmenu -i $dmenu_args -l 7 -g 6 -W 370 -X 775 -Y 380"
+    rofi_command="dmenu -i $dmenu_args -l 5 -g 5 -W 250 -X 900 -Y 200 -h 32"
     ;;
 esac
 
 main() {
-
-	# If you run this command with an argument, it will automatically insert the character.
-	# Otherwise, copy and show a message that the emoji has been copied.
-	if [ -n "$1" ]; then
-		if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-			helpText
-		elif [ "$1" = "-w" ]; then
-			chooseEmoji
-		else
-      helpText
-    fi
-  else
-    chooseEmoji
-		xdotool type "$chosen"
-    printf "%s" "$chosen" | xclip -selection clipboard
-    notify-send -u low "'$chosen' copied." &
-    exit 0
-  fi
+	chooseEmoji
+	xdotool type "$chosen"
+	printf "%s" "$chosen" | xclip -selection clipboard
+	notify-send -u low "'$chosen' copied." &
+	exit 0
 }
 
 chooseEmoji() {
@@ -46,19 +33,6 @@ chooseEmoji() {
 
 	# Exit if none chosen.
 	[ -z "$chosen" ] && exit
-}
-
-helpText() {
-	cat <<EOF
-emojimenu - select, copy and use emoji from dmenu and rofi.
-
-Usage:
-  emojimenu 
-  emojimenu [-w]
-Options:
-  -h, --help	show this help text
-  -c 		do not insert automatically, copy to clipboard only
-EOF
 }
 
 main "$@"

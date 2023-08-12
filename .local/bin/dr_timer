@@ -5,8 +5,8 @@
 [ -e "$HOME"/.local/bin/menus.conf ] && . $HOME/.local/bin/menus.conf
 menu=${menu:-dmenu}
 
-time=$(dmenu -p "Timer - Enter a time interval:" $dmenu_args < /dev/null)
-[ -z "$time" ] && printf "No time interval specified...\n" && exit 1
+time=$(dmenu -p "⏰ Timer - Enter a time interval:" -W 460 $dmenu_args < /dev/null)
+[ -z "$time" ] && exit 0
 
 calc() {
 	seconds="$(echo "$time*$2" | bc | sed 's/\..*$//')"

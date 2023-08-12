@@ -12,7 +12,7 @@ display() {
         traffic)    
             icbg=#6791c9
             bg=#e79881
-            label=t
+            label=T
             ;;
         cputemp)    
             icbg=#6791c9
@@ -62,7 +62,7 @@ display() {
         powprofile) 
             icbg=#6791c9
             bg=#e79881
-            label=t
+            label=P
             ;;
         time)       
             icbg=#6791c9
@@ -72,17 +72,17 @@ display() {
         gamemodest)
             icbg=#6791c9
             bg=#e79881
-            label=t
+            label=G
             ;;
         updates)
             icbg=#6791c9
             bg=#e79881
-            label=t
+            label=^
             ;;
         *)
             icbg=#6791c9
             bg=#e79881
-            label=t
+            label=E
             ;;
     esac
     
@@ -90,7 +90,8 @@ display() {
     icfg=#0c0e0f
     icbg=#6791c9
     #bg=#99b7e0
-    fg="#e0e1e2"
+    #fg="#e0e1e2"
+    fg="#6791c9"
     #fg="#0c0e0f"
     
     ## if we get called with arg2, its for the text color
@@ -120,10 +121,10 @@ display() {
     # COLORED ICON BG+FG
     #printf "^c%s^^b%s^ %s ^d^ %s" "$icfg" "$icbg" "$label" "$1"
     # COLORED TEXT FG
-    #printf "^c%s^%s %s " "$fg" "$label" "$1"
+    printf "^c%s^%s %s " "$fg" "$label" "$1"
 
     ## BLOCKS!
     #printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s ^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"
     # BLOCK, SINGLE COLORS
-    printf "^c%s^^b%s^ %s %s ^d^" "$icfg" "$bg" "$label" "$1"
+    #printf "^c%s^^b%s^ %s %s " "$icfg" "$bg" "$label" "$1"
 }

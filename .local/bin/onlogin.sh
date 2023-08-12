@@ -32,8 +32,20 @@ on_xorg() {
   fi
 }
 
-on_xorg
+dpi_set() {
+  MONITOR="HDMI1"
+  dpi=120
 
+  HDMI_STATUS=$(xrandr | grep "${MONITOR} connected")
+  if [ -n "${HDMI_STATUS}" ]; then
+    dpi=96
+  fi
+
+  "$HOME"/.local/bin/change_dpi ${dpi}
+}
+
+on_xorg
+dpi_set
 xset r rate 280 40
 setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escapegrp_led:caps
 

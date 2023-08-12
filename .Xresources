@@ -25,10 +25,10 @@ Xcursor.size: 32
 
 st.termname: st-256color
 ! format: font name:style=bold:size=11
-st.font: Monoid:size=10
+st.font: monospace:size=11
 
 !! Fonts:
-!e Cascadia Code
+!! e = errors with some characters
 ! Dejavu Sans Mono
 ! FiraCode
 ! Hack
@@ -38,26 +38,22 @@ st.font: Monoid:size=10
 ! JetBrains Mono
 ! Liberation Mono
 ! Monoid
+! SF Mono
+! Share Tech Mono
 ! Source Code Pro
+!e Cascadia Code
 !e UbuntuMono
-!* e: errors with some characters
 
 !! Nerd Fonts:
 ! AestheticIosevka Nerd Font Mono
-! FiraCode Nerd Font
-! Hack Nerd Font
-! JetBrainsMono Nerd Font
 ! LigaSFMono Nerd Font
-! ProggyClean Nerd Font
-! ShureTechMono Nerd Font
-! UbuntuMono Nerd Font
 
 ! Kerning / character bounding-box height multiplier
 st.chscale:           1.0
 ! Kerning / character bounding-box width multiplier
 st.cwscale:           1.0
 ! window padding
-st.borderpx:          3
+st.borderpx:          2
 ! Available cursor values: 2 4 6 7 = █ _ | ☃ ( 1 3 5 are blinking versions)
 st.cursorshape:       3
 ! thickness of underline and bar cursors
@@ -65,7 +61,7 @@ st.cursorthickness:   2
 ! Amount of lines scrolled
 st.mousescrollincremenent: 5
 ! blinking timeout for terminal and cursor blinking (0 disables)
-st.blinktimeout:      700
+st.blinktimeout:      600
 ! bell volume. Value between -100 and 100. (0 disables)
 st.bellvolume:        0
 ! (float values in range 0 to 1.0)

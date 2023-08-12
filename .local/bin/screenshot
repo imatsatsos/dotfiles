@@ -25,7 +25,7 @@ if [ "$1" = menu ]; then
 		fullscreen="󰹑  Fullscreen"
 		window="  Window"
 		selection="󰒉  Selection"
-		choice=$(printf "%s\n%s\n%s" "$fullscreen" "$window" "$selection" | dmenu -p "Screenshot:" $dmenu_args)
+		choice=$(printf "%s\n%s\n%s" "$fullscreen" "$window" "$selection" | dmenu -p "Screenshot:" -l 3 -W 300 -X 810 -Y 940 $dmenu_args)
 	;;
 	esac
 fi

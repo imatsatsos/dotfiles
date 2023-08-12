@@ -96,7 +96,8 @@ do_copy_dotconfig "background \
     polybar/ \
     rofi/ \
     sxhkd/ \
-    sway/"
+    sway/ \
+    wezterm/"
 
 sleep 1
 echo "Copy operation complete!"

@@ -17,7 +17,7 @@ case $menu in
     # hide the entry by making font color same as background
     nb=${nb:-'#222226'}
     nf=$nb
-    dmenu -p "Password:" $dmenu_args -nf "$nf" -nb "$nb" -W 400 -X 760 -Y 540 &
+    dmenu -p "Password:" $dmenu_args -nf "$nf" -nb "$nb" -h 40 -W 400 -X 760 -Y 540 &
     ;;
 esac
 

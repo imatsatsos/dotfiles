@@ -28,7 +28,7 @@ main() {
   
 	case $menu in
 		"rofi") choice=$( (get_options) | rofi -dmenu -p "Set profile" -fuzzy -select "$curr_profile" -theme $theme -mesg "Active profile: $curr_profile") ;;
-		*) choice=$( (get_options) | dmenu -i -p "Set profile: ($curr_profile)" $dmenu_args -X 1550 -Y 40 -W 350 -l 3) ;;
+		*) choice=$( (get_options) | dmenu -i -p "Set profile: [$curr_profile]" $dmenu_args -X 1550 -Y 40 -W 350 -l 3) ;;
 	esac
 	
   # run the selected command

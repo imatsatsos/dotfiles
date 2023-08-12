@@ -108,6 +108,7 @@ video/3gpp2=mpv.desktop
 video/dv=mpv.desktop
 x-scheme-handler/sgnl=signal.desktop
 x-scheme-handler/signalcaptcha=signal.desktop
+application/pdf=org.gnome.Evince.desktop
 
 [Added Associations]
 audio/aac=mpv.desktop;
@@ -203,6 +204,7 @@ video/3gp=mpv.desktop;
 video/3gpp=mpv.desktop;
 video/3gpp2=mpv.desktop;
 video/dv=mpv.desktop;
+application/pdf=org.gnome.Evince.desktop;
 
 [Removed Associations]
 inode/directory=com.visualstudio.code.desktop;

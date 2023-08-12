@@ -76,7 +76,7 @@ if [[ "$MUTED" == *"yes"* ]]; then
 display "" "$MUTE_COLOR" "$ICON"
 elif [ "${VOLUME%%%}" -ge 101 ]; then
 #    echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
-display ">100" "$BOOST_COLOR"
+display ">100" "$BOOST_COLOR" "$ICON"
 else
     #echo "$ICON ${VOLUME%%%}"
     vol=${VOLUME%%%}
