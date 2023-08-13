@@ -3,11 +3,14 @@
 	name = imatsatsos
 [init]
     defaultBranch = main
+[color]
+    ui = auto
 [alias]
     st = status
     aa = add -A .
     cm = commit -m
-    reword = commit --amend
+    # rewrite commit message
+    oops = commit --amend
+    # diff for one file
+    df = log --patch --follow
     acp = "! acp() { git add -A && git commit -m \"$1\" && git push; }; acp"
-[color]
-    ui = auto

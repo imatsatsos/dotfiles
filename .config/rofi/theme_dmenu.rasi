@@ -1,26 +1,21 @@
 /* rofi dmenu theme */
 
+@import "colors.rasi"
+
 configuration {
-    window-format: "{w} <b>{t:50}</b>";
     drun-display-format:"{name}";
-    display-window: "<b>󱂬 </b>";
-    display-drun: "";
     display-run: ">_ ";
 }
 
 * {
-    bg: #0c0e0f;
-    bg-sel: #6791c9;
-    txt: #e4e6e7;
-    txt-sel: @bg;
+    text-sel: @txt-sel;
 
-    background-color: @bg; 
     border-color:     @bg-sel;
-    text-color:       @txt;
-    font:            "sans medium 13";
+    border-radius:    0px;
 }
 
 window {
+    background-color: @bg; 
     anchor:     south;
     location:   south;
     width:      100%;
@@ -34,13 +29,12 @@ horibox {
 }
 
 entry {
-    background-color:               @bg;
-    text-color:                     @bg-sel;
-    placeholder-color:              @txt;
-    padding:  4px 12px;
-    expand:                         false;
-    width:      10em;
-    placeholder:                    "Run:";
+    text-color:        @bg-sel;
+    placeholder-color: @bg-sel;
+    padding:           4px 12px;
+    expand:            false;
+    width:             10em;
+    placeholder:       "Run:";
 }
 
 listview {
@@ -59,7 +53,7 @@ element selected {
 }
 
 element-text, element-icon {
-  background-color: inherit;
+  background-color: transparent;
   text-color: inherit;
 }
 element-text normal {

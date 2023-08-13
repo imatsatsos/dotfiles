@@ -1,10 +1,12 @@
-super + e
-  pcmanfm
+super + e ; {e,p,v,d}
+  pcmanfm {~/, ~/Pictures, ~/Videos, ~/Downloads}
+
+super + v
+  mpv $(xclip -o -sel clip)
 
 super + g
   dr_websearch
 
-#flatpak run com.brave.Browser 
 super + w
   LIBVA_DRI3_DISABLE=1 LIBVA_DRIVER_NAME=iHD nixGLIntel brave
 
@@ -23,26 +25,28 @@ super + KP_Divide
 super + Escape
   dr_power
 
-ctrl + grave
+super + grave
   dunstctl history-pop
 
 super + shift + g
   picom-toggle
 
-super + ctrl + l
+super + control + l
   i3exit lock
 
 {_, super +, shift +, ctrl +} @Print
   screenshot {fullscreen, menu, selection, window}
 
 {XF86AudioPrev, XF86AudioPlay, XF86AudioNext}
-  playerctl {--player=spotify previous, play-pause, --player=spotify next}
+  playerctl {--player=spotify previous, play-pause, --player=spotify next} && \
+  	notify-send -r 2362 "$(playerctl metadata title)" "$(playerctl metadata artist)" \
+	-i "$(playerctl metadata mpris:artUrl)"
 
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
   pkill -SIGRTMIN+9 i3blocks
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume, XF86AudioMute, ctrl + XF86AudioMute}
-  volume_control {up, down, mute, micmute}; kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
+  volume_control {up, down, mute, micmute}
 
 XF86Search
   fsearch

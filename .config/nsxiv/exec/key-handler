@@ -18,32 +18,48 @@
 # If KEY has an uppercase equivalent, S-KEY is resolved into it. For instance,
 # K replaces S-k and Scedilla replaces S-scedilla, but S-Delete is sent as-is.
 
+print_help() {
+printf %s "\
+c  copy image
+y  copy path
+d  send to trash
+w  set as wallpaper
+g  edit in gimp
+,  rotate +90
+.  rotate -90
+/  mirror horizontally
+m  metadata
+h    help
+"
+}
+
 rotate() {
 	degree="$1"
 	tr '\n' '\0' | xargs -0 realpath | sort | uniq | while read file; do
-		case "$(file -b -i "$file")" in
-		image/jpeg*) jpegtran -rotate "$degree" -copy all -outfile "$file" "$file" ;;
-		*)           mogrify  -rotate "$degree" "$file" ;;
+		case "$1" in
+		"flop") convert -flop "$file" "$file" ;;
+		*) convert -rotate "$degree" "$file" "$file" ;;
 		esac
 	done
 }
 
 case "$1" in
-"C-x")      xclip -in -filter | tr '\n' ' ' | xclip -in -selection clipboard ;;
-"C-c")      while read file; do 
-              xclip -selection clipboard -target image/png "$file"
-              notify-send "Image copied to clipboard"
+"y")      xclip -in -filter | tr '\n' ' ' | xclip -in -selection clipboard ;;
+"c")      while read file; do 
+              xclip -selection clipboard -target image/png "$file" && \
+		      notify-send "Image copied to clipboard"
             done ;;
-"C-e")      while read file; do urxvt -bg "#444" -fg "#eee" -sl 0 -title "$file" -e sh -c "exiv2 pr -q -pa '$file' | less" & done ;;
-"C-g")      while read file; do setsid -f gimp "$file" & done ;;
-"C-r")      while read file; do setsid -f rawtherapee "$file" & done ;;
-"C-d")	    while read file; do mv "$file" $XDG_DATA_HOME/Trash/files ; done ;;
-"C-comma")  rotate 270 ;;
-"C-period") rotate  90 ;;
-"C-slash")  rotate 180 ;;
-"C-w")      while read file; do 
+#"C-m")      while read file; do st -t termfloat -e sh -c "exiv2 pr -q -pa '$file' | less" & done ;;
+"m")      while read file; do notify-send "$file" "$(exiv2 pr -q -pa \"$(realpath \"$file\")\")" & done ;;
+"g")      while read file; do setsid -f gimp "$file" & done ;;
+"d")	    while read file; do mv "$file" $XDG_DATA_HOME/Trash/files ; done ;;
+"comma")  rotate -90 ;;
+"period") rotate  90 ;;
+"slash")  rotate flop ;;
+"w")      while read file; do 
               cp "$file" "$HOME"/.config/background 
               xwallpaper --maximize "$HOME"/.config/background && notify-send "Wallpaper changed"
             done ;;
+"h")	    notify-send "Key handler" "$(print_help)"
 esac
 

@@ -16,7 +16,7 @@ case $menu in
     rofi_command="rofi -dmenu -theme /$HOME/.config/rofi/theme_asroot.rasi"
     ;;
   *)
-    rofi_command="dmenu -i $dmenu_args"
+    rofi_command="dmenu -i -c -l 5 $dmenu_args"
     ;;
 esac
 

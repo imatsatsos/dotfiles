@@ -2,4 +2,9 @@
 #
 # Kill a process using rofi
 
-ps --user "$USER" -F | dmenu -l 10 -p "Which process to kill? 🔫 " | awk '{print $11}' | xargs pkill
+. "$HOME"/.local/bin/menus.conf
+
+process_name=$(ps -u "$USER" -F | dmenu -i -l 10 -p "Which process to kill? 🔫 " $dmenu_args | awk '{print $11}')
+if [ -n "$process_name" ]; then
+	pkill "$process_name" && notify-send "Process $process_name killed"
+fi

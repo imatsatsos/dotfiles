@@ -10,7 +10,7 @@ theme="$HOME/.config/rofi/theme_power.rasi"
 confirm_theme="$HOME/.config/rofi/theme_confirm.rasi"
 
 # commands
-uptime=$(uptime -p | sed -e 's/up //g')
+uptime=$(uptime -p | sed 's/up\s*//; s/\s*hour*/h/; s/\s*minutes/m/')
 i3exit="$HOME/.local/bin/i3exit"
 
 # display for ROFI
@@ -38,7 +38,7 @@ main() {
 
 case $menu in
 	"rofi") choice=$( get_options | rofi -dmenu -p "Goodbye ${USER}" -mesg "Uptime: $uptime" -no-default-config -theme "$theme") ;;
-	*) choice=$( get_options | dmenu -i -p "Goodbye ${USER} | Uptime: $uptime" $dmenu_args) ;;
+	*) choice=$( get_options | dmenu -i -c -l 5 -p "Goodbye ${USER} | Uptime: $uptime" $dmenu_args) ;;
 esac
 
 # run the selected command

@@ -2,12 +2,16 @@
 # script changes volume, mute state of default sink(output) and mute state of defaut source(mic) and sends a notification
 # DEPENDS: pipewire/wireplumber
 
+refresh_bar(){
+  kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
+}
+
 case "$1" in
-    "up") wpctl set-volume @DEFAULT_SINK@ 2%+ ;;
-    "down") wpctl set-volume @DEFAULT_SINK@ 2%- ;;
-    "mute") wpctl set-mute @DEFAULT_SINK@ toggle ;;
-    "micmute") wpctl set-mute @DEFAULT_SOURCE@ toggle ;;
-    *) echo "\$1: up | down | mute | micmute"; exit 1 ;;
+    "up") wpctl set-volume @DEFAULT_SINK@ 2%+ && refresh_bar;;
+    "down") wpctl set-volume @DEFAULT_SINK@ 2%- && refresh_bar;;
+    "mute") wpctl set-mute @DEFAULT_SINK@ toggle && refresh_bar;;
+    "micmute") wpctl set-mute @DEFAULT_SOURCE@ toggle && refresh_bar;;
+    *) echo "\$1: up | down | mute | micmute"; exit 1;;
 esac
 
 case "$1" in
@@ -15,7 +19,7 @@ case "$1" in
   "micmute")
     state=$(wpctl get-volume @DEFAULT_SOURCE@ | grep -q 'MUTED' && echo "MUTED" || echo "")
     if [ "$state" = "MUTED" ]; then
-      notify-send -a "sysui" "Mic mute" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-off.svg" -h string:fgcolor:#ffa0a0 -h string:frcolor:#ffa0a0
+      notify-send -a "sysui" "Mic mute" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-off.svg" -h string:fgcolor:#df5b61 -h string:frcolor:#df5b61
    else
       notify-send -a "sysui" "Mic on" -t 1500 -r 201 -i "$HOME/.config/dunst/micw-on.svg"
     fi
@@ -26,7 +30,7 @@ case "$1" in
     volume=$(echo "$output" | awk '{print $2}')
     percentage=$(awk -v vol="$volume" 'BEGIN { print int(vol * 100) }')
     state=$(echo "$output" | grep -q 'MUTED' && echo "MUTED" || echo "")
-    args=$([ "$state" = "MUTED" ] && echo "-h string:fgcolor:#ffa0a0 -h string:frcolor:#ffa0a0 -h string:hlcolor:#ffa0a0")
+    args=$([ "$state" = "MUTED" ] && echo "-h string:fgcolor:#df5b61 -h string:frcolor:#df5b61 -h string:hlcolor:#df5b61")
 
     case "$percentage" in
       [7-9][0-9] | 100) icon=audio-volume-high ;;

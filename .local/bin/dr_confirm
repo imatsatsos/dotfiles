@@ -36,8 +36,8 @@ while [ $# -ne 0 ]; do
 done
 
 case $menu in
-	"rofi") chosen=$(printf "%s\n%s" "$yes" "$no" | rofi -dmenu -p "$query" -no-fixed-num-lines -theme "$theme"  -selected-row 1) ;;
-	*) chosen=$(printf "%s\n%s" "$yes" "$no" | dmenu -i -p "$query" $dmenu_args -W 400 -X 760 -Y 540 -h 40 -l 2) ;;
+	"rofi") chosen=$(printf "%s\n%s" "$no" "$yes" | rofi -dmenu -p "$query" -no-fixed-num-lines -theme "$theme"  -selected-row 1) ;;
+	*) chosen=$(printf "%s\n%s" "$no" "$yes" | dmenu -i -p "$query" $dmenu_args -c -h 40 -l 2) ;;
 esac
 
 case "$chosen" in

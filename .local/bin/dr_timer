@@ -5,7 +5,7 @@
 [ -e "$HOME"/.local/bin/menus.conf ] && . $HOME/.local/bin/menus.conf
 menu=${menu:-dmenu}
 
-time=$(dmenu -p "⏰ Timer - Enter a time interval:" -W 460 $dmenu_args < /dev/null)
+time=$(dmenu -p "⏰ Timer - Enter a time interval:" -W 1350 $dmenu_args < /dev/null)
 [ -z "$time" ] && exit 0
 
 calc() {

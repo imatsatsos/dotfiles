@@ -121,10 +121,10 @@ display() {
     # COLORED ICON BG+FG
     #printf "^c%s^^b%s^ %s ^d^ %s" "$icfg" "$icbg" "$label" "$1"
     # COLORED TEXT FG
-    printf "^c%s^%s %s " "$fg" "$label" "$1"
+    printf "^c%s^%s %s^d^" "$fg" "$label" "$1"
 
     ## BLOCKS!
-    #printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s ^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"
+    #printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"
     # BLOCK, SINGLE COLORS
     #printf "^c%s^^b%s^ %s %s " "$icfg" "$bg" "$label" "$1"
 }

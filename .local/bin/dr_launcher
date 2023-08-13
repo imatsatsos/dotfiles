@@ -3,9 +3,10 @@
 
 ## main app launcher
 #rofi -show combi -modes combi -combi-modes "window,drun,run"
+rofi -show combi -combi-modes "drun,run"  -theme theme_launcher.rasi
 
 ## dmenu app launcher
-rofi -combi-modes "drun,run" -show combi -theme theme_dmenu.rasi
+#rofi -combi-modes "drun,run" -show combi -theme theme_dmenu.rasi
 
 ## fullscreen app launcher
 # rofi -show drun -theme theme_launchpad.rasi

@@ -1,0 +1,56 @@
+/* rofi launcher theme */
+
+@import "colors.rasi"
+
+* {
+    text-sel: @txt-sel;
+
+    border-color:     @bg-sel;
+    border-radius:    0px;
+}
+
+window {
+    location:   center;
+    width:      32%;
+    background-color: @bg; 
+    children:   [ vertbox ];
+}
+
+vertbox {
+    orientation: vertical;
+    children:    [ entry, listview ];
+}
+
+entry {
+    text-color:        @bg-sel;
+    placeholder-color: @txt;
+    padding:           4px 12px;
+    expand:            false;
+    width:             10em;
+}
+
+listview {
+    layout:   vertical;
+    spacing:  0px;
+    lines:    10;
+}
+
+element {
+    padding:  4px 12px;
+}
+
+element selected {
+    text-color: @text-sel;
+    background-color: @bg-sel;
+}
+
+element-text, element-icon {
+    background-color: transparent;
+    text-color: inherit;
+}
+element-text normal {
+    highlight: cyan;
+}
+element-text selected {
+    highlight: white;
+}

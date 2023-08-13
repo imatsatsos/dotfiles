@@ -2,7 +2,7 @@
 # uses xcolor to pick a pixel's color and copies the hex value to the clipboard
 # DEPENDS: xcolor, xclip, convert (imagemagick)
 
-hex=$(xcolor -P 154 -S 7)
+hex=$(xcolor -P 250 -S 10)
 if [ -n "$hex" ]; then
 	fname="${hex#?}"
 	convert -size 64x64 xc:"$hex" "/tmp/${fname}.png"

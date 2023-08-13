@@ -27,7 +27,7 @@ show-icons: true;
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
-	hover-select: true;
+/*	hover-select: true;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -41,6 +41,7 @@ show-icons: true;
 /*	threads: 0;*/
 /*	scroll-method: 0;*/
 /*	window-format: "{w}    {c}   {t}";*/
+	window-format: "{w} <b>{t:50}</b>";
 /*	click-to-exit: true;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
@@ -56,11 +57,11 @@ show-icons: true;
 /*	refilter-timeout-limit: 8192;*/
 /*	xserver-i300-workaround: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-/*	display-window: ;*/
+	display-window: "<b>󱂬 </b>";
 /*	display-windowcd: ;*/
-/*	display-run: ;*/
+	display-run: " >_ ";
 /*	display-ssh: ;*/
-/*	display-drun: ;*/
+	display-drun: "";
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	display-filebrowser: ;*/
@@ -108,8 +109,8 @@ show-icons: true;
 /*	ml-row-right: "ScrollRight";*/
 /*	ml-row-up: "ScrollUp";*/
 /*	ml-row-down: "ScrollDown";*/
-	me-select-entry: "";
-	me-accept-entry: "MousePrimary";
+	me-select-entry: "MousePrimary";
+	me-accept-entry: "!MousePrimary";
 /*	me-accept-custom: "Control+MouseDPrimary";*/
   timeout {
       action: "kb-cancel";

@@ -15,7 +15,7 @@ case $menu in
     rofi -modi emoji -show emoji -theme "$HOME"/.config/rofi/theme_emoji.rasi; exit 0
     ;;
   *)
-    rofi_command="dmenu -i $dmenu_args -l 5 -g 5 -W 250 -X 900 -Y 200 -h 32"
+    rofi_command="dmenu -i $dmenu_args -l 5 -g 5 -W 250 -X 1100 -Y 500 -h 32"
     ;;
 esac
 
