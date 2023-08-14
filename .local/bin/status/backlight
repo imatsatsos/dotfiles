@@ -1,6 +1,8 @@
 #!/bin/env sh
 # Outputs current screen brightness %
 
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
+
 for folders in /sys/class/backlight/*/; do
     backlight="$folders"
 done
@@ -15,11 +17,4 @@ max_brightness=$(cat "$backlight/max_brightness")
 brightness=$(cat "$backlight/brightness")
 percent=$(( brightness * 100 / max_brightness ))
 
-if [ -n "$border" ]; then
-    label="<span color=\"$border\">󰃟</span>"
-else
-    label="󰃟"
-fi
-
-. "$HOME"/.local/bin/status/sbcol
-display "$percent" || echo "$label $percent"
+display "$percent" || echo "󰃟$percent"

@@ -82,7 +82,7 @@ display() {
         *)
             icbg=#6791c9
             bg=#e79881
-            label=E
+            label=󰌗
             ;;
     esac
     
@@ -90,21 +90,31 @@ display() {
     icfg=#0c0e0f
     icbg=#6791c9
     #bg=#99b7e0
+    
     #fg="#e0e1e2"
     fg="#6791c9"
     #fg="#0c0e0f"
     
-    ## if we get called with arg2, its for the text color
+    ## if we get called with $2, replace the text fg color
     if [ -n "$2" ]; then
         fg="$2"
-        #bg="#222324"
     fi
     
-    ## if we get called with arg3, its for the label
+    ## if we get called with $3, replace the label
     if [ -n "$3" ]; then
         label="$3"
     fi
-
+    
+    # if i3 is running
+    if [ -n "$I3SOCK" ]; then
+        # $2 is the color passed from scripts, used to color the text
+        if [ -z "$2" ]; then
+            echo "<span color=\"$border\">$label</span>$1"
+        else
+            echo "<span color=\"$border\">$label</span><span color=\"$2\">$1</span>"
+        fi
+        exit 0
+    fi
     ## differentiate between bars. work in progress..
     # case "$STATUSBAR" in
     #     "dwmblocks")
@@ -117,9 +127,9 @@ display() {
 
     ## SIMPLE!
     # COLORED ICON BG+FG + TEXT FG
-    #printf "^c%s^^b%s^ %s ^d^^c%s^%s " "$icfg" "$icbg" "$label" "$fg" "$1"
+    #printf "^c%s^^b%s^ %s^d^^c%s^%s" "$icfg" "$icbg" "$label" "$fg" "$1"
     # COLORED ICON BG+FG
-    #printf "^c%s^^b%s^ %s ^d^ %s" "$icfg" "$icbg" "$label" "$1"
+    #printf "^c%s^^b%s^ %s^d^ %s" "$icfg" "$icbg" "$label" "$1"
     # COLORED TEXT FG
     printf "^c%s^%s %s^d^" "$fg" "$label" "$1"
 

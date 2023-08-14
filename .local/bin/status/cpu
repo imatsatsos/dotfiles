@@ -1,7 +1,9 @@
 #!/bin/env sh
 # Outputs cpu usage %
 
-cpu(){
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
+
+cpu_usage(){
     read -r cpu a b c previdle rest < /proc/stat
     prevtotal=$((a+b+c+previdle))
     sleep 0.5
@@ -11,16 +13,16 @@ cpu(){
 }
 
 case $BLOCK_BUTTON in
-	1) notify-send "CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
-	3) setsid -f "$TERMINAL" -T termfloat -e htop ;;
+    1) notify-send "CPU hogs(100% per core)" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)" ;;
+    3) setsid -f "$TERMINAL" -T termfloat -e htop & ;;
 esac
 
-cpu
-    . "$HOME"/.local/bin/status/sbcol
-    if [ "$usage" -ge 85 ]; then
-      display "$usage%" "#ff1600"
-    elif [ "$usage" -ge 70 ]; then
-      display "$usage%" "#ff9600"
-    else
-      display "$usage%"
-    fi
+cpu_usage
+
+if [ "$usage" -ge 84 ]; then
+    color="#ff1600"
+elif [ "$usage" -ge 70 ]; then
+    color="#ff9600"
+fi
+
+display "$usage%" "$color" || echo "$usage%"

@@ -3,14 +3,15 @@
 # extension
 # DEPENDS: gamemode
 
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
+
 # if gamemode is not installed, exit silently
-if ! command -v gamemoded >/dev/null 2>&1; then exit; fi
+[ ! command -v gamemoded >/dev/null 2>&1 ] && exit
 
 # if gamemode is disabled, dont output anything
 if [ "$(gamemoded -s)" = "gamemode is inactive" ]; then
     exit
 # if gamemode is running then output status
 else
-    echo "<span color=\"#78dca7\">GAMEMODE</span>"
+    display "GAMEMODE" "#78dca7" || echo "GAMEMODE ON"
 fi
-

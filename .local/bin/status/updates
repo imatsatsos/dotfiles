@@ -4,7 +4,7 @@
 
 case "$button" in
   # show updates
-  1) setsid -f "$TERMINAL" -T termfloat -e sh -c "cat /tmp/updates"
+  1) setsid -f "$TERMINAL" -T termfloat -e sh -c "cat /tmp/updates" &
      exit ;;
   # hide
   3) exit ;;

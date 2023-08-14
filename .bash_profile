@@ -1,13 +1,20 @@
 ## Get the aliases and functions
 [ -f "$HOME"/.bashrc ] && . "$HOME"/.bashrc
 
-## Environment variables
-#export SSH_AUTH_SOCK=run/user/$(id -u)/keyring/ssh
-# this one fixes apps that use egl from slow behaviour, seems to break mpv :(
+#  ___ _  ___   __ __   ___   ___  ___ 
+# | __| \| \ \ / / \ \ / /_\ | _ \/ __|
+# | _|| .` |\ V /   \ V / _ \|   /\__ \
+# |___|_|\_| \_/     \_/_/ \_\_|_\|___/
+
+export PATH="$HOME/.local/bin/:$HOME/Applications/:$PATH"
+
+# This fixes apps that use egl from slow behaviour, seems to break mpv :(
+#  More test needed..
 #if /home/$USER/.local/bin/envycontrol.py -q | grep -q integrated ; then
 #    export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
 #fi
 
+# Hardware accel for NVIDIA?
 #if NVIDIA
 #export LIBVA_DRIVER_NAME=nvidia
 #export VDPAU_DRIVER=nvidia

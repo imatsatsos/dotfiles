@@ -3,7 +3,8 @@
 # DEPENDS: pipewire/wireplumber
 
 refresh_bar(){
-  kill -45 $(pidof dwmblocks) && pkill -SIGRTMIN+10 i3blocks
+  kill -45 $(pidof dwmblocks)
+  pkill -SIGRTMIN+10 i3blocks
 }
 
 case "$1" in

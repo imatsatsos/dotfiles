@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 # Output ram usage
 
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
+
 output=$(awk '
 /^MemTotal:/ {
 	mem_total=$2
@@ -40,10 +42,9 @@ END {
 }
 ' /proc/meminfo)
 
-. "$HOME"/.local/bin/status/sbcol
-display "$output"
-
 case $BLOCK_BUTTON in
     1) notify-send "Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head -n 5)" ;;
-    3) setsid -f "$TERMINAL" -T termfloat -e htop ;;
+    3) setsid -f "$TERMINAL" -T termfloat -e htop & ;;
 esac
+
+display "$output" || echo "$output"

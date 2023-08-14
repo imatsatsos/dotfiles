@@ -1,7 +1,10 @@
 #!/bin/env sh
 # Outputs current active keyboard layout
 # Sends a notification if called with "notify"
-layout=$(xset -q | grep -A 0 'LED' | cut -c59-67)
+
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
+
+layout=$(xset -q | grep -A 0 'LED' | cut -c60-67)
 
 [ -z "$layout" ] && exit
 
@@ -12,13 +15,10 @@ else
 fi
 
 if [ "$1" = "notify" ]; then 
-  case $output in
-    "en")
-      dunstify -a "Layout" "󰌌  EN " "| English " -t 1000 -r 231 ;;
-    "gr")
-      dunstify -a "Layout" "󰌌  GR " "| Ελληνικά" -t 1000 -r 231 ;;
-  esac
+    case $output in
+        "en") dunstify -a "Layout" "󰌌  EN " "| English " -t 1000 -r 231 ;;
+        "gr") dunstify -a "Layout" "󰌌  GR " "| Ελληνικά" -t 1000 -r 231 ;;
+    esac
 else 
-  . "$HOME"/.local/bin/status/sbcol
-  display "$output"
+    display "$output" || echo "$output"
 fi

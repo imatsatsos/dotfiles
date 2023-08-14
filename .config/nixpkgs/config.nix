@@ -9,7 +9,6 @@
         };
       commandLineArgs = [
       "--enable-blink-features=MiddleClickAutoscroll"
-      "--disable-features=EnableTabMuting"
       ];
     })
   ];

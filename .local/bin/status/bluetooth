@@ -1,6 +1,8 @@
 #!/bin/env sh
 # Outputs bluetooth status (on/off) and if connected, the name of the device
 
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
+
 # input mac address of devices, find with bluetoothctl list Paired
 headset="1C:E6:1D:56:18:C3"
 speaker="F8:DF:15:B2:38:7A"
@@ -18,13 +20,13 @@ power_on() {
 toggle_power() {
     if power_on; then
         bluetoothctl power off >/dev/null
-        notify-send -t 2000 "󰂲 Bluetooth off"
+        notify-send -a "sysui" -t 4000 "󰂲 Bluetooth off"
     else
         if rfkill list bluetooth | grep -q 'blocked: yes'; then
             rfkill unblock bluetooth && sleep 3
         fi
         bluetoothctl power on >/dev/null
-        notify-send -t 2000 " Bluetooth on"
+        notify-send -a "sysui" -t 4000 " Bluetooth on"
     fi
 }
 
@@ -39,8 +41,8 @@ device_connected() {
 }
 
 case $BLOCK_BUTTON in
-  2) toggle_power ;;
   1) setsid -f rofi-bluetooth & ;;
+  2) toggle_power ;;
 esac
 
 if power_on; then
@@ -54,10 +56,4 @@ else
   label='󰂲'
 fi
 
-. "$HOME"/.local/bin/status/sbcol
-display "$output" "$fg" "$label"
-# if [ -n "$border" ]; then
-#   printf "<span color='%s'>%s</span>" "$border" "$output"
-# else
-#   printf "%s" "$output"
-# fi
+display "$output" "$fg" "$label" || echo "$label$output"

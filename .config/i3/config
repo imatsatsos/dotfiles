@@ -21,15 +21,15 @@ set $sep      #8783d9
 set $wind     #fcf39c
 
 ## Select Fonts
-set $font ShureTechMono Nerd Font 11
-set $font_bar ShureTechMono Nerd Font 11
+set $font Share Tech Mono 11
+set $font_bar Share Tech Mono 11
 
 ## Select Border style (normal | pixel <px> | none)
 set $border_style pixel 2
 set $border_style_float normal 0
 
 ## Select Gaps size
-set $gaps_in_size 6
+set $gaps_in_size 5
 set $gaps_out_size 0
 
 ## Select Terminal
@@ -111,17 +111,17 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+z split h;exec notify-send -t 700 -r 587 'Horizontal split ||'
-bindsym $mod+v split v;exec notify-send -t 700 -r 587 'Vertical split =='
+bindsym $mod+slash split h;exec notify-send -t 700 -r 587 'Horizontal split ||'
+bindsym $mod+apostrophe split v;exec notify-send -t 700 -r 587 'Vertical split =='
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # toggle sticky for current container
-bindsym $mod+Shift+s sticky toggle
+bindsym $mod+s sticky toggle
 
 # fullscreen sticky video playback "hack"
-bindsym $mod+y fullscreen disable; floating enable; border none; resize set 512 288; sticky enable; move window position 1270 100
+bindsym $mod+shift+f fullscreen disable; floating enable; border none; resize set 512 288; sticky enable; move window position 1270 100
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
@@ -135,7 +135,7 @@ bindsym $mod+space floating toggle; [tiling] border $border_style; [floating] bo
 bindsym $mod+Shift+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+d focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -191,14 +191,14 @@ bindsym $mod+Shift+q mode $modeSession
 ##############
 # WORKSPACES #
 ##############
-set $ws1 1: WWW
-set $ws2 2:󰀻 GEN
-set $ws3 3: TERM
-set $ws4 4: READ
-set $ws5 5: GAME
-set $ws6 6: CHAT
-set $ws7 7:SEV
-set $ws8 8: TORR
+set $ws1 1: GEN
+set $ws3 2: TERM
+set $ws2 3: WWW
+set $ws7 4:????
+set $ws8 5: TORR
+set $ws4 6: READ
+set $ws5 7: GAME
+set $ws6 8: CHAT
 set $ws9 9: MPV
 set $ws10 10: VM
 
@@ -241,19 +241,19 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # RULES #
 #########
 # assign to workspace
-assign [class="Brave"]              $ws1
+assign [class="Brave-browser"]      $ws3
+assign [class="Firefox"]            $ws3
 assign [class="mpv"]                $ws9
-assign [class="Signal"]             $ws6
+assign [class="Signal"]             $ws8
 assign [class="virt-manager"]       $ws10
-assign [class="MATLAB"]             $ws5
 assign [class="qbittorrent"]        $ws8
 
 # automatic focus for windows opening on different worskpace
-for_window [class="Brave"]          focus
+for_window [class="Brave-browser"]  focus
+for_window [class="Firefox"]        focus
 for_window [class="mpv"]            focus
 for_window [class="Signal"]         focus
 for_window [class="virt-manager"]   focus
-for_window [class="MATLAB"]         focus
 for_window [class="qbittorrent"]    focus
 
 # assign floating
@@ -268,6 +268,8 @@ for_window [class="Lxappearance"]       floating enable
 for_window [class="MATLAB"]             floating enable, border normal
 for_window [class="kooha"]              floating enable
 for_window [class="qbittorrent"]        floating enable
+for_window [class="File-roller"]        floating enable
+for_window [class="Nsxiv"]              floating enable
 
 ###############
 # Scratchpads #
@@ -289,12 +291,12 @@ bindsym $mod+equal scratchpad show
 # COLORS #
 ##########
 client.background       $bg
-# class                 border    bground  text    indicator  child_border
-client.focused          $focusbrd $bg      $txt    $focusind  $focusbrd
-client.focused_inactive $bg       $bg      $txt    $txtb      $bg
-client.unfocused        $bg       $bg      $txt    $txtb      $bg
-client.urgent           $urgbrd   $bg      $txtb   $urgbrd    $urgbrd
-client.placeholder      $bg       $bg      $txt    $bg        $bg
+# class                 border     bground  text    indicator   child_border
+client.focused          $focusbrd  $bg      $txt    $focusind   $focusbrd
+client.focused_inactive $bg        $bg      $txt    $txtb       $bg
+client.unfocused        $bg        $bg      $txt    $txtb       $bg
+client.urgent           $urgbrd    $bg      $txtb   $urgbrd     $urgbrd
+client.placeholder      $bg        $bg      $txt    $bg         $bg
 
 #######
 # BAR #
@@ -306,14 +308,14 @@ bar {
         tray_padding 3
         strip_workspace_numbers no
         colors {
-	          separator       $sep
-		        background      $bg
-		        statusline      $txt
-#               class      	    	border 		    bg		    txt	    	indicator
-		        focused_workspace   	$wfbrd   	    $wfbg	    $bg     	$wind
-		        active_workspace	    $wabrd        $wabg     $txt    	$wind
-		        inactive_workspace    $winabrd      $bg    	  $txt	  	$wind
-		        urgent_workspace	    $urgbrd       $urgbg    $txt  		$wind
+                separator       $sep
+                background      $bg
+                statusline      $txt
+#                       class      	    border      bg	  txt	  indicator
+                        focused_workspace   $wfbrd      $wfbg	  $bg    $wind
+                        active_workspace    $wabrd      $wabg     $txt   $wind
+                        inactive_workspace  $winabrd    $bg       $txt   $wind
+                        urgent_workspace    $urgbrd     $urgbg    $txt   $wind
         }
 }
 

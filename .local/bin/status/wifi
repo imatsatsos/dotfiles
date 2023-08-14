@@ -6,7 +6,7 @@
 # Middle click: toggles wifi state
 # DEPENDS: iw to display info, NetworkManager for connection handling
 
-. "$HOME"/.local/bin/status/sbcol
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
 
 if [ -z "$INTERFACE" ] ; then
     INTERFACE="${BLOCK_INSTANCE:-wlp0s20f3}"
@@ -26,21 +26,21 @@ LABEL="󰖩"
 toggle_wifi() {
     if [ "$(cat /sys/class/net/"$INTERFACE"/operstate)" = 'down' ]; then
 	nmcli device up	"$INTERFACE" >/dev/null 2>&1
-	notify-send -t 2000 "󰖩 Wifi on"
+	notify-send -a "sysui" -t 4000 "󰖩 Wifi on"
     else
 	nmcli device down "$INTERFACE" >/dev/null 2>&1
-	notify-send -t 2000 "󰖪 Wifi off"
+	notify-send -a "sysui" -t 4000 "󰖪 Wifi off"
     fi
 }
 
 case "$BLOCK_BUTTON" in
     2) toggle_wifi ;;
-    3) setsid -f "$TERMINAL" -T termfloat -e nmtui ;;
+    3) setsid -f "$TERMINAL" -T termfloat -e nmtui & ;;
 esac
 
 # If the wifi interface exists but no connection is active, "down" shall be displayed.
 if [ "$(cat /sys/class/net/"$INTERFACE"/operstate)" = 'down' ]; then
-    display "down" "$COLOR_DOWN" "󰖪"
+    display "down" "$COLOR_DOWN" "󰖪" || echo "󰖪down"
     exit 0
 fi
 
@@ -49,6 +49,7 @@ SSID=$(iw "$INTERFACE" link | awk '/SSID: / {$1=""; print $0}')
 #SHORT_SSID="*${SSID: -3}"
 QUALITY=$(iw "${INTERFACE}" link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '{print  ($1 > -50 ? 100 :($1 < -100 ? 0 : ($1+100)*2))}')
 QUALITYdBm=$(iw "${INTERFACE}" link | grep dBm | grep -Eoe '-[0-9]{2} dBm')
+IP=$(ip address show wlp0s20f3 | grep -Eo 'inet [0-9.]+' | awk '{print $2}')
 
 OUTPUT="$QUALITY"
 
@@ -64,12 +65,7 @@ else
 fi
 
 case "$BLOCK_BUTTON" in
-    1) notify-send -a "sysui" -t 3000 "$SSID" "$QUALITY% (${QUALITYdBm})" ;;
+    1) notify-send -a "sysui" -t 4000 "$SSID" "$QUALITY% (${QUALITYdBm})\n$IP" ;;
 esac
 
-# if [ -n "$border" ]; then
-#     LABEL="<span color=\"$border\">$LABEL</span>"
-# fi
-#
-# echo "$LABEL  <span color=\"$COLOR\">$OUTPUT</span>"
-display "$OUTPUT" "$COLOR"
+display "$OUTPUT" "$COLOR" || echo "$OUTPUT"

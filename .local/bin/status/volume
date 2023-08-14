@@ -6,8 +6,8 @@
 # Mousewheel: change volume
 # DEPENDS: pactl, alsamixer
 
-# export this as env variable in .shellrc
-#TERMINAL=i3-sensible-terminal
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
+
 MUTE_COLOR="#707580"
 BOOST_COLOR="#f01600"
 
@@ -44,7 +44,7 @@ get_mic_state() {
 case "$BLOCK_BUTTON" in
     1) change_sink ;;
     2) volume_control mute ;;
-    3) setsid -f "$TERMINAL" -T termfloat -e alsamixer ;;
+    3) setsid -f "$TERMINAL" -T termfloat -e alsamixer & ;;
     4) pactl set-sink-volume @DEFAULT_SINK@ +1% ;;
     5) pactl set-sink-volume @DEFAULT_SINK@ -1% ;;
 esac
@@ -70,10 +70,9 @@ if [ -n "$border" ]; then
     ICON="<span color=\"$border\">$ICON</span>"
 fi
 
-. "$HOME"/.local/bin/status/sbcol
 if [[ "$MUTED" == *"yes"* ]]; then
 #    echo "$ICON<span color=\"$MUTE_COLOR\">  M</span>"
-display "" "$MUTE_COLOR" "$ICON"
+display " M" "$MUTE_COLOR" "$ICON"
 elif [ "${VOLUME%%%}" -ge 101 ]; then
 #    echo "<span color=\"$BOOST_COLOR\">$ICON ${VOLUME%%%}</span>"
 display ">100" "$BOOST_COLOR" "$ICON"

@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/bin/env sh
 # Outputs the current date and time
+
+[ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
 
 case $BLOCK_BUTTON in
   1) dunst_cal curr & ;;
@@ -18,5 +20,4 @@ output=$(date '+%a %d, %H:%M')
 #   echo "<span bgcolor=\"$border\" fgcolor=\"#ffffff\"> $(date '+%a %d, %H:%M') </span>"
 # fi
 
-. "$HOME"/.local/bin/status/sbcol
-display "$output"
+display "$output" || echo "$output"
