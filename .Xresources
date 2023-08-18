@@ -160,24 +160,24 @@ st.alpha:             0.95
 !*color15:      #f4f7ff
 
 !! Yoru
-*foreground:   #edeff0
-*background:   #0c0e0f
-*color0:       #232526
-*color8:       #2c2e2f
-*color1:       #df5b61
-*color9:       #e8646a
-*color2:       #78b892
-*color10:      #81c19b
-*color3:       #de8f78
-*color11:      #e79881
-*color4:       #6791c9
-*color12:      #709ad2
-*color5:       #bc83e3
-*color13:      #c58cec
-*color6:       #67afc1
-*color14:      #70b8ca
-*color7:       #e4e6e7
-*color15:      #f2f4f5
+! *foreground:   #edeff0
+! *background:   #0c0e0f
+! *color0:       #232526
+! *color8:       #2c2e2f
+! *color1:       #df5b61
+! *color9:       #e8646a
+! *color2:       #78b892
+! *color10:      #81c19b
+! *color3:       #de8f78
+! *color11:      #e79881
+! *color4:       #6791c9
+! *color12:      #709ad2
+! *color5:       #bc83e3
+! *color13:      #c58cec
+! *color6:       #67afc1
+! *color14:      #70b8ca
+! *color7:       #e4e6e7
+! *color15:      #f2f4f5
 
 !! Atom-one-dark
 ! *foreground:    #ABB2BF
@@ -262,3 +262,23 @@ st.alpha:             0.95
 ! *color14:       #7aa89f
 ! *color7:        #c8c093
 ! *color15:       #dcd7ba
+
+!! Midnight
+*foreground:    #b5bdc5
+*background:    #080c10
+*color0:        #181818
+*color8:        #525252
+*color1:        #fa4d56
+*color9:        #ff7279
+*color2:        #42be65
+*color10:       #7ac098
+*color3:        #c8b670
+*color11:       #f8e6a0
+*color4:        #5080ff
+*color12:       #78a9ff
+*color5:        #a665d0
+*color13:       #a3a0d8
+*color6:        #50b0e0
+*color14:       #9ac6e0
+*color7:        #b5bdc5
+*color15:       #e0e0e0

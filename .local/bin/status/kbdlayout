@@ -4,7 +4,7 @@
 
 [ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
 
-layout=$(xset -q | grep -A 0 'LED' | cut -c60-67)
+layout=$(xset -q | grep -A 0 'LED' | cut -c59-67)
 
 [ -z "$layout" ] && exit
 

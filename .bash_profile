@@ -6,7 +6,33 @@
 # | _|| .` |\ V /   \ V / _ \|   /\__ \
 # |___|_|\_| \_/     \_/_/ \_\_|_\|___/
 
-export PATH="$HOME/.local/bin/:$HOME/Applications/:$PATH"
+# PATH
+if [ -d "$HOME/.local/bin" ]; then
+	PATH="$HOME/.local/bin/:$PATH"
+fi
+# Flatpaks to PATH
+if [ -d "/var/lib/flatpak/exports/bin/" ]; then
+	PATH="/var/lib/flatpak/exports/bin/:$PATH"
+fi
+# AppImages to PATH
+if [ -d "$HOME/Applications" ]; then
+	PATH="$HOME/Applications/:$PATH"
+fi
+export PATH
+
+# ENVIRONMENT VARIABLES
+export EDITOR=nvim
+export TERMINAL=st
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export HISTFILE="${XDG_STATE_HOME}"/bash_history
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export LESSHISTFILE=-
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
 
 # This fixes apps that use egl from slow behaviour, seems to break mpv :(
 #  More test needed..

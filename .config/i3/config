@@ -11,22 +11,22 @@ set $focusind #759eea
 set $urgbrd   #d95177
 set $urgbg    #d95177
 
-set $wfbrd    #6d98e8
-set $wfbg     #759eea
+set $wfbrd    #8783d9
+set $wfbg     #8783d9
 set $wftxt    #222236
-set $wabg     #8783d9
+set $wabg     #759eea
 set $wabrd    #29293f
 set $winabrd  #222236
 set $sep      #8783d9
 set $wind     #fcf39c
 
 ## Select Fonts
-set $font Share Tech Mono 11
-set $font_bar Share Tech Mono 11
+set $font monospace 11
+set $font_bar monospace 11
 
 ## Select Border style (normal | pixel <px> | none)
 set $border_style pixel 2
-set $border_style_float normal 0
+set $border_style_float normal 1
 
 ## Select Gaps size
 set $gaps_in_size 5
@@ -55,10 +55,11 @@ set $mod Mod4
 # Mouse keybinds
 floating_modifier $mod
 # middle mouse over titlebar
-bindsym --release button2 kill
 bindsym --release button3 move scratchpad
+bindsym --release button2 kill
 # mod+middle mouse over window
-bindsym --whole-window $mod+button2 move scratchpad
+bindsym --whole-window $mod+button3 floating toggle
+bindsym --whole-window $mod+button7 move scratchpad
 bindsym --whole-window $mod+button8 scratchpad show
 
 # Launch apps
@@ -111,8 +112,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+slash split h;exec notify-send -t 700 -r 587 'Horizontal split ||'
-bindsym $mod+apostrophe split v;exec notify-send -t 700 -r 587 'Vertical split =='
+bindsym $mod+apostrophe split h;exec notify-send -t 700 -r 587 'Vertical split ||'
+bindsym $mod+slash split v;exec notify-send -t 700 -r 587 'Horizontal split =='
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -129,13 +130,14 @@ bindsym $mod+m layout tabbed
 bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+space floating toggle; [tiling] border $border_style; [floating] border $border_style_float
+bindsym $mod+space floating toggle; [tiling] border $border_style;
+#bindsym $mod+space floating toggle; [tiling] border $border_style; [floating] border $border_style_float
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+d focus parent
+bindsym $mod+i focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -186,24 +188,25 @@ mode $modeSession {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Shift+q mode $modeSession
+bindsym $mod+Control+Shift+q mode $modeSession
 
 ##############
 # WORKSPACES #
 ##############
-set $ws1 1: GEN
-set $ws3 2: TERM
-set $ws2 3: WWW
-set $ws7 4:????
-set $ws8 5: TORR
-set $ws4 6: READ
-set $ws5 7: GAME
-set $ws6 8: CHAT
-set $ws9 9: MPV
-set $ws10 10: VM
+set $ws1 1:
+set $ws2 2:
+set $ws3 3:
+set $ws4 4:?
+set $ws5 5:
+set $ws6 6:
+set $ws7 7:
+set $ws8 8:
+set $ws9 9:
+set $ws10 10:
 
 focus_wrapping no
 force_display_urgency_hint 2000 ms
+for_window [urgent="latest"] focus
 
 # switch to workspace next/previous
 bindsym $mod+Ctrl+Right workspace next
@@ -292,7 +295,7 @@ bindsym $mod+equal scratchpad show
 ##########
 client.background       $bg
 # class                 border     bground  text    indicator   child_border
-client.focused          $focusbrd  $bg      $txt    $focusind   $focusbrd
+client.focused          $bg        $bg      $txt    $focusind   $focusbrd
 client.focused_inactive $bg        $bg      $txt    $txtb       $bg
 client.unfocused        $bg        $bg      $txt    $txtb       $bg
 client.urgent           $urgbrd    $bg      $txtb   $urgbrd     $urgbrd
@@ -324,8 +327,8 @@ bar {
 ###########
 default_border $border_style
 default_floating_border $border_style_float
-for_window [tiling] $border_syle
-for_window [floating] $border_style_float
+#for_window [tiling] $border_syle
+#for_window [floating] $border_style_float
 hide_edge_borders smart_no_gaps
 
 ########

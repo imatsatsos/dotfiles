@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# set ENV variables for Hardware Acceleration
+export LIBVA_DRI3_DISABLE=1
+export LIBVA_DRIVER_NAME=iHD
+
+exec /usr/bin/signal-desktop --start-in-tray --enable-gpu --enable-features=VaapiVideoDecoder,VaapiVideoEncoder --disable-features=UseChromeOSDirectVideoDecoder

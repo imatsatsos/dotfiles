@@ -8,7 +8,7 @@ super + g
   dr_websearch
 
 super + w
-  LIBVA_DRI3_DISABLE=1 LIBVA_DRIVER_NAME=iHD nixGLIntel brave
+  tehbrave
 
 super + a
   dr_launcher

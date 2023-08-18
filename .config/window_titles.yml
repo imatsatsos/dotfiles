@@ -1,7 +1,7 @@
 # the icon to fall back to, if there is no mapping
 default_icon: 
 # spaces to insert between the icon & window title
-padding: 1
+padding: 0
 # auto-capitalize window titles, when they are not manually set.
 capitalize: true
 
@@ -20,14 +20,17 @@ mappings:
 - class: firefox
   title: Firefox
   icon: 
+  show_native_title: true
 
 - class: brave-browser
   title: Brave
   icon: &browser 
+  show_native_title: true
 
 - class: Pcmanfm
   title: Files 
   icon: &files 󰉋
+  show_native_title: true
 
 - class: org.gnome.Nautilus
   title: Files 
@@ -51,6 +54,10 @@ mappings:
 - class: xst-256color
   icon: *term
   title: xst
+
+- class: St
+  icon: *term
+  title: Suckless terminal
   # if this is enabled, the native title is shown,
   # as well as the mapped title.
   # e.g. Kitty [~/]

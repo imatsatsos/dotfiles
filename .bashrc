@@ -23,37 +23,6 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-#  ___ _  ___   __ __   ___   ___  ___ 
-# | __| \| \ \ / / \ \ / /_\ | _ \/ __|
-# | _|| .` |\ V /   \ V / _ \|   /\__ \
-# |___|_|\_| \_/     \_/_/ \_\_|_\|___/
-# User scripts/bin to PATH
-if [ -d "$HOME/.local/bin" ]; then
-	PATH="$HOME/.local/bin/:$PATH"
-fi
-# Flatpaks to PATH
-if [ -d "/var/lib/flatpak/exports/bin/" ]; then
-	PATH="/var/lib/flatpak/exports/bin/:$PATH"
-fi
-# AppImages to PATH
-if [ -d "$HOME/Applications" ]; then
-	PATH="$HOME/Applications/:$PATH"
-fi
-export PATH
-
-# ENVIRONMENT VARIABLES
-export EDITOR=nvim
-export TERMINAL=st
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export HISTFILE="${XDG_STATE_HOME}"/bash_history
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
-
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
 #  ___ _  _  ___  ___ _____ ___ 
 # / __| || |/ _ \| _ \_   _/ __|
 # \__ \ __ | (_) |  _/ | | \__ \
@@ -175,6 +144,7 @@ alias \
 	treestat='rpm-ostree status' \
 	fuck='sudo !!' \
 	zipit="tar -cvf \"$1\" | xz -T 0 -zevc > \"${1%/}.tar.xz\"" \
+	zap="tar -cvf archive.tar.xz --use-compress-program='xz -T0' \"$1\"" \
 	itop='sudo intel_gpu_top' \
 	imeas='sudo intel-undervolt measure' \
 	vim='nvim' \
@@ -183,9 +153,7 @@ alias \
 	weekly_main='sudo fstrim -va && sudo makewhatis && sudo xbps-remove -oOv && sudo vkpurge rm all' \
 	errors='sudo dmesg --level=emerg,alert,crit,err,warn' \
 	envy='sudo python /home/$USER/.local/bin/envycontrol.py' \
-	brave='LIBVA_DRI3_DISABLE=1 LIBVA_DRIVER_NAME=iHD nixGLIntel brave' \
-	zap="tar -cvf archive.tar.xz --use-compress-program='xz -T0' \"$1\"" \
-	hst='inpt=$(history | cut -c 5 | fzf -0 --tac) && echo "$inpt" | xclip -r -selection c'
+	fh='inpt=$(history | cut -c 5 | fzf -0 --tac) && echo "$inpt" | xclip -r -selection c'
 
 # exa for ls
 if type "exa" >/dev/null 2>&1; then
@@ -231,7 +199,6 @@ fi
 
 # Directory aliases
 alias \
-	h='cd $HOME && ll' \
 	dl='cd $HOME/Downloads && ll' \
 	doc='cd $HOME/Documents && ll' \
 	gr='cd $HOME/Gitrepos/ && ll'
@@ -266,29 +233,13 @@ function parse_git_dirty {
 	renamed=$(echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
 	deleted=$(echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
 	bits=''
-	if [ "${renamed}" == "0" ]; then
-		bits=">${bits}"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="+${bits}"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="?${bits}"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="x${bits}"
-	fi
-	if [ "${dirty}" == "0" ]; then
-		bits="!${bits}"
-	fi
-	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
-	else
-		echo ""
-	fi
+	if [ "${renamed}" == "0" ]; then bits=">${bits}"; fi
+	if [ "${ahead}" == "0" ]; then bits="*${bits}"; fi
+	if [ "${newfile}" == "0" ]; then bits="+${bits}"; fi
+	if [ "${untracked}" == "0" ]; then bits="?${bits}"; fi
+	if [ "${deleted}" == "0" ]; then bits="x${bits}"; fi
+	if [ "${dirty}" == "0" ]; then bits="!${bits}"; fi
+	if [ ! "${bits}" == "" ]; then echo " ${bits}"; else echo ""; fi
 }
 
 #old PS1='\n\[\e[34m\]\u\[\e[0;2;3m\]@\h \[\e[0m\]\w ($(git branch 2>/dev/null | grep '"'"'*'"'"' | colrm 1 2)) [$?] \$ '

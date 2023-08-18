@@ -10,7 +10,7 @@
     width = (70, 300)
     height = 200
     origin = top-right
-    offset = 10x36
+    offset = 20x36
     scale = 0
     transparency = 20
     corner_radius = 10
