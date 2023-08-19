@@ -4,8 +4,5 @@
 export LIBVA_DRI3_DISABLE=1
 export LIBVA_DRIVER_NAME=iHD
 
-# find brave path from nix
-#bravepath=$(whereis brave|cut -d' ' -f3)
-
 # finally exec with our flags and env variables
 exec nixGLIntel brave --enable-blink-features=MiddleClickAutoscroll --remove-grab-handle --disable-top-sites "$@"

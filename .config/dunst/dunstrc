@@ -325,7 +325,7 @@
     icon_position = top
 
 [spotify]
-    appname = "*spotify*"
+    appname = "Spotify*"
     
     format = "<b>  Now Playing:</b>\n%s\n<i>%b</i>"
     max_icon_size = 128

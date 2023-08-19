@@ -6,29 +6,32 @@
 
 menu=${menu:-dmenu}
 
+default_engine="https://www.startpage.com/do/search?q="
+
 declare -A URLS
 
+# type %S% where the query should be placed
 URLS=(
-  ["startpage"]="https://www.startpage.com/do/search?q="
-  ["duckduckgo"]="https://www.duckduckgo.com/?q="
-  ["searx"]="https://searxng.nicfab.eu/searxng/search?q="
-  ["google"]="https://www.google.com/search?q="
-  ["youtube"]="https://www.youtube.com/results?search_query="
-  ["bing"]="https://www.bing.com/search?q="
-  ["yahoo"]="https://search.yahoo.com/search?p="
-  ["yandex"]="https://yandex.ru/yandsearch?text="
-  ["imdb"]="http://www.imdb.com/find?ref_=nv_sr_fn&q="
-  ["rottentomatoes"]="https://www.rottentomatoes.com/search/?search="
-  ["github"]="https://github.com/search?q="
-  ["goodreads"]="https://www.goodreads.com/search?q="
-  ["stackoverflow"]="http://stackoverflow.com/search?q="
-  ["searchcode"]="https://searchcode.com/?q="
-  ["openhub"]="https://www.openhub.net/p?ref=homepage&query="
-  ["superuser"]="http://superuser.com/search?q="
-  ["askubuntu"]="http://askubuntu.com/search?q="
-  ["vimawesome"]="http://vimawesome.com/?q="
-  ["skroutz"]="https://www.skroutz.gr/search?keyphrase="
-  ["1337"]="https://1337x.to/search/"
+  ["startpage"]="https://www.startpage.com/do/search?q=%S%"
+  ["duckduckgo"]="https://www.duckduckgo.com/?q=%S%"
+  ["searx"]="https://searxng.nicfab.eu/searxng/search?q=%S%"
+  ["google"]="https://www.google.com/search?q=%S%"
+  ["youtube"]="https://www.youtube.com/results?search_query=%S%"
+  ["bing"]="https://www.bing.com/search?q=%S%"
+  ["yahoo"]="https://search.yahoo.com/search?p=%S%"
+  ["yandex"]="https://yandex.ru/yandsearch?text=%S%"
+  ["imdb"]="http://www.imdb.com/find?ref_=nv_sr_fn&q=%S%"
+  ["rottentomatoes"]="https://www.rottentomatoes.com/search/?search=%S%"
+  ["github"]="https://github.com/search?q=%S%"
+  ["goodreads"]="https://www.goodreads.com/search?q=%S%"
+  ["stackoverflow"]="http://stackoverflow.com/search?q=%S%"
+  ["searchcode"]="https://searchcode.com/?q=%S%"
+  ["openhub"]="https://www.openhub.net/p?ref=homepage&query=%S%"
+  ["superuser"]="http://superuser.com/search?q=%S%"
+  ["askubuntu"]="http://askubuntu.com/search?q=%S%"
+  ["vimawesome"]="http://vimawesome.com/?q=%S%"
+  ["skroutz"]="https://www.skroutz.gr/search?keyphrase=%S%"
+  ["1337"]="https://1337x.to/search/%S%/1/"
 )
 
 gen_list() {
@@ -45,17 +48,31 @@ main() {
   esac
 
   if [[ -n "$platform" ]]; then
-    case $menu in
-      "rofi") query=$( rofi -dmenu -p "Search >") ;;
-      *) query=$( dmenu -p "Search >" $dmenu_args -c -W 1000) ;;
-    esac
 
-    if [[ -n "$query" ]]; then
-      url=${URLS[$platform]}$query
-      xdg-open "$url"
+    for item in "${!URLS[@]}"; do
+      echo $item
+      if [ "$item" == "$platform" ]; then
+        exists=1;
+        echo 'for exists 1'
+      fi
+    done
+
+    if [ "$exists" == "1" ]; then
+      echo 'if exists 1'
+      case $menu in
+        "rofi") query=$( rofi -dmenu -p "Search >") ;;
+        *) query=$( dmenu -p "Search >" $dmenu_args -c -W 1000) ;;
+      esac
+
+      if [[ -n "$query" ]]; then
+        url=${URLS[$platform]/\%S\%/$query}
+        xdg-open "$url"
+      fi
+    else
+      xdg-open "${default_engine}${platform}"
     fi
   fi
-}
+  }
 
 main
 

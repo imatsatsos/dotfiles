@@ -34,7 +34,7 @@ export DBUS_SESSION_BUS_ADDRESS
 
 # WM apps
 pidof -sx "pipewire" || pipewire &
-export $(gnome-keyring-daemon --start --components=pkcs11,secrets,gpg)
+pidof -sx "gnome-keyring-daemon" || export $(gnome-keyring-daemon --start --components=pkcs11,secrets,gpg)
 pidof -sx "polkit-gnome-authentication-agent-1" || "/usr/libexec/polkit-gnome-authentication-agent-1" &
 pidof -sx "low_battery" || low_battery &
 #pidof -sx "picom" || picom -b &
@@ -42,6 +42,7 @@ xwallpaper --maximize ~/.config/background &
 pidof -sx "onlogin.sh" || onlogin.sh &
 pidof -sx "sxhkd" || sxhkd &
 pidof -sx "dwmblocks" || dwmblocks -b &
+pidof -sx "easyeffects" || easyeffects --gapplication-service &
 
 # update dbus environment variables
 #dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
