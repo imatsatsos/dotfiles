@@ -7,7 +7,10 @@ lock() {
     if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
         swaylock -f -c 121314 -i ~/.config/lockscreen.png -s fit
     else
-        i3lock --nofork -c 121314 -f -i ~/.config/lockscreen.png
+        xset dpms force off
+        maim /tmp/lock.png
+        convert /tmp/lock.png -fill black -colorize 50% -filter Gaussian -resize 30% -define "filter:sigma=1" -resize "1920x1080" -gravity center -extent "1920x1080" /tmp/lockblur.png
+        i3lock --nofork -c 121314 -f -i /tmp/lockblur.png
     fi
 }
 
