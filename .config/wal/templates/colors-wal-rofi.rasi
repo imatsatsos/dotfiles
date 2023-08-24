@@ -1,0 +1,12 @@
+* {{
+	bg: {background}d0;
+	bg-sel: {color4};
+	brd: {color4}80;
+	txt: {foreground};
+	txt-sel: {background};
+
+	background-color: transparent;
+	text-color: @txt;
+	border-color: @brd;
+	border-radius: 14px;
+}}

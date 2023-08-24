@@ -2,6 +2,10 @@
 
 @import "colors.rasi"
 
+configuration {
+	display-drun: "";
+}
+
 * {
     text-sel: @txt-sel;
 
@@ -49,7 +53,7 @@ element-text, element-icon {
     text-color: inherit;
 }
 element-text normal {
-    highlight: cyan;
+    highlight: @bg-sel;
 }
 element-text selected {
     highlight: white;

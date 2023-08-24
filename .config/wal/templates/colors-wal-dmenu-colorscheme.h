@@ -1,0 +1,9 @@
+static const char nor_fg[]    = "{foreground}";
+static const char nor_bg[]    = "{background}";
+static const char sel_fg[]    = "{color0}";
+static const char sel_bg[]    = "{color4}";
+static const char brd[]       = "{color4}";
+static const char nor_hl_fg[] = "{color5}";
+static const char nor_hl_bg[] = "{background}";
+static const char sel_hl_fg[] = "{foreground}";
+static const char sel_hl_bg[] = "{color4}";

@@ -79,6 +79,7 @@ do_copy_dotconfig "background \
     alacritty/ \
     btop/ \
     dunst/ \
+    easyeffects/ \
     fastfetch/ \
     fontconfig/ \
     git/ \
@@ -98,6 +99,7 @@ do_copy_dotconfig "background \
     sxhkd/ \
     sway/ \
     wezterm/ \
+    wal/ \
     Xresources.d/"
 
 sleep 1
