@@ -32,7 +32,7 @@ while true; do
         "Battery Critical: ${battery_level}%" \
         "$time_to_empty minutes left!" \
         -u critical \
-        -r 101 \
+        -r 523 \
         -i /usr/share/icons/HighContrast/scalable/status/battery-low.svg
 
   elif [ "$battery_level" -lt 26 ] && [ "$discharging" -eq 1 ]    
@@ -41,7 +41,7 @@ while true; do
       dunstify -a "Battery" \
         "Battery Low: ${battery_level}%" \
         "$time_to_empty minutes left!" \
-        -r 101 \
+        -r 523 \
         -i /usr/share/icons/HighContrast/scalable/status/battery-low.svg
   fi
 

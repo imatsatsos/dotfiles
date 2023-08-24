@@ -9,7 +9,7 @@
 [ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
 
 MUTE_COLOR="#707580"
-BOOST_COLOR="#f01600"
+BOOST_COLOR="#f91f28"
 
 get_default_sink() {
     DEFAULT_SINK=$(pactl info | grep "Default Sink" | cut -d ' ' -f3)

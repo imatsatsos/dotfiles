@@ -6,12 +6,12 @@
 
 # Setup
 lang="${1:-eng}"
-command -v tesseract-ocr || exit 1
+command -v tesseract-ocr 1>/dev/null 2>&1 || exit 1
 
 tmpfile_in="$(mktemp -u).png"
 tmpfile_out="$(mktemp -u)"
 maim -s "${tmpfile_in}"
 tesseract-ocr -l "$lang" "${tmpfile_in}" "${tmpfile_out}"
 xclip -i -sel c <"${tmpfile_out}.txt"
-notify-send "OCR completed!"
+notify-send "OCR completed!" "Output in clipboard"
 rm "${tmpfile_in}" "${tmpfile_out}.txt"

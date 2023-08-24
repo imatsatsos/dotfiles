@@ -131,7 +131,13 @@ display() {
     # COLORED ICON BG+FG
     #printf "^c%s^^b%s^ %s^d^ %s" "$icfg" "$icbg" "$label" "$1"
     # COLORED TEXT FG
-    printf "^c%s^%s %s^d^" "$fg" "$label" "$1"
+    #printf "^c%s^%s %s^d^" "$fg" "$label" "$1"
+    # COLORED TEXT ONLY WHEN PASSED
+    if [ -n "$2" ]; then
+        printf "^c%s^%s %s^d^" "$fg" "$label" "$1"
+    else
+        printf "%s %s" "$label" "$1"
+    fi
 
     ## BLOCKS!
     #printf "^c%s^^b%s^ %s ^c%s^^b%s^ %s^d^" "$icfg" "$icbg" "$label" "$fg" "$bg" "$1"

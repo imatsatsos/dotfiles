@@ -29,7 +29,7 @@ g  edit in gimp
 .  rotate -90
 /  mirror horizontally
 m  metadata
-h    help
+h  help
 "
 }
 
@@ -47,19 +47,16 @@ case "$1" in
 "y")      xclip -in -filter | tr '\n' ' ' | xclip -in -selection clipboard ;;
 "c")      while read file; do 
               xclip -selection clipboard -target image/png "$file" && \
-		      notify-send "Image copied to clipboard"
+		      notify-send "$file copied to clipboard"
             done ;;
 #"C-m")      while read file; do st -t termfloat -e sh -c "exiv2 pr -q -pa '$file' | less" & done ;;
 "m")      while read file; do notify-send "$file" "$(exiv2 pr -q -pa \"$(realpath \"$file\")\")" & done ;;
 "g")      while read file; do setsid -f gimp "$file" & done ;;
-"d")	    while read file; do mv "$file" $XDG_DATA_HOME/Trash/files ; done ;;
+"d")	  while read file; do mv "$file" $XDG_DATA_HOME/Trash/files ; done ;;
 "comma")  rotate -90 ;;
 "period") rotate  90 ;;
 "slash")  rotate flop ;;
-"w")      while read file; do 
-              cp "$file" "$HOME"/.config/background 
-              xwallpaper --maximize "$HOME"/.config/background && notify-send "Wallpaper changed"
-            done ;;
-"h")	    notify-send "Key handler" "$(print_help)"
+"w")      while read file; do setwall "$file" && notify-send "$file set as wallpaper!" ; done ;;
+"h")	  notify-send "Key handler:" "$(print_help)"
 esac
 

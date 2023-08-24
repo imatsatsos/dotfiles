@@ -310,7 +310,6 @@
 [kbd_layout]
     appname = "Layout"
     
-    set_stack_tag = "kbdlayout"
     format = "<b>%s</b>%b"
     max_icon_size = 24
     alignment = center 
@@ -328,9 +327,7 @@
     appname = "Spotify*"
     
     format = "<b>  Now Playing:</b>\n%s\n<i>%b</i>"
-    max_icon_size = 128
-    alignment = center
-    icon_position = top
+    max_icon_size = 100
     history_ignore = yes
 
 [calendar]

@@ -44,7 +44,7 @@ gen_list() {
 main() {
   case $menu in
     "rofi") platform=$( (gen_list) | rofi -dmenu -p "Search >" -fuzzy) ;;
-    *) platform=$( (gen_list) | dmenu -i -p "Search >" -l 10 $dmenu_args -c -W 1000) ;;
+    *) platform=$( (gen_list) | dmenu -i -p "Search >" -l 8 -g 3 $dmenu_args -c -W 1000) ;;
   esac
 
   if [[ -n "$platform" ]]; then

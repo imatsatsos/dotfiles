@@ -3,7 +3,7 @@
 send_notification() {
 	TODAY=$(date '+%-d')
 	HEAD=$(cal -m "$1" | head -n1)
-	BODY=$(cal -m "$1" | tail -n7 | sed -z "s|$TODAY|<b><span foreground='#5faefe'>$TODAY</span></b>|1")
+	BODY=$(cal -m "$1" | tail -n7 | sed -z "s|$TODAY|<b><span foreground='#f33030'>$TODAY</span></b>|1")
 	FOOT="\n<i>       ~ calendar</i> 󰸗 "
 	dunstify -a "Calendar" -h string:x-canonical-private-synchronous:calendar \
 		"$HEAD" "$BODY$FOOT" -u low

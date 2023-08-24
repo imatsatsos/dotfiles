@@ -13,16 +13,16 @@ state=$(upower -i "$path_to_battery"  | grep -E "state" | sed 's/.*:[[:space:]]*
 
 if [ "$battery_level" -le 20 ]; then
     label=" "
-    color="#f01600"
-elif [ "$battery_level" -le 35 ]; then
+    color="#f91f28"
+elif [ "$battery_level" -le 40 ]; then
     label=" "
-    color="#ff9600"
-elif [ "$battery_level" -le 60 ]; then
+    color="#f9841f"
+elif [ "$battery_level" -le 75 ]; then
     label=" "
-    color="#e9ff00"
+    color="#f9f11f"
 elif [ "$battery_level" -le 85 ]; then
     label=" "
-    color="#69ff00"
+    color="#28f91f"
 else
     label=" "
 fi

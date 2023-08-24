@@ -3,8 +3,8 @@
 
 [ -e "$HOME/.local/bin/status/sbcol" ] && . "$HOME"/.local/bin/status/sbcol
 
-# hwmon4-temp1 is cpu pkg temp, but this can change to hwmon5.. name is coretemp.. make a for loop that checks it..
-file="/sys/class/hwmon/hwmon4/temp1_input"
+# find the hwmon folder containing 'coretemp' in the file 'name', then display temp1_input (package_temp)
+file="$(echo $(grep -li coretemp /sys/class/hwmon/*/* 2>/dev/null) | sed 's/name/temp1_input/')"
 
 # if file doesn't exit, then exit
 [ -e "$file" ] || exit
@@ -19,9 +19,9 @@ case $BLOCK_BUTTON in
 esac
 
 if [ "$temp" -ge 80 ]; then
-    color="#ff1600"
+    color="#f91f28"
 elif [ "$temp" -ge 72 ]; then
-    color="#ff9600"
+    color="#f9f11f"
 fi
 
 display "$temp°C" "$color" || echo "$temp°C"

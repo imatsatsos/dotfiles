@@ -38,7 +38,7 @@ main() {
 
 case $menu in
 	"rofi") choice=$( get_options | rofi -dmenu -p "Goodbye ${USER}" -mesg "Uptime: $uptime" -no-default-config -theme "$theme") ;;
-	*) choice=$( get_options | dmenu -i -c -l 5 -p "Goodbye ${USER} | Uptime: $uptime" $dmenu_args) ;;
+	*) choice=$( get_options | dmenu -i -c -l 2 -g 3 -p "Goodbye ${USER} | Uptime: $uptime" $dmenu_args) ;;
 esac
 
 # run the selected command

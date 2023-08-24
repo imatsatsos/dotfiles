@@ -1,0 +1,19 @@
+#!/bin/env sh
+
+dir="$HOME/Phone"
+
+[ -d "$dir" ] || mkdir "$dir"
+
+device=$(simple-mtpfs -l)
+
+if [ -n "$device" ]; then
+	id=${device%%:*}
+else
+	notify-send "No MTP device connected!"
+fi
+
+if [ -n "$(find "$dir" -maxdepth 0 -empty)" ]; then
+	simple-mtpfs --device "$id" "$dir" && notify-send "Device mounted in $dir"
+else
+	fusermount -u "$dir" && notify-send "Device unmounted"
+fi

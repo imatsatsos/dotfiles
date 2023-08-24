@@ -16,8 +16,8 @@ fi
 
 if [ "$1" = "notify" ]; then 
     case $output in
-        "en") dunstify -a "Layout" "󰌌  EN " "| English " -t 1000 -r 231 ;;
-        "gr") dunstify -a "Layout" "󰌌  GR " "| Ελληνικά" -t 1000 -r 231 ;;
+        "en") notify-send -a "Layout" "󰌌  EN " "| English " -t 1000 -r 231 ;;
+        "gr") notify-send -a "Layout" "󰌌  GR " "| Ελληνικά" -t 1000 -r 231 ;;
     esac
 else 
     display "$output" || echo "$output"

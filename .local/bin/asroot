@@ -4,4 +4,4 @@
 export SUDO_ASKPASS=/home/"$USER"/.local/bin/dr_askpass
 
 ## execute the application
-sudo -A "$1"
+sudo -A "$@"

@@ -33,9 +33,9 @@ END {
     
 	#printf("%.1fG/%.1fG (%.f%%)\n", used, total, pct)
 	if (pct > 90){
-		printf("<span color=\"#ff1600\">%.1fG</span>\n", used)
+		printf("<span color=\"#f91f28\">%.1fG</span>\n", used)
 	} else if (pct > 80){
-		printf("<span color=\"#ff9600\">%.1fG</span>\n", used)
+		printf("<span color=\"#f9f11f\">%.1fG</span>\n", used)
 	} else {
 		printf("%.1fG\n", used)
 	}

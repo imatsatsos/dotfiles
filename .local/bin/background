@@ -1,0 +1,4 @@
+#!/bin/env sh
+
+command -v nsxiv 1>/dev/null 2>&1 || exit 1
+[ -d ~/Pictures/Wallpapers ] && nsxiv -t -g=1440x900 ~/Pictures/Wallpapers

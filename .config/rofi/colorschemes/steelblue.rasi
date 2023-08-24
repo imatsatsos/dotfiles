@@ -10,5 +10,4 @@
 	border-color:     @brd;
 	border-radius:    14px;
 
-	font: "Sans 14";
 }

@@ -97,7 +97,8 @@ do_copy_dotconfig "background \
     rofi/ \
     sxhkd/ \
     sway/ \
-    wezterm/"
+    wezterm/ \
+    Xresources.d/"
 
 sleep 1
 echo "Copy operation complete!"

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+	url="$(xclip -o)"
+else
+	url="$1"
+fi
+
+case "$url" in
+	*.mkv|*.webm|*.mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtube.com/shorts*|*youtu.be*|*bitchute.com*)
+		setsid -f mpv --autofit=1280 -quiet "$url" >/dev/null 2>&1 ;;
+	*.torrent|magnet*)
+		setsid -f qbittorrent "$url" >/dev/null 2>&1 ;;
+	*.png|*.jpg|*.jpe|*.jpeg|*.gif|*.gifv|*.webp)
+		curl -sL "$url" > "/tmp/$(echo "$url" | sed "s/.*\///")" && nsxiv -a "/tmp/$(echo "$url" | sed "s/.*\///")"  >/dev/null 2>&1 & ;;
+	*.mp3|*.flac|*.opus|*.mp3?source*)
+		setsid -f tsp curl -LO "$url" >/dev/null 2>&1 ;;
+	*)
+		if [ -f "$url" ]; then "$TERMINAL" -e "$EDITOR" "$url"
+		else setsid -f "$BROWSER" "$url" >/dev/null 2>&1; fi ;;
+esac

@@ -44,19 +44,25 @@ dpi_set() {
   "$HOME"/.local/bin/change_dpi ${dpi}
 }
 
+# run apps for X11 sessions
 on_xorg
-dpi_set
-xset r rate 280 40
-setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle,caps:escapegrp_led:caps
 
+# Set dpi based on external monitor
+dpi_set
+
+# Fix mouse and touchpad input
 fixinput
 # gnome_scaling_factor
+
 # Update dbus stuff ffs
 dbus-update-activation-environment DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
 # Disable bluetooth (soft-block)
 rfkill block bluetooth
+
 # Set default output volume
 wpctl set-volume @DEFAULT_SINK@ 50%
+
 # Set default mic volume
 wpctl set-volume @DEFAULT_SOURCE@ 16%
 

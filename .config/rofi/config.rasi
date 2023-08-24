@@ -1,6 +1,6 @@
 configuration {
 /*	modes: "window,drun,run,emoji,calc";*/
-/*	font: "mono 12";*/
+	font: "sans 14";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/

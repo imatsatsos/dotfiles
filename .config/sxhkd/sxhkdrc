@@ -1,8 +1,11 @@
+super + F5
+  pkill -USR1 -x sxhkd; pkill dunst; notify-send "Sxhkd, Dunst reloaded!"
+
 super + e ; {e,p,v,d}
   pcmanfm {~/, ~/Pictures, ~/Videos, ~/Downloads}
 
 super + v
-  mpv $(xclip -o -sel clip)
+  linkhandler $(xclip -o -sel clip)
 
 super + g
   dr_websearch
@@ -39,7 +42,7 @@ super + control + l
 
 {XF86AudioPrev, XF86AudioPlay, XF86AudioNext}
   playerctl {--player=spotify previous, play-pause, --player=spotify next} && \
-  	notify-send -r 2362 "$(playerctl metadata title)" "$(playerctl metadata artist)" \
+  	notify-send -t 3000 -r 236 "$(playerctl metadata title)" "$(playerctl metadata artist)" \
 	-i "$(playerctl metadata mpris:artUrl)"
 
 {XF86MonBrightnessUp, XF86MonBrightnessDown}

@@ -1,0 +1,24 @@
+#!/bin/env sh
+
+[ -n "$1" ] && cp "$1" ~/.config/background
+
+xwallpaper --maximize ~/.config/background
+
+notify-send "Wallpaper changed!"
+
+wal -c
+wal -i ~/.config/background
+
+# apply colors to rofi
+cp ~/.cache/wal/colors-wal-rofi.rasi ~/.config/rofi/colors.rasi
+
+# recompile dmenu, dwm
+asroot make -C ~/Gitrepos/mysuckless/dmenu/ clean install
+make -C ~/Gitrepos/mysuckless/dmenu/ clean
+asroot make -C ~/Gitrepos/mysuckless/dwmproper/ clean install
+make -C ~/Gitrepos/mysuckless/dwmproper/ clean
+# asroot make -C ~/Gitrepos/mysuckless/dwm/ clean install
+# make -C ~/Gitrepos/mysuckless/dwm/ clean
+
+# restart dwm
+kill -HUP $(pidof -s dwm)

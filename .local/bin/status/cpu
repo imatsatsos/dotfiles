@@ -19,10 +19,10 @@ esac
 
 cpu_usage
 
-if [ "$usage" -ge 84 ]; then
-    color="#ff1600"
+if [ "$usage" -ge 85 ]; then
+    color="#f91f28"
 elif [ "$usage" -ge 70 ]; then
-    color="#ff9600"
+    color="#f9f11f"
 fi
 
 display "$usage%" "$color" || echo "$usage%"

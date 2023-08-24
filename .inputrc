@@ -1,7 +1,8 @@
 $include /etc/inputrc
 
 # -- Add color --
-set colored-stats on
+# can make terminal flash
+#set colored-stats on
 set colored-completion-prefix on
 
 # -- Completion --
