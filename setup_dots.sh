@@ -95,14 +95,14 @@ installCursor() {
     # create icons dir
     [ ! -d $HOME/.local/share/icons ] && mkdir -p $HOME/.local/share/icons/
     # download cursors
-    curl -fLO https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Black.tar.gz || return
+    curl -fLO https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.0/BreezeX-Black.tar.gz \
+        || echo -e "${RED}ERROR: curling BreezeX_Cursor!\n${RC}"
     # extract it
     tar -xzf $GITPATH/BreezeX-Black.tar.gz
     # clean up
     rm -f $GITPATH/BreezeX-Black.tar.gz
     # move extracted folder ~/.local/share/icons
-    mv -f $GITPATH/BreezeX-Black "$HOME/.local/share/icons/BreezeX-Black/"
-    #cp -rf $GITPATH/.local/share/icons/ $HOME/.local/share/
+    mv -f $GITPATH/BreezeX-Black "$HOME/.local/share/icons/BreezeX-Black"
     # backup old ~/.icons
     [ -d $HOME/.icons ] && mv $HOME/.icons $HOME/.iconsbak
     # symlink .local/share/icons to ~/.icons, or X11 cursor won't work
@@ -110,8 +110,19 @@ installCursor() {
     echo -e "${GREEN}DONE\n${RC}"
 }
 
+installIcons() {
+    echo -e "${YELLOW}Installing Win11 icons..\n${RC}"
+    sleep 1
+    [ ! -d $HOME/.local/share/icons ] && mkdir -p $HOME/.local/share/icons
+    git clone --depth=1 https://github.com/yeyushengfan258/Win11-icon-theme.git \
+        || echo -e "${RED}ERROR: git cloning Win11-icon-theme!\n${RC}"
+    ./Win11-icon-theme/install.sh
+    echo -e "${GREEN}DONE\n${RC}"
+
+}
+
 copyFonts() {
-    echo -e "${YELLOW}Installing fonts..${RC}"
+    echo -e "${YELLOW}Copying fonts..${RC}"
     [ ! -d $HOME/.local/share/fonts ] && mkdir -p $HOME/.local/share/fonts
     cp -rf $GITPATH/.local/share/fonts/* $HOME/.local/share/fonts/
     fc-cache -f
@@ -161,10 +172,11 @@ copyConfig() {
 checkEnv
 installDepend
 installCursor
+installIcons
 installStarship
 copyFonts
 if copyConfig; then
     echo -e "${GREEN}Restart your shell to see the changes.${RC}"
 else
-    echo -e "${RED}! ERROR: Something went wrong during .dots copy${RC}"
+    echo -e "${RED}! ERROR: Something went wrong during .dotfiles copy!${RC}"
 fi

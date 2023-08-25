@@ -46,19 +46,11 @@ do_copy_icons () {
     done
 }
 
-do_copy_themes () {
-    [ ! -d "$GITREPO/.local/share/themes" ] && mkdir -p "$GITREPO/.local/share/themes"
-    for folder in $1; do
-        cp -rf "$HOME/.local/share/themes/$folder" $GITREPO/.local/share/themes/
-    done
-}
-
 echo "Removing old dots from: ${GITREPO}"
 rm -rf "${GITREPO}/.config" "${GITREPO}/.local"
 echo "Copying dots to folder: ${GITREPO}"
 do_copy_localbin
 do_copy_fonts
-#do_copy_themes
 
 do_copy_icons "\
     default"
