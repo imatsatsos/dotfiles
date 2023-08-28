@@ -1,4 +1,5 @@
 #!/bin/env bash
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -201,6 +202,8 @@ fi
 alias \
 	dl='cd $HOME/Downloads && ll' \
 	doc='cd $HOME/Documents && ll' \
+	vid='cd $HOME/Videos && ll' \
+	pic='cd $HOME/Pictures && ll' \
 	gr='cd $HOME/Gitrepos/ && ll'
 
 #  ___  ___ _ 
@@ -252,4 +255,3 @@ PS1='\n\[\e[34m\]\u\[\e[0;2;3m\]@\h \[\e[0m\]\w\[\e[93m\]$(parse_git_branch)\[\e
 
 type "neofetch" >/dev/null 2>&1 && neofetch
 #[ -f /usr/local/bin/starship ] && eval "$(starship init bash)"
-
