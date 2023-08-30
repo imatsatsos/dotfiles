@@ -1,8 +1,8 @@
 * {
 	bg: #080508d0;
-	bg-sel: #9095DB;
-	brd: #9095DB80;
-	txt: #dec5de;
+	bg-sel: #7E94DF;
+	brd: #7E94DF80;
+	txt: #ffefff;
 	txt-sel: #080508;
 
 	background-color: transparent;

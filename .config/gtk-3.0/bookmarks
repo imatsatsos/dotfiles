@@ -7,4 +7,5 @@ file:///home/john/Videos Videos
 file:///home/john/Pictures Pictures
 file:///home/john/Music Music
 file:///home/john/.local/share/Steam/steamapps steamapps
-ftp://192.168.1.2:2121/ / on 192.168.1.2:2121
+ftp://192.168.1.2:2121/ Phone FTP
+sftp://user@192.168.1.9/ Debian SFTP

@@ -1,13 +1,12 @@
 #!/bin/env sh
 
-[ -n "$1" ] && cp "$1" ~/.config/background
-
-xwallpaper --maximize ~/.config/background
-
-notify-send "Wallpaper changed!"
-
-wal -c
-wal -i ~/.config/background
+if [ -n "$1" ]; then
+	cp "$1" ~/.config/background
+	xwallpaper --zoom ~/.config/background
+	notify-send "Wallpaper changed!"
+	wal -c
+	wal -i ~/.config/background
+fi
 
 # apply colors to rofi
 cp ~/.cache/wal/colors-wal-rofi.rasi ~/.config/rofi/colors.rasi

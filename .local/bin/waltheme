@@ -1,0 +1,8 @@
+#!/bin/env sh
+#
+# Apply a user chosen pywal theme
+
+# list wal themes
+chosen=$(wal --theme | fzf | sed 's/^\W*//')
+
+[ -n $chosen ] && wal --theme "$chosen"

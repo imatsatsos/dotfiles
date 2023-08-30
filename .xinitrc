@@ -42,7 +42,7 @@ pidof -sx "gnome-keyring-daemon" || export $(gnome-keyring-daemon --start --comp
 pidof -sx "lxpolkit" || lxpolkit &
 pidof -sx "low_battery" || low_battery &
 #pidof -sx "picom" || picom -b &
-xwallpaper --maximize ~/.config/background &
+xwallpaper --zoom ~/.config/background &
 pidof -sx "onlogin.sh" || onlogin.sh &
 pidof -sx "sxhkd" || sxhkd &
 pidof -sx "dwmblocks" || dwmblocks -b &

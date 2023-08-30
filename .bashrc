@@ -159,9 +159,9 @@ alias \
 # exa for ls
 if type "exa" >/dev/null 2>&1; then
 	alias \
-		ls='exa --icons --group-directories-first' \
-		la='exa -al --icons --group-directories-first' \
-		ll='exa -l --icons --group-directories-first' \
+		l='exa --icons --group-directories-first' \
+		la='exa -a --icons --group-directories-first' \
+		ll='exa -la --icons --group-directories-first' \
 		lg='exa -al --git --icons'
 fi
 
@@ -196,6 +196,13 @@ if type "flatpak" >/dev/null 2>&1; then
 		fsearch='flatpak search' \
 		forphan='flatpak uninstall --unused --delete-data' \
 		flist='flatpak list --app --columns=name,application,runtime,version'
+fi
+
+# Aliases for Nix
+if type "nix-env" >/dev/null 2>&1; then
+	alias \
+		nupdate="nix-channel --update && nix-env -u '*'" \
+		nclean='nix-collect-garbage -d'
 fi
 
 # Directory aliases
