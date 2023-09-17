@@ -64,7 +64,7 @@ rfkill block bluetooth
 wpctl set-volume @DEFAULT_SINK@ 50%
 
 # Set default mic volume
-wpctl set-volume @DEFAULT_SOURCE@ 16%
+wpctl set-volume @DEFAULT_SOURCE@ 22%
 
 notify-send "Login script run!"
 

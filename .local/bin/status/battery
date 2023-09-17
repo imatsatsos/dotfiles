@@ -12,19 +12,19 @@ battery_level=$(upower -i "$path_to_battery"  | grep -E "percentage" | sed 's/[^
 state=$(upower -i "$path_to_battery"  | grep -E "state" | sed 's/.*:[[:space:]]*//')
 
 if [ "$battery_level" -le 20 ]; then
-    label=" "
+    label=""
     color="#f91f28"
 elif [ "$battery_level" -le 40 ]; then
-    label=" "
+    label=""
     color="#f9841f"
 elif [ "$battery_level" -le 75 ]; then
-    label=" "
+    label=""
     color="#f9f11f"
 elif [ "$battery_level" -le 85 ]; then
-    label=" "
+    label=""
     color="#28f91f"
 else
-    label=" "
+    label=""
 fi
 
 if [ "$state" = "charging" ]; then

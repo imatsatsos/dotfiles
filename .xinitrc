@@ -47,7 +47,7 @@ pidof -sx "onlogin.sh" || onlogin.sh &
 pidof -sx "sxhkd" || sxhkd &
 pidof -sx "dwmblocks" || dwmblocks -b &
 pidof -sx "easyeffects" || easyeffects --gapplication-service &
-wal -R &
+wal -nR &
 
 #autostart="programs"
 #for program in $autostart; do

@@ -1,9 +1,9 @@
 * {
-	bg: #080508d0;
-	bg-sel: #7E94DF;
-	brd: #7E94DF80;
-	txt: #ffefff;
-	txt-sel: #080508;
+	bg: #0E0E11d0;
+	bg-sel: #123D85;
+	brd: #123D8580;
+	txt: #b6e2ff;
+	txt-sel: #0E0E11;
 
 	background-color: transparent;
 	text-color: @txt;

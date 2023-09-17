@@ -1,11 +1,12 @@
-file:///home/john/.local .local
-file:///home/john/.config .config
 file:///home/john/Documents Documents
 file:///home/john/Downloads Downloads
-file:///home/john/Gitrepos Gitrepos
 file:///home/john/Videos Videos
 file:///home/john/Pictures Pictures
 file:///home/john/Music Music
+file:///home/john/Gitrepos Gitrepos
 file:///home/john/.local/share/Steam/steamapps steamapps
+file:///home/john/.local .local
+file:///home/john/.config .config
+file:///run/media/john/38C08ECCC08E8FB4/Users/dellg5 dellg5
 ftp://192.168.1.2:2121/ Phone FTP
 sftp://user@192.168.1.9/ Debian SFTP
